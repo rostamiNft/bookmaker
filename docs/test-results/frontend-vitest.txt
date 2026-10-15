@@ -1,0 +1,13 @@
+
+ RUN  v5.0.5 /home/user/bookmaker/frontend
+
+ ✓ src/test/ui.test.jsx (10 tests) 1312ms
+   ✓ Bookmaker UI (10)
+     ✓ creates a book from the form and navigates to it 501ms
+     ✓ blocks generation when the estimate reports a problem 393ms
+
+ Test Files  1 passed (1)
+      Tests  10 passed (10)
+   Start at  16:56:59
+   Duration  2.24s (tests 62%, environment 29%, setup 5%, transform 2%, import 1%, worker 1%)
+

@@ -1,0 +1,796 @@
+{
+ "title": "Mia and the Silent Stream",
+ "settings": {
+  "title": "",
+  "topic": "saving the village garden when its stream stops flowing",
+  "moral": "",
+  "age_group": "6-8",
+  "language": "en",
+  "page_count": 14,
+  "complexity": "medium",
+  "narration": "third_person",
+  "illustration_style": "gouache",
+  "aspect_ratio": "4:3",
+  "page_size": "A4",
+  "orientation": "portrait",
+  "main_characters": 2,
+  "hero_name": "",
+  "text_amount": "medium",
+  "fantasy_level": 1,
+  "humor_level": 1,
+  "ending": "happy",
+  "cover_style": "illustrated",
+  "author": "Bookmaker Sample",
+  "publisher": "Open Picture Books",
+  "page_numbers": true,
+  "back_cover": true,
+  "text_in_image": false,
+  "output_profile": "screen",
+  "seed": 33,
+  "llm_provider_id": "",
+  "image_provider_id": "",
+  "vision_provider_id": "",
+  "max_image_attempts": 3,
+  "max_story_attempts": 3,
+  "budget_usd": 0.0
+ },
+ "qa_report": {
+  "story_generation": {
+   "ok": true,
+   "errors": 0,
+   "warnings": 0,
+   "word_count": 472,
+   "issues": []
+  },
+  "layout": {
+   "ok": true,
+   "issues": [],
+   "pages": [
+    {
+     "index": 1,
+     "kind": "cover",
+     "number": null,
+     "notes": []
+    },
+    {
+     "index": 2,
+     "kind": "title",
+     "number": null,
+     "notes": []
+    },
+    {
+     "index": 3,
+     "kind": "copyright",
+     "number": null,
+     "notes": []
+    },
+    {
+     "index": 4,
+     "kind": "story",
+     "number": 1,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 5,
+     "kind": "story",
+     "number": 2,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 6,
+     "kind": "story",
+     "number": 3,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 7,
+     "kind": "story",
+     "number": 4,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 8,
+     "kind": "story",
+     "number": 5,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 9,
+     "kind": "story",
+     "number": 6,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 10,
+     "kind": "story",
+     "number": 7,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 11,
+     "kind": "story",
+     "number": 8,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 12,
+     "kind": "story",
+     "number": 9,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 13,
+     "kind": "story",
+     "number": 10,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 14,
+     "kind": "story",
+     "number": 11,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 15,
+     "kind": "story",
+     "number": 12,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 16,
+     "kind": "story",
+     "number": 13,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 17,
+     "kind": "story",
+     "number": 14,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 18,
+     "kind": "end",
+     "number": null,
+     "notes": []
+    },
+    {
+     "index": 19,
+     "kind": "back",
+     "number": null,
+     "notes": []
+    }
+   ]
+  },
+  "pdf": {
+   "ok": true,
+   "issues": [],
+   "info": {
+    "size_mb": 1.65,
+    "pages": 19,
+    "metadata": {
+     "/Author": "Bookmaker Sample",
+     "/CreationDate": "D:20261015165208+00'00'",
+     "/Creator": "Bookmaker (open-source children's book generator)",
+     "/Keywords": "children's book, silent_stream, 6-8",
+     "/ModDate": "D:20261015165208+00'00'",
+     "/Producer": "ReportLab PDF Library - (opensource)",
+     "/Subject": "When the garden's stream dries up, Mia and Nutmeg follow it uphill, clean up along the way, and free the water so the garden can bloom again.",
+     "/Title": "Mia and the Silent Stream",
+     "/Trapped": "/False"
+    },
+    "lang": "en",
+    "fonts": [
+     {
+      "name": "/AAAAAA+Andika-Bold",
+      "embedded": true,
+      "has_tounicode": true
+     },
+     {
+      "name": "/AAAAAA+Andika",
+      "embedded": true,
+      "has_tounicode": true
+     }
+    ],
+    "rendered": 19
+   },
+   "expected_story_pages": 14
+  },
+  "story": {
+   "ok": true,
+   "errors": 0,
+   "warnings": 0,
+   "word_count": 472,
+   "issues": []
+  },
+  "images": {
+   "issues": []
+  },
+  "summary": {
+   "status": "completed",
+   "errors": 0,
+   "warnings": 0,
+   "pdf_valid": true,
+   "story_pages": 14,
+   "word_count": 472,
+   "checked_at": 1792083130.1160743,
+   "engines": {
+    "story": "offline:silent_stream",
+    "images": "Built-in procedural illustrator (offline, CPU)"
+   }
+  }
+ },
+ "pages": [
+  {
+   "number": 1,
+   "beat": "setup",
+   "text": "In a sunny little village, the best place of all was the shared garden, where a bright stream bubbled between the flower beds. Mia visited every morning to say hello to the flowers.",
+   "image_prompt": "Mia in a sunny community garden with tall sunflowers and a sparkling little stream flowing between flower beds",
+   "characters_present": [
+    "hero"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 134,
+      "file": "images/page-01-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero"
+    ]
+   }
+  },
+  {
+   "number": 2,
+   "beat": "companion",
+   "text": "Mia's best garden friend was Nutmeg, a quick little squirrel, who knew every corner of every flower bed. Together, they knew where the sweetest strawberries hid and which flower opened first in the morning.",
+   "image_prompt": "Mia and Nutmeg picking strawberries together in a sunny garden, smiling",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 235,
+      "file": "images/page-02-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  },
+  {
+   "number": 3,
+   "beat": "inciting",
+   "text": "Then one scorching morning, Mia ran to the bridge and gasped. The stream was gone, and the flowers were wilting. Where water had flowed, there were only dry stones and cracked mud.",
+   "image_prompt": "A dry streambed with cracked mud and drooping sunflowers under a hot sun, Mia and Nutmeg looking shocked",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 336,
+      "file": "images/page-03-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  },
+  {
+   "number": 4,
+   "beat": "decision",
+   "text": "Mr. Bram, the old gardener, scratched his beard. 'Water always comes from somewhere,' he said. 'Follow the stream, and you'll find the answer.' So Mia and Nutmeg grabbed a basket and a watering can and set off upstream.",
+   "image_prompt": "An old gardener with a white beard and straw hat pointing uphill along a dry streambed, Mia holding a watering can, Nutmeg with a basket",
+   "characters_present": [
+    "hero",
+    "comp",
+    "helper"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 437,
+      "file": "images/page-04-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp",
+     "helper"
+    ]
+   }
+  },
+  {
+   "number": 5,
+   "beat": "ep_follow",
+   "text": "They walked along the dry streambed, past the willow trees and over the smooth white pebbles. Every few steps, Mia knelt down to look for clues.",
+   "image_prompt": "Mia and Nutmeg walking along a dry pebbly streambed between willow trees, Mia carrying a watering can",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 538,
+      "file": "images/page-05-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  },
+  {
+   "number": 6,
+   "beat": "ep_animals",
+   "text": "On the way, they met a family of thirsty ducks waddling in circles. Mia shared the water from the watering can. 'Don't worry,' she told them, 'we're going to fix this.'",
+   "image_prompt": "Mia pouring water from a green watering can for a mother duck and ducklings on a dry path, Nutmeg watching kindly",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 639,
+      "file": "images/page-06-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  },
+  {
+   "number": 7,
+   "beat": "ep_trash",
+   "text": "Further on, they found plastic bags and old cans caught in the reeds. Mia and Nutmeg picked up every piece and put it in their basket. 'The stream deserves better than this,' said Nutmeg.",
+   "image_prompt": "Mia and Nutmeg picking up plastic bags and cans from reeds and putting them in a basket beside a dry streambed",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 740,
+      "file": "images/page-07-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  },
+  {
+   "number": 8,
+   "beat": "ep_hill",
+   "text": "The path climbed up a steep, rocky slope. Nutmeg slipped, but Mia caught her just in time. 'Thanks,' said Nutmeg, catching her breath. 'Let's go slowly and carefully.'",
+   "image_prompt": "Mia catching Nutmeg who slipped on a steep rocky slope, both relieved",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 841,
+      "file": "images/page-08-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  },
+  {
+   "number": 9,
+   "beat": "ep_shade",
+   "text": "The sun was hot, so they rested in the shade of a big oak tree and shared a strawberry each. A breeze cooled their faces, and soon they felt ready to keep going.",
+   "image_prompt": "Mia and Nutmeg resting in the shade of a big oak tree on a hot day, sharing strawberries",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 942,
+      "file": "images/page-09-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  },
+  {
+   "number": 10,
+   "beat": "doubt",
+   "text": "The sun grew hotter and the path grew longer. Mia's feet hurt. 'Maybe we should go back,' she sighed. Then she thought of the drooping sunflowers and the worried little frog, and she kept walking.",
+   "image_prompt": "Mia sitting tired on a rock under a hot sun on a long dusty path, Nutmeg encouraging Mia to continue",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1043,
+      "file": "images/page-10-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  },
+  {
+   "number": 11,
+   "beat": "climax",
+   "text": "At the edge of the woods, they saw it at last: a tangled dam of branches, leaves, and trash, holding back all the water. It was much too heavy to move all at once. So they worked piece by piece, until the water rushed free.",
+   "image_prompt": "Mia and Nutmeg pulling branches from a big tangled dam of sticks and rubbish blocking a stream near a pond in the woods",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1144,
+      "file": "images/page-11-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  },
+  {
+   "number": 12,
+   "beat": "resolution",
+   "text": "Down the hill the stream ran, singing again, all the way home to the garden. By the time they returned, the sunflowers were lifting their heads.",
+   "image_prompt": "A sparkling stream flowing again through the garden, sunflowers lifting their heads, Mia and Nutmeg walking back happily",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1245,
+      "file": "images/page-12-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  },
+  {
+   "number": 13,
+   "beat": "celebration",
+   "text": "Mr. Bram and all the neighbors cheered, and the little frog jumped into the water with a happy SPLASH! Together, they planted new seeds along the stream, so its banks would stay green and strong.",
+   "image_prompt": "Mia, Nutmeg and an old gardener planting seeds along a flowing stream, a frog jumping into the water, neighbors cheering",
+   "characters_present": [
+    "hero",
+    "comp",
+    "helper"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1346,
+      "file": "images/page-13-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp",
+     "helper"
+    ]
+   }
+  },
+  {
+   "number": 14,
+   "beat": "ending",
+   "text": "Every morning after that, Mia walked up the stream to make sure the water could flow freely. And the garden grew more beautiful than ever. Every evening, the stream sang its gentle thank-you song.",
+   "image_prompt": "Mia sitting on a little wooden bridge over a flowing stream at golden sunset, a leaf floating, blooming garden around, Nutmeg beside",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1447,
+      "file": "images/page-14-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  }
+ ],
+ "characters": [
+  {
+   "id": "hero",
+   "name": "Mia",
+   "role": "protagonist",
+   "pronoun": "she",
+   "age": "7",
+   "description": "a 7-year-old girl with light brown skin, black bob hair, round friendly face, big dark eyes, wearing a yellow hoodie and purple trousers, a blue scarf and white shoes",
+   "personality": "",
+   "appearance": {
+    "species": "human",
+    "skin": "#a86b45",
+    "hair_color": "#151515",
+    "hair_style": "bob",
+    "eye_color": "#3b2a20",
+    "face": "round, rosy cheeks",
+    "body": "small child",
+    "height": 1.0
+   },
+   "outfit": {
+    "top": "hoodie",
+    "top_color": "#f4d03f",
+    "bottom": "trousers",
+    "bottom_color": "#8e6cc9",
+    "accessory": "scarf",
+    "accessory_color": "#3d8bd9",
+    "shoes_color": "#f4f4f4"
+   },
+   "distinctive": [
+    "blue scarf",
+    "black bob hair",
+    "yellow hoodie"
+   ],
+   "expressions": [
+    "happy",
+    "curious",
+    "worried",
+    "determined",
+    "surprised"
+   ],
+   "movement": "quick, bouncy steps",
+   "palette": [
+    "#a86b45",
+    "#151515",
+    "#f4d03f",
+    "#3d8bd9",
+    "#8e6cc9"
+   ],
+   "relationships": {
+    "comp": "best friend",
+    "helper": "trusted grown-up",
+    "_latin_name": "Mia"
+   }
+  },
+  {
+   "id": "comp",
+   "name": "Nutmeg",
+   "role": "companion",
+   "pronoun": "she",
+   "age": "young",
+   "description": "a quick little squirrel with russet fur, big shiny dark eyes, wearing a small blue scarf",
+   "personality": "",
+   "appearance": {
+    "species": "squirrel",
+    "skin": "#b5652b",
+    "hair_color": "",
+    "hair_style": "",
+    "eye_color": "#2a1c12",
+    "face": "",
+    "body": "small squirrel",
+    "height": 0.7
+   },
+   "outfit": {
+    "top": "",
+    "top_color": "",
+    "bottom": "",
+    "bottom_color": "",
+    "accessory": "scarf",
+    "accessory_color": "#3d8bd9",
+    "shoes_color": ""
+   },
+   "distinctive": [
+    "blue scarf",
+    "squirrel shape"
+   ],
+   "expressions": [
+    "happy",
+    "curious",
+    "surprised",
+    "kind"
+   ],
+   "movement": "scampers",
+   "palette": [
+    "#b5652b",
+    "#3d8bd9"
+   ],
+   "relationships": {
+    "hero": "best friend",
+    "_latin_name": "Nutmeg"
+   }
+  },
+  {
+   "id": "helper",
+   "name": "Mr. Bram",
+   "role": "supporting",
+   "pronoun": "he",
+   "age": "old",
+   "description": "a kind elderly man with light brown skin, white hair and a white beard, round glasses and a blue cardigan",
+   "personality": "",
+   "appearance": {
+    "species": "human_old",
+    "skin": "#a86b45",
+    "hair_color": "#e8e8e8",
+    "hair_style": "beard",
+    "eye_color": "#3b2a20",
+    "face": "",
+    "body": "",
+    "height": 1.25
+   },
+   "outfit": {
+    "top": "cardigan",
+    "top_color": "#3d8bd9",
+    "bottom": "trousers",
+    "bottom_color": "#6b5b4b",
+    "accessory": "glasses",
+    "accessory_color": "#444444",
+    "shoes_color": "#5a3825"
+   },
+   "distinctive": [
+    "white hair",
+    "round glasses",
+    "blue cardigan"
+   ],
+   "expressions": [
+    "kind",
+    "happy"
+   ],
+   "movement": "slow and gentle",
+   "palette": [
+    "#a86b45",
+    "#e8e8e8",
+    "#3d8bd9"
+   ],
+   "relationships": {
+    "hero": "mentor",
+    "_latin_name": "Mr. Bram"
+   }
+  }
+ ]
+}

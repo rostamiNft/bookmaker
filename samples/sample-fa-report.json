@@ -1,0 +1,794 @@
+{
+ "title": "سامان و ستاره‌ی کوچولوی گمشده",
+ "settings": {
+  "title": "",
+  "topic": "یک ستاره‌ی کوچک از آسمان می‌افتد و باید پیش از صبح به خانه برگردد",
+  "moral": "",
+  "age_group": "6-8",
+  "language": "fa",
+  "page_count": 14,
+  "complexity": "medium",
+  "narration": "third_person",
+  "illustration_style": "watercolor",
+  "aspect_ratio": "4:3",
+  "page_size": "A4",
+  "orientation": "portrait",
+  "main_characters": 2,
+  "hero_name": "",
+  "text_amount": "medium",
+  "fantasy_level": 2,
+  "humor_level": 2,
+  "ending": "happy",
+  "cover_style": "illustrated",
+  "author": "کتاب‌ساز",
+  "publisher": "نشر نمونه",
+  "page_numbers": true,
+  "back_cover": true,
+  "text_in_image": false,
+  "output_profile": "screen",
+  "seed": 21,
+  "llm_provider_id": "",
+  "image_provider_id": "",
+  "vision_provider_id": "",
+  "max_image_attempts": 3,
+  "max_story_attempts": 3,
+  "budget_usd": 0.0
+ },
+ "qa_report": {
+  "story_generation": {
+   "ok": true,
+   "errors": 0,
+   "warnings": 0,
+   "word_count": 565,
+   "issues": []
+  },
+  "layout": {
+   "ok": true,
+   "issues": [],
+   "pages": [
+    {
+     "index": 1,
+     "kind": "cover",
+     "number": null,
+     "notes": []
+    },
+    {
+     "index": 2,
+     "kind": "title",
+     "number": null,
+     "notes": []
+    },
+    {
+     "index": 3,
+     "kind": "copyright",
+     "number": null,
+     "notes": []
+    },
+    {
+     "index": 4,
+     "kind": "story",
+     "number": 1,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 5,
+     "kind": "story",
+     "number": 2,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 6,
+     "kind": "story",
+     "number": 3,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 7,
+     "kind": "story",
+     "number": 4,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 8,
+     "kind": "story",
+     "number": 5,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 9,
+     "kind": "story",
+     "number": 6,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 10,
+     "kind": "story",
+     "number": 7,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 11,
+     "kind": "story",
+     "number": 8,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 12,
+     "kind": "story",
+     "number": 9,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 13,
+     "kind": "story",
+     "number": 10,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 14,
+     "kind": "story",
+     "number": 11,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 15,
+     "kind": "story",
+     "number": 12,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 16,
+     "kind": "story",
+     "number": 13,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 17,
+     "kind": "story",
+     "number": 14,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 18,
+     "kind": "end",
+     "number": null,
+     "notes": []
+    },
+    {
+     "index": 19,
+     "kind": "back",
+     "number": null,
+     "notes": []
+    }
+   ]
+  },
+  "pdf": {
+   "ok": true,
+   "issues": [],
+   "info": {
+    "size_mb": 1.32,
+    "pages": 19,
+    "metadata": {
+     "/Author": "کتاب‌ساز",
+     "/CreationDate": "D:20261015165205+00'00'",
+     "/Creator": "Bookmaker (open-source children's book generator)",
+     "/Keywords": "children's book, lost_star, 6-8",
+     "/ModDate": "D:20261015165205+00'00'",
+     "/Producer": "ReportLab PDF Library - (opensource)",
+     "/Subject": "وقتی کوچک‌ترین ستاره‌ی آسمان به مرغزار می‌افتد، سامان و فلفل آن را از رودخانه و جنگل عبور می‌دهند تا پیش از طلوع آفتاب از بالای تپه‌ی ماه به آسمان برگردد.",
+     "/Title": "سامان و ستاره‌ی کوچولوی گمشده",
+     "/Trapped": "/False"
+    },
+    "lang": "fa",
+    "fonts": [
+     {
+      "name": "/AAAAAA+Vazirmatn-Bold",
+      "embedded": true,
+      "has_tounicode": true
+     },
+     {
+      "name": "/AAAAAA+Vazirmatn-Regular",
+      "embedded": true,
+      "has_tounicode": true
+     }
+    ],
+    "rendered": 19
+   },
+   "expected_story_pages": 14
+  },
+  "story": {
+   "ok": true,
+   "errors": 0,
+   "warnings": 0,
+   "word_count": 565,
+   "issues": []
+  },
+  "images": {
+   "issues": []
+  },
+  "summary": {
+   "status": "completed",
+   "errors": 0,
+   "warnings": 0,
+   "pdf_valid": true,
+   "story_pages": 14,
+   "word_count": 565,
+   "checked_at": 1792083127.8018854,
+   "engines": {
+    "story": "offline:lost_star",
+    "images": "Built-in procedural illustrator (offline, CPU)"
+   }
+  }
+ },
+ "pages": [
+  {
+   "number": 1,
+   "beat": "setup",
+   "text": "سامان در کلبه‌ای کوچک در کنار یک مرغزار سبز و بزرگ زندگی می‌کرد؛ جایی که علف‌ها بوی شبدر می‌دادند و شب‌ها پر از ستاره بود. هر شب روی پله‌های ایوان می‌نشست و ستاره‌ها را یکی‌یکی می‌شمرد تا وقتی که چشم‌هایش سنگین می‌شد. ولی هیچ‌وقت از چهل‌وسه جلوتر نمی‌رفت، چون همیشه همان‌جا خمیازه‌اش می‌گرفت!",
+   "image_prompt": "Saman sitting on the porch steps of a small cottage at the edge of a meadow at dusk, looking up at the first stars, peaceful and dreamy",
+   "characters_present": [
+    "hero"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 122,
+      "file": "images/page-01-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero"
+    ]
+   }
+  },
+  {
+   "number": 2,
+   "beat": "companion",
+   "text": "بهترین دوست سامان، فلفل بود؛ روباه کوچولوی نارنجی که زیر درخت سیب پیر زندگی می‌کرد. فلفل همه‌ی راه‌های مرغزار را بلد بود و هیچ‌وقت برای شام دیر نمی‌کرد. فلفل می‌توانست بوی کیک زغال‌اخته را از سه تپه آن‌طرف‌تر بفهمد!",
+   "image_prompt": "Saman and Felfel playing together under an old apple tree in a sunny meadow, laughing",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 223,
+      "file": "images/page-02-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  },
+  {
+   "number": 3,
+   "beat": "inciting",
+   "text": "یک شب اتفاق عجیبی افتاد. کوچک‌ترین ستاره از آسمان لیز خورد و پایین و پایین‌تر آمد، درست وسط مرغزار! باید پیش از صبح به آسمان برمی‌گشت. ستاره با صدای آرامی روی علف‌ها نشست و مثل یک چراغ کوچک می‌درخشید.",
+   "image_prompt": "A small glowing star falling from the night sky with a sparkling trail into a dark meadow, Saman and Felfel watching amazed",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 324,
+      "file": "images/page-03-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  },
+  {
+   "number": 4,
+   "beat": "decision",
+   "text": "مادربزرگ جغدِ دانا از روی شاخه پایین آمد و گفت: «فقط از بالای تپه‌ی ماه است که ستاره می‌تواند به آسمان برگردد.» سامان ستاره را آرام در یک سبد گذاشت و دو دوست در دل شب راه افتادند.",
+   "image_prompt": "A wise old owl on a branch pointing her wing toward a distant hill under the moon, Saman holding a small basket with a glowing star, Felfel beside",
+   "characters_present": [
+    "hero",
+    "comp",
+    "helper"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 425,
+      "file": "images/page-04-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp",
+     "helper"
+    ]
+   }
+  },
+  {
+   "number": 5,
+   "beat": "ep_river",
+   "text": "اول به رودخانه‌ای پهن و پرسروصدا رسیدند. پلی در کار نبود؛ فقط چند سنگ لغزنده وسط آب بود. فلفل اول پرید و سامان سبد را بالا گرفت و پشت سرش رفت. قدم‌به‌قدم و با احتیاط به آن طرف رسیدند. فلفل روی آخرین سنگ تلوتلو خورد و شلپ! فقط دمش خیس شد.",
+   "image_prompt": "Saman carefully stepping across stepping stones in a moonlit river holding a basket with a glowing star high, Felfel hopping ahead",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 526,
+      "file": "images/page-05-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  },
+  {
+   "number": 6,
+   "beat": "ep_fireflies",
+   "text": "بعد به جنگلی تاریک و انبوه رسیدند. درخت‌ها آن‌قدر بلند بودند که ماه را پنهان می‌کردند و راه دیگر پیدا نبود. ناگهان دسته‌ای کرم شب‌تاب پایین آمدند و چشمک‌زنان گفتند: «دنبال ما بیایید!» و جنگل پر از نوری مهربان شد.",
+   "image_prompt": "Saman and Felfel in a tall dark forest at night, a swirl of glowing fireflies lighting a winding path",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 627,
+      "file": "images/page-06-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  },
+  {
+   "number": 7,
+   "beat": "ep_bear",
+   "text": "وسط راه، خرس قهوه‌ای بزرگی خوابیده بود و مثل رعد خروپف می‌کرد. سامان به‌جای داد زدن، یک لالایی آرام زمزمه کرد. خرس در خواب لبخند زد، غلت خورد و درست به اندازه‌ی کافی جا باز کرد تا آن‌ها پاورچین‌پاورچین رد شوند. فلفل آن‌قدر آرام راه می‌رفت که حتی سبیل‌هایش هم تکان نمی‌خوردند.",
+   "image_prompt": "A big friendly brown bear sleeping across a forest path at night, Saman tiptoeing past humming, Felfel tiptoeing behind",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 728,
+      "file": "images/page-07-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  },
+  {
+   "number": 8,
+   "beat": "ep_wind",
+   "text": "در دشت باز، باد تندی وزید و سبد را کشید؛ نزدیک بود ستاره‌ی کوچولو را با خودش ببرد! سامان و فلفل به هم چسبیدند و از ستاره محافظت کردند تا باد خسته شد و آرام گرفت.",
+   "image_prompt": "Saman and Felfel huddled together on a windy grassy plain at night shielding a glowing star in a basket, grass and leaves swirling",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 829,
+      "file": "images/page-08-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  },
+  {
+   "number": 9,
+   "beat": "ep_thorns",
+   "text": "دیواری از بوته‌های پرخار راهشان را بست. آن‌قدر انبوه بود که نمی‌شد از رویش رد شد. فلفل تونل کوچکی نزدیک زمین پیدا کرد و سامان پشت سرش خزید و مراقب بود حتی یک خار هم به ستاره نخورد.",
+   "image_prompt": "Saman crawling through a small tunnel in thorny bramble bushes at night following Felfel, carefully holding a glowing basket",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 930,
+      "file": "images/page-09-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  },
+  {
+   "number": 10,
+   "beat": "doubt",
+   "text": "حالا نور ستاره خیلی کم شده بود و پاهای سامان خسته بودند. آهسته گفت: «اگر دیر برسیم چه؟» فلفل کنارش نشست و گفت: «تا این‌جا با هم آمده‌ایم. می‌توانیم کمی دیگر هم برویم.»",
+   "image_prompt": "Saman sitting tired on a rock at night holding a basket with a very faint star, Felfel comforting Saman",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1031,
+      "file": "images/page-10-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  },
+  {
+   "number": 11,
+   "beat": "climax",
+   "text": "سرانجام به بالای بلندترین تپه رسیدند. آسمان کم‌کم داشت روشن می‌شد. وقتی برای از دست دادن نبود! سامان سبد را تا جایی که می‌توانست بالا برد و فریاد زد: «پرواز کن و به خانه برو، ستاره‌ی کوچولو!»",
+   "image_prompt": "Saman on top of a grassy hill at dawn lifting a basket high with a glowing star toward the pale sky, Felfel cheering",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1132,
+      "file": "images/page-11-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  },
+  {
+   "number": 12,
+   "beat": "resolution",
+   "text": "ستاره لرزید، درخشید و آرام‌آرام بالا رفت؛ آن‌قدر بالا که دوباره به خانه‌اش رسید. نورش دوباره پرفروغ شده بود و برای آخرین بار، با قدردانی برای سامان چشمک زد.",
+   "image_prompt": "A bright star rising into the dawn sky with a sparkling trail, Saman and Felfel on the hilltop waving goodbye",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1233,
+      "file": "images/page-12-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  },
+  {
+   "number": 13,
+   "beat": "celebration",
+   "text": "پایین در مرغزار، پرنده‌ها شروع به آواز خواندن کردند و انگار همه‌ی دنیا کمی روشن‌تر شده بود. سامان و فلفل خندیدند و از تپه‌ی نرم و سبز تا خانه قل خوردند. فلفل از همه سریع‌تر قل خورد و وسط بوته‌ی گل‌های بابونه فرود آمد!",
+   "image_prompt": "Saman and Felfel rolling and laughing down a grassy hill in the golden morning light, birds flying, daisies",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1334,
+      "file": "images/page-13-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  },
+  {
+   "number": 14,
+   "beat": "ending",
+   "text": "آن شب، سامان دوباره روی ایوان نشست و ستاره‌ها را شمرد. وقتی به کوچک‌ترین ستاره رسید، ستاره چشمک زد و سامان هم برایش چشمک زد. فلفل هم همان نزدیکی جمع شده بود و آرام خروپف می‌کرد.",
+   "image_prompt": "Saman on the cottage porch at night smiling up at a starry sky where one small star twinkles brightly, Felfel curled up asleep nearby",
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1435,
+      "file": "images/page-14-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "characters": [
+     "hero",
+     "comp"
+    ]
+   }
+  }
+ ],
+ "characters": [
+  {
+   "id": "hero",
+   "name": "سامان",
+   "role": "protagonist",
+   "pronoun": "he",
+   "age": "7",
+   "description": "a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes",
+   "personality": "",
+   "appearance": {
+    "species": "human",
+    "skin": "#a86b45",
+    "hair_color": "#b5651d",
+    "hair_style": "short",
+    "eye_color": "#3b2a20",
+    "face": "round, rosy cheeks",
+    "body": "small child",
+    "height": 1.0
+   },
+   "outfit": {
+    "top": "hoodie",
+    "top_color": "#4caf7a",
+    "bottom": "shorts",
+    "bottom_color": "#ef7fb0",
+    "accessory": "scarf",
+    "accessory_color": "#2bb3b1",
+    "shoes_color": "#e94f4f"
+   },
+   "distinctive": [
+    "teal scarf",
+    "auburn short hair",
+    "green hoodie"
+   ],
+   "expressions": [
+    "happy",
+    "curious",
+    "worried",
+    "determined",
+    "surprised"
+   ],
+   "movement": "quick, bouncy steps",
+   "palette": [
+    "#a86b45",
+    "#b5651d",
+    "#4caf7a",
+    "#2bb3b1",
+    "#ef7fb0"
+   ],
+   "relationships": {
+    "comp": "best friend",
+    "helper": "trusted grown-up",
+    "_latin_name": "Saman"
+   }
+  },
+  {
+   "id": "comp",
+   "name": "فلفل",
+   "role": "companion",
+   "pronoun": "he",
+   "age": "young",
+   "description": "a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf",
+   "personality": "",
+   "appearance": {
+    "species": "fox",
+    "skin": "#e07b39",
+    "hair_color": "",
+    "hair_style": "",
+    "eye_color": "#2a1c12",
+    "face": "",
+    "body": "small fox",
+    "height": 0.7
+   },
+   "outfit": {
+    "top": "",
+    "top_color": "",
+    "bottom": "",
+    "bottom_color": "",
+    "accessory": "scarf",
+    "accessory_color": "#ef7fb0",
+    "shoes_color": ""
+   },
+   "distinctive": [
+    "pink scarf",
+    "fox shape"
+   ],
+   "expressions": [
+    "happy",
+    "curious",
+    "surprised",
+    "kind"
+   ],
+   "movement": "trots lightly",
+   "palette": [
+    "#e07b39",
+    "#ef7fb0"
+   ],
+   "relationships": {
+    "hero": "best friend",
+    "_latin_name": "Felfel"
+   }
+  },
+  {
+   "id": "helper",
+   "name": "مادربزرگ جغد",
+   "role": "supporting",
+   "pronoun": "she",
+   "age": "old",
+   "description": "a wise old owl with speckled brown feathers, big shiny dark eyes, wearing small dark round glasses",
+   "personality": "",
+   "appearance": {
+    "species": "owl",
+    "skin": "#8b6b4a",
+    "hair_color": "",
+    "hair_style": "",
+    "eye_color": "#2a1c12",
+    "face": "",
+    "body": "small owl",
+    "height": 0.6
+   },
+   "outfit": {
+    "top": "",
+    "top_color": "",
+    "bottom": "",
+    "bottom_color": "",
+    "accessory": "glasses",
+    "accessory_color": "#444444",
+    "shoes_color": ""
+   },
+   "distinctive": [
+    "dark round glasses",
+    "owl shape"
+   ],
+   "expressions": [
+    "happy",
+    "curious",
+    "surprised",
+    "kind"
+   ],
+   "movement": "glides",
+   "palette": [
+    "#8b6b4a",
+    "#444444"
+   ],
+   "relationships": {
+    "hero": "mentor",
+    "_latin_name": "Grandma Owl"
+   }
+  }
+ ]
+}

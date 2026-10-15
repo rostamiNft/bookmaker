@@ -1,0 +1,13 @@
+........................................................................ [ 33%]
+........................................................................ [ 66%]
+........................................................................ [100%]
+============================= slowest 8 durations ==============================
+38.18s call     tests/test_api_e2e.py::test_image_provider_failure_falls_back
+28.52s setup    tests/test_api_e2e.py::test_full_book_generation_and_pdf_download
+27.06s call     tests/test_api_e2e.py::test_pause_and_resume
+23.94s call     tests/test_api_e2e.py::test_character_edit_invalidates_and_redraws_affected_images
+20.51s call     tests/test_api_e2e.py::test_recovery_after_crash
+20.19s call     tests/test_api_e2e.py::test_persian_book
+19.00s call     tests/test_illustration.py::test_every_page_renders_with_expected_characters_and_passes_qa
+15.96s call     tests/test_api_e2e.py::test_delete_moves_to_trash
+216 passed in 250.47s (0:04:10)
