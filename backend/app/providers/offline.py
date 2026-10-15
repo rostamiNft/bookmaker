@@ -43,12 +43,29 @@ class ProceduralImage(ImageProvider):
         img.save(buf, format="PNG", optimize=True)
         return ImageResult(data=buf.getvalue(), model="procedural-v1", seed=seed, meta=meta)
 
-    def reference_sheet(self, character: dict, style: str = "watercolor") -> ImageResult:
+    def reference_sheet(self, character: dict, style: str = "watercolor", mode: str = "multi_view") -> ImageResult:
         from ..illustration.scene import render_reference_sheet
-        img, meta = render_reference_sheet(character, style=style)
+        img, meta = render_reference_sheet(character, style=style, mode=mode)
         buf = io.BytesIO()
         img.save(buf, format="PNG", optimize=True)
         return ImageResult(data=buf.getvalue(), model="procedural-v1", meta=meta)
 
     def check(self):
         return {"ok": True, "note": "Built-in procedural illustrator (no AI, CPU only)."}
+
+    def cast_lineup(self, characters: list[dict]) -> ImageResult:
+        from ..illustration.scene import render_cast_lineup
+        img, meta = render_cast_lineup(characters)
+        buf = io.BytesIO()
+        img.save(buf, format="PNG", optimize=True)
+        return ImageResult(data=buf.getvalue(), model="procedural-v1", meta=meta)
+
+    supports_inpainting = True
+
+    def inpaint(self, image, mask_png, prompt, negative_prompt="", seed=None):
+        """The vector renderer cannot redraw a region; it uses classical OpenCV repair."""
+        from ..illustration.inpaint import classical, load_mask, to_png
+        from PIL import Image
+        im = Image.open(io.BytesIO(image)).convert("RGB")
+        out = classical(im, load_mask(mask_png, im.size))
+        return ImageResult(data=to_png(out), model="opencv-telea", seed=seed, meta={"inpaint": True})

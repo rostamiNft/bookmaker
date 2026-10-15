@@ -14,6 +14,34 @@ def latin_name(c: dict) -> str:
     return (c.get("relationships") or {}).get("_latin_name") or c.get("name", "")
 
 
+def relative_heights(characters: list[dict]) -> dict[str, float]:
+    from .scene import character_height
+    hs = {c["id"]: character_height(c, 1.0) for c in characters}
+    top = max(hs.values()) if hs else 1.0
+    return {k: round(v / top, 2) for k, v in hs.items()}
+
+
+def scale_and_relations(present: list[dict], all_chars: list[dict]) -> list[str]:
+    """Logic rules from the Character Bible: relative sizes and relationships of the
+    characters on this page (keeps scale consistent across pages for AI models)."""
+    lines = []
+    if len(present) >= 2:
+        rel = relative_heights(all_chars)
+        tallest = max(present, key=lambda c: rel.get(c["id"], 1))
+        parts = [f"{latin_name(c)} is about {round(rel[c['id']] / rel[tallest['id']] * 100)}% of {latin_name(tallest)}'s height"
+                 for c in present if c is not tallest]
+        lines.append(f"Relative sizes (keep consistent): {latin_name(tallest)} is the tallest; " + "; ".join(parts) + ".")
+    ids = {c["id"]: c for c in present}
+    rels = []
+    for c in present:
+        for other, how in (c.get("relationships") or {}).items():
+            if other in ids and not other.startswith("_") and how:
+                rels.append(f"{latin_name(c)} - {how} of {latin_name(ids[other])}")
+    if rels:
+        lines.append("Relationships: " + "; ".join(sorted(set(rels))[:4]) + ".")
+    return lines
+
+
 def build_page_prompt(page: dict, characters: list[dict], style: str, text_in_image: bool = False,
                       aspect: str = "4:3") -> tuple[str, str]:
     present = [c for c in characters if c["id"] in page.get("characters_present", [])]
@@ -30,16 +58,30 @@ def build_page_prompt(page: dict, characters: list[dict], style: str, text_in_im
             expr = scene.get("expressions", {}).get(c["id"], "")
             lines.append(f"- {latin_name(c)}: {c.get('description', '')}. Always the same look: {', '.join(c.get('distinctive', []))}."
                          + (f" Pose: {pose}." if pose else "") + (f" Expression: {expr}." if expr else ""))
+    lines += scale_and_relations(present, characters)
     lines.append(f"Composition: {scene.get('shot', 'medium')} shot, aspect ratio {aspect}, clear readable staging, all characters fully inside the frame.")
     if not text_in_image:
         lines.append("Absolutely no text, letters or writing anywhere in the image.")
     return "\n".join(lines), NEGATIVE + ("" if not text_in_image else "").replace("text, letters, words, captions, ", "" if text_in_image else "text, letters, words, captions, ")
 
 
-def build_reference_prompt(c: dict, style: str) -> tuple[str, str]:
+def build_reference_prompt(c: dict, style: str, mode: str = "multi_view") -> tuple[str, str]:
+    if mode == "multi_view":
+        views = ("Character turnaround sheet: the same character shown four times side by side - front view, three-quarter view, "
+                 "side profile and back view - full body, neutral standing pose, identical proportions, outfit and colours in every view")
+    else:
+        views = "Full body, front view, three poses side by side (standing, waving, pointing)"
     p = (f"Character reference sheet for a children's picture book, {ILLUSTRATION_STYLES.get(style, style)}. "
-         f"{latin_name(c)}: {c.get('description', '')}. Full body, front view, three poses side by side (standing, waving, pointing), "
-         f"plain light background, consistent proportions and colours. Distinctive: {', '.join(c.get('distinctive', []))}. No text.")
+         f"{latin_name(c)}: {c.get('description', '')}. {views}, "
+         f"plain light background, consistent proportions and colours. Distinctive: {', '.join(c.get('distinctive', []))}. No text, no labels.")
+    return p, NEGATIVE
+
+
+def build_cast_prompt(characters: list[dict], style: str) -> tuple[str, str]:
+    rel = relative_heights(characters)
+    who = "; ".join(f"{latin_name(c)} ({c.get('description', '')}, {round(rel[c['id']] * 100)}% height)" for c in characters)
+    p = (f"Cast line-up for a children's picture book, {ILLUSTRATION_STYLES.get(style, style)}. All characters standing side by side on one "
+         f"ground line, front view, full body, true relative sizes: {who}. Plain light background. No text, no labels.")
     return p, NEGATIVE
 
 

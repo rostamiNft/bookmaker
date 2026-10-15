@@ -72,6 +72,10 @@ def run_job(job_id: str) -> None:
             pipe.regenerate_cover()
         elif kind == "regenerate_text":
             pipe.regenerate_text(payload["page_id"], payload.get("instruction", ""))
+        elif kind == "inpaint_image":
+            pipe.inpaint_page(payload["page_id"], payload["mask"], payload.get("prompt", ""), payload.get("engine", ""))
+        elif kind == "narrate":
+            pipe.narrate(payload.get("page_id", ""), bool(payload.get("force")))
         elif kind in ("rebuild_pdf", "run_qa"):
             pipe.rebuild()
         else:

@@ -70,8 +70,10 @@ def health():
     return {"ok": True}
 
 
+from .api.auth import router as auth_router  # noqa: E402
 from .api.routes import router  # noqa: E402
 
+app.include_router(auth_router)
 app.include_router(router)
 
 if FRONTEND_DIST.is_dir():

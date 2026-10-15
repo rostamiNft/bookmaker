@@ -52,6 +52,20 @@ class BookSettings(BaseModel):
     max_image_attempts: int = Field(3, ge=1, le=6)
     max_story_attempts: int = Field(3, ge=1, le=5)
     budget_usd: float = Field(0.0, ge=0, le=1000, description="0 = no paid-API budget limit enforced beyond estimate confirmation")
+    # workflow
+    review_outline: bool = Field(False, description="Stop after the story plan so the text can be reviewed before illustration")
+    reference_mode: Literal["multi_view", "single"] = "multi_view"  # character sheets: poses+expressions / turnaround prompts
+    cast_reference: bool = True  # also send the cast line-up (relative sizes) to AI image models
+    # layout & print
+    layout_style: Literal["classic", "full_bleed"] = "classic"  # full_bleed: text typeset on a panel over the illustration
+    bleed_mm: float = Field(0.0, ge=0, le=6)
+    crop_marks: bool = False
+    color_mode: Literal["rgb", "cmyk"] = "rgb"
+    # narration
+    narration_audio: bool = False
+    tts_provider_id: str = ""
+    narration_voice: str = Field("", max_length=80)
+    narration_speed: float = Field(1.0, ge=0.5, le=2.0)
 
     @field_validator("title", "topic", "moral", "hero_name", "author", "publisher")
     @classmethod
@@ -68,7 +82,8 @@ class Appearance(BaseModel):
     eye_color: str = "#3b2a20"
     face: str = ""
     body: str = ""
-    height: float = 1.0  # relative height
+    height: float = 1.0  # relative height (story data)
+    scale: float = Field(1.0, ge=0.5, le=1.8)  # user size override on top of the species proportions
 
 
 class Outfit(BaseModel):

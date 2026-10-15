@@ -91,7 +91,76 @@ class LayoutEngine:
         self.footer = 22.0 if s.page_numbers else 0.0
 
     # ------------------------------------------------------------------ story
-    def story_page(self, number: int, text: str, has_image: bool = True) -> PageLayout:
+    def story_page(self, number: int, text: str, has_image: bool = True, image_path: str | None = None) -> PageLayout:
+        if self.s.layout_style == "full_bleed" and has_image and image_path:
+            pl = self.full_bleed_page(number, text, image_path)
+            if pl.kind == "story":
+                return pl
+            fallback_note = pl.notes[0]
+        else:
+            fallback_note = ""
+        pl = self._classic_story_page(number, text, has_image)
+        if fallback_note:
+            pl.notes.append(fallback_note)
+        return pl
+
+    def full_bleed_page(self, number: int, text: str, image_path: str) -> PageLayout:
+        """Illustration covers the whole page (into the bleed); text sits on a translucent
+        panel placed over the calmer band (top or bottom) of the picture. Falls back to the
+        classic layout when the picture would lose >30% to cropping or the text needs too
+        much of the page. Returns a PageLayout of kind 'fallback' with the reason otherwise."""
+        from PIL import Image, ImageFilter, ImageStat
+        W, H, m = self.W, self.H, self.m
+        with Image.open(image_path) as im:
+            sw, sh = im.size
+            pa, ia = W / H, sw / sh
+            loss = 1 - min(pa / ia, ia / pa)
+            if loss > 0.30:
+                return PageLayout("fallback", number, W, H, notes=[f"full_bleed→classic: {loss:.0%} of the picture would be cropped"])
+            g = im.convert("L")
+            if ia > pa:
+                nw = int(sh * pa)
+                g = g.crop(((sw - nw) // 2, 0, (sw - nw) // 2 + nw, sh))
+            else:
+                nh = int(sw / pa)
+                g = g.crop((0, (sh - nh) // 2, sw, (sh - nh) // 2 + nh))
+            g.thumbnail((240, 240))
+            edges = g.filter(ImageFilter.FIND_EDGES)
+            band = int(edges.height * 0.36)
+            busy_top = ImageStat.Stat(edges.crop((0, 0, edges.width, band))).mean[0]
+            busy_bot = ImageStat.Stat(edges.crop((0, edges.height - band, edges.width, edges.height))).mean[0]
+        lo, hi = FONT_RANGE[self.s.age_group]
+        if self.rtl:
+            lo, hi = lo + 1, hi + 1
+        miss = missing_glyphs(text, self.chain)
+        if miss:
+            raise LayoutError("missing_glyphs", f"No font contains: {''.join(miss)!r}", number)
+        at_top = busy_top < busy_bot
+        pad = max(12.0, m * 0.45)
+        px, pw = m * 0.7, W - 1.4 * m
+        tw = pw - 2 * pad
+        align = "center" if self.s.age_group == "3-5" else "start"
+        for frac in (0.2, 0.25, 0.3, 0.35, 0.4):
+            ph = H * frac
+            para = fit(text, self.chain, tw, ph - 2 * pad, hi, lo, self.rtl, self.leading)
+            if not para:
+                continue
+            ph = min(ph, para.height + 2 * pad + 6)  # shrink the panel to the text actually set
+            if at_top:
+                py = H - m * 0.7 - ph
+            else:
+                py = m * 0.7 + self.footer
+            pl = PageLayout("story", number, W, H)
+            pl.elements.append(Element("image", 0, 0, W, H, {"slot": "page", "frame": False, "full_bleed": True}))
+            pl.elements.append(Element("rect", px, py, pw, ph, {"fill": (1, 0.99, 0.96), "alpha": 0.88, "radius": 14}))
+            pl.elements.append(text_element(para, px + pad, py + pad, tw, ph - 2 * pad, self.rtl, align, self.chain))
+            if self.s.page_numbers:
+                self._pagenum(pl, number, panel=True)
+            pl.notes.append(f"layout=full_bleed panel={'top' if at_top else 'bottom'} panel_frac={ph / H:.2f} font={para.size} crop={loss:.0%}")
+            return pl
+        return PageLayout("fallback", number, W, H, notes=["full_bleed→classic: text needs more than 40% of the page"])
+
+    def _classic_story_page(self, number: int, text: str, has_image: bool = True) -> PageLayout:
         W, H, m = self.W, self.H, self.m
         lo, hi = FONT_RANGE[self.s.age_group]
         if self.rtl:
@@ -141,12 +210,14 @@ class LayoutEngine:
                 return pl
         raise LayoutError("text_overflow", f"Text does not fit even at {lo}pt with the smallest image ({len(text)} chars).", number)
 
-    def _pagenum(self, pl: PageLayout, number: int | None):
+    def _pagenum(self, pl: PageLayout, number: int | None, panel: bool = False):
         if self.s.page_numbers and number is not None:
             label = str(number)
             if self.rtl:
                 label = label.translate(str.maketrans("0123456789", "۰۱۲۳۴۵۶۷۸۹"))
             para = wrap(label, self.chain, 10, 60, self.rtl, 1.2)
+            if panel:  # readable on top of a full-bleed picture
+                pl.elements.append(Element("rect", self.W / 2 - 16, self.m * 0.55 - 3, 32, 20, {"fill": (1, 0.99, 0.96), "alpha": 0.85, "radius": 9}))
             pl.elements.append(text_element(para, self.W / 2 - 30, self.m * 0.55, 60, 16, self.rtl, "center", self.chain,
                                             color=(0.45, 0.4, 0.38)))
             pl.elements[-1].kind = "pagenum"
@@ -265,6 +336,16 @@ def verify_layout(pl: PageLayout, margin: float) -> list[dict]:
                 continue  # text over full-bleed cover sits on its own panel
             if _overlap(t.box(), im.box()):
                 add("overlap", "Text box overlaps an image")
+    if any(i.data.get("full_bleed") for i in images):
+        panels = [e.box() for e in pl.elements if e.kind == "rect" and e.data.get("alpha", 1) >= 0.75]
+        for t in texts:
+            ls = t.data["lines"]
+            if not ls:
+                continue
+            tb = (min(l["x"] for l in ls), min(l["bottom"] for l in ls), max(l["x"] + l["width"] for l in ls), max(l["top"] for l in ls))
+            inside = any(p[0] - 0.5 <= tb[0] and p[1] - 0.5 <= tb[1] and tb[2] <= p[2] + 0.5 and tb[3] <= p[3] + 0.5 for p in panels)
+            if not inside:
+                add("text_on_picture", "Text over a full-bleed picture without a readable panel behind it")
     for i in range(len(images)):
         for j in range(i + 1, len(images)):
             if _overlap(images[i].box(), images[j].box()):

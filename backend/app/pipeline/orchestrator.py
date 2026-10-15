@@ -15,7 +15,7 @@ from sqlalchemy import select
 from ..config import settings as app_settings
 from ..db import session_scope
 from ..illustration.image_qa import check_image, find_duplicates, fit_to_aspect
-from ..illustration.prompts import build_cover_prompt, build_page_prompt, build_reference_prompt
+from ..illustration.prompts import build_cast_prompt, build_cover_prompt, build_page_prompt, build_reference_prompt
 from ..layout.book import build_layouts
 from ..layout.engine import ASPECTS, page_size
 from ..layout.pdf import render_pdf
@@ -28,12 +28,16 @@ from ..schemas import BookSettings, StoryPlan
 from ..story import offline_engine
 from ..story.llm_engine import generate_plan_llm, regenerate_page_llm
 from ..story.validator import validate_plan
-from .store import absf, add_history, current_plan, project_dir, rel, stage_log
+from .store import absf, add_history, current_plan, project_dir, rel, snapshot_page, stage_log
 
 log = logging.getLogger("pipeline")
 
-STAGES = ["plan", "characters", "images", "pdf", "qa"]
-PROGRESS = {"plan": (0, 15), "characters": (15, 22), "images": (22, 82), "pdf": (82, 95), "qa": (95, 100)}
+STAGES = ["plan", "characters", "images", "pdf", "audio", "qa"]
+PROGRESS = {"plan": (0, 15), "characters": (15, 22), "images": (22, 82), "pdf": (82, 92), "audio": (92, 97), "qa": (97, 100)}
+
+
+class AwaitingReview(Exception):
+    pass
 IMG_LONG_SIDE = {"screen": 1280, "print": 2048}
 
 
@@ -63,6 +67,8 @@ class Pipeline:
             self.llm_offline = llm is None or llm.provider_type == "offline"
             self.image_offline = img is None or img.provider_type == "offline"
             self.image_model_name = (img.name if img else "procedural") or "procedural"
+            self.tts_id = self.s.tts_provider_id or d.get("tts") or ""
+            self.inpaint_default = d.get("inpaint") or ""
             self.llm_model_name = (llm.name if llm else "offline") or "offline"
         self.router = Router(project_id, self.s.budget_usd)
         self.dir = project_dir(project_id)
@@ -124,7 +130,14 @@ class Pipeline:
                 if st.get("status") == "done" and stage not in ("pdf", "qa"):
                     continue
                 self.checkpoint()
+                if stage == "characters" and self.s.review_outline and not self._state().get("outline", {}).get("approved"):
+                    raise AwaitingReview()
                 getattr(self, f"stage_{stage}")()
+        except AwaitingReview:
+            self._update(status="awaiting_review", progress=float(PROGRESS["plan"][1]))
+            self._log("pipeline", "ok", "Story plan ready: review/edit the text, then approve it to start illustrating")
+            with session_scope() as s:
+                add_history(s, self.pid, "awaiting_outline_review")
         except Paused:
             self._update(status="paused", pause_requested=False)
             self._log("pipeline", "warning", "Paused by user; progress is saved and can be resumed")
@@ -198,10 +211,10 @@ class Pipeline:
                 continue
             self.checkpoint()
             if self.image_offline:
-                res = ProceduralImage().reference_sheet(spec, self.s.illustration_style)
+                res = ProceduralImage().reference_sheet(spec, self.s.illustration_style, self.s.reference_mode)
                 approved = True
             else:
-                prompt, neg = build_reference_prompt(spec, self.s.illustration_style)
+                prompt, neg = build_reference_prompt(spec, self.s.illustration_style, self.s.reference_mode)
                 res = self.router.run(self.image_id, "image", "character_reference",
                                       lambda prov, cfg: prov.generate(prompt, neg, 1024, 768, seed=self.seed, style=self.s.illustration_style,
                                                                       characters=[spec]))
@@ -214,15 +227,53 @@ class Pipeline:
                 c.ref_image_file = rel(self.pid, path)
                 c.ref_approved = approved
             self._progress("characters", (i + 1) / max(1, len(chars)))
+        cast = self._cast_sheet()
         with session_scope() as s:
-            add_history(s, self.pid, "character_bible_ready", {"characters": [c[1] for c in chars]})
-        self._set_stage("characters", "done")
+            add_history(s, self.pid, "character_bible_ready", {"characters": [c[1] for c in chars], "cast_sheet": bool(cast)})
+        self._set_stage("characters", "done", cast_file=cast.get("file", ""), ai_cast_file=cast.get("ai_file", ""),
+                        relative_heights=cast.get("relative_heights", {}))
+
+    def _cast_sheet(self) -> dict:
+        """Cast line-up at true relative sizes. Procedural: exact geometry (always built, shown in the UI).
+        AI provider + cast_reference: the model draws the line-up from the references, used as an extra page reference."""
+        with session_scope() as s:
+            rows = s.scalars(select(Character).where(Character.project_id == self.pid)).all()
+            specs = [r.spec for r in rows]
+            refs = [absf(self.pid, r.ref_image_file) for r in rows if r.ref_image_file and r.ref_approved]
+        if not specs:
+            return {}
+        order = {"protagonist": 0, "companion": 1, "supporting": 2}
+        specs.sort(key=lambda c: order.get(c.get("role"), 3))
+        res = ProceduralImage().cast_lineup(specs)
+        path = self.dir / "refs" / "cast.png"
+        path.write_bytes(res.data)
+        out = {"file": rel(self.pid, path), "relative_heights": res.meta.get("relative_heights", {})}
+        if not self.image_offline and self.s.cast_reference and len(specs) > 1:
+            prompt, neg = build_cast_prompt(specs, self.s.illustration_style)
+            try:
+                ai = self.router.run(self.image_id, "image", "cast_reference",
+                                     lambda prov, cfg: prov.generate(prompt, neg, 1280, 720, seed=self.seed + 77, style=self.s.illustration_style,
+                                                                     characters=specs, reference_images=[f.read_bytes() for f in refs if f and f.exists()][:4] or None))
+                q = check_image(ai.data, 16 / 9, ocr=False)
+                if q["ok"] or all(i["code"] in ("aspect_mismatch",) for i in q["issues"] if i["severity"] == "error"):
+                    p2 = self.dir / "refs" / "cast-ai.png"
+                    p2.write_bytes(ai.data)
+                    out["ai_file"] = rel(self.pid, p2)
+            except ProviderError as e:
+                self._log("characters", "warning", f"AI cast line-up failed; pages use individual references only: {e}")
+        return out
 
     # ------------------------------------------------------------------ stage: images
     def _characters(self):
         with session_scope() as s:
             rows = s.scalars(select(Character).where(Character.project_id == self.pid)).all()
             return [r.spec for r in rows], {r.char_id: absf(self.pid, r.ref_image_file) for r in rows if r.ref_image_file and r.ref_approved}
+
+    def _cast_ref(self):
+        if self.image_offline or not self.s.cast_reference:
+            return None
+        f = self.dir / "refs" / "cast-ai.png"
+        return f if f.exists() else None
 
     def _img_size(self, aspect: float) -> tuple[int, int]:
         long_side = IMG_LONG_SIDE[self.s.output_profile]
@@ -254,6 +305,8 @@ class Pipeline:
     def generate_page_image(self, page_id: str, variant_offset: int = 0) -> dict:
         with session_scope() as s:
             p = s.get(Page, page_id)
+            if p.image_file:
+                snapshot_page(s, p, "before_image_regeneration")
             page = {"id": p.id, "number": p.number, "text": p.text, "image_description": p.image_prompt, "scene": dict(p.scene or {}),
                     "characters_present": list(p.characters_present or []), "meta": dict(p.image_meta or {})}
         chars, refs = self._characters()
@@ -268,6 +321,9 @@ class Pipeline:
             variant = base_variant + attempt
             seed = self.seed + page["number"] * 101 + variant * 7
             ref_bytes = [refs[c].read_bytes() for c in page["characters_present"] if refs.get(c) and refs[c].exists()]
+            cast_file = self._cast_ref()
+            if cast_file and len(page["characters_present"]) > 1 and len(ref_bytes) < 4:
+                ref_bytes.append(cast_file.read_bytes())
             try:
                 res = self.router.run(self.image_id, "image", f"page_{page['number']}",
                                       lambda prov, cfg: prov.generate(prompt, neg, w, h, seed=seed, reference_images=ref_bytes or None,
@@ -411,6 +467,7 @@ class Pipeline:
                 return False
             if new.text == page.text or len(new.text) >= len(page.text):
                 return False
+            snapshot_page(s, page, "before_auto_shorten", actor="qa")
             add_history(s, self.pid, "text_shortened_for_layout", {"page": number, "before": page.text, "after": new.text}, actor="qa")
             page.text = new.text
             return True
@@ -444,16 +501,25 @@ class Pipeline:
                 break
         out = self.dir / "pdf" / f"book-v{version}.pdf"
         info = render_pdf(layouts, images, out, title=title, author=self.s.author, subject=plan.summary, language=self.s.language,
-                          keywords=["children's book", plan.theme, self.s.age_group], profile=self.s.output_profile)
+                          keywords=["children's book", plan.theme, self.s.age_group], profile=self.s.output_profile,
+                          bleed_mm=self.s.bleed_mm, crop_marks=self.s.crop_marks, color_mode=self.s.color_mode)
         W, H = page_size(self.s)
+        MW, MH = info["media_size"]
         expected_story = len(page_dicts)
         image_pages = [i + 1 for i, l in enumerate(layouts) if any(e.kind == "image" and (e.data.get("slot") != "cover" or "cover" in images)
                                                                 and (l.kind != "story" or f"story:{l.number}" in images) for e in l.elements)]
         ltr = None
         if self.s.language == "en":
             ltr = {i + 1: next(e for e in l.elements if e.kind == "text").data["lines"][0]["logical"] for i, l in enumerate(layouts) if l.kind == "story"}
-        v = validate_pdf(out, expected_pages=len(layouts), expected_size=(W, H), page_kinds=[l.kind for l in layouts], image_pages=image_pages,
-                         title=title, language=self.s.language, ltr_samples=ltr, render_dir=self.dir / "render" / f"v{version}")
+        rtl = None
+        if self.s.language == "fa":
+            rtl = {i + 1: next(e for e in l.elements if e.kind == "text").data["lines"][0]["logical"] for i, l in enumerate(layouts) if l.kind == "story"}
+        v = validate_pdf(out, expected_pages=len(layouts), expected_size=(MW, MH), page_kinds=[l.kind for l in layouts], image_pages=image_pages,
+                         title=title, language=self.s.language, ltr_samples=ltr, render_dir=self.dir / "render" / f"v{version}",
+                         trim=(W, H, info["trim_offset"]) if info["trim_offset"] > 0 else None, bleed_pt=info["bleed_pt"],
+                         color_mode=self.s.color_mode, rtl_samples=rtl)
+        v["info"]["print"] = {"trim_mm": [round(W / 72 * 25.4, 1), round(H / 72 * 25.4, 1)], "bleed_mm": self.s.bleed_mm,
+                              "crop_marks": self.s.crop_marks, "color_mode": self.s.color_mode, "layout_style": self.s.layout_style}
         story_missing = [p["number"] for p in page_dicts if f"story:{p['number']}" not in images]
         for n in story_missing:
             issues.append({"code": "image_missing", "severity": "error", "message": "Story page has no illustration", "page": n, "stage": "image"})
@@ -493,7 +559,8 @@ class Pipeline:
             rep = dict(proj.qa_report or {})
             layout = rep.get("layout", {"issues": []})
             pdfq = rep.get("pdf", {"issues": [], "ok": False})
-            sections = {"story": story["issues"], "images": image_issues, "layout": layout.get("issues", []), "pdf": pdfq.get("issues", [])}
+            sections = {"story": story["issues"], "images": image_issues, "layout": layout.get("issues", []), "pdf": pdfq.get("issues", []),
+                        "audio": (rep.get("audio") or {}).get("issues", []) if self.s.narration_audio else []}
             errors = sum(1 for sec in sections.values() for i in sec if i.get("severity") == "error")
             warnings = sum(1 for sec in sections.values() for i in sec if i.get("severity") == "warning")
             pdf_ok = bool(pdfq.get("ok")) and bool(proj.pdf_file)
@@ -554,6 +621,7 @@ class Pipeline:
             raise ValueError("No language model is configured and this page is not from the offline engine; edit the text manually.")
         with session_scope() as s:
             page = s.get(Page, page_id)
+            snapshot_page(s, page, "before_text_rewrite", actor="user")
             page.text = new.text
             page.text_variant = variant
             if new.image_description and new.image_description != old_desc:
@@ -573,3 +641,141 @@ class Pipeline:
         self.stage_images()
         self.stage_pdf()
         self.stage_qa()
+
+    # ------------------------------------------------------------------ stage: audio (optional narration)
+    def stage_audio(self):
+        if not self.s.narration_audio:
+            self._set_stage("audio", "done", skipped=True)
+            return
+        self._set_stage("audio", "running")
+        with session_scope() as s:
+            ids = [p.id for p in s.scalars(select(Page).where(Page.project_id == self.pid).order_by(Page.number))]
+        issues = []
+        for i, page_id in enumerate(ids):
+            self.checkpoint()
+            issues += self.narrate_page(page_id)
+            self._progress("audio", (i + 1) / max(1, len(ids)))
+        with session_scope() as s:
+            p = s.get(Project, self.pid)
+            q = dict(p.qa_report or {})
+            q["audio"] = {"ok": not any(x["severity"] == "error" for x in issues), "issues": issues}
+            p.qa_report = q
+        self._set_stage("audio", "done", pages=len(ids), issues=len(issues))
+
+    def narrate_page(self, page_id: str, force: bool = False) -> list[dict]:
+        """Narrate one page. Skips pages whose text did not change since the last narration.
+        Returns QA issues (never raises for provider problems: narration is optional)."""
+        import hashlib
+        with session_scope() as s:
+            p = s.get(Page, page_id)
+            number, text, meta, old = p.number, p.text, dict(p.audio_meta or {}), p.audio_file
+        key = hashlib.sha256(f"{text}|{self.s.narration_voice}|{self.s.narration_speed}|{self.tts_id}".encode()).hexdigest()[:12]
+        if not force and meta.get("key") == key and old and absf(self.pid, old) and absf(self.pid, old).exists():
+            return list(meta.get("issues", []))
+        if not self.tts_id:
+            return [{"code": "tts_not_configured", "severity": "warning", "message": "No narration provider configured", "page": number, "stage": "audio"}]
+        spoken = text
+        try:
+            res = self.router.run(self.tts_id, "tts", f"narration_{number}",
+                                  lambda prov, cfg: prov.synthesize(spoken, self.s.language, self.s.narration_voice, self.s.narration_speed))
+        except (ProviderError, NotImplementedError) as e:
+            issue = {"code": "tts_failed", "severity": "warning", "message": f"Narration failed: {str(e)[:200]}", "page": number, "stage": "audio"}
+            with session_scope() as s:
+                p = s.get(Page, page_id)
+                p.audio_meta = {**meta, "issues": [issue]}
+            return [issue]
+        ext = "mp3" if res.mime == "audio/mpeg" else "wav"
+        path = self.dir / "audio" / f"page-{number:02d}-{key}.{ext}"
+        path.parent.mkdir(exist_ok=True)
+        path.write_bytes(res.data)
+        issues = []
+        cps = len(text) / res.duration_s if res.duration_s else 0
+        if res.duration_s <= 0.3:
+            issues.append({"code": "audio_empty", "severity": "warning", "message": "Narration is (almost) silent", "page": number, "stage": "audio"})
+        elif not (2.0 <= cps <= 45.0):
+            issues.append({"code": "audio_suspect_length", "severity": "warning",
+                           "message": f"Narration length looks wrong ({res.duration_s:.1f}s for {len(text)} characters)", "page": number, "stage": "audio"})
+        with session_scope() as s:
+            p = s.get(Page, page_id)
+            p.audio_file = rel(self.pid, path)
+            p.audio_meta = {"key": key, "engine": res.model, "voice": res.voice, "mime": res.mime, "duration_s": res.duration_s,
+                            "bytes": len(res.data), "issues": issues}
+        return issues
+
+    def narrate(self, page_id: str = "", force: bool = False):
+        self._update(status="running")
+        if page_id:
+            self.narrate_page(page_id, force=force)
+        else:
+            with session_scope() as s:
+                ids = [p.id for p in s.scalars(select(Page).where(Page.project_id == self.pid).order_by(Page.number))]
+            issues = []
+            for pid_ in ids:
+                self.checkpoint()
+                issues += self.narrate_page(pid_, force=force)
+            with session_scope() as s:
+                p = s.get(Project, self.pid)
+                q = dict(p.qa_report or {})
+                q["audio"] = {"ok": True, "issues": issues}
+                p.qa_report = q
+        self.stage_qa()
+
+    # ------------------------------------------------------------------ region repair
+    def inpaint_page(self, page_id: str, mask_rel: str, prompt: str = "", engine: str = ""):
+        """Repair a painted region of a page illustration, then rebuild PDF + QA."""
+        from ..illustration.inpaint import inpaint, mask_png
+        from ..illustration.prompts import NEGATIVE
+        self._update(status="running")
+        with session_scope() as s:
+            p = s.get(Page, page_id)
+            if not p.image_file or not (absf(self.pid, p.image_file) and absf(self.pid, p.image_file).exists()):
+                raise ValueError("This page has no illustration to repair")
+            snapshot_page(s, p, "before_inpaint", actor="user")
+            number, img_path, chars_present, scene = p.number, absf(self.pid, p.image_file), list(p.characters_present or []), dict(p.scene or {})
+            meta = dict(p.image_meta or {})
+        mask_file = absf(self.pid, mask_rel)
+        if not mask_file or not mask_file.exists():
+            raise ValueError("Mask file missing")
+        engine = engine if engine != "default" else self.inpaint_default
+        engine_fn, engine_name = None, "opencv-telea"
+        if engine and engine != "classical":
+            with session_scope() as s:
+                cfg = s.get(ProviderConfig, engine)
+                if cfg is None:
+                    raise ValueError("Unknown repair provider")
+                kind, engine_name = cfg.kind, cfg.name
+            seed = self.seed + number * 101 + 5000 + len(meta.get("inpaints", []))
+            full_prompt = (prompt or "repair this area so it matches the surrounding illustration") + \
+                f". Children's picture-book illustration, {self.s.illustration_style}."
+
+            def engine_fn(img_png, mask):
+                return self.router.run(engine, kind, f"inpaint_page_{number}",
+                                       lambda prov, cfg: prov.inpaint(img_png, mask_png(mask, prov.mask_convention()), full_prompt, NEGATIVE, seed)).data
+        data, report = inpaint(img_path.read_bytes(), mask_file.read_bytes(), engine_fn)
+        report["engine"] = engine_name if engine_fn else report["engine"]
+        report["prompt"] = prompt
+        k = len(meta.get("inpaints", [])) + 1
+        out = self.dir / "images" / f"page-{number:02d}-fix{k}.png"
+        out.write_bytes(data)
+        with session_scope() as s:
+            chars = [c.spec for c in s.scalars(select(Character).where(Character.project_id == self.pid))]
+        q = check_image(data, self.aspect, expected_chars=chars_present, meta=None,
+                        palettes={c["id"]: c.get("palette", []) for c in chars}, time_of_day=scene.get("time", "day"))
+        if report["changed_outside_mask"] > 0.001:
+            q["issues"].append({"code": "repair_leaked", "severity": "error", "message": "Pixels outside the mask changed", "stage": "image"})
+            q["ok"] = False
+        with session_scope() as s:
+            p = s.get(Page, page_id)
+            m = dict(p.image_meta or {})
+            m["inpaints"] = (m.get("inpaints", []) + [{**report, "file": rel(self.pid, out), "mask": mask_rel, "at": time.time()}])[-20:]
+            m["dhash"] = q.get("metrics", {}).get("dhash", m.get("dhash"))
+            p.image_meta = m
+            p.image_file = rel(self.pid, out)
+            p.image_status = "generated" if q["ok"] else "failed"
+            p.qa = {**(p.qa or {}), "image": q}
+            add_history(s, self.pid, "image_repaired", {"page": number, **report}, actor="user")
+        self._log("images", "ok" if q["ok"] else "warning", f"page {number} region repaired with {report['engine']}",
+                  {k2: report[k2] for k2 in ("mask_coverage", "changed_outside_mask", "mean_change_inside_mask")})
+        self.stage_pdf()
+        self.stage_qa()
+        return report

@@ -7,8 +7,9 @@ GitHub/PyPI/npm (no model downloads, no model APIs, no API keys).
 
 | Suite | Command | Result |
 |---|---|---|
-| Backend unit + integration + end-to-end | `cd backend && ../.venv/bin/python -m pytest -q` | **216 passed**, 0 failed (250 s): [log](test-results/backend-pytest.txt) |
-| Frontend UI (Vitest + Testing Library, jsdom) | `cd frontend && npm test` | **10 passed**, 0 failed: [log](test-results/frontend-vitest.txt) |
+| Backend unit + integration + end-to-end | `cd backend && ../.venv/bin/python -m pytest -q` | **235 passed**, 0 failed (297 s): [log](test-results/backend-pytest.txt) |
+| Frontend UI (Vitest + Testing Library, jsdom) | `cd frontend && npm test` | **18 passed**, 0 failed: [log](test-results/frontend-vitest.txt) |
+| **Browser end-to-end** (real Chromium 153 headless + real backend in `accounts` mode, no mocks) | `frontend/e2e/browser-e2e.mjs` | **14/14 checks passed**: [results + screenshots](test-results/browser-e2e/) |
 
 What the backend suite covers:
 
@@ -38,10 +39,28 @@ What the backend suite covers:
   **LLM + image API over HTTP** (paid-run confirmation 402, cost accounting, references sent, LLM page rewrite); upload
   validation (script disguised as PNG rejected), auth token, input validation; delete → trash; backup zip; system stats and estimates.
 
+* **New features** (`test_new_features.py`, `test_media_providers.py`): outline gate (`awaiting_review`, no images before
+  approval, edits kept); print PDF (bleed boxes, crop marks, DeviceCMYK images, full-bleed pages, layout fallback);
+  Persian `/ActualText`; revisions + restore (undo of undo); region repair with OpenCV (pixels outside the mask unchanged)
+  and with AI providers over HTTP (OpenAI `/images/edits`, A1111/sd.cpp img2img+mask, ComfyUI inpaint workflow, IOPaint);
+  FastSD CPU adapter; offline eSpeak NG + OpenAI-compatible TTS (MP3 per page, re-record only changed pages); EPUB passes
+  EPUBCheck 5.3, HTML reader, images ZIP; accounts (setup, login, throttling, roles, isolation 404, disabled user, password
+  change, `?token=` media); character scale/cast sheet; paid-TTS cost estimate and 402 confirmation for narration.
+
 UI tests: dashboard, create-book form (preset + topic → correct request, navigation), blocked start on estimate
 warnings, page editing + image regeneration, progress + QA report, book-like preview navigation (spread/single), PDF
-download link, provider add/test, Persian RTL switch, API error display. Backend responses are mocked in these tests.
-**Not done:** browser-based visual UI testing (no headless browser could be downloaded in this environment).
+download link, provider add/test, Persian RTL switch, API error display; login + first-run setup, outline approval,
+revision restore, narration player + repair dialog, EPUB export status, character scale slider, preview read-along.
+Backend responses are mocked in these Vitest tests.
+
+**Browser E2E (real, 2026-10-15)** with headless Chromium against a fresh server (`BOOKMAKER_AUTH_MODE=accounts`):
+first-run setup → admin login → Persian 8-page book with outline review + narration → status `awaiting_review` with no
+images → approve → `completed`, 0 errors/0 warnings → MP3 on every page (10–23 s), Chromium plays it → paint a mask in
+the repair dialog → OpenCV repair, `changed_outside_mask = 0`, old image kept as a revision → build EPUB in the UI →
+EPUBCheck ✓ 5.3.0 → HTML reader is RTL with 11 sheets and 8 audio elements → cast line-up visible → Preview read-along
+plays page 1, then page 2 automatically → second user "reader" gets 404 for the admin's book and sees an empty library →
+no unexpected console errors (only the expected 401 before login and the deliberate 404).
+Screenshots: `docs/test-results/browser-e2e/e2e-*.png`.
 
 ## Acceptance books (generated through the live web API, then inspected page by page)
 
@@ -49,9 +68,12 @@ download link, provider add/test, Persian RTL switch, API error display. Backend
 |---|---|---|
 | `samples/sample-fa-lost-star.pdf`: *سامان و ستاره‌ی کوچولوی گمشده* | fa, 6-8, 14 story pages, watercolor, A4 | 19 PDF pages (cover, title, copyright, 14 story, end, back cover), 1.3 MB, QA: 0 errors / 0 warnings, fonts Vazirmatn embedded, `/Lang fa` |
 | `samples/sample-en-silent-stream.pdf`: *Mia and the Silent Stream* | en, 6-8, 14 story pages, gouache, A4 | 19 PDF pages, 1.6 MB, QA: 0 errors / 0 warnings, Andika embedded, `/Lang en`, text extractable |
+| `samples/sample-fa-lost-star.epub` | same Persian book + narration | EPUB 3, 3.2 MB, 14 pages with audio, **EPUBCheck 5.3.0: 0 errors, 0 warnings** |
+| `samples/sample-fa-print-fullbleed-cmyk.pdf` | Persian, aspect 3:4, full-bleed layout, 3 mm bleed, crop marks, CMYK | 19 pages, 5.0 MB, MediaBox 648×895 pt, TrimBox = A4 (595×841), BleedBox +8.5 pt, all images DeviceCMYK, 89 ActualText spans, QA 0/0 |
 
 Contact sheets: `samples/sample-*-pages.jpg`; full per-page data (text, prompts, attempts, QA): `samples/sample-*-report.json`.
 Each PDF was re-opened with pypdf and every page rasterised with PDFium; the renders were viewed manually.
+All samples were regenerated on 2026-10-15 with the current code through the live web API.
 
 ## Defects found by testing/inspection and fixed at the root
 
@@ -69,6 +91,11 @@ Each PDF was re-opened with pypdf and every page rasterised with PDFium; the ren
 12. **Bidi defect**: brackets of English phrases inside Persian lines were misplaced (`(… CPU :label`). Fixed with LTR embeddings + regression test.
 13. Wording problems found while reading the sample books (repeated "garden", lowercase sentence start, doubled "And"). Templates fixed, plus automatic sentence capitalisation.
 14. (Test bug) A test deleted the last page, which removes the story's ending; QA correctly reported `no_ending`. The test was fixed, not the check.
+15. Full-bleed text panel bounding box was computed in the wrong coordinate system (verify_layout flagged overlap). Fixed.
+16. RTL extraction check rewritten: PDFium ignores `/ActualText`, so the check reads the content stream with pypdf.
+17. Rapidocr installs GUI OpenCV which shadows the headless build (`libGL.so.1` ImportError). `run.sh`/Dockerfile now keep only the headless build.
+18. UI: the Users page requested the admin-only user list for normal users (403 in the console). Fixed (found by the browser E2E).
+19. Mock ComfyUI server crashed on non-image uploads after the inpaint change (found by the full suite). Fixed.
 
 ## Feature status
 
@@ -86,29 +113,43 @@ Each PDF was re-opened with pypdf and every page rasterised with PDFium; the ren
 * Security controls: optional token auth, rate limiting, size limits, validation, path-traversal protection, safe uploads, redacted logs.
 * Bilingual responsive UI (dashboard, creation, workspace, preview, QA, history, logs, settings, library, providers).
 * Headless CLI (`backend/cli.py`).
+* **Outline review gate** before illustration (API + UI + browser E2E).
+* **Region repair (inpainting)**: mask painter in the UI, built-in OpenCV engine (CPU), AI engines via IOPaint, A1111/Forge/sd.cpp, ComfyUI, OpenAI edits (mock-protocol tests); pixels outside the mask are proven unchanged.
+* **Revisions / undo** for every page change, restore from the UI.
+* **User accounts** (`accounts` mode): first-run admin setup, login/logout, sessions, roles, per-user isolation, login throttling, user management UI.
+* **Print PDF**: bleed, crop marks, TrimBox/BleedBox, CMYK images, full-bleed layout with typeset text panel (with automatic, reported fallback to classic when the crop would be too large).
+* **Narration**: offline eSpeak NG (Persian + English) and OpenAI-compatible TTS; MP3 per page; player, Preview read-along, embedded in EPUB/HTML; paid-TTS cost estimate + confirmation.
+* **Exports**: EPUB 3 validated by EPUBCheck, single-file HTML reader, images + text ZIP.
+* **Character scale & cast line-up** (relative sizes enforced; used as an extra reference for AI images when `cast_reference` is on).
+* **CPU diffusion adapters**: FastSD CPU (`fastsdcpu`), stable-diffusion.cpp via the A1111-compatible API.
+* Persian `/ActualText` for correct copy/paste and screen readers.
 
 ### ⚠️ Implemented, partially verified
 * **Real AI models were not exercised** (no network access to model hosts/APIs here). Adapters are tested against mock servers implementing the same HTTP protocols; behaviour with real services (latency, odd outputs) still needs validation by the user.
-* Anthropic LLM/vision adapter and AUTOMATIC1111 image adapter are implemented but have **no automated test**.
+* Anthropic LLM/vision adapter has **no automated test**. AUTOMATIC1111 / sd.cpp / FastSD CPU / IOPaint / Kokoro-style TTS adapters are tested only against mock servers built from their documented APIs (no real server could be downloaded here).
+* AI region repair, `cast_reference` with a real image model, and the OpenAI-compatible TTS were never run against real models.
+* EPUBCheck needs the optional `epubcheck` + `jdk4py` wheels (~70 MB); without them EPUBs are reported "not checked".
+* Offline narration quality: eSpeak NG is intelligible but robotic; it is GPL-3.0 and therefore an optional install.
 * Vision-model review is implemented (adapter tested), but not exercised inside a full end-to-end run.
 * Character consistency for AI images relies on references + fixed seeds + a colour heuristic (warning-level) + optional vision review. Quality depends on the model and workflow.
 * "Actual" cost = provider-reported token/image usage × user-entered prices (APIs do not return prices).
 * LLM path: Persian quality depends strongly on the model; small local models may need more revision attempts.
 
 ### ❌ Not implemented (future work)
-* Inpainting/region repair of images (a defective image is regenerated as a whole).
-* CPU diffusion adapter (stable-diffusion.cpp / FastSD CPU), so AI images without GPU or API.
-* User accounts/roles (only a shared token; `owner_id` prepared), PostgreSQL/Redis/Celery deployment profile.
-* Print-shop features: bleed, crop marks, CMYK/PDF-X. Hyphenation and justified text.
-* Undo/revert from history (history is an audit log).
-* Typeset text inside illustrations (the `text_in_image` option only relaxes the "no text" prompt rules).
+* PDF/X-1a/X-4 conformance (ICC output intent, profile-based CMYK conversion). Current CMYK is a naive conversion.
+* PostgreSQL/Redis/Celery deployment profile; SSO/OAuth login; password reset by e-mail.
+* Hyphenation and justified text; HarfBuzz shaping (uharfbuzz) instead of arabic-reshaper.
+* Text-highlight synchronised with audio (word timings); video export.
+* LoRA training per character (CharForge-style) — documented as an external GPU workflow only.
+* Speech bubbles / typeset text placed *inside* the illustration composition (the full-bleed panel is a separate overlay).
 
 ## Known limitations
 
 * The offline engine is a template system, **not AI**: it maps any topic to the closest of 4 arcs, writes third-person
   stories with 2 main characters + 1 helper, English or Persian, 6–18 pages.
 * The procedural illustrations are simple flat vector art, consistent and child-friendly but far from painterly AI or human illustration.
-* PDF text extraction: English extracts correctly; Persian extracts as presentation-form glyphs in visual order (reading is fine, copy/paste/search is degraded). Fix would need ActualText spans or a HarfBuzz-based renderer.
-* Layout chooses from stacked and side-by-side templates (no full-bleed story pages yet); a 4:3 image on a portrait page leaves generous whitespace (choose 3:4 for portrait books).
+* PDF text extraction: Persian text now carries `/ActualText` (logical order), which Acrobat-style readers and pypdf honour; PDFium/pdftotext-style extractors ignore ActualText and still return visual-order presentation forms.
+* Full-bleed layout: with 4:3 pictures on portrait pages the crop would be too large, so pages fall back to the classic layout (noted in the layout report); use aspect 3:4. The text panel can cover the characters' feet/legs on some scenes (the illustrator does not reserve the panel area yet).
+* A failed job (e.g. a crash in a repair) marks the whole book `failed` until the next successful job; finished work is kept.
 * SQLite + in-process worker = single server instance. No hard CPU/RAM caps inside the app: use container limits.
 * The Dockerfile was not built or tested in this environment.

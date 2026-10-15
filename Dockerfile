@@ -10,7 +10,9 @@ FROM python:3.11-slim
 RUN apt-get update && apt-get install -y --no-install-recommends fonts-dejavu-core && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY backend/requirements*.txt backend/
-RUN pip install --no-cache-dir -r backend/requirements.txt -r backend/requirements-optional.txt
+RUN pip install --no-cache-dir -r backend/requirements.txt -r backend/requirements-optional.txt -r backend/requirements-media.txt \
+ && (pip uninstall -y opencv-python || true) \
+ && pip install --no-cache-dir --force-reinstall --no-deps opencv-python-headless==5.0.0.93
 COPY backend/ backend/
 COPY assets/ assets/
 COPY --from=ui /ui/dist frontend/dist

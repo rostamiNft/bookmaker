@@ -684,15 +684,18 @@ SHOT_SCALE = {"wide": 0.34, "medium": 0.46, "close": 0.6}
 SLOTS = {1: [0.42], 2: [0.36, 0.6], 3: [0.26, 0.48, 0.7], 4: [0.2, 0.4, 0.6, 0.8]}
 
 
+SPECIES_HEIGHT = {"human": 1.0, "human_old": 1.22, "owl": 0.6}
+
+
 def character_height(spec: dict, base: float) -> float:
-    sp = spec.get("appearance", {}).get("species", "human")
-    if sp == "human":
-        return base
-    if sp == "human_old":
-        return base * 1.22
-    if sp == "owl":
-        return base * 0.6
-    return base * 0.68
+    """Species proportions x the user's size override (Character Bible `appearance.scale`)."""
+    app = spec.get("appearance", {}) or {}
+    factor = SPECIES_HEIGHT.get(app.get("species", "human"), 0.68)
+    try:
+        scale = max(0.5, min(1.8, float(app.get("scale", 1.0) or 1.0)))
+    except (TypeError, ValueError):
+        scale = 1.0
+    return base * factor * scale
 
 
 def finish_style(img: Image.Image, style: str, seed: int) -> Image.Image:
@@ -814,19 +817,63 @@ def render_scene(scene: dict, characters: dict[str, dict], width: int, height: i
     return out, meta
 
 
-def render_reference_sheet(spec: dict, width: int = 1024, height: int = 768, style: str = "watercolor") -> tuple[Image.Image, dict]:
-    """Approved character reference: full figure in three poses on a plain background."""
+def render_reference_sheet(spec: dict, width: int = 1024, height: int = 768, style: str = "watercolor",
+                           mode: str = "multi_view") -> tuple[Image.Image, dict]:
+    """Approved character reference. multi_view: three full-body poses on top and an
+    expression row (happy, sad, surprised, laughing, sleepy) below; single: three poses."""
     W, H = width * SS, height * SS
     img = Image.new("RGBA", (W, H), (250, 246, 238, 255))
     d = ImageDraw.Draw(img, "RGBA")
-    d.ellipse([W * 0.05, H * 0.82, W * 0.95, H * 0.95], fill=(230, 222, 210, 255))
-    base = H * 0.62
-    h = character_height(spec, base)
-    boxes = []
-    for x, pose, expr in ((0.2, "stand", "happy"), (0.5, "wave", "laugh"), (0.8, "point", "surprised")):
-        fig = Figure(d, W * x, H * 0.88, h * (0.92 if x != 0.5 else 1.0), "day")
-        draw_character(fig, spec, pose, expr)
-        boxes.append([int(v / SS) for v in fig.bbox])
+    boxes, expressions = [], []
+    norm = character_height({"appearance": {**spec.get("appearance", {}), "scale": 1.0}}, 1.0)  # sheet ignores size override
+    if mode == "multi_view":
+        d.ellipse([W * 0.05, H * 0.5, W * 0.95, H * 0.58], fill=(230, 222, 210, 255))
+        d.line([(W * 0.04, H * 0.62), (W * 0.96, H * 0.62)], fill=(215, 205, 190, 255), width=SS * 2)
+        h = H * 0.44 * norm / max(norm, 1.0)
+        for x, pose, expr in ((0.2, "stand", "happy"), (0.5, "wave", "laugh"), (0.8, "point", "surprised")):
+            fig = Figure(d, W * x, H * 0.55, h * (0.92 if x != 0.5 else 1.0), "day")
+            draw_character(fig, spec, pose, expr)
+            boxes.append([int(v / SS) for v in fig.bbox])
+        hs = H * 0.3 * norm / max(norm, 1.0)
+        for i, expr in enumerate(("happy", "sad", "surprised", "laugh", "sleep")):
+            fig = Figure(d, W * (0.12 + i * 0.19), H * 0.97, hs, "day")
+            draw_character(fig, spec, "stand", expr)
+            expressions.append({"expression": expr, "box": [int(v / SS) for v in fig.bbox]})
+    else:
+        d.ellipse([W * 0.05, H * 0.82, W * 0.95, H * 0.95], fill=(230, 222, 210, 255))
+        h = H * 0.62 * norm / max(norm, 1.0)
+        for x, pose, expr in ((0.2, "stand", "happy"), (0.5, "wave", "laugh"), (0.8, "point", "surprised")):
+            fig = Figure(d, W * x, H * 0.88, h * (0.92 if x != 0.5 else 1.0), "day")
+            draw_character(fig, spec, pose, expr)
+            boxes.append([int(v / SS) for v in fig.bbox])
     out = img.resize((width, height), Image.LANCZOS)
     out = finish_style(out, style if style != "watercolor" else "flat_vector", 1)
-    return out, {"renderer": "procedural-v1", "reference_boxes": boxes, "palette": spec.get("palette", [])}
+    return out, {"renderer": "procedural-v1", "reference_boxes": boxes, "expression_boxes": expressions, "mode": mode,
+                 "palette": spec.get("palette", [])}
+
+
+def render_cast_lineup(specs: list[dict], width: int = 1280, height: int = 720, style: str = "flat_vector") -> tuple[Image.Image, dict]:
+    """All characters side by side on one ground line at their true relative sizes
+    (species proportions x size override) with height guides: the scale reference
+    used by the procedural renderer and sent to AI image models."""
+    W, H = width * SS, height * SS
+    img = Image.new("RGBA", (W, H), (248, 245, 238, 255))
+    d = ImageDraw.Draw(img, "RGBA")
+    ground = H * 0.9
+    heights = [character_height(sp, 1.0) for sp in specs]
+    tallest = max(heights) if heights else 1.0
+    unit = H * 0.72 / tallest
+    for k in range(1, 5):  # guides at 25 % steps of the tallest character
+        y = ground - unit * tallest * k / 4
+        d.line([(W * 0.03, y), (W * 0.97, y)], fill=(222, 214, 200, 255), width=SS)
+    d.line([(W * 0.03, ground), (W * 0.97, ground)], fill=(150, 130, 110, 255), width=SS * 3)
+    n = max(1, len(specs))
+    boxes = {}
+    for i, (sp, hgt) in enumerate(zip(specs, heights)):
+        fig = Figure(d, W * (i + 0.5) / n, ground, unit * hgt, "day")
+        draw_character(fig, sp, "stand", "happy")
+        boxes[sp.get("id", str(i))] = [int(v / SS) for v in fig.bbox]
+    out = img.resize((width, height), Image.LANCZOS)
+    out = finish_style(out, style, 2)
+    rel = {sp.get("id", str(i)): round(h / tallest, 3) for i, (sp, h) in enumerate(zip(specs, heights))}
+    return out, {"renderer": "procedural-v1", "boxes": boxes, "relative_heights": rel}

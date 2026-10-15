@@ -1,6 +1,8 @@
 """Secrets encryption, auth, rate limiting and safe file paths."""
 from __future__ import annotations
 
+import hashlib
+import hmac
 import os
 import secrets
 import threading
@@ -63,17 +65,104 @@ def mask_secret(stored: str) -> str:
 
 
 # ---------------------------------------------------------------- auth
-def require_auth(request: Request) -> str:
-    """Return the current user id. Single-user mode -> 'local'.
-    When BOOKMAKER_API_TOKEN is set a matching bearer token is required."""
-    token = settings.api_token
-    if not token:
-        return "local"
+# Three modes (BOOKMAKER_AUTH_MODE):
+#   none     - single local user, no login (default for a personal machine)
+#   token    - one shared bearer token (BOOKMAKER_API_TOKEN)
+#   accounts - user accounts with roles (admin | user); each user sees only their own books
+def _supplied_token(request: Request) -> str:
     header = request.headers.get("authorization", "")
-    supplied = header[7:] if header.lower().startswith("bearer ") else request.query_params.get("token", "")
-    if not supplied or not secrets.compare_digest(supplied, token):
-        raise HTTPException(status_code=401, detail="Authentication required")
-    return "local"
+    return header[7:].strip() if header.lower().startswith("bearer ") else request.query_params.get("token", "")
+
+
+def hash_password(password: str, salt: bytes | None = None) -> str:
+    salt = salt or os.urandom(16)
+    dk = hashlib.scrypt(password.encode(), salt=salt, n=2 ** 14, r=8, p=1, dklen=32)
+    return f"scrypt${salt.hex()}${dk.hex()}"
+
+
+def verify_password(password: str, stored: str) -> bool:
+    try:
+        algo, salt_hex, dk_hex = stored.split("$")
+        if algo != "scrypt":
+            return False
+        return hmac.compare_digest(hash_password(password, bytes.fromhex(salt_hex)).split("$")[2], dk_hex)
+    except (ValueError, AttributeError):
+        return False
+
+
+def token_hash(token: str) -> str:
+    return hashlib.sha256(token.encode()).hexdigest()
+
+
+def current_user(request: Request) -> dict:
+    """Return {'id', 'role', 'username'} for the caller or raise 401."""
+    cached = getattr(request.state, "user", None)
+    if cached:
+        return cached
+    mode = settings.auth_mode
+    if mode == "none":
+        user = {"id": "local", "role": "admin", "username": "local"}
+    elif mode == "token":
+        supplied = _supplied_token(request)
+        if not supplied or not settings.api_token or not secrets.compare_digest(supplied, settings.api_token):
+            raise HTTPException(status_code=401, detail="Authentication required")
+        user = {"id": "local", "role": "admin", "username": "local"}
+    else:
+        from datetime import datetime
+        from .db import session_scope
+        from .models import AuthSession, User
+        supplied = _supplied_token(request)
+        if not supplied:
+            raise HTTPException(status_code=401, detail="Authentication required")
+        with session_scope() as s:
+            sess = s.get(AuthSession, token_hash(supplied))
+            if sess is None or sess.expires_at < datetime.utcnow():
+                raise HTTPException(status_code=401, detail="Session expired or invalid; please log in")
+            u = s.get(User, sess.user_id)
+            if u is None or not u.active:
+                raise HTTPException(status_code=401, detail="Account disabled")
+            user = {"id": u.id, "role": u.role, "username": u.username}
+    request.state.user = user
+    return user
+
+
+def require_auth(request: Request) -> str:
+    """Return the current user id (owner id of books)."""
+    return current_user(request)["id"]
+
+
+def require_admin(request: Request) -> str:
+    u = current_user(request)
+    if u["role"] != "admin":
+        raise HTTPException(status_code=403, detail="Administrator role required")
+    return u["id"]
+
+
+class LoginThrottle:
+    """Locks a username for 15 minutes after 5 failed logins (brute-force protection)."""
+
+    def __init__(self, max_fail: int = 5, window: float = 900):
+        self.max_fail, self.window = max_fail, window
+        self._fails: dict[str, list[float]] = {}
+        self._lock = threading.Lock()
+
+    def blocked(self, key: str) -> bool:
+        now = time.monotonic()
+        with self._lock:
+            f = [t for t in self._fails.get(key, []) if now - t < self.window]
+            self._fails[key] = f
+            return len(f) >= self.max_fail
+
+    def fail(self, key: str):
+        with self._lock:
+            self._fails.setdefault(key, []).append(time.monotonic())
+
+    def reset(self, key: str):
+        with self._lock:
+            self._fails.pop(key, None)
+
+
+login_throttle = LoginThrottle()
 
 
 # ---------------------------------------------------------------- rate limit

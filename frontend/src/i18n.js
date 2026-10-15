@@ -51,11 +51,52 @@ export const STRINGS = {
   },
 }
 
+// strings for features added later (accounts, revisions, region repair, narration, exports, print)
+const EXTRA = {
+  en: {
+    login: 'Sign in', logout: 'Sign out', username: 'Username', password: 'Password', setupTitle: 'Create the administrator account',
+    setupHint: 'No account exists yet. The first account becomes administrator and receives existing books.', users: 'Users', role: 'Role',
+    active: 'Active', newUser: 'New user', changePassword: 'Change password', currentPassword: 'Current password', newPassword: 'New password',
+    tokenLogin: 'This server requires an API token.', books: 'Books', lastLogin: 'Last login', disable: 'Disable', enable: 'Enable', resetPassword: 'Reset password',
+    awaitingReview: 'The story is ready for review. Read and edit the pages, then approve it to start the illustrations.', approveOutline: 'Approve story & illustrate',
+    revisions: 'Revisions (undo)', restoreText: 'Restore text', restoreImage: 'Restore image', noRevisions: 'No earlier versions yet.',
+    repair: 'Repair region', repairHint: 'Paint over the part of the picture that should be fixed (e.g. an extra hand, a stray mark). Only the painted area changes.',
+    brush: 'Brush', eraser: 'Eraser', clear: 'Clear', engine: 'Repair engine', engineClassical: 'Built-in (OpenCV, offline – good for small defects)',
+    engineDefault: 'Default repair provider', repairPrompt: 'What should be there instead? (AI engines only)', runRepair: 'Repair painted area',
+    narrationAudio: 'Narration audio (read-aloud)', readAlong: 'Read along', stopReading: 'Stop', narrate: 'Generate narration', regenerateAudio: 'Re-record all', ttsModel: 'Voice / TTS engine', voice: 'Voice (optional)',
+    speed: 'Speed', exportsTab: 'Export', epub: 'EPUB 3 e-book', html: 'Web reader (single HTML file)', imagesZip: 'Images + text (.zip)', build: 'Build',
+    epubcheck: 'EPUBCheck', notChecked: 'not checked', castSheet: 'Cast line-up (relative sizes)', scale: 'Size', relHeight: 'relative height',
+    printOptions: 'Print options', layoutStyle: 'Page layout', bleed: 'Bleed (mm)', cropMarks: 'Crop marks', colorMode: 'Colour mode',
+    reviewOutline: 'Let me review the story before illustrating', castReference: 'Use the cast line-up as reference (AI image models)',
+    cmykNote: 'CMYK is a simple device conversion without an ICC profile (not PDF/X). Ask your printer for their requirements.',
+    awaiting_review: 'awaiting review', inpaintModel: 'Region repair', ttsDefault: 'Narration (TTS)',
+  },
+  fa: {
+    login: 'ورود', logout: 'خروج', username: 'نام کاربری', password: 'رمز عبور', setupTitle: 'ساخت حساب مدیر',
+    setupHint: 'هنوز حسابی وجود ندارد. نخستین حساب، مدیر می‌شود و کتاب‌های موجود به او تعلق می‌گیرد.', users: 'کاربران', role: 'نقش',
+    active: 'فعال', newUser: 'کاربر جدید', changePassword: 'تغییر رمز', currentPassword: 'رمز فعلی', newPassword: 'رمز جدید',
+    tokenLogin: 'این سرور به توکن API نیاز دارد.', books: 'کتاب‌ها', lastLogin: 'آخرین ورود', disable: 'غیرفعال', enable: 'فعال‌سازی', resetPassword: 'تنظیم رمز',
+    awaitingReview: 'داستان برای بازبینی آماده است. صفحات را بخوانید و ویرایش کنید، سپس برای شروع تصویرسازی تأیید کنید.', approveOutline: 'تأیید داستان و تصویرسازی',
+    revisions: 'نسخه‌های قبلی (بازگردانی)', restoreText: 'بازگردانی متن', restoreImage: 'بازگردانی تصویر', noRevisions: 'هنوز نسخه‌ی قبلی وجود ندارد.',
+    repair: 'اصلاح بخشی از تصویر', repairHint: 'روی بخشی از تصویر که باید اصلاح شود رنگ بزنید (مثلاً دست اضافه یا لکه). فقط همان بخش تغییر می‌کند.',
+    brush: 'قلم', eraser: 'پاک‌کن', clear: 'پاک کردن همه', engine: 'موتور اصلاح', engineClassical: 'داخلی (OpenCV، آفلاین – مناسب نقص‌های کوچک)',
+    engineDefault: 'سرویس پیش‌فرض اصلاح', repairPrompt: 'به‌جای آن چه باشد؟ (فقط موتورهای هوش مصنوعی)', runRepair: 'اصلاح بخش رنگ‌شده',
+    narrationAudio: 'صدای روایت (بلندخوانی)', readAlong: 'بلندخوانی خودکار', stopReading: 'توقف', narrate: 'تولید صدای روایت', regenerateAudio: 'ضبط دوباره‌ی همه', ttsModel: 'موتور صدا (TTS)', voice: 'صدا (اختیاری)',
+    speed: 'سرعت', exportsTab: 'خروجی‌ها', epub: 'کتاب الکترونیک EPUB 3', html: 'کتاب‌خوان وب (یک فایل HTML)', imagesZip: 'تصاویر و متن (.zip)', build: 'ساختن',
+    epubcheck: 'EPUBCheck', notChecked: 'بررسی نشد', castSheet: 'برگه‌ی کنار هم شخصیت‌ها (اندازه‌ی نسبی)', scale: 'اندازه', relHeight: 'قد نسبی',
+    printOptions: 'تنظیمات چاپ', layoutStyle: 'چیدمان صفحه', bleed: 'بلید (میلی‌متر)', cropMarks: 'علامت برش', colorMode: 'حالت رنگ',
+    reviewOutline: 'پیش از تصویرسازی داستان را بازبینی می‌کنم', castReference: 'برگه‌ی شخصیت‌ها به‌عنوان مرجع (مدل‌های تصویری هوش مصنوعی)',
+    cmykNote: 'CMYK یک تبدیل ساده‌ی دستگاهی بدون پروفایل ICC است (PDF/X نیست). مشخصات را از چاپخانه بپرسید.',
+    awaiting_review: 'در انتظار بازبینی', inpaintModel: 'اصلاح ناحیه‌ای', ttsDefault: 'روایت صوتی (TTS)',
+  },
+}
+for (const l of Object.keys(EXTRA)) Object.assign(STRINGS[l], EXTRA[l])
+
 export const LangContext = createContext({ lang: 'en', t: (k) => k })
 export const useT = () => useContext(LangContext)
 export const makeT = (lang) => (k) => (STRINGS[lang] && STRINGS[lang][k]) || STRINGS.en[k] || k
 
 export const STATUS_COLORS = {
   completed: 'ok', completed_with_warnings: 'warn', needs_review: 'warn', failed: 'bad', running: 'run', queued: 'run', paused: 'muted',
-  draft: 'muted', cancelled: 'muted',
+  draft: 'muted', cancelled: 'muted', awaiting_review: 'warn',
 }

@@ -22,6 +22,9 @@ export async function api(path, { method = 'GET', body, form } = {}) {
   const text = await res.text()
   let data = null
   try { data = text ? JSON.parse(text) : null } catch { data = text }
+  if (res.status === 401 && !path.startsWith('/api/auth/login') && !path.startsWith('/api/auth/setup')) {
+    window.dispatchEvent(new CustomEvent('bm-auth-required'))
+  }
   if (!res.ok) throw new ApiError(res.status, data && data.detail !== undefined ? data.detail : data)
   return data
 }
@@ -30,4 +33,8 @@ export function withToken(url) {
   const t = token()
   if (!url || !t) return url
   return url + (url.includes('?') ? '&' : '?') + 'token=' + encodeURIComponent(t)
+}
+
+export function setToken(t) {
+  try { if (t) localStorage.setItem('bm_token', t); else localStorage.removeItem('bm_token') } catch { /* private mode */ }
 }

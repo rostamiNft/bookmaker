@@ -146,7 +146,8 @@ async def images(request: Request):
 async def edits(prompt: str = Form(...), size: str = Form(...), model: str = Form(""), n: str = Form("1"), request: Request = None):
     form = await request.form()
     refs = form.getlist("image[]")
-    STATE.calls.append(("edit", size, len(refs)))
+    mask = form.get("mask")
+    STATE.calls.append(("edit", size, len(refs)) if mask is None else ("edit_mask", size, len(refs)))
     gate = _image_gate()
     if gate:
         return gate
@@ -177,9 +178,16 @@ def stats():
     return {"system": {"comfyui_version": "mock"}, "devices": [{"name": "cpu", "vram_free": 0}]}
 
 
+_UPLOADS = {}
+
+
 @app.post("/upload/image")
 async def upload(image: UploadFile = File(...), overwrite: str = Form("true")):
-    await image.read()
+    data = await image.read()
+    try:  # real ComfyUI stores any file; remember the size of real images (inpaint input)
+        _UPLOADS[image.filename] = Image.open(io.BytesIO(data)).size
+    except Exception:
+        pass
     STATE.calls.append(("comfy_upload", image.filename))
     return {"name": image.filename}
 
@@ -188,8 +196,14 @@ async def upload(image: UploadFile = File(...), overwrite: str = Form("true")):
 async def prompt(request: Request):
     body = await request.json()
     wf = body["prompt"]
-    w = wf["5"]["inputs"]["width"]
-    h = wf["5"]["inputs"]["height"]
+    loads = [n["inputs"]["image"] for n in wf.values() if n.get("class_type") == "LoadImage"]
+    if "width" in wf["5"]["inputs"]:
+        w, h = wf["5"]["inputs"]["width"], wf["5"]["inputs"]["height"]
+    elif loads and loads[0] in _UPLOADS:  # inpaint workflow: output has the input image size
+        w, h = _UPLOADS[loads[0]]
+        STATE.calls.append(("comfy_inpaint", len(loads)))
+    else:
+        return JSONResponse({"error": "bad workflow", "node_errors": {"5": "missing size"}}, status_code=400)
     pid = f"p{len(_COMFY) + 1}"
     _COMFY[pid] = {"w": w, "h": h, "t": time.time(), "text": wf["6"]["inputs"]["text"]}
     STATE.calls.append(("comfy_prompt", w, h, isinstance(w, int)))

@@ -8,7 +8,7 @@ import time
 import zipfile
 from datetime import datetime
 
-from fastapi import APIRouter, Depends, File, HTTPException, Query, Request, UploadFile
+from fastapi import APIRouter, Depends, File, Form, HTTPException, Query, Request, UploadFile
 from fastapi.responses import FileResponse, StreamingResponse
 from PIL import Image
 from pydantic import BaseModel, Field
@@ -17,13 +17,13 @@ from sqlalchemy.orm import Session
 
 from ..config import settings
 from ..db import get_db
-from ..models import Character, HistoryEntry, Job, Page, Project, ProviderConfig, StageLog, UsageRecord
-from ..pipeline.store import absf, add_history, current_plan, project_dir, renumber
+from ..models import Character, HistoryEntry, Job, Page, PageRevision, Project, ProviderConfig, StageLog, UsageRecord
+from ..pipeline.store import absf, add_history, current_plan, project_dir, renumber, snapshot_page
 from ..pipeline.worker import JobConflict, enqueue
 from ..presets import PRESETS
-from ..providers.registry import PROVIDER_TYPES, build, estimate, get_defaults, validate_config
+from ..providers.registry import PROVIDER_TYPES, build, cost_of, estimate, get_defaults, validate_config
 from ..schemas import BookSettings, CharacterSpec, Scene
-from ..security import encrypt_secret, mask_secret, require_auth, safe_join
+from ..security import encrypt_secret, mask_secret, require_admin, require_auth, safe_join
 from ..story.offline_engine import MAX_PAGES, MIN_PAGES
 
 router = APIRouter(prefix="/api", dependencies=[Depends(require_auth)])
@@ -45,7 +45,9 @@ def page_out(pid: str, p: Page) -> dict:
     return {"id": p.id, "number": p.number, "beat": p.beat, "text": p.text, "image_prompt": p.image_prompt, "scene": p.scene,
             "characters_present": p.characters_present, "image_url": file_url(pid, p.image_file), "image_status": p.image_status,
             "image_locked": p.image_locked, "image_meta": {k: v for k, v in (p.image_meta or {}).items() if k not in ("renderer_meta",)},
-            "qa": p.qa or {}}
+            "qa": p.qa or {}, "audio_url": file_url(pid, p.audio_file),
+            "audio_meta": {k: v for k, v in (p.audio_meta or {}).items() if k != "key"},
+            "inpaints": len((p.image_meta or {}).get("inpaints", []))}
 
 
 def project_summary(p: Project) -> dict:
@@ -62,6 +64,25 @@ def provider_out(c: ProviderConfig) -> dict:
             "api_key": mask_secret(c.api_key), "has_api_key": bool(c.api_key), "params": {k: v for k, v in (c.params or {}).items() if k != "workflow"},
             "has_workflow": bool((c.params or {}).get("workflow")), "enabled": c.enabled, "builtin": c.builtin, "fallback_id": c.fallback_id,
             "last_check": c.last_check}
+
+
+EXPORT_FORMATS = {"epub": ("application/epub+zip", "epub"), "html": ("text/html; charset=utf-8", "html"), "images": ("application/zip", "zip")}
+
+
+def export_info(p: Project) -> dict:
+    return {k: v for k, v in ((p.stage_state or {}).get("exports") or {}).items() if k in EXPORT_FORMATS}
+
+
+def book_data(db: Session, p: Project):
+    from ..export.books import BookData, BookPage
+    plan = current_plan(db, p)
+    pages = db.scalars(select(Page).where(Page.project_id == p.id).order_by(Page.number)).all()
+    cover = absf(p.id, (p.stage_state or {}).get("cover", {}).get("file", ""))
+    return BookData(id=p.id, title=p.title or plan.title, language=p.language, author=(p.settings or {}).get("author", ""),
+                    publisher=(p.settings or {}).get("publisher", ""), summary=plan.summary, blurb=plan.back_cover_blurb or plan.summary,
+                    cover=cover if cover and cover.is_file() else None, version=p.version,
+                    pages=[BookPage(number=x.number, text=x.text, image=absf(p.id, x.image_file), audio=absf(p.id, x.audio_file),
+                                    alt=(x.image_prompt or "").split(".")[0]) for x in pages])
 
 
 def job_conflict(e: JobConflict):
@@ -94,7 +115,7 @@ def system(db: Session = Depends(get_db)):
             "usage": {"cost_usd": round(float(usage[0]), 4), "input_tokens": int(usage[1]), "output_tokens": int(usage[2]),
                       "images": int(usage[3]), "calls": int(usage[4])},
             "offline_engine": {"min_pages": MIN_PAGES, "max_pages": MAX_PAGES}, "env": settings.env,
-            "auth_enabled": bool(settings.api_token)}
+            "auth_enabled": settings.auth_mode != "none", "auth_mode": settings.auth_mode}
 
 
 @router.get("/presets")
@@ -148,7 +169,7 @@ def list_providers(db: Session = Depends(get_db)):
             "defaults": get_defaults(db), "types": PROVIDER_TYPES}
 
 
-@router.post("/providers", status_code=201)
+@router.post("/providers", status_code=201, dependencies=[Depends(require_admin)])
 def create_provider(body: ProviderIn, db: Session = Depends(get_db)):
     c = ProviderConfig()
     _apply_provider(c, body)
@@ -157,7 +178,7 @@ def create_provider(body: ProviderIn, db: Session = Depends(get_db)):
     return provider_out(c)
 
 
-@router.put("/providers/{prov_id}")
+@router.put("/providers/{prov_id}", dependencies=[Depends(require_admin)])
 def update_provider(prov_id: str, body: ProviderIn, db: Session = Depends(get_db)):
     c = db.get(ProviderConfig, prov_id)
     if not c:
@@ -169,7 +190,7 @@ def update_provider(prov_id: str, body: ProviderIn, db: Session = Depends(get_db
     return provider_out(c)
 
 
-@router.delete("/providers/{prov_id}")
+@router.delete("/providers/{prov_id}", dependencies=[Depends(require_admin)])
 def delete_provider(prov_id: str, db: Session = Depends(get_db)):
     c = db.get(ProviderConfig, prov_id)
     if not c:
@@ -185,7 +206,7 @@ def delete_provider(prov_id: str, db: Session = Depends(get_db)):
     return {"ok": True}
 
 
-@router.post("/providers/{prov_id}/check")
+@router.post("/providers/{prov_id}/check", dependencies=[Depends(require_admin)])
 def check_provider(prov_id: str, db: Session = Depends(get_db)):
     from ..logging_setup import redact
     c = db.get(ProviderConfig, prov_id)
@@ -209,16 +230,21 @@ class DefaultsIn(BaseModel):
     review_llm: str = ""
     image: str = ""
     vision: str = ""
+    tts: str = ""
+    inpaint: str = ""  # "" = built-in classical (OpenCV) repair
 
 
-@router.put("/providers-defaults")
+@router.put("/providers-defaults", dependencies=[Depends(require_admin)])
 def set_defaults(body: DefaultsIn, db: Session = Depends(get_db)):
     from ..models import AppSetting
-    for kind, pid in (("llm", body.llm), ("image", body.image), ("vision", body.vision), ("llm", body.review_llm)):
+    for kinds, pid in (("llm", body.llm), ("image", body.image), ("vision", body.vision), ("llm", body.review_llm), ("tts", body.tts),
+                       (("inpaint", "image"), body.inpaint)):
         if pid:
             c = db.get(ProviderConfig, pid)
-            if not c or c.kind != kind:
-                raise HTTPException(422, f"{pid} is not a {kind} provider")
+            if not c or c.kind not in (kinds if isinstance(kinds, tuple) else (kinds,)):
+                raise HTTPException(422, f"{pid} is not a {kinds} provider")
+            if c.kind == "image" and c.provider_type == "fastsdcpu" and kinds == ("inpaint", "image"):
+                raise HTTPException(422, "FastSD CPU cannot repair regions")
     if not body.llm or not body.image:
         raise HTTPException(422, "A default story provider and image provider are required")
     row = db.get(AppSetting, "defaults")
@@ -228,8 +254,12 @@ def set_defaults(body: DefaultsIn, db: Session = Depends(get_db)):
 
 
 @router.get("/usage")
-def usage(db: Session = Depends(get_db), project_id: str = ""):
+def usage(request: Request, db: Session = Depends(get_db), project_id: str = ""):
+    from ..security import current_user
     q = select(UsageRecord).order_by(UsageRecord.id.desc()).limit(200)
+    u = current_user(request)
+    if u["role"] != "admin":  # regular accounts only see calls made for their own books
+        q = q.where(UsageRecord.project_id.in_(select(Project.id).where(Project.owner_id == u["id"])))
     if project_id:
         q = q.where(UsageRecord.project_id == project_id)
     return [{"provider": u.provider_name, "kind": u.kind, "model": u.model, "purpose": u.purpose, "input_tokens": u.input_tokens,
@@ -249,14 +279,15 @@ def estimate_cost(body: BookSettings, db: Session = Depends(get_db)):
     d = get_defaults(db)
     llm = db.get(ProviderConfig, body.llm_provider_id or d["llm"])
     img = db.get(ProviderConfig, body.image_provider_id or d["image"])
-    est = estimate(body.model_dump(), llm, img)
+    tts = db.get(ProviderConfig, body.tts_provider_id or d.get("tts") or "") if body.narration_audio else None
+    est = estimate(body.model_dump(), llm, img, tts)
     warn = []
     if (llm is None or llm.provider_type == "offline") and not (MIN_PAGES <= body.page_count <= MAX_PAGES):
         warn.append(f"The offline story engine supports {MIN_PAGES}-{MAX_PAGES} pages; connect an LLM provider for {body.page_count} pages.")
     if llm and llm.provider_type == "offline" and body.language not in ("en", "fa"):
         warn.append("The offline engine writes English and Persian only.")
     est["warnings"] = warn
-    est["providers"] = {"llm": llm.name if llm else None, "image": img.name if img else None}
+    est["providers"] = {"llm": llm.name if llm else None, "image": img.name if img else None, "tts": tts.name if tts else None}
     return est
 
 
@@ -314,7 +345,11 @@ def project_detail(pid: str, db: Session = Depends(get_db), user: str = Depends(
                             "ref_url": file_url(pid, c.ref_image_file), "ref_approved": c.ref_approved} for c in chars],
             "jobs": [{"id": j.id, "kind": j.kind, "status": j.status, "attempts": j.attempts, "message": j.message,
                       "created_at": j.created_at.isoformat() + "Z"} for j in jobs],
-            "renders": renders, "pdf_url": f"/api/projects/{pid}/pdf" if p.pdf_file else None}
+            "renders": renders, "pdf_url": f"/api/projects/{pid}/pdf" if p.pdf_file else None,
+            "cast_url": file_url(pid, (p.stage_state or {}).get("characters", {}).get("cast_file", "")),
+            "cast_ai_url": file_url(pid, (p.stage_state or {}).get("characters", {}).get("ai_cast_file", "")),
+            "relative_heights": (p.stage_state or {}).get("characters", {}).get("relative_heights", {}),
+            "exports": export_info(p)}
 
 
 class ProjectPatch(BaseModel):
@@ -340,7 +375,9 @@ def patch_project(pid: str, body: ProjectPatch, db: Session = Depends(get_db), u
         p.archived = body.archived
         changes["archived"] = body.archived
     if body.settings:
-        allowed = {"page_size", "orientation", "page_numbers", "back_cover", "cover_style", "output_profile", "publisher", "author", "max_image_attempts", "budget_usd"}
+        allowed = {"page_size", "orientation", "page_numbers", "back_cover", "cover_style", "output_profile", "publisher", "author", "max_image_attempts",
+                   "budget_usd", "layout_style", "bleed_mm", "crop_marks", "color_mode", "narration_audio", "tts_provider_id", "narration_voice",
+                   "narration_speed", "cast_reference", "review_outline"}
         bad = set(body.settings) - allowed
         if bad:
             raise HTTPException(422, f"These settings cannot be changed after creation: {sorted(bad)}")
@@ -443,6 +480,8 @@ def patch_page(pid: str, page_id: str, body: PagePatch, db: Session = Depends(ge
     if not pg or pg.project_id != pid:
         raise HTTPException(404, "Page not found")
     detail = {"page": pg.number}
+    if (body.text is not None and body.text.strip() != pg.text) or (body.image_prompt is not None and body.image_prompt != pg.image_prompt):
+        snapshot_page(db, pg, "before_edit", actor="user")
     if body.text is not None and body.text.strip() != pg.text:
         if not body.text.strip():
             raise HTTPException(422, "Page text cannot be empty")
@@ -567,6 +606,134 @@ def regen_text(pid: str, page_id: str, body: RegenTextIn, db: Session = Depends(
     return _enqueue(pid, "regenerate_text", {"page_id": page_id, "instruction": body.instruction})
 
 
+@router.post("/projects/{pid}/approve-outline")
+def approve_outline(pid: str, db: Session = Depends(get_db), user: str = Depends(require_auth)):
+    """Review gate: the user has read/edited the story text; continue with illustration."""
+    p = get_project(db, pid, user)
+    if not db.scalar(select(Page.id).where(Page.project_id == pid).limit(1)):
+        raise HTTPException(409, "There is no story plan to approve yet")
+    st = dict(p.stage_state or {})
+    st["outline"] = {"approved": True, "at": time.time()}
+    p.stage_state = st
+    add_history(db, pid, "outline_approved", actor="user")
+    db.commit()
+    return _enqueue(pid, "generate_book")
+
+
+@router.post("/projects/{pid}/pages/{page_id}/inpaint")
+async def inpaint_page(pid: str, page_id: str, mask: UploadFile = File(...), prompt: str = Form("", max_length=600),
+                       engine: str = Form("default", max_length=40), db: Session = Depends(get_db), user: str = Depends(require_auth)):
+    """Region repair: `mask` is a PNG where painted (white or opaque) pixels mark the area to repair.
+    engine: "default" (configured default), "classical" (built-in OpenCV) or a provider id."""
+    from ..illustration.inpaint import MaskError, load_mask, validate_mask
+    get_project(db, pid, user)
+    pg = db.get(Page, page_id)
+    if not pg or pg.project_id != pid:
+        raise HTTPException(404, "Page not found")
+    src = absf(pid, pg.image_file)
+    if not src or not src.is_file():
+        raise HTTPException(409, "This page has no illustration yet")
+    if engine not in ("default", "classical"):
+        cfg = db.get(ProviderConfig, engine)
+        if not cfg or not cfg.enabled or cfg.kind not in ("image", "inpaint") or cfg.provider_type == "fastsdcpu":
+            raise HTTPException(422, "Choose an image or inpainting provider that can repair regions")
+    data = await mask.read(settings.max_upload_mb * 1024 * 1024 + 1)
+    if len(data) > settings.max_upload_mb * 1024 * 1024:
+        raise HTTPException(413, "Mask too large")
+    try:
+        with Image.open(src) as im:
+            size = im.size
+        cov = validate_mask(load_mask(data, size))
+    except MaskError as e:
+        raise HTTPException(422, str(e))
+    name = f"uploads/mask-p{pg.number:02d}-{int(time.time() * 1000)}.png"
+    load_mask(data, size).save(project_dir(pid) / name)  # normalised, metadata-free copy
+    out = _enqueue(pid, "inpaint_image", {"page_id": page_id, "mask": name, "prompt": prompt.strip(), "engine": engine})
+    return {**out, "mask_coverage": round(cov, 4)}
+
+
+class NarrateIn(BaseModel):
+    page_id: str = ""
+    force: bool = False
+    confirm_cost: bool = False
+
+
+@router.post("/projects/{pid}/narrate")
+def narrate(pid: str, body: NarrateIn, db: Session = Depends(get_db), user: str = Depends(require_auth)):
+    get_project(db, pid, user)
+    if body.page_id:
+        pg = db.get(Page, body.page_id)
+        if not pg or pg.project_id != pid:
+            raise HTTPException(404, "Page not found")
+    # paid TTS: announce the cost before spending money (same contract as book creation)
+    p = db.get(Project, pid)
+    d = get_defaults(db)
+    tts = db.get(ProviderConfig, (p.settings or {}).get("tts_provider_id") or d.get("tts") or "")
+    if tts is not None:
+        pages = db.scalars(select(Page).where(Page.project_id == pid)).all()
+        todo = [x for x in pages if (not body.page_id or x.id == body.page_id) and (body.force or not x.audio_file)]
+        chars = sum(len(x.text or "") for x in todo)
+        cost = cost_of(tts, chars=chars)
+        if cost > 0 and not body.confirm_cost:
+            raise HTTPException(402, json.dumps({"message": f"Narration uses a paid TTS service ({tts.name}): about {chars} characters, ~${cost:.4f}. "
+                                                            "Confirm the cost to continue.", "estimate": {"tts_chars": chars, "tts_cost_usd": round(cost, 4)}}))
+    return _enqueue(pid, "narrate", {"page_id": body.page_id, "force": body.force})
+
+
+def revision_out(pid: str, r: PageRevision) -> dict:
+    return {"id": r.id, "number": r.number, "reason": r.reason, "actor": r.actor, "text": r.text, "image_prompt": r.image_prompt,
+            "image_url": file_url(pid, r.image_file), "image_status": r.image_status, "at": r.created_at.isoformat() + "Z",
+            "qa_ok": (r.qa or {}).get("image", {}).get("ok") if r.qa else None}
+
+
+@router.get("/projects/{pid}/pages/{page_id}/revisions")
+def page_revisions(pid: str, page_id: str, db: Session = Depends(get_db), user: str = Depends(require_auth)):
+    get_project(db, pid, user)
+    pg = db.get(Page, page_id)
+    if not pg or pg.project_id != pid:
+        raise HTTPException(404, "Page not found")
+    rows = db.scalars(select(PageRevision).where(PageRevision.page_id == page_id).order_by(PageRevision.id.desc())).all()
+    return [revision_out(pid, r) for r in rows]
+
+
+class RestoreIn(BaseModel):
+    restore_text: bool = True
+    restore_image: bool = True
+    rebuild: bool = True
+
+
+@router.post("/projects/{pid}/pages/{page_id}/revisions/{rev_id}/restore")
+def restore_revision(pid: str, page_id: str, rev_id: int, body: RestoreIn, db: Session = Depends(get_db), user: str = Depends(require_auth)):
+    """Undo: bring back the text and/or illustration of an earlier snapshot. The current
+    state is snapshotted first, so a restore can itself be undone."""
+    get_project(db, pid, user)
+    pg = db.get(Page, page_id)
+    rev = db.get(PageRevision, rev_id)
+    if not pg or pg.project_id != pid or not rev or rev.page_id != page_id:
+        raise HTTPException(404, "Revision not found")
+    if db.scalar(select(Job.id).where(Job.project_id == pid, Job.status.in_(["queued", "running"]))):
+        raise HTTPException(409, "Wait until the running task has finished")
+    if body.restore_image and rev.image_file and not (absf(pid, rev.image_file) and absf(pid, rev.image_file).is_file()):
+        raise HTTPException(410, "The image file of this revision no longer exists")
+    snapshot_page(db, pg, "before_restore", actor="user")
+    if body.restore_text and rev.text:
+        pg.text = rev.text
+        pg.image_prompt = rev.image_prompt or pg.image_prompt
+    if body.restore_image and rev.image_file:
+        pg.image_file = rev.image_file
+        pg.image_status = rev.image_status if rev.image_status in ("generated", "approved", "failed") else "generated"
+        meta = dict(pg.image_meta or {})
+        meta.update({k: v for k, v in (rev.image_meta or {}).items() if k not in ("next_variant", "attempts")})
+        pg.image_meta = meta
+        pg.qa = rev.qa or {}
+    add_history(db, pid, "page_restored", {"page": pg.number, "revision": rev.id, "text": body.restore_text, "image": body.restore_image}, actor="user")
+    db.commit()
+    out = {"ok": True, "page": page_out(pid, pg)}
+    if body.rebuild:
+        out.update(_enqueue(pid, "rebuild_pdf") or {})
+    return out
+
+
 # ------------------------------------------------------------------ characters
 class CharPatch(BaseModel):
     name: str | None = Field(None, max_length=120)
@@ -589,6 +756,15 @@ def patch_character(pid: str, char_row: str, body: CharPatch, db: Session = Depe
         for k in ("description", "personality", "distinctive", "palette", "age", "pronoun"):
             if k in body.spec:
                 spec[k] = body.spec[k]
+        if "relationships" in body.spec and isinstance(body.spec["relationships"], dict):
+            known = {x.char_id for x in db.scalars(select(Character).where(Character.project_id == pid))}
+            rels = {k: v for k, v in (spec.get("relationships") or {}).items() if k.startswith("_")}  # keep internal keys
+            for other, how in body.spec["relationships"].items():
+                if other not in known or other == c.char_id:
+                    raise HTTPException(422, f"Unknown character in relationships: {other}")
+                if str(how).strip():
+                    rels[other] = str(how).strip()[:80]
+            spec["relationships"] = rels
     if body.name:
         spec["name"] = body.name.strip()
     spec = CharacterSpec(**spec).model_dump()
@@ -601,6 +777,9 @@ def patch_character(pid: str, char_row: str, body: CharPatch, db: Session = Depe
     c.spec = spec
     c.name = spec["name"]
     visual_change = body.spec and any(k in body.spec for k in ("appearance", "outfit", "description"))
+    if visual_change and set(body.spec.get("appearance", {})) <= {"scale"} and not any(k in body.spec for k in ("outfit", "description")):
+        # size only: the reference sheet stays valid; pages and cast line-up must be redrawn
+        visual_change = "scale"
     affected = 0
     if body.name and old_name != c.name:
         for pg in db.scalars(select(Page).where(Page.project_id == pid)):
@@ -608,7 +787,8 @@ def patch_character(pid: str, char_row: str, body: CharPatch, db: Session = Depe
                 pg.text = pg.text.replace(old_name, c.name)
                 affected += 1
     if visual_change:
-        c.ref_image_file, c.ref_approved = "", False
+        if visual_change != "scale":
+            c.ref_image_file, c.ref_approved = "", False
         st = dict(p.stage_state or {})
         st["characters"] = {"status": "pending"}
         st["images"] = {"status": "pending"}
@@ -678,7 +858,7 @@ def logs(pid: str, db: Session = Depends(get_db), user: str = Depends(require_au
 def project_file(pid: str, path: str, db: Session = Depends(get_db), user: str = Depends(require_auth)):
     get_project(db, pid, user)
     target = safe_join(project_dir(pid), path)
-    if not target.is_file() or target.suffix.lower() not in (".png", ".jpg", ".jpeg", ".webp", ".json"):
+    if not target.is_file() or target.suffix.lower() not in (".png", ".jpg", ".jpeg", ".webp", ".json", ".mp3", ".wav"):
         raise HTTPException(404, "File not found")
     return FileResponse(target, headers={"Cache-Control": "private, max-age=60", "X-Content-Type-Options": "nosniff"})
 
@@ -710,3 +890,56 @@ def export_project(pid: str, db: Session = Depends(get_db), user: str = Depends(
                     z.write(f, f"{sub}/{f.name}")
     buf.seek(0)
     return StreamingResponse(buf, media_type="application/zip", headers={"Content-Disposition": f'attachment; filename="book-{pid[:8]}.zip"'})
+
+
+class ExportIn(BaseModel):
+    format: str = Field(..., pattern="^(epub|html|images)$")
+    validate_epub: bool = True
+
+
+@router.post("/projects/{pid}/exports")
+def build_export(pid: str, body: ExportIn, db: Session = Depends(get_db), user: str = Depends(require_auth)):
+    """Build an EPUB 3 / single-file HTML reader / images ZIP from the current pages (+ narration if present)."""
+    from ..export.books import build_epub, build_html, build_images_zip, validate_epub
+    p = get_project(db, pid, user)
+    if db.scalar(select(Job.id).where(Job.project_id == pid, Job.status.in_(["queued", "running"]))):
+        raise HTTPException(409, "Wait until the running task has finished")
+    book = book_data(db, p)
+    if not book.pages:
+        raise HTTPException(409, "The book has no pages yet")
+    missing = [x.number for x in book.pages if not (x.image and x.image.is_file())]
+    ext = EXPORT_FORMATS[body.format][1]
+    out = project_dir(pid) / "exports" / f"book-v{p.version}.{ext}"
+    t0 = time.monotonic()
+    if body.format == "epub":
+        info = build_epub(book, out)
+        info["validation"] = validate_epub(out) if body.validate_epub else {"checked": False, "ok": None, "note": "skipped"}
+    elif body.format == "html":
+        info = build_html(book, out)
+    else:
+        info = build_images_zip(book, out)
+    info.update({"file": f"exports/{out.name}", "version": p.version, "built_at": datetime.utcnow().isoformat() + "Z",
+                 "seconds": round(time.monotonic() - t0, 2), "pages_without_image": missing})
+    st = dict(p.stage_state or {})
+    ex = dict(st.get("exports") or {})
+    ex[body.format] = info
+    st["exports"] = ex
+    p.stage_state = st
+    add_history(db, pid, "export_built", {"format": body.format, "bytes": info["bytes"],
+                                          "valid": (info.get("validation") or {}).get("ok")}, actor="user")
+    db.commit()
+    return info
+
+
+@router.get("/projects/{pid}/exports/{fmt}")
+def download_export(pid: str, fmt: str, db: Session = Depends(get_db), user: str = Depends(require_auth)):
+    p = get_project(db, pid, user)
+    if fmt not in EXPORT_FORMATS:
+        raise HTTPException(404, "Unknown format")
+    info = export_info(p).get(fmt)
+    f = absf(pid, info["file"]) if info else None
+    if not f or not f.is_file():
+        raise HTTPException(404, "Build this export first")
+    safe_title = "".join(ch for ch in (p.title or "book") if ch.isalnum() or ch in " -_").strip()[:60] or "book"
+    suffix = {"images": "-images.zip"}.get(fmt, f".{EXPORT_FORMATS[fmt][1]}")
+    return FileResponse(f, media_type=EXPORT_FORMATS[fmt][0], filename=f"{safe_title}-v{info['version']}{suffix}")

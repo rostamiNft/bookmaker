@@ -50,6 +50,53 @@ to 4 reference images; otherwise `/images/generations`. The API only supports fi
 requested and the result is **centre-cropped** to the book's aspect ratio (reported as a QA warning, never stretched).
 Set pricing *per image* to get correct cost estimates; paid runs require confirmation in the UI.
 
+### stable-diffusion.cpp server (CPU or GPU, MIT)
+`sd-server` from [leejet/stable-diffusion.cpp](https://github.com/leejet/stable-diffusion.cpp) runs SD 1.5/SDXL/FLUX
+(GGUF) on CPU, Vulkan, Metal or CUDA. It exposes an AUTOMATIC1111-compatible API, so use type `automatic1111` with Base URL
+`http://127.0.0.1:1234` (txt2img, img2img with references, img2img + mask for region repair). Its OpenAI-compatible
+`/v1/images/generations` also works with type `openai_compatible` if you set `{"response_format": ""}` in *Advanced params*
+(the server does not accept that field).
+
+### FastSD CPU (CPU, MIT)
+[rupeshs/fastsdcpu](https://github.com/rupeshs/fastsdcpu) generates 512×512 images in a few seconds on a modern CPU (LCM /
+OpenVINO). Start its API server (`python src/app.py --api`, port 8000 by default; run Bookmaker on another port) and add
+type `fastsdcpu`, Base URL `http://127.0.0.1:8000`. *Advanced params*: `steps` (default 1–4), `use_openvino`,
+`lcm_model_id`, `tiny_vae`, `reference_strength` (img2img from the character reference sheet when present).
+Quality is far below SDXL/FLUX; it is a "no GPU but still AI" option. Model weights keep their own licences.
+
+## Region repair / inpainting (kind = `inpaint`, optional)
+The **Repair a region** dialog (Pages tab) always offers the built-in **classical** engine: OpenCV Telea/Navier-Stokes
+inpainting on CPU. It removes small artefacts (stray letters, smudges, an extra finger) but cannot draw new content.
+To redraw a region from a prompt, pick any of:
+
+| Engine | How to connect |
+|---|---|
+| IOPaint (LaMa, MAT, SD inpaint …; Apache-2.0, archived 2025 but working) | `iopaint start --model=lama --device=cpu --port=8080`; provider kind `inpaint`, type `iopaint`, URL `http://127.0.0.1:8080`. LaMa runs on CPU. `hd_strategy` param: `Crop` (default) / `Resize` / `Original` |
+| AUTOMATIC1111 / Forge / sd.cpp | the existing `image` provider: img2img with `mask` (`inpaint_denoise` param, default 0.75) |
+| ComfyUI | the existing `image` provider: built-in inpaint workflow (VAEEncodeForInpaint) or your own `inpaint_workflow` with `{{image}}`, `{{mask}}` placeholders |
+| OpenAI-compatible | `/images/edits` with `mask` (transparent = repaint) |
+
+Whatever the engine returns, the result is composited through the mask, so pixels outside it are guaranteed unchanged
+(`changed_outside_mask` is measured and must be 0). The previous image is kept as a revision (undo).
+
+## Narration / read-aloud (kind = `tts`, optional)
+* **Built-in offline narrator**: eSpeak NG via the optional `espeakng-loader` wheel (+ `lameenc` for MP3);
+  `pip install -r backend/requirements-media.txt`. Supports Persian and English (and ~100 other languages), robotic but
+  intelligible, fully offline. **Licence: eSpeak NG is GPL-3.0.** It is loaded at runtime as a separate shared library and
+  is not installed unless you choose to; if you redistribute Bookmaker bundled with it, comply with the GPL.
+* **OpenAI-compatible `/v1/audio/speech`**: OpenAI `tts-1`/`gpt-4o-mini-tts`, or local servers such as
+  [Kokoro-FastAPI](https://github.com/remsky/Kokoro-FastAPI) (Apache-2.0; Kokoro voices are English/European/Asian, no
+  Persian) or LocalAI. Params: `voice`, `voices` (per language, e.g. `{"fa": "...", "en": "af_bella"}`), `format`.
+  Set pricing `per_1k_chars` and the estimate/confirmation covers narration cost too (narration of a paid TTS asks for
+  confirmation before any spend).
+* Audio is stored per page (`audio/page-NN-<hash>.mp3`); edited text invalidates only that page's audio.
+  It is embedded in the EPUB (media) and HTML reader and played in the Preview read-along.
+
+## Exports
+EPUB 3 (fixed-layout picture pages, text kept as real text, `dir=rtl` for Persian), validated by **EPUBCheck 5.3** when
+`epubcheck` + `jdk4py` are installed (otherwise reported as "not checked", never as valid); single-file HTML reader;
+images + text ZIP. Exports are versioned with the book and rebuilt on demand.
+
 ## Vision reviewer (kind = `vision`, optional)
 Any multimodal model via `ollama` (e.g. `qwen2.5vl`, `llava`), `openai_compatible` (e.g. `gpt-4o-mini`) or
 `anthropic`. When set, each illustration that passes the automatic checks is also reviewed for relevance to the page
@@ -60,6 +107,7 @@ text, visible text/letters and anatomy problems. Failing reviews trigger regener
 | Setup | Story | Images | Notes |
 |---|---|---|---|
 | No GPU, no internet | built-in engine | procedural illustrator | always works, ~35 s per 14-page book |
+| No GPU, local AI images | Ollama 1–4B (slow) | FastSD CPU / sd.cpp (SD 1.5 Q4) | seconds to minutes per image; lower quality |
 | No GPU + APIs | OpenAI-compatible/Anthropic | gpt-image-1 or a hosted SDXL/FLUX API | pay per use; set budget |
 | 8–12 GB GPU | Ollama 7–14B | ComfyUI SD 1.5 / SDXL | 1–3 min per book image set |
 | 16–24 GB GPU | Ollama 14–32B | ComfyUI SDXL/FLUX + IP-Adapter | best local quality |

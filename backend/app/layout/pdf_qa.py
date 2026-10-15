@@ -27,19 +27,22 @@ def _fonts_on_page(page) -> list[dict]:
     return out
 
 
-def _image_count(page) -> int:
+def _images(page) -> list:
     res = page.get("/Resources") or {}
     xo = res.get("/XObject") or {}
-    n = 0
-    for _, ref in xo.items():
-        if ref.get_object().get("/Subtype") == "/Image":
-            n += 1
-    return n
+    return [ref.get_object() for _, ref in xo.items() if ref.get_object().get("/Subtype") == "/Image"]
+
+
+def _image_count(page) -> int:
+    return len(_images(page))
 
 
 def validate_pdf(path: str | Path, *, expected_pages: int, expected_size: tuple[float, float], page_kinds: list[str],
                  image_pages: list[int], title: str, language: str, ltr_samples: dict[int, str] | None = None,
-                 render_dir: str | Path | None = None, max_mb: float = 150) -> dict:
+                 render_dir: str | Path | None = None, max_mb: float = 150, trim: tuple[float, float, float] | None = None,
+                 bleed_pt: float = 0.0, color_mode: str = "rgb", rtl_samples: dict[int, str] | None = None) -> dict:
+    """trim=(W, H, offset): expect TrimBox at offset inside the media box (bleed/crop-mark output).
+    rtl_samples: logical Persian text expected to be extractable (via ActualText) per page."""
     issues: list[dict] = []
     info: dict = {}
 
@@ -86,14 +89,52 @@ def validate_pdf(path: str | Path, *, expected_pages: int, expected_size: tuple[
             all_fonts[f["name"]] = f
             if not f["embedded"]:
                 add("font_not_embedded", f"Font {f['name']} is not embedded", i)
-        if i in image_pages and _image_count(page) < 1:
+        imgs = _images(page)
+        if i in image_pages and not imgs:
             add("image_missing", f"Page {i} should contain an illustration but has none", i)
+        if color_mode == "cmyk":
+            for im in imgs:
+                if str(im.get("/ColorSpace")) != "/DeviceCMYK":
+                    add("not_cmyk", f"Page {i} has an image in {im.get('/ColorSpace')} (CMYK expected)", i)
+        if trim:
+            tb = page.trimbox
+            want = (trim[2], trim[2], trim[2] + trim[0], trim[2] + trim[1])
+            got = (float(tb.left), float(tb.bottom), float(tb.right), float(tb.top))
+            if any(abs(a - b_) > 0.5 for a, b_ in zip(got, want)):
+                add("trim_box", f"Page {i} TrimBox {tuple(round(v, 1) for v in got)} != expected {tuple(round(v, 1) for v in want)}", i)
+            if bleed_pt > 0:
+                bb = page.bleedbox
+                if abs(float(bb.width) - (trim[0] + 2 * bleed_pt)) > 0.5:
+                    add("bleed_box", f"Page {i} BleedBox width {float(bb.width):.1f} != trim + 2×bleed", i)
         if ltr_samples and i in ltr_samples:
             txt = (page.extract_text() or "").replace("\n", " ")
             words = [w for w in ltr_samples[i].split()[:4]]
             if not all(w.strip(".,!?'\"") in txt for w in words):
                 add("text_not_extractable", f"Expected text not extractable on page {i}", i, sev="warning")
     info["fonts"] = list(all_fonts.values())
+    if rtl_samples:
+        # (1) a standard extractor (pypdf) returns the logical text; (2) every page carries
+        # ActualText spans with the exact logical text (used by Acrobat/poppler-based tools;
+        # pdfium-based viewers such as Chrome ignore ActualText and fall back to glyph order).
+        import re
+        import unicodedata
+        norm = lambda t: "".join(unicodedata.normalize("NFKC", t).split()).replace("\u200c", "")
+        info["rtl_extract_checked"], info["actualtext_spans"] = 0, 0
+        for pno, want in rtl_samples.items():
+            if not (1 <= pno <= n):
+                continue
+            page = r.pages[pno - 1]
+            cs = page.get_contents()  # raw stream, read before extract_text re-parses it
+            data = cs.get_data() if cs is not None else b""
+            got = page.extract_text() or ""
+            words = [w for w in want.split()[:3] if w]
+            if not all(norm(w) in norm(got) for w in words):
+                add("text_not_extractable", f"Persian text on page {pno} does not extract in logical order", pno, sev="warning")
+            spans = [bytes.fromhex(h.decode()).decode("utf-16-be").lstrip("\ufeff") for h in re.findall(rb"/ActualText\s*<([0-9A-Fa-f]+)>", data)]
+            info["actualtext_spans"] += len(spans)
+            if not any(want.strip() == sp.strip() for sp in spans):
+                add("actualtext_missing", f"Page {pno}: no ActualText span with the logical text of the first line", pno, sev="warning")
+            info["rtl_extract_checked"] += 1
 
     # render every page: catches pages that fail to rasterise, blank and duplicate pages
     try:

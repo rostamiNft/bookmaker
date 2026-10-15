@@ -45,7 +45,7 @@ def build_layouts(s: BookSettings, title: str, pages: list[dict], images: dict[s
     guard(eng.title_page, title, s.author, s.publisher)
     guard(eng.copyright_page, copyright_lines(title, s.author, s.publisher, s.language, plan, models))
     for p in pages:
-        guard(eng.story_page, p["number"], p["text"], f"story:{p['number']}" in images)
+        guard(eng.story_page, p["number"], p["text"], f"story:{p['number']}" in images, images.get(f"story:{p['number']}"))
     guard(eng.end_page, END_TEXT.get(s.language, "The End"), False)
     if s.back_cover:
         blurb = plan.get("back_cover_blurb") or plan.get("summary", "")

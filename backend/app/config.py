@@ -44,6 +44,9 @@ class Settings:
     # Optional single shared API token. When set, every /api request must send
     # `Authorization: Bearer <token>` (or ?token= for downloads opened in a new tab).
     api_token: str = field(default_factory=lambda: os.environ.get("BOOKMAKER_API_TOKEN", ""))
+    # none | token | accounts. Default: "token" when BOOKMAKER_API_TOKEN is set, otherwise "none".
+    auth_mode_env: str = field(default_factory=lambda: os.environ.get("BOOKMAKER_AUTH_MODE", "").strip().lower())
+    session_days: int = field(default_factory=lambda: _int("BOOKMAKER_SESSION_DAYS", 14))
     # Key used to encrypt provider API keys at rest. If empty a key file is generated in data_dir.
     secret_key: str = field(default_factory=lambda: os.environ.get("BOOKMAKER_SECRET_KEY", ""))
     max_concurrent_books: int = field(default_factory=lambda: _int("BOOKMAKER_MAX_CONCURRENT_BOOKS", 1))
@@ -54,6 +57,17 @@ class Settings:
     enable_ocr: bool = field(default_factory=lambda: _bool("BOOKMAKER_ENABLE_OCR", True))
     cors_origins: str = field(default_factory=lambda: os.environ.get("BOOKMAKER_CORS_ORIGINS", ""))
     start_worker: bool = field(default_factory=lambda: _bool("BOOKMAKER_START_WORKER", True))
+
+    @property
+    def auth_mode(self) -> str:
+        """none | token | accounts. Unset → "token" when an API token is configured, else "none"."""
+        if self.auth_mode_env in ("none", "token", "accounts"):
+            return self.auth_mode_env
+        return "token" if self.api_token else "none"
+
+    @auth_mode.setter
+    def auth_mode(self, value: str):
+        self.auth_mode_env = value
 
     @property
     def is_production(self) -> bool:

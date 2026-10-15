@@ -1,0 +1,30 @@
+Sanster/IOPaint | 23304 | Apache-2.0 | 2025-04-29 | arch True | Image inpainting tool powered by SOTA AI Model. Remove any unwanted object, defe
+advimman/lama | 10315 | Apache-2.0 | 2025-02-05 | arch False | 🦙  LaMa Image Inpainting, Resolution-robust Large Mask Inpainting with Fourier C
+leejet/stable-diffusion.cpp | 7692 | MIT | 2026-10-15 | arch False | Diffusion model(SD,Flux,Wan,Qwen Image,Z-Image,...) inference in pure C/C++
+rupeshs/fastsdcpu | 2175 | MIT | 2026-07-24 | arch False | Fast stable diffusion on CPU and AI PC
+remsky/Kokoro-FastAPI | 5552 | Apache-2.0 | 2026-10-14 | arch False | Dockerized OpenAI-compatible wrapper for Kokoro-82M text-to-speech w/multiplatfo
+OHF-Voice/piper1-gpl | 5883 | GPL-3.0 | 2026-10-15 | arch False | Fast and local neural text-to-speech engine
+rhasspy/piper | 11303 | MIT | 2025-08-26 | arch True | A fast, local neural text to speech system
+Nodlik/StPageFlip | 888 | MIT | 2024-01-08 | arch False | Simple library for creating realistic page turning effects
+w3c/epubcheck | 1977 | BSD-3-Clause | 2026-10-08 | arch False | The conformance checker for EPUB publications
+harfbuzz/uharfbuzz | 113 | Apache-2.0 | 2026-10-06 | arch False | A HarfBuzz Python binding
+mudler/LocalAI | 49554 | MIT | 2026-10-15 | arch False | LocalAI is the open-source AI engine. Run any model - LLMs, vision, voice, image
+cubiq/ComfyUI_IPAdapter_plus | 6145 | GPL-3.0 | 2025-04-14 | arch False | 
+ToTheBeginning/PuLID | 3551 | Apache-2.0 | 2025-07-31 | arch False | [NeurIPS 2024] Official code for PuLID: Pure and Lightning ID Customization via 
+HVision-NKU/StoryDiffusion | 6475 | Apache-2.0 | 2024-09-26 | arch False | Accepted as [NeurIPS 2024] Spotlight Presentation Paper
+espeak-ng/espeak-ng | 6950 | GPL-3.0 | 2026-09-22 | arch False | eSpeak NG is an open source speech synthesizer that supports more than hundred l
+chrisstaite/lameenc | 65 | LGPL-3.0 | 2026-06-27 | arch False | Python bindings around the LAME encoder
+Sparticuz/chromium | 1657 | MIT | 2026-10-07 | arch False | Chromium for Serverless Platforms
+thewh1teagle/espeakng-loader | 10 | MIT | 2025-11-01 | arch False | This package loads the espeak-ng shared library so it will be available for othe
+global-asp/pb-source | 8 | None | 2016-04-25 | arch False | Pratham Books stories in Markdown format
+TencentARC/PhotoMaker | 10087 | NOASSERTION | 2024-10-31 | arch False | PhotoMaker [CVPR 2024]
+instantX-research/InstantID | 11993 | Apache-2.0 | 2024-07-18 | arch False | InstantID: Zero-shot Identity-Preserving Generation in Seconds 🔥
+roshan-research/hazm | 1432 | MIT | 2026-04-01 | arch False | Persian NLP Toolkit
+Kozea/Pyphen | 230 | NOASSERTION | 2026-09-02 | arch False | Hy-phen-ation made easy
+opencv/opencv | 91190 | Apache-2.0 | 2026-10-15 | arch False | Open Source Computer Vision Library
+kovidgoyal/calibre | 26153 | GPL-3.0 | 2026-10-15 | arch False | The official source code repository for the calibre ebook manager
+lllyasviel/stable-diffusion-webui-forge | 13070 | AGPL-3.0 | 2025-07-31 | arch False | 
+comfyanonymous/ComfyUI NOT FOUND
+ollama/ollama | 183281 | MIT | 2026-10-15 | arch False | Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and o
+roatienza/Deep-Learning-Experiments | 1207 | MIT | 2026-09-26 | arch False | Videos, notes and experiments to understand deep learning
+jdk4py/jdk4py NOT FOUND

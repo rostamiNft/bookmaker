@@ -1,0 +1,1143 @@
+{
+ "title": "سامان و ستاره‌ی کوچولوی گمشده",
+ "settings": {
+  "title": "",
+  "topic": "یک ستاره‌ی کوچک از آسمان می‌افتد و باید پیش از صبح به خانه برگردد",
+  "moral": "",
+  "age_group": "6-8",
+  "language": "fa",
+  "page_count": 14,
+  "complexity": "medium",
+  "narration": "third_person",
+  "illustration_style": "watercolor",
+  "aspect_ratio": "3:4",
+  "page_size": "A4",
+  "orientation": "portrait",
+  "main_characters": 2,
+  "hero_name": "",
+  "text_amount": "medium",
+  "fantasy_level": 2,
+  "humor_level": 2,
+  "ending": "happy",
+  "cover_style": "illustrated",
+  "author": "کتاب‌ساز",
+  "publisher": "نشر نمونه",
+  "page_numbers": true,
+  "back_cover": true,
+  "text_in_image": false,
+  "output_profile": "screen",
+  "seed": 21,
+  "llm_provider_id": "",
+  "image_provider_id": "",
+  "vision_provider_id": "",
+  "max_image_attempts": 3,
+  "max_story_attempts": 3,
+  "budget_usd": 0.0,
+  "review_outline": false,
+  "reference_mode": "multi_view",
+  "cast_reference": true,
+  "layout_style": "full_bleed",
+  "bleed_mm": 3.0,
+  "crop_marks": true,
+  "color_mode": "cmyk",
+  "narration_audio": false,
+  "tts_provider_id": "",
+  "narration_voice": "",
+  "narration_speed": 1.0
+ },
+ "qa_report": {
+  "story_generation": {
+   "ok": true,
+   "errors": 0,
+   "warnings": 0,
+   "word_count": 565,
+   "issues": []
+  },
+  "layout": {
+   "ok": true,
+   "issues": [],
+   "pages": [
+    {
+     "index": 1,
+     "kind": "cover",
+     "number": null,
+     "notes": []
+    },
+    {
+     "index": 2,
+     "kind": "title",
+     "number": null,
+     "notes": []
+    },
+    {
+     "index": 3,
+     "kind": "copyright",
+     "number": null,
+     "notes": []
+    },
+    {
+     "index": 4,
+     "kind": "story",
+     "number": 1,
+     "notes": [
+      "layout=full_bleed panel=top panel_frac=0.17 font=15.0 crop=6%"
+     ]
+    },
+    {
+     "index": 5,
+     "kind": "story",
+     "number": 2,
+     "notes": [
+      "layout=full_bleed panel=bottom panel_frac=0.20 font=19.0 crop=6%"
+     ]
+    },
+    {
+     "index": 6,
+     "kind": "story",
+     "number": 3,
+     "notes": [
+      "layout=full_bleed panel=top panel_frac=0.20 font=19.0 crop=6%"
+     ]
+    },
+    {
+     "index": 7,
+     "kind": "story",
+     "number": 4,
+     "notes": [
+      "layout=full_bleed panel=top panel_frac=0.17 font=20.0 crop=6%"
+     ]
+    },
+    {
+     "index": 8,
+     "kind": "story",
+     "number": 5,
+     "notes": [
+      "layout=full_bleed panel=top panel_frac=0.20 font=19.0 crop=6%"
+     ]
+    },
+    {
+     "index": 9,
+     "kind": "story",
+     "number": 6,
+     "notes": [
+      "layout=full_bleed panel=top panel_frac=0.20 font=19.0 crop=6%"
+     ]
+    },
+    {
+     "index": 10,
+     "kind": "story",
+     "number": 7,
+     "notes": [
+      "layout=full_bleed panel=top panel_frac=0.19 font=17.0 crop=6%"
+     ]
+    },
+    {
+     "index": 11,
+     "kind": "story",
+     "number": 8,
+     "notes": [
+      "layout=full_bleed panel=top panel_frac=0.18 font=21.0 crop=6%"
+     ]
+    },
+    {
+     "index": 12,
+     "kind": "story",
+     "number": 9,
+     "notes": [
+      "layout=full_bleed panel=top panel_frac=0.17 font=19.0 crop=6%"
+     ]
+    },
+    {
+     "index": 13,
+     "kind": "story",
+     "number": 10,
+     "notes": [
+      "layout=full_bleed panel=top panel_frac=0.18 font=21.0 crop=6%"
+     ]
+    },
+    {
+     "index": 14,
+     "kind": "story",
+     "number": 11,
+     "notes": [
+      "layout=full_bleed panel=top panel_frac=0.20 font=19.0 crop=6%"
+     ]
+    },
+    {
+     "index": 15,
+     "kind": "story",
+     "number": 12,
+     "notes": [
+      "layout=full_bleed panel=top panel_frac=0.20 font=24 crop=6%"
+     ]
+    },
+    {
+     "index": 16,
+     "kind": "story",
+     "number": 13,
+     "notes": [
+      "layout=full_bleed panel=top panel_frac=0.20 font=19.0 crop=6%"
+     ]
+    },
+    {
+     "index": 17,
+     "kind": "story",
+     "number": 14,
+     "notes": [
+      "layout=full_bleed panel=top panel_frac=0.20 font=19.0 crop=6%"
+     ]
+    },
+    {
+     "index": 18,
+     "kind": "end",
+     "number": null,
+     "notes": []
+    },
+    {
+     "index": 19,
+     "kind": "back",
+     "number": null,
+     "notes": []
+    }
+   ]
+  },
+  "pdf": {
+   "ok": true,
+   "issues": [],
+   "info": {
+    "size_mb": 4.98,
+    "pages": 19,
+    "metadata": {
+     "/Author": "کتاب‌ساز",
+     "/CreationDate": "D:20261015193234+00'00'",
+     "/Creator": "Bookmaker (open-source children's book generator)",
+     "/Keywords": "children's book, lost_star, 6-8",
+     "/ModDate": "D:20261015193234+00'00'",
+     "/Producer": "ReportLab PDF Library - (opensource)",
+     "/Subject": "وقتی کوچک‌ترین ستاره‌ی آسمان به مرغزار می‌افتد، سامان و فلفل آن را از رودخانه و جنگل عبور می‌دهند تا پیش از طلوع آفتاب از بالای تپه‌ی ماه به آسمان برگردد.",
+     "/Title": "سامان و ستاره‌ی کوچولوی گمشده",
+     "/Trapped": "/False"
+    },
+    "lang": "fa",
+    "fonts": [
+     {
+      "name": "/AAAAAA+Vazirmatn-Bold",
+      "embedded": true,
+      "has_tounicode": true
+     },
+     {
+      "name": "/AAAAAA+Vazirmatn-Regular",
+      "embedded": true,
+      "has_tounicode": true
+     }
+    ],
+    "rtl_extract_checked": 14,
+    "actualtext_spans": 51,
+    "rendered": 19,
+    "print": {
+     "trim_mm": [
+      210.0,
+      297.0
+     ],
+     "bleed_mm": 3.0,
+     "crop_marks": true,
+     "color_mode": "cmyk",
+     "layout_style": "full_bleed"
+    }
+   },
+   "expected_story_pages": 14
+  },
+  "story": {
+   "ok": true,
+   "errors": 0,
+   "warnings": 0,
+   "word_count": 565,
+   "issues": []
+  },
+  "images": {
+   "issues": []
+  },
+  "summary": {
+   "status": "completed",
+   "errors": 0,
+   "warnings": 0,
+   "pdf_valid": true,
+   "story_pages": 14,
+   "word_count": 565,
+   "checked_at": 1792092759.326758,
+   "engines": {
+    "story": "offline:lost_star",
+    "images": "Built-in procedural illustrator (offline, CPU)"
+   }
+  }
+ },
+ "pages": [
+  {
+   "number": 1,
+   "text": "سامان در کلبه‌ای کوچک در کنار یک مرغزار سبز و بزرگ زندگی می‌کرد؛ جایی که علف‌ها بوی شبدر می‌دادند و شب‌ها پر از ستاره بود. هر شب روی پله‌های ایوان می‌نشست و ستاره‌ها را یکی‌یکی می‌شمرد تا وقتی که چشم‌هایش سنگین می‌شد. ولی هیچ‌وقت از چهل‌وسه جلوتر نمی‌رفت، چون همیشه همان‌جا خمیازه‌اش می‌گرفت!",
+   "image_prompt": "Saman sitting on the porch steps of a small cottage at the edge of a meadow at dusk, looking up at the first stars, peaceful and dreamy",
+   "image_status": "generated",
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 960,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 592965,
+      "aspect": 0.75,
+      "luma_std": 28.16,
+      "luma_mean": 152.79,
+      "dhash": "c9313e276162251b",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0
+      }
+     }
+    }
+   },
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: Saman sitting on the porch steps of a small cottage at the edge of a meadow at dusk, looking up at the first stars, peaceful and dreamy\nSetting: meadow, time of day: sunset, mood: calm.\nExactly 1 main character visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: look_up.\nComposition: wide shot, aspect ratio 3:4, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 122,
+      "file": "images/page-01-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero"
+    ],
+    "dhash": "c9313e276162251b"
+   },
+   "has_audio": false
+  },
+  {
+   "number": 2,
+   "text": "بهترین دوست سامان، فلفل بود؛ روباه کوچولوی نارنجی که زیر درخت سیب پیر زندگی می‌کرد. فلفل همه‌ی راه‌های مرغزار را بلد بود و هیچ‌وقت برای شام دیر نمی‌کرد. فلفل می‌توانست بوی کیک زغال‌اخته را از سه تپه آن‌طرف‌تر بفهمد!",
+   "image_prompt": "Saman and Felfel playing together under an old apple tree in a sunny meadow, laughing",
+   "image_status": "generated",
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 960,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 681043,
+      "aspect": 0.75,
+      "luma_std": 32.98,
+      "luma_mean": 150.53,
+      "dhash": "beb9612666605917",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 0.5
+      }
+     }
+    }
+   },
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: Saman and Felfel playing together under an old apple tree in a sunny meadow, laughing\nSetting: meadow, time of day: day, mood: happy.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: wave.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: jump.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: medium shot, aspect ratio 3:4, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 223,
+      "file": "images/page-02-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "beb9612666605917"
+   },
+   "has_audio": false
+  },
+  {
+   "number": 3,
+   "text": "یک شب اتفاق عجیبی افتاد. کوچک‌ترین ستاره از آسمان لیز خورد و پایین و پایین‌تر آمد، درست وسط مرغزار! باید پیش از صبح به آسمان برمی‌گشت. ستاره با صدای آرامی روی علف‌ها نشست و مثل یک چراغ کوچک می‌درخشید.",
+   "image_prompt": "A small glowing star falling from the night sky with a sparkling trail into a dark meadow, Saman and Felfel watching amazed",
+   "image_status": "generated",
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 960,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 571567,
+      "aspect": 0.75,
+      "luma_std": 36.46,
+      "luma_mean": 98.75,
+      "dhash": "419bc4ccb1454907",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: A small glowing star falling from the night sky with a sparkling trail into a dark meadow, Saman and Felfel watching amazed\nSetting: meadow, time of day: night, mood: surprised.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: point. Expression: surprised.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: stand. Expression: surprised.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: wide shot, aspect ratio 3:4, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 324,
+      "file": "images/page-03-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "419bc4ccb1454907"
+   },
+   "has_audio": false
+  },
+  {
+   "number": 4,
+   "text": "مادربزرگ جغدِ دانا از روی شاخه پایین آمد و گفت: «فقط از بالای تپه‌ی ماه است که ستاره می‌تواند به آسمان برگردد.» سامان ستاره را آرام در یک سبد گذاشت و دو دوست در دل شب راه افتادند.",
+   "image_prompt": "A wise old owl on a branch pointing her wing toward a distant hill under the moon, Saman holding a small basket with a glowing star, Felfel beside",
+   "image_status": "generated",
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 960,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 653645,
+      "aspect": 0.75,
+      "luma_std": 39.34,
+      "luma_mean": 102.61,
+      "dhash": "413134302acaa50b",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0,
+       "helper": 1.0
+      }
+     }
+    }
+   },
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: A wise old owl on a branch pointing her wing toward a distant hill under the moon, Saman holding a small basket with a glowing star, Felfel beside\nSetting: meadow, time of day: night, mood: determined.\nExactly 3 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: hold. Expression: determined.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: stand.\n- Grandma Owl: a wise old owl with speckled brown feathers, big shiny dark eyes, wearing small dark round glasses. Always the same look: dark round glasses, owl shape. Pose: point.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height; Grandma Owl is about 60% of Saman's height.\nRelationships: Felfel - best friend of Saman; Grandma Owl - mentor of Saman; Saman - best friend of Felfel; Saman - trusted grown-up of Grandma Owl.\nComposition: medium shot, aspect ratio 3:4, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 425,
+      "file": "images/page-04-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp",
+     "helper"
+    ],
+    "dhash": "413134302acaa50b"
+   },
+   "has_audio": false
+  },
+  {
+   "number": 5,
+   "text": "اول به رودخانه‌ای پهن و پرسروصدا رسیدند. پلی در کار نبود؛ فقط چند سنگ لغزنده وسط آب بود. فلفل اول پرید و سامان سبد را بالا گرفت و پشت سرش رفت. قدم‌به‌قدم و با احتیاط به آن طرف رسیدند. فلفل روی آخرین سنگ تلوتلو خورد و شلپ! فقط دمش خیس شد.",
+   "image_prompt": "Saman carefully stepping across stepping stones in a moonlit river holding a basket with a glowing star high, Felfel hopping ahead",
+   "image_status": "generated",
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 960,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 584648,
+      "aspect": 0.75,
+      "luma_std": 38.06,
+      "luma_mean": 96.14,
+      "dhash": "0121109a94656917",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: Saman carefully stepping across stepping stones in a moonlit river holding a basket with a glowing star high, Felfel hopping ahead\nSetting: river, time of day: night, mood: careful.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: walk_hold.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: jump.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: wide shot, aspect ratio 3:4, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 526,
+      "file": "images/page-05-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "0121109a94656917"
+   },
+   "has_audio": false
+  },
+  {
+   "number": 6,
+   "text": "بعد به جنگلی تاریک و انبوه رسیدند. درخت‌ها آن‌قدر بلند بودند که ماه را پنهان می‌کردند و راه دیگر پیدا نبود. ناگهان دسته‌ای کرم شب‌تاب پایین آمدند و چشمک‌زنان گفتند: «دنبال ما بیایید!» و جنگل پر از نوری مهربان شد.",
+   "image_prompt": "Saman and Felfel in a tall dark forest at night, a swirl of glowing fireflies lighting a winding path",
+   "image_status": "generated",
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 960,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 602377,
+      "aspect": 0.75,
+      "luma_std": 26.06,
+      "luma_mean": 97.12,
+      "dhash": "c989239014642807",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: Saman and Felfel in a tall dark forest at night, a swirl of glowing fireflies lighting a winding path\nSetting: forest, time of day: night, mood: wonder.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: walk_hold. Expression: happy.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: walk.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: wide shot, aspect ratio 3:4, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 627,
+      "file": "images/page-06-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "c989239014642807"
+   },
+   "has_audio": false
+  },
+  {
+   "number": 7,
+   "text": "وسط راه، خرس قهوه‌ای بزرگی خوابیده بود و مثل رعد خروپف می‌کرد. سامان به‌جای داد زدن، یک لالایی آرام زمزمه کرد. خرس در خواب لبخند زد، غلت خورد و درست به اندازه‌ی کافی جا باز کرد تا آن‌ها پاورچین‌پاورچین رد شوند. فلفل آن‌قدر آرام راه می‌رفت که حتی سبیل‌هایش هم تکان نمی‌خوردند.",
+   "image_prompt": "A big friendly brown bear sleeping across a forest path at night, Saman tiptoeing past humming, Felfel tiptoeing behind",
+   "image_status": "generated",
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 960,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 532286,
+      "aspect": 0.75,
+      "luma_std": 23.53,
+      "luma_mean": 98.21,
+      "dhash": "0909e29b96660917",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: A big friendly brown bear sleeping across a forest path at night, Saman tiptoeing past humming, Felfel tiptoeing behind\nSetting: forest, time of day: night, mood: careful.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: tiptoe.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: tiptoe.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: wide shot, aspect ratio 3:4, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 728,
+      "file": "images/page-07-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "0909e29b96660917"
+   },
+   "has_audio": false
+  },
+  {
+   "number": 8,
+   "text": "در دشت باز، باد تندی وزید و سبد را کشید؛ نزدیک بود ستاره‌ی کوچولو را با خودش ببرد! سامان و فلفل به هم چسبیدند و از ستاره محافظت کردند تا باد خسته شد و آرام گرفت.",
+   "image_prompt": "Saman and Felfel huddled together on a windy grassy plain at night shielding a glowing star in a basket, grass and leaves swirling",
+   "image_status": "generated",
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 960,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 571594,
+      "aspect": 0.75,
+      "luma_std": 36.65,
+      "luma_mean": 96.98,
+      "dhash": "23139c9897646917",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: Saman and Felfel huddled together on a windy grassy plain at night shielding a glowing star in a basket, grass and leaves swirling\nSetting: meadow, time of day: night, mood: brave.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: hold. Expression: determined.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: stand.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: medium shot, aspect ratio 3:4, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 829,
+      "file": "images/page-08-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "23139c9897646917"
+   },
+   "has_audio": false
+  },
+  {
+   "number": 9,
+   "text": "دیواری از بوته‌های پرخار راهشان را بست. آن‌قدر انبوه بود که نمی‌شد از رویش رد شد. فلفل تونل کوچکی نزدیک زمین پیدا کرد و سامان پشت سرش خزید و مراقب بود حتی یک خار هم به ستاره نخورد.",
+   "image_prompt": "Saman crawling through a small tunnel in thorny bramble bushes at night following Felfel, carefully holding a glowing basket",
+   "image_status": "generated",
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 960,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 559493,
+      "aspect": 0.75,
+      "luma_std": 27.09,
+      "luma_mean": 96.58,
+      "dhash": "d3d1449196d76817",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: Saman crawling through a small tunnel in thorny bramble bushes at night following Felfel, carefully holding a glowing basket\nSetting: forest, time of day: night, mood: careful.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: kneel.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: walk.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: medium shot, aspect ratio 3:4, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 930,
+      "file": "images/page-09-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "d3d1449196d76817"
+   },
+   "has_audio": false
+  },
+  {
+   "number": 10,
+   "text": "حالا نور ستاره خیلی کم شده بود و پاهای سامان خسته بودند. آهسته گفت: «اگر دیر برسیم چه؟» فلفل کنارش نشست و گفت: «تا این‌جا با هم آمده‌ایم. می‌توانیم کمی دیگر هم برویم.»",
+   "image_prompt": "Saman sitting tired on a rock at night holding a basket with a very faint star, Felfel comforting Saman",
+   "image_status": "generated",
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 960,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 548930,
+      "aspect": 0.75,
+      "luma_std": 36.28,
+      "luma_mean": 90.05,
+      "dhash": "13611c1b26b4a543",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: Saman sitting tired on a rock at night holding a basket with a very faint star, Felfel comforting Saman\nSetting: hill, time of day: night, mood: sad.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: sit. Expression: sad.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: stand. Expression: kind.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: close shot, aspect ratio 3:4, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1031,
+      "file": "images/page-10-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "13611c1b26b4a543"
+   },
+   "has_audio": false
+  },
+  {
+   "number": 11,
+   "text": "سرانجام به بالای بلندترین تپه رسیدند. آسمان کم‌کم داشت روشن می‌شد. وقتی برای از دست دادن نبود! سامان سبد را تا جایی که می‌توانست بالا برد و فریاد زد: «پرواز کن و به خانه برو، ستاره‌ی کوچولو!»",
+   "image_prompt": "Saman on top of a grassy hill at dawn lifting a basket high with a glowing star toward the pale sky, Felfel cheering",
+   "image_status": "generated",
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 960,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 608794,
+      "aspect": 0.75,
+      "luma_std": 25.29,
+      "luma_mean": 148.31,
+      "dhash": "6374d4c163484b17",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: Saman on top of a grassy hill at dawn lifting a basket high with a glowing star toward the pale sky, Felfel cheering\nSetting: hill, time of day: sunset, mood: hopeful.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: lift. Expression: determined.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: jump.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: wide shot, aspect ratio 3:4, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1132,
+      "file": "images/page-11-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "6374d4c163484b17"
+   },
+   "has_audio": false
+  },
+  {
+   "number": 12,
+   "text": "ستاره لرزید، درخشید و آرام‌آرام بالا رفت؛ آن‌قدر بالا که دوباره به خانه‌اش رسید. نورش دوباره پرفروغ شده بود و برای آخرین بار، با قدردانی برای سامان چشمک زد.",
+   "image_prompt": "A bright star rising into the dawn sky with a sparkling trail, Saman and Felfel on the hilltop waving goodbye",
+   "image_status": "generated",
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 960,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 634985,
+      "aspect": 0.75,
+      "luma_std": 24.92,
+      "luma_mean": 148.95,
+      "dhash": "4d6c686366656917",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: A bright star rising into the dawn sky with a sparkling trail, Saman and Felfel on the hilltop waving goodbye\nSetting: hill, time of day: sunset, mood: joyful.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: wave. Expression: happy.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: wave. Expression: happy.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: wide shot, aspect ratio 3:4, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1233,
+      "file": "images/page-12-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "4d6c686366656917"
+   },
+   "has_audio": false
+  },
+  {
+   "number": 13,
+   "text": "پایین در مرغزار، پرنده‌ها شروع به آواز خواندن کردند و انگار همه‌ی دنیا کمی روشن‌تر شده بود. سامان و فلفل خندیدند و از تپه‌ی نرم و سبز تا خانه قل خوردند. فلفل از همه سریع‌تر قل خورد و وسط بوته‌ی گل‌های بابونه فرود آمد!",
+   "image_prompt": "Saman and Felfel rolling and laughing down a grassy hill in the golden morning light, birds flying, daisies",
+   "image_status": "generated",
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 960,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 675356,
+      "aspect": 0.75,
+      "luma_std": 32.78,
+      "luma_mean": 167.73,
+      "dhash": "666447676b695b07",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: Saman and Felfel rolling and laughing down a grassy hill in the golden morning light, birds flying, daisies\nSetting: meadow, time of day: day, mood: joyful.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: jump. Expression: laugh.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: jump. Expression: laugh.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: wide shot, aspect ratio 3:4, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1334,
+      "file": "images/page-13-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "666447676b695b07"
+   },
+   "has_audio": false
+  },
+  {
+   "number": 14,
+   "text": "آن شب، سامان دوباره روی ایوان نشست و ستاره‌ها را شمرد. وقتی به کوچک‌ترین ستاره رسید، ستاره چشمک زد و سامان هم برایش چشمک زد. فلفل هم همان نزدیکی جمع شده بود و آرام خروپف می‌کرد.",
+   "image_prompt": "Saman on the cottage porch at night smiling up at a starry sky where one small star twinkles brightly, Felfel curled up asleep nearby",
+   "image_status": "generated",
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 960,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 554855,
+      "aspect": 0.75,
+      "luma_std": 36.12,
+      "luma_mean": 99.74,
+      "dhash": "9363fcd9196c6903",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: Saman on the cottage porch at night smiling up at a starry sky where one small star twinkles brightly, Felfel curled up asleep nearby\nSetting: meadow, time of day: night, mood: content.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: look_up. Expression: happy.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: sleep. Expression: sleep.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: wide shot, aspect ratio 3:4, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1435,
+      "file": "images/page-14-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "9363fcd9196c6903"
+   },
+   "has_audio": false
+  }
+ ],
+ "characters": [
+  {
+   "char_id": "hero",
+   "name": "سامان",
+   "role": "protagonist",
+   "spec": {
+    "id": "hero",
+    "name": "سامان",
+    "role": "protagonist",
+    "pronoun": "he",
+    "age": "7",
+    "description": "a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes",
+    "personality": "",
+    "appearance": {
+     "species": "human",
+     "skin": "#a86b45",
+     "hair_color": "#b5651d",
+     "hair_style": "short",
+     "eye_color": "#3b2a20",
+     "face": "round, rosy cheeks",
+     "body": "small child",
+     "height": 1.0,
+     "scale": 1.0
+    },
+    "outfit": {
+     "top": "hoodie",
+     "top_color": "#4caf7a",
+     "bottom": "shorts",
+     "bottom_color": "#ef7fb0",
+     "accessory": "scarf",
+     "accessory_color": "#2bb3b1",
+     "shoes_color": "#e94f4f"
+    },
+    "distinctive": [
+     "teal scarf",
+     "auburn short hair",
+     "green hoodie"
+    ],
+    "expressions": [
+     "happy",
+     "curious",
+     "worried",
+     "determined",
+     "surprised"
+    ],
+    "movement": "quick, bouncy steps",
+    "palette": [
+     "#a86b45",
+     "#b5651d",
+     "#4caf7a",
+     "#2bb3b1",
+     "#ef7fb0"
+    ],
+    "relationships": {
+     "comp": "best friend",
+     "helper": "trusted grown-up",
+     "_latin_name": "Saman"
+    }
+   }
+  },
+  {
+   "char_id": "comp",
+   "name": "فلفل",
+   "role": "companion",
+   "spec": {
+    "id": "comp",
+    "name": "فلفل",
+    "role": "companion",
+    "pronoun": "he",
+    "age": "young",
+    "description": "a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf",
+    "personality": "",
+    "appearance": {
+     "species": "fox",
+     "skin": "#e07b39",
+     "hair_color": "",
+     "hair_style": "",
+     "eye_color": "#2a1c12",
+     "face": "",
+     "body": "small fox",
+     "height": 0.7,
+     "scale": 1.0
+    },
+    "outfit": {
+     "top": "",
+     "top_color": "",
+     "bottom": "",
+     "bottom_color": "",
+     "accessory": "scarf",
+     "accessory_color": "#ef7fb0",
+     "shoes_color": ""
+    },
+    "distinctive": [
+     "pink scarf",
+     "fox shape"
+    ],
+    "expressions": [
+     "happy",
+     "curious",
+     "surprised",
+     "kind"
+    ],
+    "movement": "trots lightly",
+    "palette": [
+     "#e07b39",
+     "#ef7fb0"
+    ],
+    "relationships": {
+     "hero": "best friend",
+     "_latin_name": "Felfel"
+    }
+   }
+  },
+  {
+   "char_id": "helper",
+   "name": "مادربزرگ جغد",
+   "role": "supporting",
+   "spec": {
+    "id": "helper",
+    "name": "مادربزرگ جغد",
+    "role": "supporting",
+    "pronoun": "she",
+    "age": "old",
+    "description": "a wise old owl with speckled brown feathers, big shiny dark eyes, wearing small dark round glasses",
+    "personality": "",
+    "appearance": {
+     "species": "owl",
+     "skin": "#8b6b4a",
+     "hair_color": "",
+     "hair_style": "",
+     "eye_color": "#2a1c12",
+     "face": "",
+     "body": "small owl",
+     "height": 0.6,
+     "scale": 1.0
+    },
+    "outfit": {
+     "top": "",
+     "top_color": "",
+     "bottom": "",
+     "bottom_color": "",
+     "accessory": "glasses",
+     "accessory_color": "#444444",
+     "shoes_color": ""
+    },
+    "distinctive": [
+     "dark round glasses",
+     "owl shape"
+    ],
+    "expressions": [
+     "happy",
+     "curious",
+     "surprised",
+     "kind"
+    ],
+    "movement": "glides",
+    "palette": [
+     "#8b6b4a",
+     "#444444"
+    ],
+    "relationships": {
+     "hero": "mentor",
+     "_latin_name": "Grandma Owl"
+    }
+   }
+  }
+ ]
+}

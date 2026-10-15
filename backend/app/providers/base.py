@@ -72,6 +72,15 @@ class LLMProvider:
 class ImageProvider:
     kind = "image"
     supports_reference_images = False
+    supports_generation = True
+    supports_inpainting = False
+
+    def inpaint(self, image: bytes, mask_png: bytes, prompt: str, negative_prompt: str = "", seed: int | None = None) -> ImageResult:
+        """Repaint the masked region. `mask_png` is encoded in the provider's convention (see mask_convention)."""
+        raise NotImplementedError("This provider cannot repair image regions")
+
+    def mask_convention(self) -> str:
+        return "white"
 
     def generate(self, prompt: str, negative_prompt: str, width: int, height: int, seed: int | None = None,
                  reference_images: list[bytes] | None = None, scene: dict | None = None,
@@ -86,6 +95,26 @@ class VisionProvider:
     kind = "vision"
 
     def describe(self, image: bytes, prompt: str, mime: str = "image/png") -> VisionResult:
+        raise NotImplementedError
+
+    def check(self) -> dict:
+        raise NotImplementedError
+
+
+@dataclass
+class AudioResult:
+    data: bytes
+    mime: str = "audio/mpeg"
+    model: str = ""
+    duration_s: float = 0.0
+    voice: str = ""
+    input_chars: int = 0
+
+
+class TTSProvider:
+    kind = "tts"
+
+    def synthesize(self, text: str, language: str, voice: str = "", speed: float = 1.0) -> AudioResult:
         raise NotImplementedError
 
     def check(self) -> dict:

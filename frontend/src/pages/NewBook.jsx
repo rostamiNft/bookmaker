@@ -10,6 +10,8 @@ export const DEFAULTS = {
   text_amount: 'medium', fantasy_level: 2, humor_level: 1, ending: 'happy', cover_style: 'illustrated', author: '', publisher: '',
   page_numbers: true, back_cover: true, text_in_image: false, output_profile: 'screen', seed: null, llm_provider_id: '', image_provider_id: '',
   vision_provider_id: '', max_image_attempts: 3, max_story_attempts: 3, budget_usd: 0,
+  review_outline: false, layout_style: 'classic', bleed_mm: 0, crop_marks: false, color_mode: 'rgb', narration_audio: false, tts_provider_id: '',
+  cast_reference: true,
 }
 
 export default function NewBook() {
@@ -102,6 +104,19 @@ export default function NewBook() {
             <Field label={t('author')}><input dir="auto" value={s.author} maxLength={120} onChange={(e) => set('author')(e.target.value)} /></Field>
             <Field label={t('publisher')}><input dir="auto" value={s.publisher} maxLength={120} onChange={(e) => set('publisher')(e.target.value)} /></Field>
           </div>
+
+          <h3>🖨 {t('printOptions')} · 🔊 {t('narrationAudio')}</h3>
+          <div className="row">
+            <Field label={t('layoutStyle')}><Select value={s.layout_style} onChange={set('layout_style')} options={[['classic', 'classic'], ['full_bleed', 'full-bleed + text panel']]} /></Field>
+            <Field label={t('bleed')}><input type="number" min={0} max={6} step={0.5} value={s.bleed_mm} onChange={num('bleed_mm')} /></Field>
+            <Field label={t('colorMode')} hint={s.color_mode === 'cmyk' ? t('cmykNote') : ''}><Select value={s.color_mode} onChange={set('color_mode')} options={['rgb', 'cmyk']} /></Field>
+          </div>
+          <div className="row checks">
+            <label><input type="checkbox" checked={s.crop_marks} onChange={(e) => set('crop_marks')(e.target.checked)} /> {t('cropMarks')}</label>
+            <label><input type="checkbox" checked={s.narration_audio} onChange={(e) => set('narration_audio')(e.target.checked)} data-testid="opt-narration" /> {t('narrationAudio')}</label>
+            <label><input type="checkbox" checked={s.review_outline} onChange={(e) => set('review_outline')(e.target.checked)} data-testid="opt-review" /> {t('reviewOutline')}</label>
+          </div>
+          {s.narration_audio && <Field label={t('ttsModel')}><Select value={s.tts_provider_id} onChange={set('tts_provider_id')} options={opts('tts')} /></Field>}
 
           <h3>🤖 {t('providers')}</h3>
           <div className="row">

@@ -103,3 +103,23 @@ code { font-size: .8rem; background: #f4ece2; padding: 1px 6px; border-radius: 6
   .sheet img { height: auto; width: calc(80vw * var(--zoom, 1)); } .spread.double { flex-direction: row; } .spread.double .sheet img { width: calc(42vw * var(--zoom, 1)); }
   main { padding: 12px; } .table { display: block; overflow-x: auto; }
 }
+
+/* ---- accounts, review gate, region repair, revisions, exports, narration ---- */
+.login { display: flex; justify-content: center; padding-top: 6vh; }
+.review-banner { background: #fff4d6; border: 1px solid #f0c96a; border-radius: 12px; padding: 10px 14px; margin: 8px 0; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.review-banner p { margin: 0; flex: 1 1 260px; }
+.modal .card.wide { width: min(1000px, 100%); }
+.mask-stage { position: relative; display: inline-block; max-width: 100%; line-height: 0; border-radius: 10px; overflow: hidden; background: #ddd; }
+.mask-stage img { max-width: 100%; max-height: 62vh; display: block; user-select: none; }
+.mask-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .55; cursor: crosshair; touch-action: none; }
+.page-audio { display: block; width: 100%; margin: 8px 0; }
+.revisions { margin-top: 12px; }
+.rev-list { list-style: none; padding: 0; margin: 6px 0; display: flex; flex-direction: column; gap: 8px; max-height: 360px; overflow-y: auto; }
+.rev-list li { display: flex; gap: 10px; align-items: flex-start; background: #fbf7f1; border-radius: 10px; padding: 6px; }
+.rev-list img { width: 84px; height: auto; border-radius: 6px; flex: none; }
+.rev-list .grow { flex: 1; min-width: 0; }
+.rev-list p { margin: 2px 0 4px; }
+.card.cast img { max-width: 100%; border-radius: 10px; margin-top: 6px; display: block; }
+.grid.exports { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.btn.tiny { padding: 1px 6px; font-size: .8rem; line-height: 1.3; }
+.sheet.reading { outline: 3px solid var(--accent, #e8735a); outline-offset: 2px; }

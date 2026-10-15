@@ -109,3 +109,47 @@ usage accounting; structured story/character data; independent QA at every stage
 measurement-based ReportLab layout with proper Persian shaping/bidi; React UI. It is the cheapest option to run
 (no GPU, single process), easy to maintain (few dependencies, plain HTTP integrations), and scales up by pointing the
 adapters at stronger local services (Ollama/ComfyUI on a GPU box) or hosted APIs.
+
+---
+
+## Second research round (2026-10-15): suggested repositories and the features they led to
+
+All data verified with the GitHub REST API on 2026-10-15 (raw lists: `docs/research/suggested_repos_2026-10-15.txt`,
+`docs/research/supporting_tools_2026-10-15.txt`). Only **ideas** were adopted; no code was copied (two of the projects have no
+LICENSE file, so copying would not be allowed anyway).
+
+| Project | ★ | Licence | Last push | Idea | Implemented in Bookmaker as |
+|---|---|---|---|---|---|
+| valleylmh/storybloom | 12 | MIT | 2026-10-06 | review the outline before paying for images; TTS read-along; ZIP/long-image export | `review_outline` gate (`awaiting_review` → approve), per-page narration, Preview read-along, EPUB/HTML/ZIP exports |
+| zfrsgtcu/ComfyUI-ZFRNodes | 36 | MIT | 2026-08-31 | contact/asset sheet conditions every frame; inpaint studio | cast line-up sheet passed as a reference (`cast_reference`), mask-based region repair |
+| mhubrich/storybook-ai-generator | 1 | no LICENSE file (README: Apache-2.0) | 2026-01-26 | relationship & scale rules, multi-view sheets | `appearance.scale` + relative heights enforced in every scene and prompt; scale slider in the UI |
+| RishiDesai/CharForge | 88 | MIT | 2025-06-27 | one image → multiview sheet → LoRA | documented GPU path (train a LoRA externally, use it in a ComfyUI workflow); not integrated (needs GPU) |
+| lincwang123-bot/moonlit-stories | 175 | MIT | 2026-09-04 | local TTS service, style key image | TTS provider kind (OpenAI-compatible `/v1/audio/speech`, e.g. Kokoro-FastAPI/LocalAI) |
+| weaiw/storybook-generator-skill | 49 | MIT | 2026-07-06 | QA checklist | compared with our QA rules (no new rule needed) |
+| naakaarafr/Storybook-Generator | 11 | MIT | 2025-06-12 | CrewAI agents + FLUX | nothing new (already a staged pipeline) |
+| kart-io/picture-skills | 13 | no LICENSE file | 2026-01-19 | multi-character prompting | prompt wording ideas only |
+| DoodleBook | – | – | – | – | **no repository found**; treated as unverified |
+
+### Supporting tools selected (CPU-friendly, permissive where possible)
+
+| Tool | ★ | Licence | Status | Used for | Notes |
+|---|---|---|---|---|---|
+| OpenCV `inpaint` (Telea/NS) | – | Apache-2.0 | active | built-in CPU region repair | removes artefacts; cannot draw new content |
+| Sanster/IOPaint (+ LaMa) | 23.3k | Apache-2.0 | **archived 2025-04** | optional AI inpainting server (LaMa on CPU) | still works; no updates expected |
+| leejet/stable-diffusion.cpp | 7.7k | MIT | active (2026-10-15) | CPU/GPU diffusion via A1111-compatible API | GGUF quantised models; weights keep their own licences |
+| rupeshs/fastsdcpu | 2.2k | MIT | active (2026-07) | CPU image provider (`fastsdcpu`) | LCM/OpenVINO; low quality but local |
+| remsky/Kokoro-FastAPI | 5.6k | Apache-2.0 | active | optional local TTS (OpenAI-compatible) | no Persian voice |
+| espeak-ng (via espeakng-loader) | 7.0k / 10 | **GPL-3.0** / MIT | active | built-in offline narrator (optional install) | Persian supported; robotic voice; GPL → optional, documented |
+| lameenc | 65 | LGPL-3.0 | active | MP3 encoding | optional |
+| rhasspy/piper → OHF-Voice/piper1-gpl | 5.9k | MIT (archived) → **GPL-3.0** | – | not used | the maintained fork is GPL and Persian voices are on Hugging Face (unreachable here) |
+| w3c/epubcheck (PyPI `epubcheck` + `jdk4py`) | 2.0k | BSD-3 / GPLv2+CPE | active | EPUB validation | ~70 MB optional; without it EPUBs are reported "not checked" |
+| ebooklib | – | **AGPL-3.0** | – | **avoided** | EPUB is written directly with `zipfile` instead |
+| StPageFlip | 888 | MIT | unmaintained since 2024-01 | not used | the HTML reader uses a small CSS page-turn instead |
+| uharfbuzz | 113 | Apache-2.0 | active | not used yet | candidate for full OpenType shaping (current: arabic-reshaper + bidi) |
+| hazm | 1.4k | MIT | active | not used | Persian NLP (normalisation) candidate |
+
+### Datasets mentioned by the user (not verified, Hugging Face unreachable from the build environment)
+TinyStories (CDLA-Sharing-1.0), Children-Stories-Collection, Story4Kids (Arabic), GlotStoryBook (Global Storybooks, CC BY),
+Colibri, Picturing Stories. Bookmaker does not train models and does not ship any of them; they are listed as possible
+fine-tuning/evaluation sources. Check each dataset card's licence before use (CC BY requires attribution; CDLA-Sharing
+requires sharing derived data under the same terms).

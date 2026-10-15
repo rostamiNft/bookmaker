@@ -65,6 +65,8 @@ class Page(Base):
     image_locked: Mapped[bool] = mapped_column(Boolean, default=False)  # user-approved: never regenerate automatically
     qa: Mapped[dict] = mapped_column(JSON, default=dict)
     text_variant: Mapped[int] = mapped_column(Integer, default=0)
+    audio_file: Mapped[str] = mapped_column(String(300), default="")  # narration (mp3), optional
+    audio_meta: Mapped[dict] = mapped_column(JSON, default=dict)  # engine, voice, text hash, duration
     project: Mapped[Project] = relationship(back_populates="pages")
 
 
@@ -164,3 +166,44 @@ class UsageRecord(Base):
     success: Mapped[bool] = mapped_column(Boolean, default=True)
     error: Mapped[str] = mapped_column(Text, default="")
     created_at: Mapped[datetime] = mapped_column(DateTime, default=now)
+
+
+class PageRevision(Base):
+    """Snapshot of a page taken before every change (text edit, rewrite, image
+    regeneration, inpainting, restore). Enables undo/restore of any earlier state."""
+    __tablename__ = "page_revisions"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    project_id: Mapped[str] = mapped_column(ForeignKey("projects.id", ondelete="CASCADE"), index=True)
+    page_id: Mapped[str] = mapped_column(String(32), index=True)
+    number: Mapped[int] = mapped_column(Integer, default=0)
+    reason: Mapped[str] = mapped_column(String(60), default="")
+    actor: Mapped[str] = mapped_column(String(64), default="system")
+    text: Mapped[str] = mapped_column(Text, default="")
+    image_prompt: Mapped[str] = mapped_column(Text, default="")
+    image_file: Mapped[str] = mapped_column(String(300), default="")
+    image_status: Mapped[str] = mapped_column(String(20), default="")
+    image_meta: Mapped[dict] = mapped_column(JSON, default=dict)
+    qa: Mapped[dict] = mapped_column(JSON, default=dict)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=now)
+
+
+class User(Base):
+    """Accounts (used when BOOKMAKER_AUTH_MODE=accounts). Passwords: scrypt hash + salt."""
+    __tablename__ = "users"
+    id: Mapped[str] = mapped_column(String(32), primary_key=True, default=new_id)
+    username: Mapped[str] = mapped_column(String(64), unique=True, index=True)
+    display_name: Mapped[str] = mapped_column(String(120), default="")
+    password_hash: Mapped[str] = mapped_column(String(300))
+    role: Mapped[str] = mapped_column(String(20), default="user")  # admin | user
+    active: Mapped[bool] = mapped_column(Boolean, default=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=now)
+    last_login: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+
+class AuthSession(Base):
+    """Login sessions. Only a SHA-256 of the bearer token is stored."""
+    __tablename__ = "auth_sessions"
+    token_hash: Mapped[str] = mapped_column(String(64), primary_key=True)
+    user_id: Mapped[str] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=now)
+    expires_at: Mapped[datetime] = mapped_column(DateTime)

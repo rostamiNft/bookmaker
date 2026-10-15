@@ -1,0 +1,16 @@
+# Repositories suggested by the user, verified through the GitHub REST API on 2026-10-15
+# repo | stars | licence (API / LICENSE file) | last push | stack | what was taken (ideas only, no code copied)
+naakaarafr/Storybook-Generator | 11 | MIT | 2025-06-12 | Python, CrewAI agents, FLUX.1-dev, PDF/HTML | agent-role split already matched our stage pipeline; nothing new
+mhubrich/storybook-ai-generator | 1 | no LICENSE file (README claims Apache-2.0) | 2026-01-26 | TS, React 19 + Express | multi-view character sheets, style config, relationship/scale "logic rules" -> character scale + cast line-up
+valleylmh/storybloom | 12 | MIT | 2026-10-06 | Next.js 15 | outline review before illustration, per-page retry, TTS + read-along, export ZIP -> outline gate, narration, exports
+zfrsgtcu/ComfyUI-ZFRNodes | 36 | MIT | 2026-08-31 | ComfyUI nodes | asset/contact sheet as reference, inpaint studio -> cast sheet reference, mask repair
+RishiDesai/CharForge | 88 | MIT | 2025-06-27 | ai-toolkit LoRA, PuLID, ComfyUI (GPU) | documented as the GPU path (LoRA per character); not integrated
+lincwang123-bot/moonlit-stories | 175 | MIT | 2026-09-04 | JS | style-key image, local TTS service -> narration via OpenAI-compatible /v1/audio/speech
+weaiw/storybook-generator-skill | 49 | MIT | 2026-07-06 | agent skill (markdown) | QA checklist cross-checked with our QA rules
+kart-io/picture-skills | 13 | no LICENSE file (README says MIT) | 2026-01-19 | agent skill | multi-character prompt advice (ideas only)
+easyJustEasy/picture-book | 6 | MIT | 2026-10-13 | Qwen/Wanx/CosyVoice | cloud-only, not used
+buildfastwithai/storybook | 18 | MIT | - | page-flip UI | page-turn idea for the HTML reader
+abhishek1482003/gemini-storybook | 0 | none | - | - | not used (no licence)
+kamransethi/Luna-Book-Generator | 0 | none | - | Ollama, EPUB | not used (no licence)
+Papr-ai/papr-open-piksa | 6 | NOASSERTION | - | - | not used (unclear licence)
+DoodleBook | - | no matching repository found | - | - | unverified, not used

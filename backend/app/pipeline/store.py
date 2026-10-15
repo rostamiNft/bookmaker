@@ -7,7 +7,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from ..config import settings
-from ..models import Character, HistoryEntry, Page, Project, StageLog
+from ..models import Character, HistoryEntry, Page, PageRevision, Project, StageLog
 from ..schemas import CharacterSpec, PageSpec, Scene, StoryPlan
 from ..story.themes import THEMES
 
@@ -16,7 +16,7 @@ ROLE_SET = {"setup", "inciting", "rising", "climax", "resolution", "ending"}
 
 def project_dir(pid: str) -> Path:
     d = settings.projects_dir / pid
-    for sub in ("images", "refs", "pdf", "render", "uploads"):
+    for sub in ("images", "refs", "pdf", "render", "uploads", "audio", "exports"):
         (d / sub).mkdir(parents=True, exist_ok=True)
     return d
 
@@ -78,3 +78,24 @@ def renumber(s: Session, pid: str) -> None:
     pages = s.scalars(select(Page).where(Page.project_id == pid).order_by(Page.number, Page.id)).all()
     for i, p in enumerate(pages, start=1):
         p.number = i
+
+
+MAX_REVISIONS_PER_PAGE = 50
+
+
+def snapshot_page(s: Session, page: Page, reason: str, actor: str = "system") -> PageRevision | None:
+    """Store the page's current state before it changes (undo/restore). Identical
+    consecutive states are stored once; the oldest snapshots beyond the cap are pruned
+    (image files are never deleted, so every kept snapshot stays restorable)."""
+    last = s.scalar(select(PageRevision).where(PageRevision.page_id == page.id).order_by(PageRevision.id.desc()).limit(1))
+    if last and last.text == page.text and last.image_file == page.image_file and last.image_prompt == page.image_prompt:
+        return None
+    rev = PageRevision(project_id=page.project_id, page_id=page.id, number=page.number, reason=reason, actor=actor, text=page.text,
+                       image_prompt=page.image_prompt, image_file=page.image_file, image_status=page.image_status,
+                       image_meta={k: v for k, v in (page.image_meta or {}).items() if k != "renderer_meta"}, qa=page.qa or {})
+    s.add(rev)
+    s.flush()
+    ids = s.scalars(select(PageRevision.id).where(PageRevision.page_id == page.id).order_by(PageRevision.id.desc())).all()
+    for old in ids[MAX_REVISIONS_PER_PAGE:]:
+        s.delete(s.get(PageRevision, old))
+    return rev
