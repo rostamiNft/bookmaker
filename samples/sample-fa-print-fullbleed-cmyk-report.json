@@ -43,7 +43,15 @@
   "narration_audio": false,
   "tts_provider_id": "",
   "narration_voice": "",
-  "narration_speed": 1.0
+  "narration_speed": 1.0,
+  "text_align": "start",
+  "hyphenation": false,
+  "shaping": "auto",
+  "kashida": true,
+  "speech_bubbles": false,
+  "print_standard": "none",
+  "icc_profile": "",
+  "lora_training": false
  },
  "qa_report": {
   "story_generation": {
@@ -80,7 +88,7 @@
      "kind": "story",
      "number": 1,
      "notes": [
-      "layout=full_bleed panel=top panel_frac=0.17 font=15.0 crop=6%"
+      "layout=full_bleed panel=top panel_frac=0.18 font=15.5 crop=6%"
      ]
     },
     {
@@ -136,7 +144,7 @@
      "kind": "story",
      "number": 8,
      "notes": [
-      "layout=full_bleed panel=top panel_frac=0.18 font=21.0 crop=6%"
+      "layout=full_bleed panel=top panel_frac=0.18 font=21.5 crop=6%"
      ]
     },
     {
@@ -209,10 +217,10 @@
     "pages": 19,
     "metadata": {
      "/Author": "کتاب‌ساز",
-     "/CreationDate": "D:20261015193234+00'00'",
+     "/CreationDate": "D:20261016074909+00'00'",
      "/Creator": "Bookmaker (open-source children's book generator)",
      "/Keywords": "children's book, lost_star, 6-8",
-     "/ModDate": "D:20261015193234+00'00'",
+     "/ModDate": "D:20261016074909+00'00'",
      "/Producer": "ReportLab PDF Library - (opensource)",
      "/Subject": "وقتی کوچک‌ترین ستاره‌ی آسمان به مرغزار می‌افتد، سامان و فلفل آن را از رودخانه و جنگل عبور می‌دهند تا پیش از طلوع آفتاب از بالای تپه‌ی ماه به آسمان برگردد.",
      "/Title": "سامان و ستاره‌ی کوچولوی گمشده",
@@ -242,7 +250,9 @@
      "bleed_mm": 3.0,
      "crop_marks": true,
      "color_mode": "cmyk",
-     "layout_style": "full_bleed"
+     "layout_style": "full_bleed",
+     "standard": "none",
+     "icc": ""
     }
    },
    "expected_story_pages": 14
@@ -264,7 +274,7 @@
    "pdf_valid": true,
    "story_pages": 14,
    "word_count": 565,
-   "checked_at": 1792092759.326758,
+   "checked_at": 1792136955.2097023,
    "engines": {
     "story": "offline:lost_star",
     "images": "Built-in procedural illustrator (offline, CPU)"
@@ -273,30 +283,34 @@
  },
  "pages": [
   {
+   "id": "cfbb2537457341d3b96a6d2bec2a0d03",
    "number": 1,
+   "beat": "setup",
    "text": "سامان در کلبه‌ای کوچک در کنار یک مرغزار سبز و بزرگ زندگی می‌کرد؛ جایی که علف‌ها بوی شبدر می‌دادند و شب‌ها پر از ستاره بود. هر شب روی پله‌های ایوان می‌نشست و ستاره‌ها را یکی‌یکی می‌شمرد تا وقتی که چشم‌هایش سنگین می‌شد. ولی هیچ‌وقت از چهل‌وسه جلوتر نمی‌رفت، چون همیشه همان‌جا خمیازه‌اش می‌گرفت!",
    "image_prompt": "Saman sitting on the porch steps of a small cottage at the edge of a meadow at dusk, looking up at the first stars, peaceful and dreamy",
-   "image_status": "generated",
-   "qa": {
-    "image": {
-     "ok": true,
-     "issues": [],
-     "metrics": {
-      "width": 960,
-      "height": 1280,
-      "format": "PNG",
-      "bytes": 592965,
-      "aspect": 0.75,
-      "luma_std": 28.16,
-      "luma_mean": 152.79,
-      "dhash": "c9313e276162251b",
-      "ocr_text": [],
-      "palette_coverage": {
-       "hero": 1.0
-      }
-     }
-    }
+   "scene": {
+    "location": "meadow",
+    "time": "sunset",
+    "characters": [
+     "hero"
+    ],
+    "props": [
+     "house"
+    ],
+    "mood": "calm",
+    "poses": {
+     "hero": "look_up"
+    },
+    "expressions": {},
+    "shot": "wide",
+    "weather": ""
    },
+   "characters_present": [
+    "hero"
+   ],
+   "image_url": "/api/projects/282d552738874d98b396df3c8b9b5299/files/images/page-01-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
    "image_meta": {
     "provider": "Built-in procedural illustrator (offline, CPU)",
     "model": "procedural-v1",
@@ -316,15 +330,8 @@
     "characters": [
      "hero"
     ],
-    "dhash": "c9313e276162251b"
+    "dhash": "c9393e276162251b"
    },
-   "has_audio": false
-  },
-  {
-   "number": 2,
-   "text": "بهترین دوست سامان، فلفل بود؛ روباه کوچولوی نارنجی که زیر درخت سیب پیر زندگی می‌کرد. فلفل همه‌ی راه‌های مرغزار را بلد بود و هیچ‌وقت برای شام دیر نمی‌کرد. فلفل می‌توانست بوی کیک زغال‌اخته را از سه تپه آن‌طرف‌تر بفهمد!",
-   "image_prompt": "Saman and Felfel playing together under an old apple tree in a sunny meadow, laughing",
-   "image_status": "generated",
    "qa": {
     "image": {
      "ok": true,
@@ -333,19 +340,57 @@
       "width": 960,
       "height": 1280,
       "format": "PNG",
-      "bytes": 681043,
+      "bytes": 593152,
       "aspect": 0.75,
-      "luma_std": 32.98,
-      "luma_mean": 150.53,
-      "dhash": "beb9612666605917",
+      "luma_std": 28.16,
+      "luma_mean": 152.79,
+      "dhash": "c9393e276162251b",
       "ocr_text": [],
       "palette_coverage": {
-       "hero": 1.0,
-       "comp": 0.5
+       "hero": 1.0
       }
      }
     }
    },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "2a4d2d03a8a04abf9590c43715dbea68",
+   "number": 2,
+   "beat": "companion",
+   "text": "بهترین دوست سامان، فلفل بود؛ روباه کوچولوی نارنجی که زیر درخت سیب پیر زندگی می‌کرد. فلفل همه‌ی راه‌های مرغزار را بلد بود و هیچ‌وقت برای شام دیر نمی‌کرد. فلفل می‌توانست بوی کیک زغال‌اخته را از سه تپه آن‌طرف‌تر بفهمد!",
+   "image_prompt": "Saman and Felfel playing together under an old apple tree in a sunny meadow, laughing",
+   "scene": {
+    "location": "meadow",
+    "time": "day",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "apple_tree"
+    ],
+    "mood": "happy",
+    "poses": {
+     "hero": "wave",
+     "comp": "jump"
+    },
+    "expressions": {},
+    "shot": "medium",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/282d552738874d98b396df3c8b9b5299/files/images/page-02-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
    "image_meta": {
     "provider": "Built-in procedural illustrator (offline, CPU)",
     "model": "procedural-v1",
@@ -368,13 +413,6 @@
     ],
     "dhash": "beb9612666605917"
    },
-   "has_audio": false
-  },
-  {
-   "number": 3,
-   "text": "یک شب اتفاق عجیبی افتاد. کوچک‌ترین ستاره از آسمان لیز خورد و پایین و پایین‌تر آمد، درست وسط مرغزار! باید پیش از صبح به آسمان برمی‌گشت. ستاره با صدای آرامی روی علف‌ها نشست و مثل یک چراغ کوچک می‌درخشید.",
-   "image_prompt": "A small glowing star falling from the night sky with a sparkling trail into a dark meadow, Saman and Felfel watching amazed",
-   "image_status": "generated",
    "qa": {
     "image": {
      "ok": true,
@@ -383,11 +421,11 @@
       "width": 960,
       "height": 1280,
       "format": "PNG",
-      "bytes": 571567,
+      "bytes": 679766,
       "aspect": 0.75,
-      "luma_std": 36.46,
-      "luma_mean": 98.75,
-      "dhash": "419bc4ccb1454907",
+      "luma_std": 32.97,
+      "luma_mean": 150.53,
+      "dhash": "beb9612666605917",
       "ocr_text": [],
       "palette_coverage": {
        "hero": 1.0,
@@ -396,6 +434,48 @@
      }
     }
    },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "44632117de314dfc827c60c287be5428",
+   "number": 3,
+   "beat": "inciting",
+   "text": "یک شب اتفاق عجیبی افتاد. کوچک‌ترین ستاره از آسمان لیز خورد و پایین و پایین‌تر آمد، درست وسط مرغزار! باید پیش از صبح به آسمان برمی‌گشت. ستاره با صدای آرامی روی علف‌ها نشست و مثل یک چراغ کوچک می‌درخشید.",
+   "image_prompt": "A small glowing star falling from the night sky with a sparkling trail into a dark meadow, Saman and Felfel watching amazed",
+   "scene": {
+    "location": "meadow",
+    "time": "night",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "falling_star"
+    ],
+    "mood": "surprised",
+    "poses": {
+     "hero": "point",
+     "comp": "stand"
+    },
+    "expressions": {
+     "hero": "surprised",
+     "comp": "surprised"
+    },
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/282d552738874d98b396df3c8b9b5299/files/images/page-03-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
    "image_meta": {
     "provider": "Built-in procedural illustrator (offline, CPU)",
     "model": "procedural-v1",
@@ -418,13 +498,6 @@
     ],
     "dhash": "419bc4ccb1454907"
    },
-   "has_audio": false
-  },
-  {
-   "number": 4,
-   "text": "مادربزرگ جغدِ دانا از روی شاخه پایین آمد و گفت: «فقط از بالای تپه‌ی ماه است که ستاره می‌تواند به آسمان برگردد.» سامان ستاره را آرام در یک سبد گذاشت و دو دوست در دل شب راه افتادند.",
-   "image_prompt": "A wise old owl on a branch pointing her wing toward a distant hill under the moon, Saman holding a small basket with a glowing star, Felfel beside",
-   "image_status": "generated",
    "qa": {
     "image": {
      "ok": true,
@@ -433,20 +506,64 @@
       "width": 960,
       "height": 1280,
       "format": "PNG",
-      "bytes": 653645,
+      "bytes": 573216,
       "aspect": 0.75,
-      "luma_std": 39.34,
-      "luma_mean": 102.61,
-      "dhash": "413134302acaa50b",
+      "luma_std": 36.46,
+      "luma_mean": 98.75,
+      "dhash": "419bc4ccb1454907",
       "ocr_text": [],
       "palette_coverage": {
        "hero": 1.0,
-       "comp": 1.0,
-       "helper": 1.0
+       "comp": 1.0
       }
      }
     }
    },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "df4fa2c0c21d4fb7b3e0035f819475c6",
+   "number": 4,
+   "beat": "decision",
+   "text": "مادربزرگ جغدِ دانا از روی شاخه پایین آمد و گفت: «فقط از بالای تپه‌ی ماه است که ستاره می‌تواند به آسمان برگردد.» سامان ستاره را آرام در یک سبد گذاشت و دو دوست در دل شب راه افتادند.",
+   "image_prompt": "A wise old owl on a branch pointing her wing toward a distant hill under the moon, Saman holding a small basket with a glowing star, Felfel beside",
+   "scene": {
+    "location": "meadow",
+    "time": "night",
+    "characters": [
+     "hero",
+     "comp",
+     "helper"
+    ],
+    "props": [
+     "basket_star",
+     "moon"
+    ],
+    "mood": "determined",
+    "poses": {
+     "hero": "hold",
+     "comp": "stand",
+     "helper": "point"
+    },
+    "expressions": {
+     "hero": "determined"
+    },
+    "shot": "medium",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp",
+    "helper"
+   ],
+   "image_url": "/api/projects/282d552738874d98b396df3c8b9b5299/files/images/page-04-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
    "image_meta": {
     "provider": "Built-in procedural illustrator (offline, CPU)",
     "model": "procedural-v1",
@@ -470,13 +587,6 @@
     ],
     "dhash": "413134302acaa50b"
    },
-   "has_audio": false
-  },
-  {
-   "number": 5,
-   "text": "اول به رودخانه‌ای پهن و پرسروصدا رسیدند. پلی در کار نبود؛ فقط چند سنگ لغزنده وسط آب بود. فلفل اول پرید و سامان سبد را بالا گرفت و پشت سرش رفت. قدم‌به‌قدم و با احتیاط به آن طرف رسیدند. فلفل روی آخرین سنگ تلوتلو خورد و شلپ! فقط دمش خیس شد.",
-   "image_prompt": "Saman carefully stepping across stepping stones in a moonlit river holding a basket with a glowing star high, Felfel hopping ahead",
-   "image_status": "generated",
    "qa": {
     "image": {
      "ok": true,
@@ -485,19 +595,61 @@
       "width": 960,
       "height": 1280,
       "format": "PNG",
-      "bytes": 584648,
+      "bytes": 654208,
       "aspect": 0.75,
-      "luma_std": 38.06,
-      "luma_mean": 96.14,
-      "dhash": "0121109a94656917",
+      "luma_std": 39.34,
+      "luma_mean": 102.61,
+      "dhash": "413134302acaa50b",
       "ocr_text": [],
       "palette_coverage": {
        "hero": 1.0,
-       "comp": 1.0
+       "comp": 1.0,
+       "helper": 1.0
       }
      }
     }
    },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "b42cab161b624f568a3aa3c2c1c7995b",
+   "number": 5,
+   "beat": "ep_river",
+   "text": "اول به رودخانه‌ای پهن و پرسروصدا رسیدند. پلی در کار نبود؛ فقط چند سنگ لغزنده وسط آب بود. فلفل اول پرید و سامان سبد را بالا گرفت و پشت سرش رفت. قدم‌به‌قدم و با احتیاط به آن طرف رسیدند. فلفل روی آخرین سنگ تلوتلو خورد و شلپ! فقط دمش خیس شد.",
+   "image_prompt": "Saman carefully stepping across stepping stones in a moonlit river holding a basket with a glowing star high, Felfel hopping ahead",
+   "scene": {
+    "location": "river",
+    "time": "night",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "stones",
+     "basket_star",
+     "moon"
+    ],
+    "mood": "careful",
+    "poses": {
+     "hero": "walk_hold",
+     "comp": "jump"
+    },
+    "expressions": {},
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/282d552738874d98b396df3c8b9b5299/files/images/page-05-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
    "image_meta": {
     "provider": "Built-in procedural illustrator (offline, CPU)",
     "model": "procedural-v1",
@@ -520,13 +672,6 @@
     ],
     "dhash": "0121109a94656917"
    },
-   "has_audio": false
-  },
-  {
-   "number": 6,
-   "text": "بعد به جنگلی تاریک و انبوه رسیدند. درخت‌ها آن‌قدر بلند بودند که ماه را پنهان می‌کردند و راه دیگر پیدا نبود. ناگهان دسته‌ای کرم شب‌تاب پایین آمدند و چشمک‌زنان گفتند: «دنبال ما بیایید!» و جنگل پر از نوری مهربان شد.",
-   "image_prompt": "Saman and Felfel in a tall dark forest at night, a swirl of glowing fireflies lighting a winding path",
-   "image_status": "generated",
    "qa": {
     "image": {
      "ok": true,
@@ -535,11 +680,11 @@
       "width": 960,
       "height": 1280,
       "format": "PNG",
-      "bytes": 602377,
+      "bytes": 584490,
       "aspect": 0.75,
-      "luma_std": 26.06,
-      "luma_mean": 97.12,
-      "dhash": "c989239014642807",
+      "luma_std": 38.06,
+      "luma_mean": 96.14,
+      "dhash": "0121109a94656917",
       "ocr_text": [],
       "palette_coverage": {
        "hero": 1.0,
@@ -548,6 +693,48 @@
      }
     }
    },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "4f855ee84c454b6084f96003ba76ca5b",
+   "number": 6,
+   "beat": "ep_fireflies",
+   "text": "بعد به جنگلی تاریک و انبوه رسیدند. درخت‌ها آن‌قدر بلند بودند که ماه را پنهان می‌کردند و راه دیگر پیدا نبود. ناگهان دسته‌ای کرم شب‌تاب پایین آمدند و چشمک‌زنان گفتند: «دنبال ما بیایید!» و جنگل پر از نوری مهربان شد.",
+   "image_prompt": "Saman and Felfel in a tall dark forest at night, a swirl of glowing fireflies lighting a winding path",
+   "scene": {
+    "location": "forest",
+    "time": "night",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "fireflies",
+     "basket_star"
+    ],
+    "mood": "wonder",
+    "poses": {
+     "hero": "walk_hold",
+     "comp": "walk"
+    },
+    "expressions": {
+     "hero": "happy"
+    },
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/282d552738874d98b396df3c8b9b5299/files/images/page-06-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
    "image_meta": {
     "provider": "Built-in procedural illustrator (offline, CPU)",
     "model": "procedural-v1",
@@ -570,13 +757,6 @@
     ],
     "dhash": "c989239014642807"
    },
-   "has_audio": false
-  },
-  {
-   "number": 7,
-   "text": "وسط راه، خرس قهوه‌ای بزرگی خوابیده بود و مثل رعد خروپف می‌کرد. سامان به‌جای داد زدن، یک لالایی آرام زمزمه کرد. خرس در خواب لبخند زد، غلت خورد و درست به اندازه‌ی کافی جا باز کرد تا آن‌ها پاورچین‌پاورچین رد شوند. فلفل آن‌قدر آرام راه می‌رفت که حتی سبیل‌هایش هم تکان نمی‌خوردند.",
-   "image_prompt": "A big friendly brown bear sleeping across a forest path at night, Saman tiptoeing past humming, Felfel tiptoeing behind",
-   "image_status": "generated",
    "qa": {
     "image": {
      "ok": true,
@@ -585,11 +765,11 @@
       "width": 960,
       "height": 1280,
       "format": "PNG",
-      "bytes": 532286,
+      "bytes": 601687,
       "aspect": 0.75,
-      "luma_std": 23.53,
-      "luma_mean": 98.21,
-      "dhash": "0909e29b96660917",
+      "luma_std": 26.06,
+      "luma_mean": 97.12,
+      "dhash": "c989239014642807",
       "ocr_text": [],
       "palette_coverage": {
        "hero": 1.0,
@@ -598,6 +778,46 @@
      }
     }
    },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "e57e2f41086447cf9254a6e7c7a2bcf3",
+   "number": 7,
+   "beat": "ep_bear",
+   "text": "وسط راه، خرس قهوه‌ای بزرگی خوابیده بود و مثل رعد خروپف می‌کرد. سامان به‌جای داد زدن، یک لالایی آرام زمزمه کرد. خرس در خواب لبخند زد، غلت خورد و درست به اندازه‌ی کافی جا باز کرد تا آن‌ها پاورچین‌پاورچین رد شوند. فلفل آن‌قدر آرام راه می‌رفت که حتی سبیل‌هایش هم تکان نمی‌خوردند.",
+   "image_prompt": "A big friendly brown bear sleeping across a forest path at night, Saman tiptoeing past humming, Felfel tiptoeing behind",
+   "scene": {
+    "location": "forest",
+    "time": "night",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "bear",
+     "basket_star"
+    ],
+    "mood": "careful",
+    "poses": {
+     "hero": "tiptoe",
+     "comp": "tiptoe"
+    },
+    "expressions": {},
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/282d552738874d98b396df3c8b9b5299/files/images/page-07-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
    "image_meta": {
     "provider": "Built-in procedural illustrator (offline, CPU)",
     "model": "procedural-v1",
@@ -620,13 +840,6 @@
     ],
     "dhash": "0909e29b96660917"
    },
-   "has_audio": false
-  },
-  {
-   "number": 8,
-   "text": "در دشت باز، باد تندی وزید و سبد را کشید؛ نزدیک بود ستاره‌ی کوچولو را با خودش ببرد! سامان و فلفل به هم چسبیدند و از ستاره محافظت کردند تا باد خسته شد و آرام گرفت.",
-   "image_prompt": "Saman and Felfel huddled together on a windy grassy plain at night shielding a glowing star in a basket, grass and leaves swirling",
-   "image_status": "generated",
    "qa": {
     "image": {
      "ok": true,
@@ -635,11 +848,11 @@
       "width": 960,
       "height": 1280,
       "format": "PNG",
-      "bytes": 571594,
+      "bytes": 531321,
       "aspect": 0.75,
-      "luma_std": 36.65,
-      "luma_mean": 96.98,
-      "dhash": "23139c9897646917",
+      "luma_std": 23.53,
+      "luma_mean": 98.21,
+      "dhash": "0909e29b96660917",
       "ocr_text": [],
       "palette_coverage": {
        "hero": 1.0,
@@ -648,6 +861,48 @@
      }
     }
    },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "0fc4a58112734f09b521493417c5c9c2",
+   "number": 8,
+   "beat": "ep_wind",
+   "text": "در دشت باز، باد تندی وزید و سبد را کشید؛ نزدیک بود ستاره‌ی کوچولو را با خودش ببرد! سامان و فلفل به هم چسبیدند و از ستاره محافظت کردند تا باد خسته شد و آرام گرفت.",
+   "image_prompt": "Saman and Felfel huddled together on a windy grassy plain at night shielding a glowing star in a basket, grass and leaves swirling",
+   "scene": {
+    "location": "meadow",
+    "time": "night",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "wind",
+     "basket_star"
+    ],
+    "mood": "brave",
+    "poses": {
+     "hero": "hold",
+     "comp": "stand"
+    },
+    "expressions": {
+     "hero": "determined"
+    },
+    "shot": "medium",
+    "weather": "windy"
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/282d552738874d98b396df3c8b9b5299/files/images/page-08-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
    "image_meta": {
     "provider": "Built-in procedural illustrator (offline, CPU)",
     "model": "procedural-v1",
@@ -670,13 +925,6 @@
     ],
     "dhash": "23139c9897646917"
    },
-   "has_audio": false
-  },
-  {
-   "number": 9,
-   "text": "دیواری از بوته‌های پرخار راهشان را بست. آن‌قدر انبوه بود که نمی‌شد از رویش رد شد. فلفل تونل کوچکی نزدیک زمین پیدا کرد و سامان پشت سرش خزید و مراقب بود حتی یک خار هم به ستاره نخورد.",
-   "image_prompt": "Saman crawling through a small tunnel in thorny bramble bushes at night following Felfel, carefully holding a glowing basket",
-   "image_status": "generated",
    "qa": {
     "image": {
      "ok": true,
@@ -685,11 +933,11 @@
       "width": 960,
       "height": 1280,
       "format": "PNG",
-      "bytes": 559493,
+      "bytes": 571539,
       "aspect": 0.75,
-      "luma_std": 27.09,
-      "luma_mean": 96.58,
-      "dhash": "d3d1449196d76817",
+      "luma_std": 36.65,
+      "luma_mean": 96.98,
+      "dhash": "23139c9897646917",
       "ocr_text": [],
       "palette_coverage": {
        "hero": 1.0,
@@ -698,6 +946,46 @@
      }
     }
    },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "2c82fdc290334f168fbd90ffde44bca9",
+   "number": 9,
+   "beat": "ep_thorns",
+   "text": "دیواری از بوته‌های پرخار راهشان را بست. آن‌قدر انبوه بود که نمی‌شد از رویش رد شد. فلفل تونل کوچکی نزدیک زمین پیدا کرد و سامان پشت سرش خزید و مراقب بود حتی یک خار هم به ستاره نخورد.",
+   "image_prompt": "Saman crawling through a small tunnel in thorny bramble bushes at night following Felfel, carefully holding a glowing basket",
+   "scene": {
+    "location": "forest",
+    "time": "night",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "brambles",
+     "basket_star"
+    ],
+    "mood": "careful",
+    "poses": {
+     "hero": "kneel",
+     "comp": "walk"
+    },
+    "expressions": {},
+    "shot": "medium",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/282d552738874d98b396df3c8b9b5299/files/images/page-09-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
    "image_meta": {
     "provider": "Built-in procedural illustrator (offline, CPU)",
     "model": "procedural-v1",
@@ -720,13 +1008,6 @@
     ],
     "dhash": "d3d1449196d76817"
    },
-   "has_audio": false
-  },
-  {
-   "number": 10,
-   "text": "حالا نور ستاره خیلی کم شده بود و پاهای سامان خسته بودند. آهسته گفت: «اگر دیر برسیم چه؟» فلفل کنارش نشست و گفت: «تا این‌جا با هم آمده‌ایم. می‌توانیم کمی دیگر هم برویم.»",
-   "image_prompt": "Saman sitting tired on a rock at night holding a basket with a very faint star, Felfel comforting Saman",
-   "image_status": "generated",
    "qa": {
     "image": {
      "ok": true,
@@ -735,11 +1016,11 @@
       "width": 960,
       "height": 1280,
       "format": "PNG",
-      "bytes": 548930,
+      "bytes": 559550,
       "aspect": 0.75,
-      "luma_std": 36.28,
-      "luma_mean": 90.05,
-      "dhash": "13611c1b26b4a543",
+      "luma_std": 27.09,
+      "luma_mean": 96.58,
+      "dhash": "d3d1449196d76817",
       "ocr_text": [],
       "palette_coverage": {
        "hero": 1.0,
@@ -748,6 +1029,48 @@
      }
     }
    },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "4a4aea5d81dc408fb34e6357c0b30d56",
+   "number": 10,
+   "beat": "doubt",
+   "text": "حالا نور ستاره خیلی کم شده بود و پاهای سامان خسته بودند. آهسته گفت: «اگر دیر برسیم چه؟» فلفل کنارش نشست و گفت: «تا این‌جا با هم آمده‌ایم. می‌توانیم کمی دیگر هم برویم.»",
+   "image_prompt": "Saman sitting tired on a rock at night holding a basket with a very faint star, Felfel comforting Saman",
+   "scene": {
+    "location": "hill",
+    "time": "night",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "basket_star_dim"
+    ],
+    "mood": "sad",
+    "poses": {
+     "hero": "sit",
+     "comp": "stand"
+    },
+    "expressions": {
+     "hero": "sad",
+     "comp": "kind"
+    },
+    "shot": "close",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/282d552738874d98b396df3c8b9b5299/files/images/page-10-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
    "image_meta": {
     "provider": "Built-in procedural illustrator (offline, CPU)",
     "model": "procedural-v1",
@@ -770,13 +1093,6 @@
     ],
     "dhash": "13611c1b26b4a543"
    },
-   "has_audio": false
-  },
-  {
-   "number": 11,
-   "text": "سرانجام به بالای بلندترین تپه رسیدند. آسمان کم‌کم داشت روشن می‌شد. وقتی برای از دست دادن نبود! سامان سبد را تا جایی که می‌توانست بالا برد و فریاد زد: «پرواز کن و به خانه برو، ستاره‌ی کوچولو!»",
-   "image_prompt": "Saman on top of a grassy hill at dawn lifting a basket high with a glowing star toward the pale sky, Felfel cheering",
-   "image_status": "generated",
    "qa": {
     "image": {
      "ok": true,
@@ -785,11 +1101,11 @@
       "width": 960,
       "height": 1280,
       "format": "PNG",
-      "bytes": 608794,
+      "bytes": 548885,
       "aspect": 0.75,
-      "luma_std": 25.29,
-      "luma_mean": 148.31,
-      "dhash": "6374d4c163484b17",
+      "luma_std": 36.28,
+      "luma_mean": 90.05,
+      "dhash": "13611c1b26b4a543",
       "ocr_text": [],
       "palette_coverage": {
        "hero": 1.0,
@@ -798,6 +1114,47 @@
      }
     }
    },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "e24b3ede11bf4083a0db057953628fde",
+   "number": 11,
+   "beat": "climax",
+   "text": "سرانجام به بالای بلندترین تپه رسیدند. آسمان کم‌کم داشت روشن می‌شد. وقتی برای از دست دادن نبود! سامان سبد را تا جایی که می‌توانست بالا برد و فریاد زد: «پرواز کن و به خانه برو، ستاره‌ی کوچولو!»",
+   "image_prompt": "Saman on top of a grassy hill at dawn lifting a basket high with a glowing star toward the pale sky, Felfel cheering",
+   "scene": {
+    "location": "hill",
+    "time": "sunset",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "basket_star"
+    ],
+    "mood": "hopeful",
+    "poses": {
+     "hero": "lift",
+     "comp": "jump"
+    },
+    "expressions": {
+     "hero": "determined"
+    },
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/282d552738874d98b396df3c8b9b5299/files/images/page-11-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
    "image_meta": {
     "provider": "Built-in procedural illustrator (offline, CPU)",
     "model": "procedural-v1",
@@ -818,15 +1175,8 @@
      "hero",
      "comp"
     ],
-    "dhash": "6374d4c163484b17"
+    "dhash": "6376d4c163484b17"
    },
-   "has_audio": false
-  },
-  {
-   "number": 12,
-   "text": "ستاره لرزید، درخشید و آرام‌آرام بالا رفت؛ آن‌قدر بالا که دوباره به خانه‌اش رسید. نورش دوباره پرفروغ شده بود و برای آخرین بار، با قدردانی برای سامان چشمک زد.",
-   "image_prompt": "A bright star rising into the dawn sky with a sparkling trail, Saman and Felfel on the hilltop waving goodbye",
-   "image_status": "generated",
    "qa": {
     "image": {
      "ok": true,
@@ -835,11 +1185,11 @@
       "width": 960,
       "height": 1280,
       "format": "PNG",
-      "bytes": 634985,
+      "bytes": 608601,
       "aspect": 0.75,
-      "luma_std": 24.92,
-      "luma_mean": 148.95,
-      "dhash": "4d6c686366656917",
+      "luma_std": 25.29,
+      "luma_mean": 148.31,
+      "dhash": "6376d4c163484b17",
       "ocr_text": [],
       "palette_coverage": {
        "hero": 1.0,
@@ -848,6 +1198,48 @@
      }
     }
    },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "de2309f4e57948499c40c43342bf19c8",
+   "number": 12,
+   "beat": "resolution",
+   "text": "ستاره لرزید، درخشید و آرام‌آرام بالا رفت؛ آن‌قدر بالا که دوباره به خانه‌اش رسید. نورش دوباره پرفروغ شده بود و برای آخرین بار، با قدردانی برای سامان چشمک زد.",
+   "image_prompt": "A bright star rising into the dawn sky with a sparkling trail, Saman and Felfel on the hilltop waving goodbye",
+   "scene": {
+    "location": "hill",
+    "time": "sunset",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "rising_star"
+    ],
+    "mood": "joyful",
+    "poses": {
+     "hero": "wave",
+     "comp": "wave"
+    },
+    "expressions": {
+     "hero": "happy",
+     "comp": "happy"
+    },
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/282d552738874d98b396df3c8b9b5299/files/images/page-12-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
    "image_meta": {
     "provider": "Built-in procedural illustrator (offline, CPU)",
     "model": "procedural-v1",
@@ -870,13 +1262,6 @@
     ],
     "dhash": "4d6c686366656917"
    },
-   "has_audio": false
-  },
-  {
-   "number": 13,
-   "text": "پایین در مرغزار، پرنده‌ها شروع به آواز خواندن کردند و انگار همه‌ی دنیا کمی روشن‌تر شده بود. سامان و فلفل خندیدند و از تپه‌ی نرم و سبز تا خانه قل خوردند. فلفل از همه سریع‌تر قل خورد و وسط بوته‌ی گل‌های بابونه فرود آمد!",
-   "image_prompt": "Saman and Felfel rolling and laughing down a grassy hill in the golden morning light, birds flying, daisies",
-   "image_status": "generated",
    "qa": {
     "image": {
      "ok": true,
@@ -885,11 +1270,11 @@
       "width": 960,
       "height": 1280,
       "format": "PNG",
-      "bytes": 675356,
+      "bytes": 635624,
       "aspect": 0.75,
-      "luma_std": 32.78,
-      "luma_mean": 167.73,
-      "dhash": "666447676b695b07",
+      "luma_std": 24.92,
+      "luma_mean": 148.95,
+      "dhash": "4d6c686366656917",
       "ocr_text": [],
       "palette_coverage": {
        "hero": 1.0,
@@ -898,6 +1283,49 @@
      }
     }
    },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "70a716f4123e467ba0b5d5f00aaaec68",
+   "number": 13,
+   "beat": "celebration",
+   "text": "پایین در مرغزار، پرنده‌ها شروع به آواز خواندن کردند و انگار همه‌ی دنیا کمی روشن‌تر شده بود. سامان و فلفل خندیدند و از تپه‌ی نرم و سبز تا خانه قل خوردند. فلفل از همه سریع‌تر قل خورد و وسط بوته‌ی گل‌های بابونه فرود آمد!",
+   "image_prompt": "Saman and Felfel rolling and laughing down a grassy hill in the golden morning light, birds flying, daisies",
+   "scene": {
+    "location": "meadow",
+    "time": "day",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "birds",
+     "flowers"
+    ],
+    "mood": "joyful",
+    "poses": {
+     "hero": "jump",
+     "comp": "jump"
+    },
+    "expressions": {
+     "hero": "laugh",
+     "comp": "laugh"
+    },
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/282d552738874d98b396df3c8b9b5299/files/images/page-13-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
    "image_meta": {
     "provider": "Built-in procedural illustrator (offline, CPU)",
     "model": "procedural-v1",
@@ -920,13 +1348,6 @@
     ],
     "dhash": "666447676b695b07"
    },
-   "has_audio": false
-  },
-  {
-   "number": 14,
-   "text": "آن شب، سامان دوباره روی ایوان نشست و ستاره‌ها را شمرد. وقتی به کوچک‌ترین ستاره رسید، ستاره چشمک زد و سامان هم برایش چشمک زد. فلفل هم همان نزدیکی جمع شده بود و آرام خروپف می‌کرد.",
-   "image_prompt": "Saman on the cottage porch at night smiling up at a starry sky where one small star twinkles brightly, Felfel curled up asleep nearby",
-   "image_status": "generated",
    "qa": {
     "image": {
      "ok": true,
@@ -935,11 +1356,11 @@
       "width": 960,
       "height": 1280,
       "format": "PNG",
-      "bytes": 554855,
+      "bytes": 675087,
       "aspect": 0.75,
-      "luma_std": 36.12,
-      "luma_mean": 99.74,
-      "dhash": "9363fcd9196c6903",
+      "luma_std": 32.79,
+      "luma_mean": 167.73,
+      "dhash": "666447676b695b07",
       "ocr_text": [],
       "palette_coverage": {
        "hero": 1.0,
@@ -948,6 +1369,49 @@
      }
     }
    },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "31a778bcc5ab42a7a16645bad175424b",
+   "number": 14,
+   "beat": "ending",
+   "text": "آن شب، سامان دوباره روی ایوان نشست و ستاره‌ها را شمرد. وقتی به کوچک‌ترین ستاره رسید، ستاره چشمک زد و سامان هم برایش چشمک زد. فلفل هم همان نزدیکی جمع شده بود و آرام خروپف می‌کرد.",
+   "image_prompt": "Saman on the cottage porch at night smiling up at a starry sky where one small star twinkles brightly, Felfel curled up asleep nearby",
+   "scene": {
+    "location": "meadow",
+    "time": "night",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "house",
+     "star_sky"
+    ],
+    "mood": "content",
+    "poses": {
+     "hero": "look_up",
+     "comp": "sleep"
+    },
+    "expressions": {
+     "hero": "happy",
+     "comp": "sleep"
+    },
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/282d552738874d98b396df3c8b9b5299/files/images/page-14-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
    "image_meta": {
     "provider": "Built-in procedural illustrator (offline, CPU)",
     "model": "procedural-v1",
@@ -970,11 +1434,38 @@
     ],
     "dhash": "9363fcd9196c6903"
    },
-   "has_audio": false
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 960,
+      "height": 1280,
+      "format": "PNG",
+      "bytes": 555147,
+      "aspect": 0.75,
+      "luma_std": 36.12,
+      "luma_mean": 99.74,
+      "dhash": "9363fcd9196c6903",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
   }
  ],
  "characters": [
   {
+   "id": "f227903709ad449aa686b99b0764f011",
    "char_id": "hero",
    "name": "سامان",
    "role": "protagonist",
@@ -1030,10 +1521,16 @@
      "comp": "best friend",
      "helper": "trusted grown-up",
      "_latin_name": "Saman"
-    }
-   }
+    },
+    "lora_name": "",
+    "lora_weight": 0.8,
+    "lora_trigger": ""
+   },
+   "ref_url": "/api/projects/282d552738874d98b396df3c8b9b5299/files/refs/hero.png",
+   "ref_approved": true
   },
   {
+   "id": "1c27804e6bf640d89d7480c497e2a860",
    "char_id": "comp",
    "name": "فلفل",
    "role": "companion",
@@ -1083,10 +1580,16 @@
     "relationships": {
      "hero": "best friend",
      "_latin_name": "Felfel"
-    }
-   }
+    },
+    "lora_name": "",
+    "lora_weight": 0.8,
+    "lora_trigger": ""
+   },
+   "ref_url": "/api/projects/282d552738874d98b396df3c8b9b5299/files/refs/comp.png",
+   "ref_approved": true
   },
   {
+   "id": "5f9a971ae673422c9f8431b09f83dc4a",
    "char_id": "helper",
    "name": "مادربزرگ جغد",
    "role": "supporting",
@@ -1136,8 +1639,13 @@
     "relationships": {
      "hero": "mentor",
      "_latin_name": "Grandma Owl"
-    }
-   }
+    },
+    "lora_name": "",
+    "lora_weight": 0.8,
+    "lora_trigger": ""
+   },
+   "ref_url": "/api/projects/282d552738874d98b396df3c8b9b5299/files/refs/helper.png",
+   "ref_approved": true
   }
  ]
 }

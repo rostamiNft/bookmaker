@@ -1,0 +1,1659 @@
+{
+ "title": "Mia and the Bird Kite",
+ "settings": {
+  "title": "",
+  "topic": "a girl who follows a stream that has stopped singing",
+  "moral": "",
+  "age_group": "6-8",
+  "language": "en",
+  "page_count": 14,
+  "complexity": "medium",
+  "narration": "third_person",
+  "illustration_style": "gouache",
+  "aspect_ratio": "4:3",
+  "page_size": "A4",
+  "orientation": "portrait",
+  "main_characters": 2,
+  "hero_name": "",
+  "text_amount": "medium",
+  "fantasy_level": 2,
+  "humor_level": 1,
+  "ending": "happy",
+  "cover_style": "illustrated",
+  "author": "Bookmaker",
+  "publisher": "Sample Press",
+  "page_numbers": true,
+  "back_cover": true,
+  "text_in_image": false,
+  "output_profile": "screen",
+  "seed": 33,
+  "llm_provider_id": "",
+  "image_provider_id": "",
+  "vision_provider_id": "",
+  "max_image_attempts": 3,
+  "max_story_attempts": 3,
+  "budget_usd": 0.0,
+  "review_outline": false,
+  "reference_mode": "multi_view",
+  "cast_reference": true,
+  "layout_style": "classic",
+  "bleed_mm": 0.0,
+  "crop_marks": false,
+  "color_mode": "rgb",
+  "narration_audio": false,
+  "tts_provider_id": "",
+  "narration_voice": "",
+  "narration_speed": 1.0,
+  "text_align": "start",
+  "hyphenation": false,
+  "shaping": "auto",
+  "kashida": true,
+  "speech_bubbles": false,
+  "print_standard": "none",
+  "icc_profile": "",
+  "lora_training": false
+ },
+ "qa_report": {
+  "story_generation": {
+   "ok": true,
+   "errors": 0,
+   "warnings": 0,
+   "word_count": 537,
+   "issues": []
+  },
+  "layout": {
+   "ok": true,
+   "issues": [],
+   "pages": [
+    {
+     "index": 1,
+     "kind": "cover",
+     "number": null,
+     "notes": []
+    },
+    {
+     "index": 2,
+     "kind": "title",
+     "number": null,
+     "notes": []
+    },
+    {
+     "index": 3,
+     "kind": "copyright",
+     "number": null,
+     "notes": []
+    },
+    {
+     "index": 4,
+     "kind": "story",
+     "number": 1,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 5,
+     "kind": "story",
+     "number": 2,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 6,
+     "kind": "story",
+     "number": 3,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 7,
+     "kind": "story",
+     "number": 4,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 8,
+     "kind": "story",
+     "number": 5,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 9,
+     "kind": "story",
+     "number": 6,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 10,
+     "kind": "story",
+     "number": 7,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 11,
+     "kind": "story",
+     "number": 8,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 12,
+     "kind": "story",
+     "number": 9,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 13,
+     "kind": "story",
+     "number": 10,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 14,
+     "kind": "story",
+     "number": 11,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 15,
+     "kind": "story",
+     "number": 12,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 16,
+     "kind": "story",
+     "number": 13,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 17,
+     "kind": "story",
+     "number": 14,
+     "notes": [
+      "layout=stack image_frac=0.66 font=23"
+     ]
+    },
+    {
+     "index": 18,
+     "kind": "end",
+     "number": null,
+     "notes": []
+    },
+    {
+     "index": 19,
+     "kind": "back",
+     "number": null,
+     "notes": []
+    }
+   ]
+  },
+  "pdf": {
+   "ok": true,
+   "issues": [],
+   "info": {
+    "size_mb": 1.59,
+    "pages": 19,
+    "metadata": {
+     "/Author": "Bookmaker",
+     "/CreationDate": "D:20261016073919+00'00'",
+     "/Creator": "Bookmaker (open-source children's book generator)",
+     "/Keywords": "children's book, kite_festival, 6-8",
+     "/ModDate": "D:20261016073919+00'00'",
+     "/Producer": "ReportLab PDF Library - (opensource)",
+     "/Subject": "Mia cannot make a kite that flies until she teams up with Biscuit, a shy newcomer full of clever ideas, in time for the Kite Festival.",
+     "/Title": "Mia and the Bird Kite",
+     "/Trapped": "/False"
+    },
+    "lang": "en",
+    "fonts": [
+     {
+      "name": "/AAAAAA+Andika-Bold",
+      "embedded": true,
+      "has_tounicode": true
+     },
+     {
+      "name": "/AAAAAA+Andika",
+      "embedded": true,
+      "has_tounicode": true
+     }
+    ],
+    "rendered": 19,
+    "print": {
+     "trim_mm": [
+      210.0,
+      297.0
+     ],
+     "bleed_mm": 0.0,
+     "crop_marks": false,
+     "color_mode": "rgb",
+     "layout_style": "classic",
+     "standard": "none",
+     "icc": ""
+    }
+   },
+   "expected_story_pages": 14
+  },
+  "story": {
+   "ok": true,
+   "errors": 0,
+   "warnings": 0,
+   "word_count": 537,
+   "issues": []
+  },
+  "images": {
+   "issues": []
+  },
+  "summary": {
+   "status": "completed",
+   "errors": 0,
+   "warnings": 0,
+   "pdf_valid": true,
+   "story_pages": 14,
+   "word_count": 537,
+   "checked_at": 1792136361.082,
+   "engines": {
+    "story": "offline:kite_festival",
+    "images": "Built-in procedural illustrator (offline, CPU)"
+   }
+  }
+ },
+ "pages": [
+  {
+   "id": "328a003a53164fc88d2221bd1ba74be7",
+   "number": 1,
+   "beat": "setup",
+   "text": "In a hilly little village where the wind loved to play, the spring wind was strong and cheerful, and Mia loved it more than anyone. Every spring, the whole village gathered on Breezy Hill to fly kites of every shape and color.",
+   "image_prompt": "Mia on a breezy village lane in spring with colorful kites flying in the sky above little houses",
+   "scene": {
+    "location": "village",
+    "time": "day",
+    "characters": [
+     "hero"
+    ],
+    "props": [
+     "kites_sky"
+    ],
+    "mood": "happy",
+    "poses": {
+     "hero": "look_up"
+    },
+    "expressions": {},
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero"
+   ],
+   "image_url": "/api/projects/3ee88af9a40a4ad98d79fdb8b6353a75/files/images/page-01-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, rich gouache storybook painting, matte colors, cozy atmosphere.\nScene: Mia on a breezy village lane in spring with colorful kites flying in the sky above little houses\nSetting: village, time of day: day, mood: happy.\nExactly 1 main character visible:\n- Mia: a 7-year-old girl with light brown skin, black bob hair, round friendly face, big dark eyes, wearing a yellow hoodie and purple trousers, a blue scarf and white shoes. Always the same look: blue scarf, black bob hair, yellow hoodie. Pose: look_up.\nComposition: wide shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 134,
+      "file": "images/page-01-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero"
+    ],
+    "dhash": "b7a2e2ad6664211b"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 457322,
+      "aspect": 1.3333,
+      "luma_std": 30.42,
+      "luma_mean": 177.94,
+      "dhash": "b7a2e2ad6664211b",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0
+      }
+     }
+    }
+   },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "28e7b94284314dcd8334fd6364f23e77",
+   "number": 2,
+   "beat": "companion",
+   "text": "That spring, a newcomer arrived in the village: Biscuit, a playful brown puppy, who lived in the blue house at the end of the lane. Biscuit was quiet and shy, and always carried a little notebook full of drawings.",
+   "image_prompt": "Mia waving hello to shy Biscuit holding a small notebook in front of a little blue house",
+   "scene": {
+    "location": "village",
+    "time": "day",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "blue_house",
+     "notebook"
+    ],
+    "mood": "curious",
+    "poses": {
+     "hero": "wave",
+     "comp": "hold"
+    },
+    "expressions": {
+     "comp": "shy"
+    },
+    "shot": "medium",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/3ee88af9a40a4ad98d79fdb8b6353a75/files/images/page-02-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, rich gouache storybook painting, matte colors, cozy atmosphere.\nScene: Mia waving hello to shy Biscuit holding a small notebook in front of a little blue house\nSetting: village, time of day: day, mood: curious.\nExactly 2 main characters visible:\n- Mia: a 7-year-old girl with light brown skin, black bob hair, round friendly face, big dark eyes, wearing a yellow hoodie and purple trousers, a blue scarf and white shoes. Always the same look: blue scarf, black bob hair, yellow hoodie. Pose: wave.\n- Biscuit: a playful brown puppy with caramel brown fur, big shiny dark eyes, wearing a small blue scarf. Always the same look: blue scarf, puppy shape. Pose: hold. Expression: shy.\nRelative sizes (keep consistent): Mia is the tallest; Biscuit is about 68% of Mia's height.\nRelationships: Biscuit - best friend of Mia; Mia - best friend of Biscuit.\nComposition: medium shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 235,
+      "file": "images/page-02-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "696666a96a696a07"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 475429,
+      "aspect": 1.3333,
+      "luma_std": 37.48,
+      "luma_mean": 169.03,
+      "dhash": "696666a96a696a07",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 0.8,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "da1351b214cf47f59ed098d250be9ebd",
+   "number": 3,
+   "beat": "inciting",
+   "text": "With the festival just three days away, Mia tested the new kite. It rose, spun, and fell flat on its nose. Mia felt like crying. Then she noticed Biscuit watching quietly from the fence.",
+   "image_prompt": "A homemade kite crashing nose-first into the grass on a hill, Mia looking disappointed, Biscuit watching from a wooden fence",
+   "scene": {
+    "location": "field",
+    "time": "day",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "kite_crashed",
+     "fence"
+    ],
+    "mood": "sad",
+    "poses": {
+     "hero": "stand",
+     "comp": "stand"
+    },
+    "expressions": {
+     "hero": "sad"
+    },
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/3ee88af9a40a4ad98d79fdb8b6353a75/files/images/page-03-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, rich gouache storybook painting, matte colors, cozy atmosphere.\nScene: A homemade kite crashing nose-first into the grass on a hill, Mia looking disappointed, Biscuit watching from a wooden fence\nSetting: field, time of day: day, mood: sad.\nExactly 2 main characters visible:\n- Mia: a 7-year-old girl with light brown skin, black bob hair, round friendly face, big dark eyes, wearing a yellow hoodie and purple trousers, a blue scarf and white shoes. Always the same look: blue scarf, black bob hair, yellow hoodie. Pose: stand. Expression: sad.\n- Biscuit: a playful brown puppy with caramel brown fur, big shiny dark eyes, wearing a small blue scarf. Always the same look: blue scarf, puppy shape. Pose: stand.\nRelative sizes (keep consistent): Mia is the tallest; Biscuit is about 68% of Mia's height.\nRelationships: Biscuit - best friend of Mia; Mia - best friend of Biscuit.\nComposition: wide shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 336,
+      "file": "images/page-03-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "6952c26868691005"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 484955,
+      "aspect": 1.3333,
+      "luma_std": 29.7,
+      "luma_mean": 176.48,
+      "dhash": "6952c26868691005",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 0.8,
+       "comp": 0.5
+      }
+     }
+    }
+   },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "76b274bad9e44a4ba85b9fc0b7c7f17d",
+   "number": 4,
+   "beat": "decision",
+   "text": "'Will you help me build a new one?' Asked Mia. Biscuit smiled and opened the notebook to a drawing of a kite shaped like a bird. They decided to build it together, and to fly it together at the festival.",
+   "image_prompt": "Biscuit showing Mia an open notebook with a drawing of a bird-shaped kite, both smiling",
+   "scene": {
+    "location": "field",
+    "time": "day",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "notebook"
+    ],
+    "mood": "happy",
+    "poses": {
+     "hero": "stand",
+     "comp": "hold"
+    },
+    "expressions": {
+     "hero": "happy",
+     "comp": "happy"
+    },
+    "shot": "close",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/3ee88af9a40a4ad98d79fdb8b6353a75/files/images/page-04-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, rich gouache storybook painting, matte colors, cozy atmosphere.\nScene: Biscuit showing Mia an open notebook with a drawing of a bird-shaped kite, both smiling\nSetting: field, time of day: day, mood: happy.\nExactly 2 main characters visible:\n- Mia: a 7-year-old girl with light brown skin, black bob hair, round friendly face, big dark eyes, wearing a yellow hoodie and purple trousers, a blue scarf and white shoes. Always the same look: blue scarf, black bob hair, yellow hoodie. Pose: stand. Expression: happy.\n- Biscuit: a playful brown puppy with caramel brown fur, big shiny dark eyes, wearing a small blue scarf. Always the same look: blue scarf, puppy shape. Pose: hold. Expression: happy.\nRelative sizes (keep consistent): Mia is the tallest; Biscuit is about 68% of Mia's height.\nRelationships: Biscuit - best friend of Mia; Mia - best friend of Biscuit.\nComposition: close shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 437,
+      "file": "images/page-04-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "5b49e668f86d6913"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 499681,
+      "aspect": 1.3333,
+      "luma_std": 40.37,
+      "luma_mean": 168.28,
+      "dhash": "5b49e668f86d6913",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 0.5
+      }
+     }
+    }
+   },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "873afe89a5f54ffda38121b2d1b79650",
+   "number": 5,
+   "beat": "ep_materials",
+   "text": "First, they gathered materials. Mia found straight sticks in the garden, and Biscuit found colorful paper in a box of old maps. Grandpa Jo gave them a ball of strong string. 'Kites like to be made with patience,' he said with a wink.",
+   "image_prompt": "Mia and Biscuit receiving a ball of string from a kind grandfather with a white beard, sticks and colorful paper on the ground",
+   "scene": {
+    "location": "village",
+    "time": "day",
+    "characters": [
+     "hero",
+     "comp",
+     "helper"
+    ],
+    "props": [
+     "string",
+     "sticks"
+    ],
+    "mood": "happy",
+    "poses": {
+     "hero": "hold",
+     "comp": "stand",
+     "helper": "give"
+    },
+    "expressions": {},
+    "shot": "medium",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp",
+    "helper"
+   ],
+   "image_url": "/api/projects/3ee88af9a40a4ad98d79fdb8b6353a75/files/images/page-05-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, rich gouache storybook painting, matte colors, cozy atmosphere.\nScene: Mia and Biscuit receiving a ball of string from a kind grandfather with a white beard, sticks and colorful paper on the ground\nSetting: village, time of day: day, mood: happy.\nExactly 3 main characters visible:\n- Mia: a 7-year-old girl with light brown skin, black bob hair, round friendly face, big dark eyes, wearing a yellow hoodie and purple trousers, a blue scarf and white shoes. Always the same look: blue scarf, black bob hair, yellow hoodie. Pose: hold.\n- Biscuit: a playful brown puppy with caramel brown fur, big shiny dark eyes, wearing a small blue scarf. Always the same look: blue scarf, puppy shape. Pose: stand.\n- Grandpa Jo: a kind elderly man with light brown skin, white hair and a white beard, round glasses and a blue cardigan. Always the same look: white hair, round glasses, blue cardigan. Pose: give.\nRelative sizes (keep consistent): Grandpa Jo is the tallest; Mia is about 82% of Grandpa Jo's height; Biscuit is about 56% of Grandpa Jo's height.\nRelationships: Biscuit - best friend of Mia; Grandpa Jo - mentor of Mia; Mia - best friend of Biscuit; Mia - trusted grown-up of Grandpa Jo.\nComposition: medium shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 538,
+      "file": "images/page-05-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp",
+     "helper"
+    ],
+    "dhash": "435ccccc54dc742b"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 523039,
+      "aspect": 1.3333,
+      "luma_std": 43.39,
+      "luma_mean": 164.53,
+      "dhash": "435ccccc54dc742b",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 0.5,
+       "helper": 1.0
+      }
+     }
+    }
+   },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "1e300b637b4b4aad8e45ae3c290a5519",
+   "number": 6,
+   "beat": "ep_argue",
+   "text": "Building was not easy. Mia wanted red wings, but Biscuit wanted blue ones, and they both frowned. Then Mia laughed. 'What if one wing is red and the other is blue?' It was even better than either idea alone.",
+   "image_prompt": "Mia holding red paper and Biscuit holding blue paper, frowning at each other then starting to laugh, at a craft table",
+   "scene": {
+    "location": "village",
+    "time": "day",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "paper_red_blue"
+    ],
+    "mood": "funny",
+    "poses": {
+     "hero": "hold",
+     "comp": "hold"
+    },
+    "expressions": {
+     "hero": "laugh",
+     "comp": "grumpy"
+    },
+    "shot": "medium",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/3ee88af9a40a4ad98d79fdb8b6353a75/files/images/page-06-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, rich gouache storybook painting, matte colors, cozy atmosphere.\nScene: Mia holding red paper and Biscuit holding blue paper, frowning at each other then starting to laugh, at a craft table\nSetting: village, time of day: day, mood: funny.\nExactly 2 main characters visible:\n- Mia: a 7-year-old girl with light brown skin, black bob hair, round friendly face, big dark eyes, wearing a yellow hoodie and purple trousers, a blue scarf and white shoes. Always the same look: blue scarf, black bob hair, yellow hoodie. Pose: hold. Expression: laugh.\n- Biscuit: a playful brown puppy with caramel brown fur, big shiny dark eyes, wearing a small blue scarf. Always the same look: blue scarf, puppy shape. Pose: hold. Expression: grumpy.\nRelative sizes (keep consistent): Mia is the tallest; Biscuit is about 68% of Mia's height.\nRelationships: Biscuit - best friend of Mia; Mia - best friend of Biscuit.\nComposition: medium shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 639,
+      "file": "images/page-06-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "a3996669c8686b17"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 466430,
+      "aspect": 1.3333,
+      "luma_std": 36.73,
+      "luma_mean": 174.18,
+      "dhash": "a3996669c8686b17",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "6c831a228cc041b8941d626ede95573a",
+   "number": 7,
+   "beat": "ep_glue",
+   "text": "The glue was sticky and the paper kept tearing, but they took turns holding and gluing. By evening, the bird kite had a beak, two wings, and a long rainbow tail.",
+   "image_prompt": "Mia and Biscuit gluing a bird-shaped kite with one red and one blue wing and a rainbow tail on a table, laughing",
+   "scene": {
+    "location": "village",
+    "time": "sunset",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "kite"
+    ],
+    "mood": "happy",
+    "poses": {
+     "hero": "hold",
+     "comp": "hold"
+    },
+    "expressions": {
+     "hero": "laugh",
+     "comp": "laugh"
+    },
+    "shot": "medium",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/3ee88af9a40a4ad98d79fdb8b6353a75/files/images/page-07-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, rich gouache storybook painting, matte colors, cozy atmosphere.\nScene: Mia and Biscuit gluing a bird-shaped kite with one red and one blue wing and a rainbow tail on a table, laughing\nSetting: village, time of day: sunset, mood: happy.\nExactly 2 main characters visible:\n- Mia: a 7-year-old girl with light brown skin, black bob hair, round friendly face, big dark eyes, wearing a yellow hoodie and purple trousers, a blue scarf and white shoes. Always the same look: blue scarf, black bob hair, yellow hoodie. Pose: hold. Expression: laugh.\n- Biscuit: a playful brown puppy with caramel brown fur, big shiny dark eyes, wearing a small blue scarf. Always the same look: blue scarf, puppy shape. Pose: hold. Expression: laugh.\nRelative sizes (keep consistent): Mia is the tallest; Biscuit is about 68% of Mia's height.\nRelationships: Biscuit - best friend of Mia; Mia - best friend of Biscuit.\nComposition: medium shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 740,
+      "file": "images/page-07-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "166b696a5a696917"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 466994,
+      "aspect": 1.3333,
+      "luma_std": 33.34,
+      "luma_mean": 148.46,
+      "dhash": "166b696a5a696917",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "9157aa836c364bc89935c1c1c95b5b89",
+   "number": 8,
+   "beat": "ep_test",
+   "text": "On the second day, they tested the kite on the hill. It rose a little, wobbled, and drifted back down. Instead of giving up, Biscuit drew new notes, and Mia added two more ribbons to the tail.",
+   "image_prompt": "Mia running on a grassy hill pulling the bird kite string while the kite wobbles low, Biscuit taking notes in a notebook",
+   "scene": {
+    "location": "field",
+    "time": "day",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "kite_low",
+     "notebook"
+    ],
+    "mood": "determined",
+    "poses": {
+     "hero": "run",
+     "comp": "hold"
+    },
+    "expressions": {},
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/3ee88af9a40a4ad98d79fdb8b6353a75/files/images/page-08-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, rich gouache storybook painting, matte colors, cozy atmosphere.\nScene: Mia running on a grassy hill pulling the bird kite string while the kite wobbles low, Biscuit taking notes in a notebook\nSetting: field, time of day: day, mood: determined.\nExactly 2 main characters visible:\n- Mia: a 7-year-old girl with light brown skin, black bob hair, round friendly face, big dark eyes, wearing a yellow hoodie and purple trousers, a blue scarf and white shoes. Always the same look: blue scarf, black bob hair, yellow hoodie. Pose: run.\n- Biscuit: a playful brown puppy with caramel brown fur, big shiny dark eyes, wearing a small blue scarf. Always the same look: blue scarf, puppy shape. Pose: hold.\nRelative sizes (keep consistent): Mia is the tallest; Biscuit is about 68% of Mia's height.\nRelationships: Biscuit - best friend of Mia; Mia - best friend of Biscuit.\nComposition: wide shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 841,
+      "file": "images/page-08-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "6b4bcc6c68692a13"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 477966,
+      "aspect": 1.3333,
+      "luma_std": 29.06,
+      "luma_mean": 176.19,
+      "dhash": "6b4bcc6c68692a13",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 0.8,
+       "comp": 0.5
+      }
+     }
+    }
+   },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "408b99dc8dc34504a8091ae407881ac9",
+   "number": 9,
+   "beat": "ep_rain",
+   "text": "Then came a sudden rain shower! They raced home, hugging the kite under Mia's coat to keep it dry. Inside, they sipped warm cocoa and painted feathers on the wings while the rain drummed on the roof.",
+   "image_prompt": "Mia and Biscuit running through a sudden spring rain in the village, protecting a kite under a coat",
+   "scene": {
+    "location": "village",
+    "time": "day",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "rain",
+     "kite"
+    ],
+    "mood": "excited",
+    "poses": {
+     "hero": "run",
+     "comp": "run"
+    },
+    "expressions": {},
+    "shot": "wide",
+    "weather": "rain"
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/3ee88af9a40a4ad98d79fdb8b6353a75/files/images/page-09-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, rich gouache storybook painting, matte colors, cozy atmosphere.\nScene: Mia and Biscuit running through a sudden spring rain in the village, protecting a kite under a coat\nSetting: village, time of day: day, mood: excited.\nExactly 2 main characters visible:\n- Mia: a 7-year-old girl with light brown skin, black bob hair, round friendly face, big dark eyes, wearing a yellow hoodie and purple trousers, a blue scarf and white shoes. Always the same look: blue scarf, black bob hair, yellow hoodie. Pose: run.\n- Biscuit: a playful brown puppy with caramel brown fur, big shiny dark eyes, wearing a small blue scarf. Always the same look: blue scarf, puppy shape. Pose: run.\nRelative sizes (keep consistent): Mia is the tallest; Biscuit is about 68% of Mia's height.\nRelationships: Biscuit - best friend of Mia; Mia - best friend of Biscuit.\nComposition: wide shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 942,
+      "file": "images/page-09-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "c9b129ed6a686b17"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 474146,
+      "aspect": 1.3333,
+      "luma_std": 29.45,
+      "luma_mean": 169.52,
+      "dhash": "c9b129ed6a686b17",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 0.8,
+       "comp": 0.5
+      }
+     }
+    }
+   },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "b3d6bae063394d3c978aa78e7e013a7f",
+   "number": 10,
+   "beat": "doubt",
+   "text": "On the night before the festival, a gust of wind blew the kite off the porch, and one of its wings tore. 'It's ruined,' Mia said quietly. Biscuit put a paw on her shoulder. 'Not ruined,' she said. 'It just needs fixing. Together.'",
+   "image_prompt": "Mia sadly holding a bird kite with a torn wing on a porch at night, Biscuit comforting Mia",
+   "scene": {
+    "location": "village",
+    "time": "night",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "kite_torn"
+    ],
+    "mood": "sad",
+    "poses": {
+     "hero": "hold",
+     "comp": "stand"
+    },
+    "expressions": {
+     "hero": "sad",
+     "comp": "kind"
+    },
+    "shot": "close",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/3ee88af9a40a4ad98d79fdb8b6353a75/files/images/page-10-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, rich gouache storybook painting, matte colors, cozy atmosphere.\nScene: Mia sadly holding a bird kite with a torn wing on a porch at night, Biscuit comforting Mia\nSetting: village, time of day: night, mood: sad.\nExactly 2 main characters visible:\n- Mia: a 7-year-old girl with light brown skin, black bob hair, round friendly face, big dark eyes, wearing a yellow hoodie and purple trousers, a blue scarf and white shoes. Always the same look: blue scarf, black bob hair, yellow hoodie. Pose: hold. Expression: sad.\n- Biscuit: a playful brown puppy with caramel brown fur, big shiny dark eyes, wearing a small blue scarf. Always the same look: blue scarf, puppy shape. Pose: stand. Expression: kind.\nRelative sizes (keep consistent): Mia is the tallest; Biscuit is about 68% of Mia's height.\nRelationships: Biscuit - best friend of Mia; Mia - best friend of Biscuit.\nComposition: close shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1043,
+      "file": "images/page-10-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "92919b565c65611b"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 392358,
+      "aspect": 1.3333,
+      "luma_std": 45.53,
+      "luma_mean": 86.59,
+      "dhash": "92919b565c65611b",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "4160778bd49c4251b10fc6d9bea1f8f4",
+   "number": 11,
+   "beat": "climax",
+   "text": "The big day came. Kites of every color filled the sky as Mia and Biscuit stood ready on Breezy Hill with their mended kite. When the breeze came, they ran side by side, and Biscuit let go at just the right moment.",
+   "image_prompt": "Mia and Biscuit running together on a grassy hill full of villagers, launching a bird kite with a heart-shaped patch on one wing",
+   "scene": {
+    "location": "field",
+    "time": "day",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "kite_launch",
+     "kites_sky",
+     "crowd"
+    ],
+    "mood": "excited",
+    "poses": {
+     "hero": "run",
+     "comp": "run"
+    },
+    "expressions": {
+     "hero": "determined",
+     "comp": "happy"
+    },
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/3ee88af9a40a4ad98d79fdb8b6353a75/files/images/page-11-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, rich gouache storybook painting, matte colors, cozy atmosphere.\nScene: Mia and Biscuit running together on a grassy hill full of villagers, launching a bird kite with a heart-shaped patch on one wing\nSetting: field, time of day: day, mood: excited.\nExactly 2 main characters visible:\n- Mia: a 7-year-old girl with light brown skin, black bob hair, round friendly face, big dark eyes, wearing a yellow hoodie and purple trousers, a blue scarf and white shoes. Always the same look: blue scarf, black bob hair, yellow hoodie. Pose: run. Expression: determined.\n- Biscuit: a playful brown puppy with caramel brown fur, big shiny dark eyes, wearing a small blue scarf. Always the same look: blue scarf, puppy shape. Pose: run. Expression: happy.\nRelative sizes (keep consistent): Mia is the tallest; Biscuit is about 68% of Mia's height.\nRelationships: Biscuit - best friend of Mia; Mia - best friend of Biscuit.\nComposition: wide shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1144,
+      "file": "images/page-11-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "2b8fe9676b680b03"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 511194,
+      "aspect": 1.3333,
+      "luma_std": 29.35,
+      "luma_mean": 175.26,
+      "dhash": "2b8fe9676b680b03",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 0.8,
+       "comp": 0.5
+      }
+     }
+    }
+   },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "93124c8baabd4a32b9f878e9cd6b7275",
+   "number": 12,
+   "beat": "resolution",
+   "text": "Up, up, up went the bird kite, until it was flying higher than any kite on Breezy Hill. The patch on its wing looked just like a little heart.",
+   "image_prompt": "A bird kite with one red and one blue wing and a long rainbow tail soaring high above other kites, Mia and Biscuit holding the string together",
+   "scene": {
+    "location": "field",
+    "time": "day",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "kite_high",
+     "kites_sky"
+    ],
+    "mood": "joyful",
+    "poses": {
+     "hero": "pull",
+     "comp": "wave"
+    },
+    "expressions": {
+     "hero": "happy",
+     "comp": "laugh"
+    },
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/3ee88af9a40a4ad98d79fdb8b6353a75/files/images/page-12-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, rich gouache storybook painting, matte colors, cozy atmosphere.\nScene: A bird kite with one red and one blue wing and a long rainbow tail soaring high above other kites, Mia and Biscuit holding the string together\nSetting: field, time of day: day, mood: joyful.\nExactly 2 main characters visible:\n- Mia: a 7-year-old girl with light brown skin, black bob hair, round friendly face, big dark eyes, wearing a yellow hoodie and purple trousers, a blue scarf and white shoes. Always the same look: blue scarf, black bob hair, yellow hoodie. Pose: pull. Expression: happy.\n- Biscuit: a playful brown puppy with caramel brown fur, big shiny dark eyes, wearing a small blue scarf. Always the same look: blue scarf, puppy shape. Pose: wave. Expression: laugh.\nRelative sizes (keep consistent): Mia is the tallest; Biscuit is about 68% of Mia's height.\nRelationships: Biscuit - best friend of Mia; Mia - best friend of Biscuit.\nComposition: wide shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1245,
+      "file": "images/page-12-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "6949cc636a686b15"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 494135,
+      "aspect": 1.3333,
+      "luma_std": 29.24,
+      "luma_mean": 176.45,
+      "dhash": "6949cc636a686b15",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 0.8,
+       "comp": 0.5
+      }
+     }
+    }
+   },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "32dd54b523604ce6ac65013b91b3d4cf",
+   "number": 13,
+   "beat": "celebration",
+   "text": "That afternoon, the villagers gave them a ribbon for the 'Best Kite Made by Friends.' But Mia and Biscuit were too busy laughing and running with their kite to care much about ribbons.",
+   "image_prompt": "Mia and Biscuit laughing together on the hill, a blue ribbon pinned on, kites in the sky, villagers clapping",
+   "scene": {
+    "location": "field",
+    "time": "day",
+    "characters": [
+     "hero",
+     "comp",
+     "helper"
+    ],
+    "props": [
+     "ribbon",
+     "kites_sky"
+    ],
+    "mood": "joyful",
+    "poses": {
+     "hero": "jump",
+     "comp": "jump",
+     "helper": "wave"
+    },
+    "expressions": {
+     "hero": "laugh",
+     "comp": "laugh"
+    },
+    "shot": "medium",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp",
+    "helper"
+   ],
+   "image_url": "/api/projects/3ee88af9a40a4ad98d79fdb8b6353a75/files/images/page-13-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, rich gouache storybook painting, matte colors, cozy atmosphere.\nScene: Mia and Biscuit laughing together on the hill, a blue ribbon pinned on, kites in the sky, villagers clapping\nSetting: field, time of day: day, mood: joyful.\nExactly 3 main characters visible:\n- Mia: a 7-year-old girl with light brown skin, black bob hair, round friendly face, big dark eyes, wearing a yellow hoodie and purple trousers, a blue scarf and white shoes. Always the same look: blue scarf, black bob hair, yellow hoodie. Pose: jump. Expression: laugh.\n- Biscuit: a playful brown puppy with caramel brown fur, big shiny dark eyes, wearing a small blue scarf. Always the same look: blue scarf, puppy shape. Pose: jump. Expression: laugh.\n- Grandpa Jo: a kind elderly man with light brown skin, white hair and a white beard, round glasses and a blue cardigan. Always the same look: white hair, round glasses, blue cardigan. Pose: wave.\nRelative sizes (keep consistent): Grandpa Jo is the tallest; Mia is about 82% of Grandpa Jo's height; Biscuit is about 56% of Grandpa Jo's height.\nRelationships: Biscuit - best friend of Mia; Grandpa Jo - mentor of Mia; Mia - best friend of Biscuit; Mia - trusted grown-up of Grandpa Jo.\nComposition: medium shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1346,
+      "file": "images/page-13-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp",
+     "helper"
+    ],
+    "dhash": "23ccccdcdcdc5423"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 540858,
+      "aspect": 1.3333,
+      "luma_std": 42.59,
+      "luma_mean": 165.06,
+      "dhash": "23ccccdcdcdc5423",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 0.8,
+       "comp": 0.5,
+       "helper": 1.0
+      }
+     }
+    }
+   },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  },
+  {
+   "id": "33deb23284e441e3a0ca47e26c63fbce",
+   "number": 14,
+   "beat": "ending",
+   "text": "From then on, Mia and Biscuit built something new together every spring. Whenever the wind blew across Breezy Hill, they were the first ones there. The bird kite still hangs above Mia's bed, its heart-shaped patch shining in the morning light.",
+   "image_prompt": "Mia and Biscuit sitting side by side on a hilltop at sunset with the bird kite resting between them",
+   "scene": {
+    "location": "field",
+    "time": "sunset",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "kite_rest"
+    ],
+    "mood": "content",
+    "poses": {
+     "hero": "sit",
+     "comp": "sit"
+    },
+    "expressions": {
+     "hero": "happy",
+     "comp": "happy"
+    },
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/3ee88af9a40a4ad98d79fdb8b6353a75/files/images/page-14-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, rich gouache storybook painting, matte colors, cozy atmosphere.\nScene: Mia and Biscuit sitting side by side on a hilltop at sunset with the bird kite resting between them\nSetting: field, time of day: sunset, mood: content.\nExactly 2 main characters visible:\n- Mia: a 7-year-old girl with light brown skin, black bob hair, round friendly face, big dark eyes, wearing a yellow hoodie and purple trousers, a blue scarf and white shoes. Always the same look: blue scarf, black bob hair, yellow hoodie. Pose: sit. Expression: happy.\n- Biscuit: a playful brown puppy with caramel brown fur, big shiny dark eyes, wearing a small blue scarf. Always the same look: blue scarf, puppy shape. Pose: sit. Expression: happy.\nRelative sizes (keep consistent): Mia is the tallest; Biscuit is about 68% of Mia's height.\nRelationships: Biscuit - best friend of Mia; Mia - best friend of Biscuit.\nComposition: wide shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1447,
+      "file": "images/page-14-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "2d2d1e6d68686115"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 447415,
+      "aspect": 1.3333,
+      "luma_std": 26.65,
+      "luma_mean": 148.65,
+      "dhash": "2d2d1e6d68686115",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 0.8,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "audio_url": null,
+   "audio_meta": {},
+   "words": [],
+   "timing_source": "",
+   "duration_s": 0.0,
+   "inpaints": 0
+  }
+ ],
+ "characters": [
+  {
+   "id": "763b48e785534d13a40813e144af6412",
+   "char_id": "hero",
+   "name": "Mia",
+   "role": "protagonist",
+   "spec": {
+    "id": "hero",
+    "name": "Mia",
+    "role": "protagonist",
+    "pronoun": "she",
+    "age": "7",
+    "description": "a 7-year-old girl with light brown skin, black bob hair, round friendly face, big dark eyes, wearing a yellow hoodie and purple trousers, a blue scarf and white shoes",
+    "personality": "",
+    "appearance": {
+     "species": "human",
+     "skin": "#a86b45",
+     "hair_color": "#151515",
+     "hair_style": "bob",
+     "eye_color": "#3b2a20",
+     "face": "round, rosy cheeks",
+     "body": "small child",
+     "height": 1.0,
+     "scale": 1.0
+    },
+    "outfit": {
+     "top": "hoodie",
+     "top_color": "#f4d03f",
+     "bottom": "trousers",
+     "bottom_color": "#8e6cc9",
+     "accessory": "scarf",
+     "accessory_color": "#3d8bd9",
+     "shoes_color": "#f4f4f4"
+    },
+    "distinctive": [
+     "blue scarf",
+     "black bob hair",
+     "yellow hoodie"
+    ],
+    "expressions": [
+     "happy",
+     "curious",
+     "worried",
+     "determined",
+     "surprised"
+    ],
+    "movement": "quick, bouncy steps",
+    "palette": [
+     "#a86b45",
+     "#151515",
+     "#f4d03f",
+     "#3d8bd9",
+     "#8e6cc9"
+    ],
+    "relationships": {
+     "comp": "best friend",
+     "helper": "trusted grown-up",
+     "_latin_name": "Mia"
+    },
+    "lora_name": "",
+    "lora_weight": 0.8,
+    "lora_trigger": ""
+   },
+   "ref_url": "/api/projects/3ee88af9a40a4ad98d79fdb8b6353a75/files/refs/hero.png",
+   "ref_approved": true
+  },
+  {
+   "id": "94a7cf1cdf89470ca3869cb6720d6606",
+   "char_id": "comp",
+   "name": "Biscuit",
+   "role": "companion",
+   "spec": {
+    "id": "comp",
+    "name": "Biscuit",
+    "role": "companion",
+    "pronoun": "she",
+    "age": "young",
+    "description": "a playful brown puppy with caramel brown fur, big shiny dark eyes, wearing a small blue scarf",
+    "personality": "",
+    "appearance": {
+     "species": "puppy",
+     "skin": "#b8834f",
+     "hair_color": "",
+     "hair_style": "",
+     "eye_color": "#2a1c12",
+     "face": "",
+     "body": "small puppy",
+     "height": 0.7,
+     "scale": 1.0
+    },
+    "outfit": {
+     "top": "",
+     "top_color": "",
+     "bottom": "",
+     "bottom_color": "",
+     "accessory": "scarf",
+     "accessory_color": "#3d8bd9",
+     "shoes_color": ""
+    },
+    "distinctive": [
+     "blue scarf",
+     "puppy shape"
+    ],
+    "expressions": [
+     "happy",
+     "curious",
+     "surprised",
+     "kind"
+    ],
+    "movement": "bounds",
+    "palette": [
+     "#b8834f",
+     "#3d8bd9"
+    ],
+    "relationships": {
+     "hero": "best friend",
+     "_latin_name": "Biscuit"
+    },
+    "lora_name": "",
+    "lora_weight": 0.8,
+    "lora_trigger": ""
+   },
+   "ref_url": "/api/projects/3ee88af9a40a4ad98d79fdb8b6353a75/files/refs/comp.png",
+   "ref_approved": true
+  },
+  {
+   "id": "c0b652683fc844baa373f6d48885771f",
+   "char_id": "helper",
+   "name": "Grandpa Jo",
+   "role": "supporting",
+   "spec": {
+    "id": "helper",
+    "name": "Grandpa Jo",
+    "role": "supporting",
+    "pronoun": "he",
+    "age": "old",
+    "description": "a kind elderly man with light brown skin, white hair and a white beard, round glasses and a blue cardigan",
+    "personality": "",
+    "appearance": {
+     "species": "human_old",
+     "skin": "#a86b45",
+     "hair_color": "#e8e8e8",
+     "hair_style": "beard",
+     "eye_color": "#3b2a20",
+     "face": "",
+     "body": "",
+     "height": 1.25,
+     "scale": 1.0
+    },
+    "outfit": {
+     "top": "cardigan",
+     "top_color": "#3d8bd9",
+     "bottom": "trousers",
+     "bottom_color": "#6b5b4b",
+     "accessory": "glasses",
+     "accessory_color": "#444444",
+     "shoes_color": "#5a3825"
+    },
+    "distinctive": [
+     "white hair",
+     "round glasses",
+     "blue cardigan"
+    ],
+    "expressions": [
+     "kind",
+     "happy"
+    ],
+    "movement": "slow and gentle",
+    "palette": [
+     "#a86b45",
+     "#e8e8e8",
+     "#3d8bd9"
+    ],
+    "relationships": {
+     "hero": "mentor",
+     "_latin_name": "Grandpa Jo"
+    },
+    "lora_name": "",
+    "lora_weight": 0.8,
+    "lora_trigger": ""
+   },
+   "ref_url": "/api/projects/3ee88af9a40a4ad98d79fdb8b6353a75/files/refs/helper.png",
+   "ref_approved": true
+  }
+ ]
+}

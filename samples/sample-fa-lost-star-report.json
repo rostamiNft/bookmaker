@@ -1,0 +1,7599 @@
+{
+ "title": "سامان و ستاره‌ی کوچولوی گمشده",
+ "settings": {
+  "title": "",
+  "topic": "یک ستاره‌ی کوچک از آسمان می‌افتد و باید پیش از صبح به خانه برگردد",
+  "moral": "",
+  "age_group": "6-8",
+  "language": "fa",
+  "page_count": 14,
+  "complexity": "medium",
+  "narration": "third_person",
+  "illustration_style": "watercolor",
+  "aspect_ratio": "4:3",
+  "page_size": "A4",
+  "orientation": "portrait",
+  "main_characters": 2,
+  "hero_name": "",
+  "text_amount": "medium",
+  "fantasy_level": 2,
+  "humor_level": 2,
+  "ending": "happy",
+  "cover_style": "illustrated",
+  "author": "کتاب‌ساز",
+  "publisher": "نشر نمونه",
+  "page_numbers": true,
+  "back_cover": true,
+  "text_in_image": false,
+  "output_profile": "screen",
+  "seed": 21,
+  "llm_provider_id": "",
+  "image_provider_id": "",
+  "vision_provider_id": "",
+  "max_image_attempts": 3,
+  "max_story_attempts": 3,
+  "budget_usd": 0.0,
+  "review_outline": false,
+  "reference_mode": "multi_view",
+  "cast_reference": true,
+  "layout_style": "classic",
+  "bleed_mm": 0.0,
+  "crop_marks": false,
+  "color_mode": "rgb",
+  "narration_audio": true,
+  "tts_provider_id": "",
+  "narration_voice": "",
+  "narration_speed": 1.0,
+  "text_align": "start",
+  "hyphenation": false,
+  "shaping": "auto",
+  "kashida": true,
+  "speech_bubbles": false,
+  "print_standard": "none",
+  "icc_profile": "",
+  "lora_training": false
+ },
+ "qa_report": {
+  "story_generation": {
+   "ok": true,
+   "errors": 0,
+   "warnings": 0,
+   "word_count": 565,
+   "issues": []
+  },
+  "layout": {
+   "ok": true,
+   "issues": [],
+   "pages": [
+    {
+     "index": 1,
+     "kind": "cover",
+     "number": null,
+     "notes": []
+    },
+    {
+     "index": 2,
+     "kind": "title",
+     "number": null,
+     "notes": []
+    },
+    {
+     "index": 3,
+     "kind": "copyright",
+     "number": null,
+     "notes": []
+    },
+    {
+     "index": 4,
+     "kind": "story",
+     "number": 1,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 5,
+     "kind": "story",
+     "number": 2,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 6,
+     "kind": "story",
+     "number": 3,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 7,
+     "kind": "story",
+     "number": 4,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 8,
+     "kind": "story",
+     "number": 5,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 9,
+     "kind": "story",
+     "number": 6,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 10,
+     "kind": "story",
+     "number": 7,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 11,
+     "kind": "story",
+     "number": 8,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 12,
+     "kind": "story",
+     "number": 9,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 13,
+     "kind": "story",
+     "number": 10,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 14,
+     "kind": "story",
+     "number": 11,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 15,
+     "kind": "story",
+     "number": 12,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 16,
+     "kind": "story",
+     "number": 13,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 17,
+     "kind": "story",
+     "number": 14,
+     "notes": [
+      "layout=stack image_frac=0.66 font=24"
+     ]
+    },
+    {
+     "index": 18,
+     "kind": "end",
+     "number": null,
+     "notes": []
+    },
+    {
+     "index": 19,
+     "kind": "back",
+     "number": null,
+     "notes": []
+    }
+   ]
+  },
+  "pdf": {
+   "ok": true,
+   "issues": [],
+   "info": {
+    "size_mb": 1.33,
+    "pages": 19,
+    "metadata": {
+     "/Author": "کتاب‌ساز",
+     "/CreationDate": "D:20261016073511+00'00'",
+     "/Creator": "Bookmaker (open-source children's book generator)",
+     "/Keywords": "children's book, lost_star, 6-8",
+     "/ModDate": "D:20261016073511+00'00'",
+     "/Producer": "ReportLab PDF Library - (opensource)",
+     "/Subject": "وقتی کوچک‌ترین ستاره‌ی آسمان به مرغزار می‌افتد، سامان و فلفل آن را از رودخانه و جنگل عبور می‌دهند تا پیش از طلوع آفتاب از بالای تپه‌ی ماه به آسمان برگردد.",
+     "/Title": "سامان و ستاره‌ی کوچولوی گمشده",
+     "/Trapped": "/False"
+    },
+    "lang": "fa",
+    "fonts": [
+     {
+      "name": "/AAAAAA+Vazirmatn-Bold",
+      "embedded": true,
+      "has_tounicode": true
+     },
+     {
+      "name": "/AAAAAA+Vazirmatn-Regular",
+      "embedded": true,
+      "has_tounicode": true
+     }
+    ],
+    "rtl_extract_checked": 14,
+    "actualtext_spans": 68,
+    "rendered": 19,
+    "print": {
+     "trim_mm": [
+      210.0,
+      297.0
+     ],
+     "bleed_mm": 0.0,
+     "crop_marks": false,
+     "color_mode": "rgb",
+     "layout_style": "classic",
+     "standard": "none",
+     "icc": ""
+    }
+   },
+   "expected_story_pages": 14
+  },
+  "audio": {
+   "ok": true,
+   "issues": []
+  },
+  "story": {
+   "ok": true,
+   "errors": 0,
+   "warnings": 0,
+   "word_count": 565,
+   "issues": []
+  },
+  "images": {
+   "issues": []
+  },
+  "summary": {
+   "status": "completed",
+   "errors": 0,
+   "warnings": 0,
+   "pdf_valid": true,
+   "story_pages": 14,
+   "word_count": 565,
+   "checked_at": 1792136114.8279147,
+   "engines": {
+    "story": "offline:lost_star",
+    "images": "Built-in procedural illustrator (offline, CPU)"
+   }
+  }
+ },
+ "pages": [
+  {
+   "id": "722c9c487bdc4ed3adc40243800bb0ad",
+   "number": 1,
+   "beat": "setup",
+   "text": "سامان در کلبه‌ای کوچک در کنار یک مرغزار سبز و بزرگ زندگی می‌کرد؛ جایی که علف‌ها بوی شبدر می‌دادند و شب‌ها پر از ستاره بود. هر شب روی پله‌های ایوان می‌نشست و ستاره‌ها را یکی‌یکی می‌شمرد تا وقتی که چشم‌هایش سنگین می‌شد. ولی هیچ‌وقت از چهل‌وسه جلوتر نمی‌رفت، چون همیشه همان‌جا خمیازه‌اش می‌گرفت!",
+   "image_prompt": "Saman sitting on the porch steps of a small cottage at the edge of a meadow at dusk, looking up at the first stars, peaceful and dreamy",
+   "scene": {
+    "location": "meadow",
+    "time": "sunset",
+    "characters": [
+     "hero"
+    ],
+    "props": [
+     "house"
+    ],
+    "mood": "calm",
+    "poses": {
+     "hero": "look_up"
+    },
+    "expressions": {},
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero"
+   ],
+   "image_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/images/page-01-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: Saman sitting on the porch steps of a small cottage at the edge of a meadow at dusk, looking up at the first stars, peaceful and dreamy\nSetting: meadow, time of day: sunset, mood: calm.\nExactly 1 main character visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: look_up.\nComposition: wide shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 122,
+      "file": "images/page-01-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero"
+    ],
+    "dhash": "49393e2921262119"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 579634,
+      "aspect": 1.3333,
+      "luma_std": 25.88,
+      "luma_mean": 154.36,
+      "dhash": "49393e2921262119",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0
+      }
+     }
+    }
+   },
+   "audio_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/audio/page-01-c07a4bea1c97.mp3",
+   "audio_meta": {
+    "engine": "espeak-ng",
+    "voice": "fa",
+    "mime": "audio/mpeg",
+    "duration_s": 25.91,
+    "bytes": 207725,
+    "issues": [],
+    "words": [
+     {
+      "w": "سامان",
+      "t": 0.0,
+      "d": 0.461
+     },
+     {
+      "w": "در",
+      "t": 0.461,
+      "d": 0.238
+     },
+     {
+      "w": "کلبه‌ای",
+      "t": 0.699,
+      "d": 0.624
+     },
+     {
+      "w": "کوچک",
+      "t": 1.323,
+      "d": 0.583
+     },
+     {
+      "w": "در",
+      "t": 1.906,
+      "d": 0.241
+     },
+     {
+      "w": "کنار",
+      "t": 2.147,
+      "d": 0.485
+     },
+     {
+      "w": "یک",
+      "t": 2.632,
+      "d": 0.28
+     },
+     {
+      "w": "مرغزار",
+      "t": 2.912,
+      "d": 0.536
+     },
+     {
+      "w": "سبز",
+      "t": 3.448,
+      "d": 0.404
+     },
+     {
+      "w": "و",
+      "t": 3.852,
+      "d": 0.222
+     },
+     {
+      "w": "بزرگ",
+      "t": 4.074,
+      "d": 0.568
+     },
+     {
+      "w": "زندگی",
+      "t": 4.642,
+      "d": 0.558
+     },
+     {
+      "w": "می‌کرد؛",
+      "t": 5.2,
+      "d": 0.855
+     },
+     {
+      "w": "جایی",
+      "t": 6.055,
+      "d": 0.292
+     },
+     {
+      "w": "که",
+      "t": 6.347,
+      "d": 0.265
+     },
+     {
+      "w": "علف‌ها",
+      "t": 6.612,
+      "d": 0.52
+     },
+     {
+      "w": "بوی",
+      "t": 7.132,
+      "d": 0.367
+     },
+     {
+      "w": "شبدر",
+      "t": 7.499,
+      "d": 0.522
+     },
+     {
+      "w": "می‌دادند",
+      "t": 8.021,
+      "d": 0.621
+     },
+     {
+      "w": "و",
+      "t": 8.642,
+      "d": 0.207
+     },
+     {
+      "w": "شب‌ها",
+      "t": 8.849,
+      "d": 0.488
+     },
+     {
+      "w": "پر",
+      "t": 9.337,
+      "d": 0.273
+     },
+     {
+      "w": "از",
+      "t": 9.61,
+      "d": 0.186
+     },
+     {
+      "w": "ستاره",
+      "t": 9.796,
+      "d": 0.544
+     },
+     {
+      "w": "بود.",
+      "t": 10.34,
+      "d": 0.567
+     },
+     {
+      "w": "هر",
+      "t": 10.907,
+      "d": 0.568
+     },
+     {
+      "w": "شب",
+      "t": 11.475,
+      "d": 0.318
+     },
+     {
+      "w": "روی",
+      "t": 11.793,
+      "d": 0.321
+     },
+     {
+      "w": "پله‌های",
+      "t": 12.114,
+      "d": 0.755
+     },
+     {
+      "w": "ایوان",
+      "t": 12.869,
+      "d": 0.441
+     },
+     {
+      "w": "می‌نشست",
+      "t": 13.31,
+      "d": 0.597
+     },
+     {
+      "w": "و",
+      "t": 13.907,
+      "d": 0.213
+     },
+     {
+      "w": "ستاره‌ها",
+      "t": 14.12,
+      "d": 0.722
+     },
+     {
+      "w": "را",
+      "t": 14.842,
+      "d": 0.187
+     },
+     {
+      "w": "یکی‌یکی",
+      "t": 15.029,
+      "d": 0.705
+     },
+     {
+      "w": "می‌شمرد",
+      "t": 15.734,
+      "d": 0.612
+     },
+     {
+      "w": "تا",
+      "t": 16.346,
+      "d": 0.242
+     },
+     {
+      "w": "وقتی",
+      "t": 16.588,
+      "d": 0.45
+     },
+     {
+      "w": "که",
+      "t": 17.038,
+      "d": 0.274
+     },
+     {
+      "w": "چشم‌هایش",
+      "t": 17.312,
+      "d": 0.844
+     },
+     {
+      "w": "سنگین",
+      "t": 18.156,
+      "d": 0.501
+     },
+     {
+      "w": "می‌شد.",
+      "t": 18.657,
+      "d": 0.602
+     },
+     {
+      "w": "ولی",
+      "t": 19.259,
+      "d": 0.602
+     },
+     {
+      "w": "هیچ‌وقت",
+      "t": 19.862,
+      "d": 0.688
+     },
+     {
+      "w": "از",
+      "t": 20.55,
+      "d": 0.175
+     },
+     {
+      "w": "چهل‌وسه",
+      "t": 20.725,
+      "d": 0.845
+     },
+     {
+      "w": "جلوتر",
+      "t": 21.57,
+      "d": 0.501
+     },
+     {
+      "w": "نمی‌رفت،",
+      "t": 22.071,
+      "d": 0.894
+     },
+     {
+      "w": "چون",
+      "t": 22.965,
+      "d": 0.327
+     },
+     {
+      "w": "همیشه",
+      "t": 23.292,
+      "d": 0.559
+     },
+     {
+      "w": "همان‌جا",
+      "t": 23.851,
+      "d": 0.547
+     },
+     {
+      "w": "خمیازه‌اش",
+      "t": 24.398,
+      "d": 0.817
+     },
+     {
+      "w": "می‌گرفت!",
+      "t": 25.215,
+      "d": 0.695
+     }
+    ],
+    "timing_source": "engine_word_events",
+    "timing_quality": {
+     "words": 53,
+     "text_words": 53,
+     "coverage": 1.0,
+     "monotonic": true,
+     "ends_at": 25.91,
+     "duration_s": 25.91,
+     "overshoot": 0.0,
+     "ok": true
+    }
+   },
+   "words": [
+    {
+     "w": "سامان",
+     "t": 0.0,
+     "d": 0.461
+    },
+    {
+     "w": "در",
+     "t": 0.461,
+     "d": 0.238
+    },
+    {
+     "w": "کلبه‌ای",
+     "t": 0.699,
+     "d": 0.624
+    },
+    {
+     "w": "کوچک",
+     "t": 1.323,
+     "d": 0.583
+    },
+    {
+     "w": "در",
+     "t": 1.906,
+     "d": 0.241
+    },
+    {
+     "w": "کنار",
+     "t": 2.147,
+     "d": 0.485
+    },
+    {
+     "w": "یک",
+     "t": 2.632,
+     "d": 0.28
+    },
+    {
+     "w": "مرغزار",
+     "t": 2.912,
+     "d": 0.536
+    },
+    {
+     "w": "سبز",
+     "t": 3.448,
+     "d": 0.404
+    },
+    {
+     "w": "و",
+     "t": 3.852,
+     "d": 0.222
+    },
+    {
+     "w": "بزرگ",
+     "t": 4.074,
+     "d": 0.568
+    },
+    {
+     "w": "زندگی",
+     "t": 4.642,
+     "d": 0.558
+    },
+    {
+     "w": "می‌کرد؛",
+     "t": 5.2,
+     "d": 0.855
+    },
+    {
+     "w": "جایی",
+     "t": 6.055,
+     "d": 0.292
+    },
+    {
+     "w": "که",
+     "t": 6.347,
+     "d": 0.265
+    },
+    {
+     "w": "علف‌ها",
+     "t": 6.612,
+     "d": 0.52
+    },
+    {
+     "w": "بوی",
+     "t": 7.132,
+     "d": 0.367
+    },
+    {
+     "w": "شبدر",
+     "t": 7.499,
+     "d": 0.522
+    },
+    {
+     "w": "می‌دادند",
+     "t": 8.021,
+     "d": 0.621
+    },
+    {
+     "w": "و",
+     "t": 8.642,
+     "d": 0.207
+    },
+    {
+     "w": "شب‌ها",
+     "t": 8.849,
+     "d": 0.488
+    },
+    {
+     "w": "پر",
+     "t": 9.337,
+     "d": 0.273
+    },
+    {
+     "w": "از",
+     "t": 9.61,
+     "d": 0.186
+    },
+    {
+     "w": "ستاره",
+     "t": 9.796,
+     "d": 0.544
+    },
+    {
+     "w": "بود.",
+     "t": 10.34,
+     "d": 0.567
+    },
+    {
+     "w": "هر",
+     "t": 10.907,
+     "d": 0.568
+    },
+    {
+     "w": "شب",
+     "t": 11.475,
+     "d": 0.318
+    },
+    {
+     "w": "روی",
+     "t": 11.793,
+     "d": 0.321
+    },
+    {
+     "w": "پله‌های",
+     "t": 12.114,
+     "d": 0.755
+    },
+    {
+     "w": "ایوان",
+     "t": 12.869,
+     "d": 0.441
+    },
+    {
+     "w": "می‌نشست",
+     "t": 13.31,
+     "d": 0.597
+    },
+    {
+     "w": "و",
+     "t": 13.907,
+     "d": 0.213
+    },
+    {
+     "w": "ستاره‌ها",
+     "t": 14.12,
+     "d": 0.722
+    },
+    {
+     "w": "را",
+     "t": 14.842,
+     "d": 0.187
+    },
+    {
+     "w": "یکی‌یکی",
+     "t": 15.029,
+     "d": 0.705
+    },
+    {
+     "w": "می‌شمرد",
+     "t": 15.734,
+     "d": 0.612
+    },
+    {
+     "w": "تا",
+     "t": 16.346,
+     "d": 0.242
+    },
+    {
+     "w": "وقتی",
+     "t": 16.588,
+     "d": 0.45
+    },
+    {
+     "w": "که",
+     "t": 17.038,
+     "d": 0.274
+    },
+    {
+     "w": "چشم‌هایش",
+     "t": 17.312,
+     "d": 0.844
+    },
+    {
+     "w": "سنگین",
+     "t": 18.156,
+     "d": 0.501
+    },
+    {
+     "w": "می‌شد.",
+     "t": 18.657,
+     "d": 0.602
+    },
+    {
+     "w": "ولی",
+     "t": 19.259,
+     "d": 0.602
+    },
+    {
+     "w": "هیچ‌وقت",
+     "t": 19.862,
+     "d": 0.688
+    },
+    {
+     "w": "از",
+     "t": 20.55,
+     "d": 0.175
+    },
+    {
+     "w": "چهل‌وسه",
+     "t": 20.725,
+     "d": 0.845
+    },
+    {
+     "w": "جلوتر",
+     "t": 21.57,
+     "d": 0.501
+    },
+    {
+     "w": "نمی‌رفت،",
+     "t": 22.071,
+     "d": 0.894
+    },
+    {
+     "w": "چون",
+     "t": 22.965,
+     "d": 0.327
+    },
+    {
+     "w": "همیشه",
+     "t": 23.292,
+     "d": 0.559
+    },
+    {
+     "w": "همان‌جا",
+     "t": 23.851,
+     "d": 0.547
+    },
+    {
+     "w": "خمیازه‌اش",
+     "t": 24.398,
+     "d": 0.817
+    },
+    {
+     "w": "می‌گرفت!",
+     "t": 25.215,
+     "d": 0.695
+    }
+   ],
+   "timing_source": "engine_word_events",
+   "duration_s": 25.91,
+   "inpaints": 0
+  },
+  {
+   "id": "09eb7a95e39348638058d6ca984f1889",
+   "number": 2,
+   "beat": "companion",
+   "text": "بهترین دوست سامان، فلفل بود؛ روباه کوچولوی نارنجی که زیر درخت سیب پیر زندگی می‌کرد. فلفل همه‌ی راه‌های مرغزار را بلد بود و هیچ‌وقت برای شام دیر نمی‌کرد. فلفل می‌توانست بوی کیک زغال‌اخته را از سه تپه آن‌طرف‌تر بفهمد!",
+   "image_prompt": "Saman and Felfel playing together under an old apple tree in a sunny meadow, laughing",
+   "scene": {
+    "location": "meadow",
+    "time": "day",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "apple_tree"
+    ],
+    "mood": "happy",
+    "poses": {
+     "hero": "wave",
+     "comp": "jump"
+    },
+    "expressions": {},
+    "shot": "medium",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/images/page-02-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: Saman and Felfel playing together under an old apple tree in a sunny meadow, laughing\nSetting: meadow, time of day: day, mood: happy.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: wave.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: jump.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: medium shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 223,
+      "file": "images/page-02-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "a6a6642a6e682917"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 668535,
+      "aspect": 1.3333,
+      "luma_std": 31.03,
+      "luma_mean": 160.45,
+      "dhash": "a6a6642a6e682917",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "audio_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/audio/page-02-14ea0d8e5a4e.mp3",
+   "audio_meta": {
+    "engine": "espeak-ng",
+    "voice": "fa",
+    "mime": "audio/mpeg",
+    "duration_s": 19.89,
+    "bytes": 159660,
+    "issues": [],
+    "words": [
+     {
+      "w": "بهترین",
+      "t": 0.0,
+      "d": 0.629
+     },
+     {
+      "w": "دوست",
+      "t": 0.629,
+      "d": 0.391
+     },
+     {
+      "w": "سامان،",
+      "t": 1.02,
+      "d": 0.706
+     },
+     {
+      "w": "فلفل",
+      "t": 1.726,
+      "d": 0.572
+     },
+     {
+      "w": "بود؛",
+      "t": 2.298,
+      "d": 0.78
+     },
+     {
+      "w": "روباه",
+      "t": 3.078,
+      "d": 0.471
+     },
+     {
+      "w": "کوچولوی",
+      "t": 3.549,
+      "d": 0.773
+     },
+     {
+      "w": "نارنجی",
+      "t": 4.322,
+      "d": 0.526
+     },
+     {
+      "w": "که",
+      "t": 4.848,
+      "d": 0.295
+     },
+     {
+      "w": "زیر",
+      "t": 5.143,
+      "d": 0.318
+     },
+     {
+      "w": "درخت",
+      "t": 5.461,
+      "d": 0.497
+     },
+     {
+      "w": "سیب",
+      "t": 5.958,
+      "d": 0.328
+     },
+     {
+      "w": "پیر",
+      "t": 6.286,
+      "d": 0.306
+     },
+     {
+      "w": "زندگی",
+      "t": 6.592,
+      "d": 0.561
+     },
+     {
+      "w": "می‌کرد.",
+      "t": 7.153,
+      "d": 0.752
+     },
+     {
+      "w": "فلفل",
+      "t": 7.905,
+      "d": 0.752
+     },
+     {
+      "w": "همه‌ی",
+      "t": 8.657,
+      "d": 0.531
+     },
+     {
+      "w": "راه‌های",
+      "t": 9.188,
+      "d": 0.599
+     },
+     {
+      "w": "مرغزار",
+      "t": 9.787,
+      "d": 0.544
+     },
+     {
+      "w": "را",
+      "t": 10.331,
+      "d": 0.202
+     },
+     {
+      "w": "بلد",
+      "t": 10.533,
+      "d": 0.393
+     },
+     {
+      "w": "بود",
+      "t": 10.926,
+      "d": 0.383
+     },
+     {
+      "w": "و",
+      "t": 11.309,
+      "d": 0.213
+     },
+     {
+      "w": "هیچ‌وقت",
+      "t": 11.522,
+      "d": 0.694
+     },
+     {
+      "w": "برای",
+      "t": 12.216,
+      "d": 0.471
+     },
+     {
+      "w": "شام",
+      "t": 12.687,
+      "d": 0.396
+     },
+     {
+      "w": "دیر",
+      "t": 13.083,
+      "d": 0.265
+     },
+     {
+      "w": "نمی‌کرد.",
+      "t": 13.348,
+      "d": 0.821
+     },
+     {
+      "w": "فلفل",
+      "t": 14.169,
+      "d": 0.82
+     },
+     {
+      "w": "می‌توانست",
+      "t": 14.989,
+      "d": 0.756
+     },
+     {
+      "w": "بوی",
+      "t": 15.745,
+      "d": 0.351
+     },
+     {
+      "w": "کیک",
+      "t": 16.096,
+      "d": 0.394
+     },
+     {
+      "w": "زغال‌اخته",
+      "t": 16.49,
+      "d": 0.793
+     },
+     {
+      "w": "را",
+      "t": 17.283,
+      "d": 0.172
+     },
+     {
+      "w": "از",
+      "t": 17.455,
+      "d": 0.161
+     },
+     {
+      "w": "سه",
+      "t": 17.616,
+      "d": 0.255
+     },
+     {
+      "w": "تپه",
+      "t": 17.871,
+      "d": 0.522
+     },
+     {
+      "w": "آن‌طرف‌تر",
+      "t": 18.393,
+      "d": 0.783
+     },
+     {
+      "w": "بفهمد!",
+      "t": 19.176,
+      "d": 0.714
+     }
+    ],
+    "timing_source": "engine_word_events",
+    "timing_quality": {
+     "words": 39,
+     "text_words": 39,
+     "coverage": 1.0,
+     "monotonic": true,
+     "ends_at": 19.89,
+     "duration_s": 19.89,
+     "overshoot": 0.0,
+     "ok": true
+    }
+   },
+   "words": [
+    {
+     "w": "بهترین",
+     "t": 0.0,
+     "d": 0.629
+    },
+    {
+     "w": "دوست",
+     "t": 0.629,
+     "d": 0.391
+    },
+    {
+     "w": "سامان،",
+     "t": 1.02,
+     "d": 0.706
+    },
+    {
+     "w": "فلفل",
+     "t": 1.726,
+     "d": 0.572
+    },
+    {
+     "w": "بود؛",
+     "t": 2.298,
+     "d": 0.78
+    },
+    {
+     "w": "روباه",
+     "t": 3.078,
+     "d": 0.471
+    },
+    {
+     "w": "کوچولوی",
+     "t": 3.549,
+     "d": 0.773
+    },
+    {
+     "w": "نارنجی",
+     "t": 4.322,
+     "d": 0.526
+    },
+    {
+     "w": "که",
+     "t": 4.848,
+     "d": 0.295
+    },
+    {
+     "w": "زیر",
+     "t": 5.143,
+     "d": 0.318
+    },
+    {
+     "w": "درخت",
+     "t": 5.461,
+     "d": 0.497
+    },
+    {
+     "w": "سیب",
+     "t": 5.958,
+     "d": 0.328
+    },
+    {
+     "w": "پیر",
+     "t": 6.286,
+     "d": 0.306
+    },
+    {
+     "w": "زندگی",
+     "t": 6.592,
+     "d": 0.561
+    },
+    {
+     "w": "می‌کرد.",
+     "t": 7.153,
+     "d": 0.752
+    },
+    {
+     "w": "فلفل",
+     "t": 7.905,
+     "d": 0.752
+    },
+    {
+     "w": "همه‌ی",
+     "t": 8.657,
+     "d": 0.531
+    },
+    {
+     "w": "راه‌های",
+     "t": 9.188,
+     "d": 0.599
+    },
+    {
+     "w": "مرغزار",
+     "t": 9.787,
+     "d": 0.544
+    },
+    {
+     "w": "را",
+     "t": 10.331,
+     "d": 0.202
+    },
+    {
+     "w": "بلد",
+     "t": 10.533,
+     "d": 0.393
+    },
+    {
+     "w": "بود",
+     "t": 10.926,
+     "d": 0.383
+    },
+    {
+     "w": "و",
+     "t": 11.309,
+     "d": 0.213
+    },
+    {
+     "w": "هیچ‌وقت",
+     "t": 11.522,
+     "d": 0.694
+    },
+    {
+     "w": "برای",
+     "t": 12.216,
+     "d": 0.471
+    },
+    {
+     "w": "شام",
+     "t": 12.687,
+     "d": 0.396
+    },
+    {
+     "w": "دیر",
+     "t": 13.083,
+     "d": 0.265
+    },
+    {
+     "w": "نمی‌کرد.",
+     "t": 13.348,
+     "d": 0.821
+    },
+    {
+     "w": "فلفل",
+     "t": 14.169,
+     "d": 0.82
+    },
+    {
+     "w": "می‌توانست",
+     "t": 14.989,
+     "d": 0.756
+    },
+    {
+     "w": "بوی",
+     "t": 15.745,
+     "d": 0.351
+    },
+    {
+     "w": "کیک",
+     "t": 16.096,
+     "d": 0.394
+    },
+    {
+     "w": "زغال‌اخته",
+     "t": 16.49,
+     "d": 0.793
+    },
+    {
+     "w": "را",
+     "t": 17.283,
+     "d": 0.172
+    },
+    {
+     "w": "از",
+     "t": 17.455,
+     "d": 0.161
+    },
+    {
+     "w": "سه",
+     "t": 17.616,
+     "d": 0.255
+    },
+    {
+     "w": "تپه",
+     "t": 17.871,
+     "d": 0.522
+    },
+    {
+     "w": "آن‌طرف‌تر",
+     "t": 18.393,
+     "d": 0.783
+    },
+    {
+     "w": "بفهمد!",
+     "t": 19.176,
+     "d": 0.714
+    }
+   ],
+   "timing_source": "engine_word_events",
+   "duration_s": 19.89,
+   "inpaints": 0
+  },
+  {
+   "id": "0a76a64f48384fdf8fe496c5c5995cf3",
+   "number": 3,
+   "beat": "inciting",
+   "text": "یک شب اتفاق عجیبی افتاد. کوچک‌ترین ستاره از آسمان لیز خورد و پایین و پایین‌تر آمد، درست وسط مرغزار! باید پیش از صبح به آسمان برمی‌گشت. ستاره با صدای آرامی روی علف‌ها نشست و مثل یک چراغ کوچک می‌درخشید.",
+   "image_prompt": "A small glowing star falling from the night sky with a sparkling trail into a dark meadow, Saman and Felfel watching amazed",
+   "scene": {
+    "location": "meadow",
+    "time": "night",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "falling_star"
+    ],
+    "mood": "surprised",
+    "poses": {
+     "hero": "point",
+     "comp": "stand"
+    },
+    "expressions": {
+     "hero": "surprised",
+     "comp": "surprised"
+    },
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/images/page-03-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: A small glowing star falling from the night sky with a sparkling trail into a dark meadow, Saman and Felfel watching amazed\nSetting: meadow, time of day: night, mood: surprised.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: point. Expression: surprised.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: stand. Expression: surprised.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: wide shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 324,
+      "file": "images/page-03-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "291bc4cc93494907"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 538372,
+      "aspect": 1.3333,
+      "luma_std": 36.37,
+      "luma_mean": 96.03,
+      "dhash": "291bc4cc93494907",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "audio_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/audio/page-03-cb17968c215d.mp3",
+   "audio_meta": {
+    "engine": "espeak-ng",
+    "voice": "fa",
+    "mime": "audio/mpeg",
+    "duration_s": 18.51,
+    "bytes": 148584,
+    "issues": [],
+    "words": [
+     {
+      "w": "یک",
+      "t": 0.0,
+      "d": 0.279
+     },
+     {
+      "w": "شب",
+      "t": 0.279,
+      "d": 0.3
+     },
+     {
+      "w": "اتفاق",
+      "t": 0.579,
+      "d": 0.624
+     },
+     {
+      "w": "عجیبی",
+      "t": 1.203,
+      "d": 0.476
+     },
+     {
+      "w": "افتاد.",
+      "t": 1.679,
+      "d": 0.942
+     },
+     {
+      "w": "کوچک‌ترین",
+      "t": 2.621,
+      "d": 0.942
+     },
+     {
+      "w": "ستاره",
+      "t": 3.563,
+      "d": 0.523
+     },
+     {
+      "w": "از",
+      "t": 4.086,
+      "d": 0.148
+     },
+     {
+      "w": "آسمان",
+      "t": 4.234,
+      "d": 0.529
+     },
+     {
+      "w": "لیز",
+      "t": 4.763,
+      "d": 0.293
+     },
+     {
+      "w": "خورد",
+      "t": 5.056,
+      "d": 0.41
+     },
+     {
+      "w": "و",
+      "t": 5.466,
+      "d": 0.214
+     },
+     {
+      "w": "پایین",
+      "t": 5.68,
+      "d": 0.434
+     },
+     {
+      "w": "و",
+      "t": 6.114,
+      "d": 0.208
+     },
+     {
+      "w": "پایین‌تر",
+      "t": 6.322,
+      "d": 0.625
+     },
+     {
+      "w": "آمد،",
+      "t": 6.947,
+      "d": 0.597
+     },
+     {
+      "w": "درست",
+      "t": 7.544,
+      "d": 0.444
+     },
+     {
+      "w": "وسط",
+      "t": 7.988,
+      "d": 0.479
+     },
+     {
+      "w": "مرغزار!",
+      "t": 8.467,
+      "d": 0.707
+     },
+     {
+      "w": "باید",
+      "t": 9.174,
+      "d": 0.707
+     },
+     {
+      "w": "پیش",
+      "t": 9.88,
+      "d": 0.339
+     },
+     {
+      "w": "از",
+      "t": 10.219,
+      "d": 0.183
+     },
+     {
+      "w": "صبح",
+      "t": 10.402,
+      "d": 0.381
+     },
+     {
+      "w": "به",
+      "t": 10.783,
+      "d": 0.182
+     },
+     {
+      "w": "آسمان",
+      "t": 10.965,
+      "d": 0.548
+     },
+     {
+      "w": "برمی‌گشت.",
+      "t": 11.513,
+      "d": 0.868
+     },
+     {
+      "w": "ستاره",
+      "t": 12.381,
+      "d": 0.868
+     },
+     {
+      "w": "با",
+      "t": 13.249,
+      "d": 0.184
+     },
+     {
+      "w": "صدای",
+      "t": 13.433,
+      "d": 0.503
+     },
+     {
+      "w": "آرامی",
+      "t": 13.936,
+      "d": 0.489
+     },
+     {
+      "w": "روی",
+      "t": 14.425,
+      "d": 0.326
+     },
+     {
+      "w": "علف‌ها",
+      "t": 14.751,
+      "d": 0.525
+     },
+     {
+      "w": "نشست",
+      "t": 15.276,
+      "d": 0.473
+     },
+     {
+      "w": "و",
+      "t": 15.749,
+      "d": 0.22
+     },
+     {
+      "w": "مثل",
+      "t": 15.969,
+      "d": 0.318
+     },
+     {
+      "w": "یک",
+      "t": 16.287,
+      "d": 0.279
+     },
+     {
+      "w": "چراغ",
+      "t": 16.566,
+      "d": 0.464
+     },
+     {
+      "w": "کوچک",
+      "t": 17.03,
+      "d": 0.573
+     },
+     {
+      "w": "می‌درخشید.",
+      "t": 17.603,
+      "d": 0.907
+     }
+    ],
+    "timing_source": "engine_word_events",
+    "timing_quality": {
+     "words": 39,
+     "text_words": 39,
+     "coverage": 1.0,
+     "monotonic": true,
+     "ends_at": 18.51,
+     "duration_s": 18.51,
+     "overshoot": 0.0,
+     "ok": true
+    }
+   },
+   "words": [
+    {
+     "w": "یک",
+     "t": 0.0,
+     "d": 0.279
+    },
+    {
+     "w": "شب",
+     "t": 0.279,
+     "d": 0.3
+    },
+    {
+     "w": "اتفاق",
+     "t": 0.579,
+     "d": 0.624
+    },
+    {
+     "w": "عجیبی",
+     "t": 1.203,
+     "d": 0.476
+    },
+    {
+     "w": "افتاد.",
+     "t": 1.679,
+     "d": 0.942
+    },
+    {
+     "w": "کوچک‌ترین",
+     "t": 2.621,
+     "d": 0.942
+    },
+    {
+     "w": "ستاره",
+     "t": 3.563,
+     "d": 0.523
+    },
+    {
+     "w": "از",
+     "t": 4.086,
+     "d": 0.148
+    },
+    {
+     "w": "آسمان",
+     "t": 4.234,
+     "d": 0.529
+    },
+    {
+     "w": "لیز",
+     "t": 4.763,
+     "d": 0.293
+    },
+    {
+     "w": "خورد",
+     "t": 5.056,
+     "d": 0.41
+    },
+    {
+     "w": "و",
+     "t": 5.466,
+     "d": 0.214
+    },
+    {
+     "w": "پایین",
+     "t": 5.68,
+     "d": 0.434
+    },
+    {
+     "w": "و",
+     "t": 6.114,
+     "d": 0.208
+    },
+    {
+     "w": "پایین‌تر",
+     "t": 6.322,
+     "d": 0.625
+    },
+    {
+     "w": "آمد،",
+     "t": 6.947,
+     "d": 0.597
+    },
+    {
+     "w": "درست",
+     "t": 7.544,
+     "d": 0.444
+    },
+    {
+     "w": "وسط",
+     "t": 7.988,
+     "d": 0.479
+    },
+    {
+     "w": "مرغزار!",
+     "t": 8.467,
+     "d": 0.707
+    },
+    {
+     "w": "باید",
+     "t": 9.174,
+     "d": 0.707
+    },
+    {
+     "w": "پیش",
+     "t": 9.88,
+     "d": 0.339
+    },
+    {
+     "w": "از",
+     "t": 10.219,
+     "d": 0.183
+    },
+    {
+     "w": "صبح",
+     "t": 10.402,
+     "d": 0.381
+    },
+    {
+     "w": "به",
+     "t": 10.783,
+     "d": 0.182
+    },
+    {
+     "w": "آسمان",
+     "t": 10.965,
+     "d": 0.548
+    },
+    {
+     "w": "برمی‌گشت.",
+     "t": 11.513,
+     "d": 0.868
+    },
+    {
+     "w": "ستاره",
+     "t": 12.381,
+     "d": 0.868
+    },
+    {
+     "w": "با",
+     "t": 13.249,
+     "d": 0.184
+    },
+    {
+     "w": "صدای",
+     "t": 13.433,
+     "d": 0.503
+    },
+    {
+     "w": "آرامی",
+     "t": 13.936,
+     "d": 0.489
+    },
+    {
+     "w": "روی",
+     "t": 14.425,
+     "d": 0.326
+    },
+    {
+     "w": "علف‌ها",
+     "t": 14.751,
+     "d": 0.525
+    },
+    {
+     "w": "نشست",
+     "t": 15.276,
+     "d": 0.473
+    },
+    {
+     "w": "و",
+     "t": 15.749,
+     "d": 0.22
+    },
+    {
+     "w": "مثل",
+     "t": 15.969,
+     "d": 0.318
+    },
+    {
+     "w": "یک",
+     "t": 16.287,
+     "d": 0.279
+    },
+    {
+     "w": "چراغ",
+     "t": 16.566,
+     "d": 0.464
+    },
+    {
+     "w": "کوچک",
+     "t": 17.03,
+     "d": 0.573
+    },
+    {
+     "w": "می‌درخشید.",
+     "t": 17.603,
+     "d": 0.907
+    }
+   ],
+   "timing_source": "engine_word_events",
+   "duration_s": 18.51,
+   "inpaints": 0
+  },
+  {
+   "id": "074c166c2e114abfa8c7e9a2457a1065",
+   "number": 4,
+   "beat": "decision",
+   "text": "مادربزرگ جغدِ دانا از روی شاخه پایین آمد و گفت: «فقط از بالای تپه‌ی ماه است که ستاره می‌تواند به آسمان برگردد.» سامان ستاره را آرام در یک سبد گذاشت و دو دوست در دل شب راه افتادند.",
+   "image_prompt": "A wise old owl on a branch pointing her wing toward a distant hill under the moon, Saman holding a small basket with a glowing star, Felfel beside",
+   "scene": {
+    "location": "meadow",
+    "time": "night",
+    "characters": [
+     "hero",
+     "comp",
+     "helper"
+    ],
+    "props": [
+     "basket_star",
+     "moon"
+    ],
+    "mood": "determined",
+    "poses": {
+     "hero": "hold",
+     "comp": "stand",
+     "helper": "point"
+    },
+    "expressions": {
+     "hero": "determined"
+    },
+    "shot": "medium",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp",
+    "helper"
+   ],
+   "image_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/images/page-04-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: A wise old owl on a branch pointing her wing toward a distant hill under the moon, Saman holding a small basket with a glowing star, Felfel beside\nSetting: meadow, time of day: night, mood: determined.\nExactly 3 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: hold. Expression: determined.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: stand.\n- Grandma Owl: a wise old owl with speckled brown feathers, big shiny dark eyes, wearing small dark round glasses. Always the same look: dark round glasses, owl shape. Pose: point.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height; Grandma Owl is about 60% of Saman's height.\nRelationships: Felfel - best friend of Saman; Grandma Owl - mentor of Saman; Saman - best friend of Felfel; Saman - trusted grown-up of Grandma Owl.\nComposition: medium shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 425,
+      "file": "images/page-04-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp",
+     "helper"
+    ],
+    "dhash": "493934202bd8d523"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 600684,
+      "aspect": 1.3333,
+      "luma_std": 38.07,
+      "luma_mean": 98.31,
+      "dhash": "493934202bd8d523",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0,
+       "helper": 1.0
+      }
+     }
+    }
+   },
+   "audio_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/audio/page-04-a64a0ce7f138.mp3",
+   "audio_meta": {
+    "engine": "espeak-ng",
+    "voice": "fa",
+    "mime": "audio/mpeg",
+    "duration_s": 15.98,
+    "bytes": 128313,
+    "issues": [],
+    "words": [
+     {
+      "w": "مادربزرگ",
+      "t": 0.0,
+      "d": 0.879
+     },
+     {
+      "w": "جغدِ",
+      "t": 0.879,
+      "d": 0.382
+     },
+     {
+      "w": "دانا",
+      "t": 1.261,
+      "d": 0.363
+     },
+     {
+      "w": "از",
+      "t": 1.624,
+      "d": 0.18
+     },
+     {
+      "w": "روی",
+      "t": 1.804,
+      "d": 0.328
+     },
+     {
+      "w": "شاخه",
+      "t": 2.132,
+      "d": 0.471
+     },
+     {
+      "w": "پایین",
+      "t": 2.603,
+      "d": 0.354
+     },
+     {
+      "w": "آمد",
+      "t": 2.957,
+      "d": 0.399
+     },
+     {
+      "w": "و",
+      "t": 3.356,
+      "d": 0.222
+     },
+     {
+      "w": "گفت:",
+      "t": 3.578,
+      "d": 0.823
+     },
+     {
+      "w": "«فقط",
+      "t": 4.401,
+      "d": 0.442
+     },
+     {
+      "w": "از",
+      "t": 4.843,
+      "d": 0.156
+     },
+     {
+      "w": "بالای",
+      "t": 4.999,
+      "d": 0.44
+     },
+     {
+      "w": "تپه‌ی",
+      "t": 5.439,
+      "d": 0.732
+     },
+     {
+      "w": "ماه",
+      "t": 6.171,
+      "d": 0.259
+     },
+     {
+      "w": "است",
+      "t": 6.43,
+      "d": 0.266
+     },
+     {
+      "w": "که",
+      "t": 6.696,
+      "d": 0.278
+     },
+     {
+      "w": "ستاره",
+      "t": 6.974,
+      "d": 0.564
+     },
+     {
+      "w": "می‌تواند",
+      "t": 7.538,
+      "d": 0.695
+     },
+     {
+      "w": "به",
+      "t": 8.233,
+      "d": 0.181
+     },
+     {
+      "w": "آسمان",
+      "t": 8.414,
+      "d": 0.554
+     },
+     {
+      "w": "برگردد.»",
+      "t": 8.968,
+      "d": 0.848
+     },
+     {
+      "w": "سامان",
+      "t": 9.816,
+      "d": 0.848
+     },
+     {
+      "w": "ستاره",
+      "t": 10.664,
+      "d": 0.543
+     },
+     {
+      "w": "را",
+      "t": 11.207,
+      "d": 0.172
+     },
+     {
+      "w": "آرام",
+      "t": 11.379,
+      "d": 0.497
+     },
+     {
+      "w": "در",
+      "t": 11.876,
+      "d": 0.236
+     },
+     {
+      "w": "یک",
+      "t": 12.112,
+      "d": 0.276
+     },
+     {
+      "w": "سبد",
+      "t": 12.388,
+      "d": 0.457
+     },
+     {
+      "w": "گذاشت",
+      "t": 12.845,
+      "d": 0.496
+     },
+     {
+      "w": "و",
+      "t": 13.341,
+      "d": 0.222
+     },
+     {
+      "w": "دو",
+      "t": 13.563,
+      "d": 0.189
+     },
+     {
+      "w": "دوست",
+      "t": 13.752,
+      "d": 0.401
+     },
+     {
+      "w": "در",
+      "t": 14.153,
+      "d": 0.253
+     },
+     {
+      "w": "دل",
+      "t": 14.406,
+      "d": 0.28
+     },
+     {
+      "w": "شب",
+      "t": 14.686,
+      "d": 0.318
+     },
+     {
+      "w": "راه",
+      "t": 15.004,
+      "d": 0.284
+     },
+     {
+      "w": "افتادند.",
+      "t": 15.288,
+      "d": 0.692
+     }
+    ],
+    "timing_source": "engine_word_events",
+    "timing_quality": {
+     "words": 38,
+     "text_words": 38,
+     "coverage": 1.0,
+     "monotonic": true,
+     "ends_at": 15.98,
+     "duration_s": 15.98,
+     "overshoot": 0.0,
+     "ok": true
+    }
+   },
+   "words": [
+    {
+     "w": "مادربزرگ",
+     "t": 0.0,
+     "d": 0.879
+    },
+    {
+     "w": "جغدِ",
+     "t": 0.879,
+     "d": 0.382
+    },
+    {
+     "w": "دانا",
+     "t": 1.261,
+     "d": 0.363
+    },
+    {
+     "w": "از",
+     "t": 1.624,
+     "d": 0.18
+    },
+    {
+     "w": "روی",
+     "t": 1.804,
+     "d": 0.328
+    },
+    {
+     "w": "شاخه",
+     "t": 2.132,
+     "d": 0.471
+    },
+    {
+     "w": "پایین",
+     "t": 2.603,
+     "d": 0.354
+    },
+    {
+     "w": "آمد",
+     "t": 2.957,
+     "d": 0.399
+    },
+    {
+     "w": "و",
+     "t": 3.356,
+     "d": 0.222
+    },
+    {
+     "w": "گفت:",
+     "t": 3.578,
+     "d": 0.823
+    },
+    {
+     "w": "«فقط",
+     "t": 4.401,
+     "d": 0.442
+    },
+    {
+     "w": "از",
+     "t": 4.843,
+     "d": 0.156
+    },
+    {
+     "w": "بالای",
+     "t": 4.999,
+     "d": 0.44
+    },
+    {
+     "w": "تپه‌ی",
+     "t": 5.439,
+     "d": 0.732
+    },
+    {
+     "w": "ماه",
+     "t": 6.171,
+     "d": 0.259
+    },
+    {
+     "w": "است",
+     "t": 6.43,
+     "d": 0.266
+    },
+    {
+     "w": "که",
+     "t": 6.696,
+     "d": 0.278
+    },
+    {
+     "w": "ستاره",
+     "t": 6.974,
+     "d": 0.564
+    },
+    {
+     "w": "می‌تواند",
+     "t": 7.538,
+     "d": 0.695
+    },
+    {
+     "w": "به",
+     "t": 8.233,
+     "d": 0.181
+    },
+    {
+     "w": "آسمان",
+     "t": 8.414,
+     "d": 0.554
+    },
+    {
+     "w": "برگردد.»",
+     "t": 8.968,
+     "d": 0.848
+    },
+    {
+     "w": "سامان",
+     "t": 9.816,
+     "d": 0.848
+    },
+    {
+     "w": "ستاره",
+     "t": 10.664,
+     "d": 0.543
+    },
+    {
+     "w": "را",
+     "t": 11.207,
+     "d": 0.172
+    },
+    {
+     "w": "آرام",
+     "t": 11.379,
+     "d": 0.497
+    },
+    {
+     "w": "در",
+     "t": 11.876,
+     "d": 0.236
+    },
+    {
+     "w": "یک",
+     "t": 12.112,
+     "d": 0.276
+    },
+    {
+     "w": "سبد",
+     "t": 12.388,
+     "d": 0.457
+    },
+    {
+     "w": "گذاشت",
+     "t": 12.845,
+     "d": 0.496
+    },
+    {
+     "w": "و",
+     "t": 13.341,
+     "d": 0.222
+    },
+    {
+     "w": "دو",
+     "t": 13.563,
+     "d": 0.189
+    },
+    {
+     "w": "دوست",
+     "t": 13.752,
+     "d": 0.401
+    },
+    {
+     "w": "در",
+     "t": 14.153,
+     "d": 0.253
+    },
+    {
+     "w": "دل",
+     "t": 14.406,
+     "d": 0.28
+    },
+    {
+     "w": "شب",
+     "t": 14.686,
+     "d": 0.318
+    },
+    {
+     "w": "راه",
+     "t": 15.004,
+     "d": 0.284
+    },
+    {
+     "w": "افتادند.",
+     "t": 15.288,
+     "d": 0.692
+    }
+   ],
+   "timing_source": "engine_word_events",
+   "duration_s": 15.98,
+   "inpaints": 0
+  },
+  {
+   "id": "1e991775a2814c57aefbb8f2f469f9f5",
+   "number": 5,
+   "beat": "ep_river",
+   "text": "اول به رودخانه‌ای پهن و پرسروصدا رسیدند. پلی در کار نبود؛ فقط چند سنگ لغزنده وسط آب بود. فلفل اول پرید و سامان سبد را بالا گرفت و پشت سرش رفت. قدم‌به‌قدم و با احتیاط به آن طرف رسیدند. فلفل روی آخرین سنگ تلوتلو خورد و شلپ! فقط دمش خیس شد.",
+   "image_prompt": "Saman carefully stepping across stepping stones in a moonlit river holding a basket with a glowing star high, Felfel hopping ahead",
+   "scene": {
+    "location": "river",
+    "time": "night",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "stones",
+     "basket_star",
+     "moon"
+    ],
+    "mood": "careful",
+    "poses": {
+     "hero": "walk_hold",
+     "comp": "jump"
+    },
+    "expressions": {},
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/images/page-05-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: Saman carefully stepping across stepping stones in a moonlit river holding a basket with a glowing star high, Felfel hopping ahead\nSetting: river, time of day: night, mood: careful.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: walk_hold.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: jump.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: wide shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 526,
+      "file": "images/page-05-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "0929049294686a15"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 537304,
+      "aspect": 1.3333,
+      "luma_std": 36.12,
+      "luma_mean": 92.52,
+      "dhash": "0929049294686a15",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "audio_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/audio/page-05-87dd5f6351bf.mp3",
+   "audio_meta": {
+    "engine": "espeak-ng",
+    "voice": "fa",
+    "mime": "audio/mpeg",
+    "duration_s": 23.87,
+    "bytes": 191425,
+    "issues": [],
+    "words": [
+     {
+      "w": "اول",
+      "t": 0.0,
+      "d": 0.461
+     },
+     {
+      "w": "به",
+      "t": 0.461,
+      "d": 0.201
+     },
+     {
+      "w": "رودخانه‌ای",
+      "t": 0.662,
+      "d": 0.754
+     },
+     {
+      "w": "پهن",
+      "t": 1.416,
+      "d": 0.383
+     },
+     {
+      "w": "و",
+      "t": 1.799,
+      "d": 0.212
+     },
+     {
+      "w": "پرسروصدا",
+      "t": 2.011,
+      "d": 0.898
+     },
+     {
+      "w": "رسیدند.",
+      "t": 2.909,
+      "d": 0.711
+     },
+     {
+      "w": "پلی",
+      "t": 3.62,
+      "d": 0.711
+     },
+     {
+      "w": "در",
+      "t": 4.331,
+      "d": 0.248
+     },
+     {
+      "w": "کار",
+      "t": 4.579,
+      "d": 0.329
+     },
+     {
+      "w": "نبود؛",
+      "t": 4.908,
+      "d": 0.851
+     },
+     {
+      "w": "فقط",
+      "t": 5.759,
+      "d": 0.459
+     },
+     {
+      "w": "چند",
+      "t": 6.218,
+      "d": 0.383
+     },
+     {
+      "w": "سنگ",
+      "t": 6.601,
+      "d": 0.376
+     },
+     {
+      "w": "لغزنده",
+      "t": 6.977,
+      "d": 0.557
+     },
+     {
+      "w": "وسط",
+      "t": 7.534,
+      "d": 0.473
+     },
+     {
+      "w": "آب",
+      "t": 8.007,
+      "d": 0.228
+     },
+     {
+      "w": "بود.",
+      "t": 8.235,
+      "d": 0.697
+     },
+     {
+      "w": "فلفل",
+      "t": 8.931,
+      "d": 0.697
+     },
+     {
+      "w": "اول",
+      "t": 9.628,
+      "d": 0.455
+     },
+     {
+      "w": "پرید",
+      "t": 10.083,
+      "d": 0.475
+     },
+     {
+      "w": "و",
+      "t": 10.558,
+      "d": 0.213
+     },
+     {
+      "w": "سامان",
+      "t": 10.771,
+      "d": 0.447
+     },
+     {
+      "w": "سبد",
+      "t": 11.218,
+      "d": 0.453
+     },
+     {
+      "w": "را",
+      "t": 11.671,
+      "d": 0.18
+     },
+     {
+      "w": "بالا",
+      "t": 11.851,
+      "d": 0.354
+     },
+     {
+      "w": "گرفت",
+      "t": 12.205,
+      "d": 0.492
+     },
+     {
+      "w": "و",
+      "t": 12.697,
+      "d": 0.214
+     },
+     {
+      "w": "پشت",
+      "t": 12.911,
+      "d": 0.355
+     },
+     {
+      "w": "سرش",
+      "t": 13.266,
+      "d": 0.473
+     },
+     {
+      "w": "رفت.",
+      "t": 13.739,
+      "d": 0.868
+     },
+     {
+      "w": "قدم‌به‌قدم",
+      "t": 14.607,
+      "d": 0.868
+     },
+     {
+      "w": "و",
+      "t": 15.475,
+      "d": 0.222
+     },
+     {
+      "w": "با",
+      "t": 15.697,
+      "d": 0.171
+     },
+     {
+      "w": "احتیاط",
+      "t": 15.868,
+      "d": 0.549
+     },
+     {
+      "w": "به",
+      "t": 16.417,
+      "d": 0.181
+     },
+     {
+      "w": "آن",
+      "t": 16.598,
+      "d": 0.166
+     },
+     {
+      "w": "طرف",
+      "t": 16.764,
+      "d": 0.445
+     },
+     {
+      "w": "رسیدند.",
+      "t": 17.209,
+      "d": 0.819
+     },
+     {
+      "w": "فلفل",
+      "t": 18.028,
+      "d": 0.819
+     },
+     {
+      "w": "روی",
+      "t": 18.847,
+      "d": 0.338
+     },
+     {
+      "w": "آخرین",
+      "t": 19.185,
+      "d": 0.54
+     },
+     {
+      "w": "سنگ",
+      "t": 19.725,
+      "d": 0.361
+     },
+     {
+      "w": "تلوتلو",
+      "t": 20.086,
+      "d": 0.638
+     },
+     {
+      "w": "خورد",
+      "t": 20.724,
+      "d": 0.415
+     },
+     {
+      "w": "و",
+      "t": 21.139,
+      "d": 0.211
+     },
+     {
+      "w": "شلپ!",
+      "t": 21.35,
+      "d": 0.693
+     },
+     {
+      "w": "فقط",
+      "t": 22.043,
+      "d": 0.693
+     },
+     {
+      "w": "دمش",
+      "t": 22.736,
+      "d": 0.383
+     },
+     {
+      "w": "خیس",
+      "t": 23.119,
+      "d": 0.341
+     },
+     {
+      "w": "شد.",
+      "t": 23.46,
+      "d": 0.41
+     }
+    ],
+    "timing_source": "engine_word_events",
+    "timing_quality": {
+     "words": 51,
+     "text_words": 51,
+     "coverage": 1.0,
+     "monotonic": true,
+     "ends_at": 23.87,
+     "duration_s": 23.87,
+     "overshoot": 0.0,
+     "ok": true
+    }
+   },
+   "words": [
+    {
+     "w": "اول",
+     "t": 0.0,
+     "d": 0.461
+    },
+    {
+     "w": "به",
+     "t": 0.461,
+     "d": 0.201
+    },
+    {
+     "w": "رودخانه‌ای",
+     "t": 0.662,
+     "d": 0.754
+    },
+    {
+     "w": "پهن",
+     "t": 1.416,
+     "d": 0.383
+    },
+    {
+     "w": "و",
+     "t": 1.799,
+     "d": 0.212
+    },
+    {
+     "w": "پرسروصدا",
+     "t": 2.011,
+     "d": 0.898
+    },
+    {
+     "w": "رسیدند.",
+     "t": 2.909,
+     "d": 0.711
+    },
+    {
+     "w": "پلی",
+     "t": 3.62,
+     "d": 0.711
+    },
+    {
+     "w": "در",
+     "t": 4.331,
+     "d": 0.248
+    },
+    {
+     "w": "کار",
+     "t": 4.579,
+     "d": 0.329
+    },
+    {
+     "w": "نبود؛",
+     "t": 4.908,
+     "d": 0.851
+    },
+    {
+     "w": "فقط",
+     "t": 5.759,
+     "d": 0.459
+    },
+    {
+     "w": "چند",
+     "t": 6.218,
+     "d": 0.383
+    },
+    {
+     "w": "سنگ",
+     "t": 6.601,
+     "d": 0.376
+    },
+    {
+     "w": "لغزنده",
+     "t": 6.977,
+     "d": 0.557
+    },
+    {
+     "w": "وسط",
+     "t": 7.534,
+     "d": 0.473
+    },
+    {
+     "w": "آب",
+     "t": 8.007,
+     "d": 0.228
+    },
+    {
+     "w": "بود.",
+     "t": 8.235,
+     "d": 0.697
+    },
+    {
+     "w": "فلفل",
+     "t": 8.931,
+     "d": 0.697
+    },
+    {
+     "w": "اول",
+     "t": 9.628,
+     "d": 0.455
+    },
+    {
+     "w": "پرید",
+     "t": 10.083,
+     "d": 0.475
+    },
+    {
+     "w": "و",
+     "t": 10.558,
+     "d": 0.213
+    },
+    {
+     "w": "سامان",
+     "t": 10.771,
+     "d": 0.447
+    },
+    {
+     "w": "سبد",
+     "t": 11.218,
+     "d": 0.453
+    },
+    {
+     "w": "را",
+     "t": 11.671,
+     "d": 0.18
+    },
+    {
+     "w": "بالا",
+     "t": 11.851,
+     "d": 0.354
+    },
+    {
+     "w": "گرفت",
+     "t": 12.205,
+     "d": 0.492
+    },
+    {
+     "w": "و",
+     "t": 12.697,
+     "d": 0.214
+    },
+    {
+     "w": "پشت",
+     "t": 12.911,
+     "d": 0.355
+    },
+    {
+     "w": "سرش",
+     "t": 13.266,
+     "d": 0.473
+    },
+    {
+     "w": "رفت.",
+     "t": 13.739,
+     "d": 0.868
+    },
+    {
+     "w": "قدم‌به‌قدم",
+     "t": 14.607,
+     "d": 0.868
+    },
+    {
+     "w": "و",
+     "t": 15.475,
+     "d": 0.222
+    },
+    {
+     "w": "با",
+     "t": 15.697,
+     "d": 0.171
+    },
+    {
+     "w": "احتیاط",
+     "t": 15.868,
+     "d": 0.549
+    },
+    {
+     "w": "به",
+     "t": 16.417,
+     "d": 0.181
+    },
+    {
+     "w": "آن",
+     "t": 16.598,
+     "d": 0.166
+    },
+    {
+     "w": "طرف",
+     "t": 16.764,
+     "d": 0.445
+    },
+    {
+     "w": "رسیدند.",
+     "t": 17.209,
+     "d": 0.819
+    },
+    {
+     "w": "فلفل",
+     "t": 18.028,
+     "d": 0.819
+    },
+    {
+     "w": "روی",
+     "t": 18.847,
+     "d": 0.338
+    },
+    {
+     "w": "آخرین",
+     "t": 19.185,
+     "d": 0.54
+    },
+    {
+     "w": "سنگ",
+     "t": 19.725,
+     "d": 0.361
+    },
+    {
+     "w": "تلوتلو",
+     "t": 20.086,
+     "d": 0.638
+    },
+    {
+     "w": "خورد",
+     "t": 20.724,
+     "d": 0.415
+    },
+    {
+     "w": "و",
+     "t": 21.139,
+     "d": 0.211
+    },
+    {
+     "w": "شلپ!",
+     "t": 21.35,
+     "d": 0.693
+    },
+    {
+     "w": "فقط",
+     "t": 22.043,
+     "d": 0.693
+    },
+    {
+     "w": "دمش",
+     "t": 22.736,
+     "d": 0.383
+    },
+    {
+     "w": "خیس",
+     "t": 23.119,
+     "d": 0.341
+    },
+    {
+     "w": "شد.",
+     "t": 23.46,
+     "d": 0.41
+    }
+   ],
+   "timing_source": "engine_word_events",
+   "duration_s": 23.87,
+   "inpaints": 0
+  },
+  {
+   "id": "50c49643d74e4cae98db997407988f8e",
+   "number": 6,
+   "beat": "ep_fireflies",
+   "text": "بعد به جنگلی تاریک و انبوه رسیدند. درخت‌ها آن‌قدر بلند بودند که ماه را پنهان می‌کردند و راه دیگر پیدا نبود. ناگهان دسته‌ای کرم شب‌تاب پایین آمدند و چشمک‌زنان گفتند: «دنبال ما بیایید!» و جنگل پر از نوری مهربان شد.",
+   "image_prompt": "Saman and Felfel in a tall dark forest at night, a swirl of glowing fireflies lighting a winding path",
+   "scene": {
+    "location": "forest",
+    "time": "night",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "fireflies",
+     "basket_star"
+    ],
+    "mood": "wonder",
+    "poses": {
+     "hero": "walk_hold",
+     "comp": "walk"
+    },
+    "expressions": {
+     "hero": "happy"
+    },
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/images/page-06-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: Saman and Felfel in a tall dark forest at night, a swirl of glowing fireflies lighting a winding path\nSetting: forest, time of day: night, mood: wonder.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: walk_hold. Expression: happy.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: walk.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: wide shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 627,
+      "file": "images/page-06-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "d149495414652913"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 563967,
+      "aspect": 1.3333,
+      "luma_std": 25.74,
+      "luma_mean": 94.46,
+      "dhash": "d149495414652913",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "audio_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/audio/page-06-828eb9190554.mp3",
+   "audio_meta": {
+    "engine": "espeak-ng",
+    "voice": "fa",
+    "mime": "audio/mpeg",
+    "duration_s": 18.93,
+    "bytes": 151928,
+    "issues": [],
+    "words": [
+     {
+      "w": "بعد",
+      "t": 0.0,
+      "d": 0.279
+     },
+     {
+      "w": "به",
+      "t": 0.279,
+      "d": 0.198
+     },
+     {
+      "w": "جنگلی",
+      "t": 0.477,
+      "d": 0.454
+     },
+     {
+      "w": "تاریک",
+      "t": 0.931,
+      "d": 0.5
+     },
+     {
+      "w": "و",
+      "t": 1.431,
+      "d": 0.204
+     },
+     {
+      "w": "انبوه",
+      "t": 1.635,
+      "d": 0.431
+     },
+     {
+      "w": "رسیدند.",
+      "t": 2.066,
+      "d": 0.844
+     },
+     {
+      "w": "درخت‌ها",
+      "t": 2.91,
+      "d": 0.844
+     },
+     {
+      "w": "آن‌قدر",
+      "t": 3.754,
+      "d": 0.472
+     },
+     {
+      "w": "بلند",
+      "t": 4.226,
+      "d": 0.42
+     },
+     {
+      "w": "بودند",
+      "t": 4.646,
+      "d": 0.536
+     },
+     {
+      "w": "که",
+      "t": 5.182,
+      "d": 0.286
+     },
+     {
+      "w": "ماه",
+      "t": 5.468,
+      "d": 0.274
+     },
+     {
+      "w": "را",
+      "t": 5.742,
+      "d": 0.165
+     },
+     {
+      "w": "پنهان",
+      "t": 5.907,
+      "d": 0.506
+     },
+     {
+      "w": "می‌کردند",
+      "t": 6.413,
+      "d": 0.674
+     },
+     {
+      "w": "و",
+      "t": 7.087,
+      "d": 0.223
+     },
+     {
+      "w": "راه",
+      "t": 7.31,
+      "d": 0.3
+     },
+     {
+      "w": "دیگر",
+      "t": 7.61,
+      "d": 0.396
+     },
+     {
+      "w": "پیدا",
+      "t": 8.006,
+      "d": 0.432
+     },
+     {
+      "w": "نبود.",
+      "t": 8.438,
+      "d": 0.761
+     },
+     {
+      "w": "ناگهان",
+      "t": 9.2,
+      "d": 0.761
+     },
+     {
+      "w": "دسته‌ای",
+      "t": 9.961,
+      "d": 0.55
+     },
+     {
+      "w": "کرم",
+      "t": 10.511,
+      "d": 0.461
+     },
+     {
+      "w": "شب‌تاب",
+      "t": 10.972,
+      "d": 0.621
+     },
+     {
+      "w": "پایین",
+      "t": 11.593,
+      "d": 0.354
+     },
+     {
+      "w": "آمدند",
+      "t": 11.947,
+      "d": 0.544
+     },
+     {
+      "w": "و",
+      "t": 12.491,
+      "d": 0.211
+     },
+     {
+      "w": "چشمک‌زنان",
+      "t": 12.702,
+      "d": 0.963
+     },
+     {
+      "w": "گفتند:",
+      "t": 13.665,
+      "d": 0.98
+     },
+     {
+      "w": "«دنبال",
+      "t": 14.645,
+      "d": 0.454
+     },
+     {
+      "w": "ما",
+      "t": 15.099,
+      "d": 0.173
+     },
+     {
+      "w": "بیایید!»",
+      "t": 15.272,
+      "d": 0.678
+     },
+     {
+      "w": "و",
+      "t": 15.95,
+      "d": 0.678
+     },
+     {
+      "w": "جنگل",
+      "t": 16.628,
+      "d": 0.47
+     },
+     {
+      "w": "پر",
+      "t": 17.098,
+      "d": 0.273
+     },
+     {
+      "w": "از",
+      "t": 17.371,
+      "d": 0.18
+     },
+     {
+      "w": "نوری",
+      "t": 17.551,
+      "d": 0.354
+     },
+     {
+      "w": "مهربان",
+      "t": 17.905,
+      "d": 0.612
+     },
+     {
+      "w": "شد.",
+      "t": 18.517,
+      "d": 0.413
+     }
+    ],
+    "timing_source": "engine_word_events",
+    "timing_quality": {
+     "words": 40,
+     "text_words": 40,
+     "coverage": 1.0,
+     "monotonic": true,
+     "ends_at": 18.93,
+     "duration_s": 18.93,
+     "overshoot": 0.0,
+     "ok": true
+    }
+   },
+   "words": [
+    {
+     "w": "بعد",
+     "t": 0.0,
+     "d": 0.279
+    },
+    {
+     "w": "به",
+     "t": 0.279,
+     "d": 0.198
+    },
+    {
+     "w": "جنگلی",
+     "t": 0.477,
+     "d": 0.454
+    },
+    {
+     "w": "تاریک",
+     "t": 0.931,
+     "d": 0.5
+    },
+    {
+     "w": "و",
+     "t": 1.431,
+     "d": 0.204
+    },
+    {
+     "w": "انبوه",
+     "t": 1.635,
+     "d": 0.431
+    },
+    {
+     "w": "رسیدند.",
+     "t": 2.066,
+     "d": 0.844
+    },
+    {
+     "w": "درخت‌ها",
+     "t": 2.91,
+     "d": 0.844
+    },
+    {
+     "w": "آن‌قدر",
+     "t": 3.754,
+     "d": 0.472
+    },
+    {
+     "w": "بلند",
+     "t": 4.226,
+     "d": 0.42
+    },
+    {
+     "w": "بودند",
+     "t": 4.646,
+     "d": 0.536
+    },
+    {
+     "w": "که",
+     "t": 5.182,
+     "d": 0.286
+    },
+    {
+     "w": "ماه",
+     "t": 5.468,
+     "d": 0.274
+    },
+    {
+     "w": "را",
+     "t": 5.742,
+     "d": 0.165
+    },
+    {
+     "w": "پنهان",
+     "t": 5.907,
+     "d": 0.506
+    },
+    {
+     "w": "می‌کردند",
+     "t": 6.413,
+     "d": 0.674
+    },
+    {
+     "w": "و",
+     "t": 7.087,
+     "d": 0.223
+    },
+    {
+     "w": "راه",
+     "t": 7.31,
+     "d": 0.3
+    },
+    {
+     "w": "دیگر",
+     "t": 7.61,
+     "d": 0.396
+    },
+    {
+     "w": "پیدا",
+     "t": 8.006,
+     "d": 0.432
+    },
+    {
+     "w": "نبود.",
+     "t": 8.438,
+     "d": 0.761
+    },
+    {
+     "w": "ناگهان",
+     "t": 9.2,
+     "d": 0.761
+    },
+    {
+     "w": "دسته‌ای",
+     "t": 9.961,
+     "d": 0.55
+    },
+    {
+     "w": "کرم",
+     "t": 10.511,
+     "d": 0.461
+    },
+    {
+     "w": "شب‌تاب",
+     "t": 10.972,
+     "d": 0.621
+    },
+    {
+     "w": "پایین",
+     "t": 11.593,
+     "d": 0.354
+    },
+    {
+     "w": "آمدند",
+     "t": 11.947,
+     "d": 0.544
+    },
+    {
+     "w": "و",
+     "t": 12.491,
+     "d": 0.211
+    },
+    {
+     "w": "چشمک‌زنان",
+     "t": 12.702,
+     "d": 0.963
+    },
+    {
+     "w": "گفتند:",
+     "t": 13.665,
+     "d": 0.98
+    },
+    {
+     "w": "«دنبال",
+     "t": 14.645,
+     "d": 0.454
+    },
+    {
+     "w": "ما",
+     "t": 15.099,
+     "d": 0.173
+    },
+    {
+     "w": "بیایید!»",
+     "t": 15.272,
+     "d": 0.678
+    },
+    {
+     "w": "و",
+     "t": 15.95,
+     "d": 0.678
+    },
+    {
+     "w": "جنگل",
+     "t": 16.628,
+     "d": 0.47
+    },
+    {
+     "w": "پر",
+     "t": 17.098,
+     "d": 0.273
+    },
+    {
+     "w": "از",
+     "t": 17.371,
+     "d": 0.18
+    },
+    {
+     "w": "نوری",
+     "t": 17.551,
+     "d": 0.354
+    },
+    {
+     "w": "مهربان",
+     "t": 17.905,
+     "d": 0.612
+    },
+    {
+     "w": "شد.",
+     "t": 18.517,
+     "d": 0.413
+    }
+   ],
+   "timing_source": "engine_word_events",
+   "duration_s": 18.93,
+   "inpaints": 0
+  },
+  {
+   "id": "0b0664fc46f64f56a767f08db128f82a",
+   "number": 7,
+   "beat": "ep_bear",
+   "text": "وسط راه، خرس قهوه‌ای بزرگی خوابیده بود و مثل رعد خروپف می‌کرد. سامان به‌جای داد زدن، یک لالایی آرام زمزمه کرد. خرس در خواب لبخند زد، غلت خورد و درست به اندازه‌ی کافی جا باز کرد تا آن‌ها پاورچین‌پاورچین رد شوند. فلفل آن‌قدر آرام راه می‌رفت که حتی سبیل‌هایش هم تکان نمی‌خوردند.",
+   "image_prompt": "A big friendly brown bear sleeping across a forest path at night, Saman tiptoeing past humming, Felfel tiptoeing behind",
+   "scene": {
+    "location": "forest",
+    "time": "night",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "bear",
+     "basket_star"
+    ],
+    "mood": "careful",
+    "poses": {
+     "hero": "tiptoe",
+     "comp": "tiptoe"
+    },
+    "expressions": {},
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/images/page-07-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: A big friendly brown bear sleeping across a forest path at night, Saman tiptoeing past humming, Felfel tiptoeing behind\nSetting: forest, time of day: night, mood: careful.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: tiptoe.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: tiptoe.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: wide shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 728,
+      "file": "images/page-07-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "0949c2d214640b25"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 517688,
+      "aspect": 1.3333,
+      "luma_std": 24.08,
+      "luma_mean": 95.6,
+      "dhash": "0949c2d214640b25",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "audio_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/audio/page-07-fb3dcd9e1c98.mp3",
+   "audio_meta": {
+    "engine": "espeak-ng",
+    "voice": "fa",
+    "mime": "audio/mpeg",
+    "duration_s": 25.08,
+    "bytes": 201038,
+    "issues": [],
+    "words": [
+     {
+      "w": "وسط",
+      "t": 0.0,
+      "d": 0.467
+     },
+     {
+      "w": "راه،",
+      "t": 0.467,
+      "d": 0.56
+     },
+     {
+      "w": "خرس",
+      "t": 1.027,
+      "d": 0.396
+     },
+     {
+      "w": "قهوه‌ای",
+      "t": 1.423,
+      "d": 0.551
+     },
+     {
+      "w": "بزرگی",
+      "t": 1.974,
+      "d": 0.564
+     },
+     {
+      "w": "خوابیده",
+      "t": 2.538,
+      "d": 0.613
+     },
+     {
+      "w": "بود",
+      "t": 3.151,
+      "d": 0.397
+     },
+     {
+      "w": "و",
+      "t": 3.548,
+      "d": 0.224
+     },
+     {
+      "w": "مثل",
+      "t": 3.772,
+      "d": 0.318
+     },
+     {
+      "w": "رعد",
+      "t": 4.09,
+      "d": 0.331
+     },
+     {
+      "w": "خروپف",
+      "t": 4.421,
+      "d": 0.698
+     },
+     {
+      "w": "می‌کرد.",
+      "t": 5.119,
+      "d": 0.687
+     },
+     {
+      "w": "سامان",
+      "t": 5.806,
+      "d": 0.686
+     },
+     {
+      "w": "به‌جای",
+      "t": 6.492,
+      "d": 0.419
+     },
+     {
+      "w": "داد",
+      "t": 6.911,
+      "d": 0.305
+     },
+     {
+      "w": "زدن،",
+      "t": 7.216,
+      "d": 0.69
+     },
+     {
+      "w": "یک",
+      "t": 7.906,
+      "d": 0.28
+     },
+     {
+      "w": "لالایی",
+      "t": 8.186,
+      "d": 0.464
+     },
+     {
+      "w": "آرام",
+      "t": 8.65,
+      "d": 0.484
+     },
+     {
+      "w": "زمزمه",
+      "t": 9.134,
+      "d": 0.566
+     },
+     {
+      "w": "کرد.",
+      "t": 9.7,
+      "d": 0.604
+     },
+     {
+      "w": "خرس",
+      "t": 10.304,
+      "d": 0.604
+     },
+     {
+      "w": "در",
+      "t": 10.908,
+      "d": 0.238
+     },
+     {
+      "w": "خواب",
+      "t": 11.146,
+      "d": 0.34
+     },
+     {
+      "w": "لبخند",
+      "t": 11.486,
+      "d": 0.579
+     },
+     {
+      "w": "زد،",
+      "t": 12.065,
+      "d": 0.581
+     },
+     {
+      "w": "غلت",
+      "t": 12.646,
+      "d": 0.394
+     },
+     {
+      "w": "خورد",
+      "t": 13.04,
+      "d": 0.416
+     },
+     {
+      "w": "و",
+      "t": 13.456,
+      "d": 0.222
+     },
+     {
+      "w": "درست",
+      "t": 13.678,
+      "d": 0.481
+     },
+     {
+      "w": "به",
+      "t": 14.159,
+      "d": 0.181
+     },
+     {
+      "w": "اندازه‌ی",
+      "t": 14.34,
+      "d": 0.775
+     },
+     {
+      "w": "کافی",
+      "t": 15.115,
+      "d": 0.445
+     },
+     {
+      "w": "جا",
+      "t": 15.56,
+      "d": 0.18
+     },
+     {
+      "w": "باز",
+      "t": 15.74,
+      "d": 0.343
+     },
+     {
+      "w": "کرد",
+      "t": 16.083,
+      "d": 0.391
+     },
+     {
+      "w": "تا",
+      "t": 16.474,
+      "d": 0.218
+     },
+     {
+      "w": "آن‌ها",
+      "t": 16.692,
+      "d": 0.298
+     },
+     {
+      "w": "پاورچین‌پاورچین",
+      "t": 16.99,
+      "d": 1.397
+     },
+     {
+      "w": "رد",
+      "t": 18.387,
+      "d": 0.297
+     },
+     {
+      "w": "شوند.",
+      "t": 18.684,
+      "d": 0.721
+     },
+     {
+      "w": "فلفل",
+      "t": 19.405,
+      "d": 0.721
+     },
+     {
+      "w": "آن‌قدر",
+      "t": 20.126,
+      "d": 0.447
+     },
+     {
+      "w": "آرام",
+      "t": 20.573,
+      "d": 0.467
+     },
+     {
+      "w": "راه",
+      "t": 21.04,
+      "d": 0.288
+     },
+     {
+      "w": "می‌رفت",
+      "t": 21.328,
+      "d": 0.488
+     },
+     {
+      "w": "که",
+      "t": 21.816,
+      "d": 0.278
+     },
+     {
+      "w": "حتی",
+      "t": 22.094,
+      "d": 0.484
+     },
+     {
+      "w": "سبیل‌هایش",
+      "t": 22.578,
+      "d": 0.853
+     },
+     {
+      "w": "هم",
+      "t": 23.431,
+      "d": 0.3
+     },
+     {
+      "w": "تکان",
+      "t": 23.731,
+      "d": 0.487
+     },
+     {
+      "w": "نمی‌خوردند.",
+      "t": 24.218,
+      "d": 0.862
+     }
+    ],
+    "timing_source": "engine_word_events",
+    "timing_quality": {
+     "words": 52,
+     "text_words": 52,
+     "coverage": 1.0,
+     "monotonic": true,
+     "ends_at": 25.08,
+     "duration_s": 25.08,
+     "overshoot": 0.0,
+     "ok": true
+    }
+   },
+   "words": [
+    {
+     "w": "وسط",
+     "t": 0.0,
+     "d": 0.467
+    },
+    {
+     "w": "راه،",
+     "t": 0.467,
+     "d": 0.56
+    },
+    {
+     "w": "خرس",
+     "t": 1.027,
+     "d": 0.396
+    },
+    {
+     "w": "قهوه‌ای",
+     "t": 1.423,
+     "d": 0.551
+    },
+    {
+     "w": "بزرگی",
+     "t": 1.974,
+     "d": 0.564
+    },
+    {
+     "w": "خوابیده",
+     "t": 2.538,
+     "d": 0.613
+    },
+    {
+     "w": "بود",
+     "t": 3.151,
+     "d": 0.397
+    },
+    {
+     "w": "و",
+     "t": 3.548,
+     "d": 0.224
+    },
+    {
+     "w": "مثل",
+     "t": 3.772,
+     "d": 0.318
+    },
+    {
+     "w": "رعد",
+     "t": 4.09,
+     "d": 0.331
+    },
+    {
+     "w": "خروپف",
+     "t": 4.421,
+     "d": 0.698
+    },
+    {
+     "w": "می‌کرد.",
+     "t": 5.119,
+     "d": 0.687
+    },
+    {
+     "w": "سامان",
+     "t": 5.806,
+     "d": 0.686
+    },
+    {
+     "w": "به‌جای",
+     "t": 6.492,
+     "d": 0.419
+    },
+    {
+     "w": "داد",
+     "t": 6.911,
+     "d": 0.305
+    },
+    {
+     "w": "زدن،",
+     "t": 7.216,
+     "d": 0.69
+    },
+    {
+     "w": "یک",
+     "t": 7.906,
+     "d": 0.28
+    },
+    {
+     "w": "لالایی",
+     "t": 8.186,
+     "d": 0.464
+    },
+    {
+     "w": "آرام",
+     "t": 8.65,
+     "d": 0.484
+    },
+    {
+     "w": "زمزمه",
+     "t": 9.134,
+     "d": 0.566
+    },
+    {
+     "w": "کرد.",
+     "t": 9.7,
+     "d": 0.604
+    },
+    {
+     "w": "خرس",
+     "t": 10.304,
+     "d": 0.604
+    },
+    {
+     "w": "در",
+     "t": 10.908,
+     "d": 0.238
+    },
+    {
+     "w": "خواب",
+     "t": 11.146,
+     "d": 0.34
+    },
+    {
+     "w": "لبخند",
+     "t": 11.486,
+     "d": 0.579
+    },
+    {
+     "w": "زد،",
+     "t": 12.065,
+     "d": 0.581
+    },
+    {
+     "w": "غلت",
+     "t": 12.646,
+     "d": 0.394
+    },
+    {
+     "w": "خورد",
+     "t": 13.04,
+     "d": 0.416
+    },
+    {
+     "w": "و",
+     "t": 13.456,
+     "d": 0.222
+    },
+    {
+     "w": "درست",
+     "t": 13.678,
+     "d": 0.481
+    },
+    {
+     "w": "به",
+     "t": 14.159,
+     "d": 0.181
+    },
+    {
+     "w": "اندازه‌ی",
+     "t": 14.34,
+     "d": 0.775
+    },
+    {
+     "w": "کافی",
+     "t": 15.115,
+     "d": 0.445
+    },
+    {
+     "w": "جا",
+     "t": 15.56,
+     "d": 0.18
+    },
+    {
+     "w": "باز",
+     "t": 15.74,
+     "d": 0.343
+    },
+    {
+     "w": "کرد",
+     "t": 16.083,
+     "d": 0.391
+    },
+    {
+     "w": "تا",
+     "t": 16.474,
+     "d": 0.218
+    },
+    {
+     "w": "آن‌ها",
+     "t": 16.692,
+     "d": 0.298
+    },
+    {
+     "w": "پاورچین‌پاورچین",
+     "t": 16.99,
+     "d": 1.397
+    },
+    {
+     "w": "رد",
+     "t": 18.387,
+     "d": 0.297
+    },
+    {
+     "w": "شوند.",
+     "t": 18.684,
+     "d": 0.721
+    },
+    {
+     "w": "فلفل",
+     "t": 19.405,
+     "d": 0.721
+    },
+    {
+     "w": "آن‌قدر",
+     "t": 20.126,
+     "d": 0.447
+    },
+    {
+     "w": "آرام",
+     "t": 20.573,
+     "d": 0.467
+    },
+    {
+     "w": "راه",
+     "t": 21.04,
+     "d": 0.288
+    },
+    {
+     "w": "می‌رفت",
+     "t": 21.328,
+     "d": 0.488
+    },
+    {
+     "w": "که",
+     "t": 21.816,
+     "d": 0.278
+    },
+    {
+     "w": "حتی",
+     "t": 22.094,
+     "d": 0.484
+    },
+    {
+     "w": "سبیل‌هایش",
+     "t": 22.578,
+     "d": 0.853
+    },
+    {
+     "w": "هم",
+     "t": 23.431,
+     "d": 0.3
+    },
+    {
+     "w": "تکان",
+     "t": 23.731,
+     "d": 0.487
+    },
+    {
+     "w": "نمی‌خوردند.",
+     "t": 24.218,
+     "d": 0.862
+    }
+   ],
+   "timing_source": "engine_word_events",
+   "duration_s": 25.08,
+   "inpaints": 0
+  },
+  {
+   "id": "422793d2b73d4fc7873afc6b84d8a768",
+   "number": 8,
+   "beat": "ep_wind",
+   "text": "در دشت باز، باد تندی وزید و سبد را کشید؛ نزدیک بود ستاره‌ی کوچولو را با خودش ببرد! سامان و فلفل به هم چسبیدند و از ستاره محافظت کردند تا باد خسته شد و آرام گرفت.",
+   "image_prompt": "Saman and Felfel huddled together on a windy grassy plain at night shielding a glowing star in a basket, grass and leaves swirling",
+   "scene": {
+    "location": "meadow",
+    "time": "night",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "wind",
+     "basket_star"
+    ],
+    "mood": "brave",
+    "poses": {
+     "hero": "hold",
+     "comp": "stand"
+    },
+    "expressions": {
+     "hero": "determined"
+    },
+    "shot": "medium",
+    "weather": "windy"
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/images/page-08-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: Saman and Felfel huddled together on a windy grassy plain at night shielding a glowing star in a basket, grass and leaves swirling\nSetting: meadow, time of day: night, mood: brave.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: hold. Expression: determined.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: stand.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: medium shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 829,
+      "file": "images/page-08-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "12139cdc95656915"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 542746,
+      "aspect": 1.3333,
+      "luma_std": 36.38,
+      "luma_mean": 94.59,
+      "dhash": "12139cdc95656915",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "audio_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/audio/page-08-30a4bf3440bc.mp3",
+   "audio_meta": {
+    "engine": "espeak-ng",
+    "voice": "fa",
+    "mime": "audio/mpeg",
+    "duration_s": 15.72,
+    "bytes": 126223,
+    "issues": [],
+    "words": [
+     {
+      "w": "در",
+      "t": 0.0,
+      "d": 0.23
+     },
+     {
+      "w": "دشت",
+      "t": 0.23,
+      "d": 0.322
+     },
+     {
+      "w": "باز،",
+      "t": 0.552,
+      "d": 0.649
+     },
+     {
+      "w": "باد",
+      "t": 1.201,
+      "d": 0.289
+     },
+     {
+      "w": "تندی",
+      "t": 1.49,
+      "d": 0.43
+     },
+     {
+      "w": "وزید",
+      "t": 1.92,
+      "d": 0.495
+     },
+     {
+      "w": "و",
+      "t": 2.415,
+      "d": 0.207
+     },
+     {
+      "w": "سبد",
+      "t": 2.622,
+      "d": 0.453
+     },
+     {
+      "w": "را",
+      "t": 3.075,
+      "d": 0.165
+     },
+     {
+      "w": "کشید؛",
+      "t": 3.24,
+      "d": 0.854
+     },
+     {
+      "w": "نزدیک",
+      "t": 4.094,
+      "d": 0.538
+     },
+     {
+      "w": "بود",
+      "t": 4.632,
+      "d": 0.378
+     },
+     {
+      "w": "ستاره‌ی",
+      "t": 5.01,
+      "d": 0.74
+     },
+     {
+      "w": "کوچولو",
+      "t": 5.75,
+      "d": 0.687
+     },
+     {
+      "w": "را",
+      "t": 6.437,
+      "d": 0.19
+     },
+     {
+      "w": "با",
+      "t": 6.627,
+      "d": 0.178
+     },
+     {
+      "w": "خودش",
+      "t": 6.805,
+      "d": 0.456
+     },
+     {
+      "w": "ببرد!",
+      "t": 7.261,
+      "d": 0.76
+     },
+     {
+      "w": "سامان",
+      "t": 8.021,
+      "d": 0.761
+     },
+     {
+      "w": "و",
+      "t": 8.782,
+      "d": 0.213
+     },
+     {
+      "w": "فلفل",
+      "t": 8.995,
+      "d": 0.571
+     },
+     {
+      "w": "به",
+      "t": 9.566,
+      "d": 0.187
+     },
+     {
+      "w": "هم",
+      "t": 9.753,
+      "d": 0.301
+     },
+     {
+      "w": "چسبیدند",
+      "t": 10.054,
+      "d": 0.776
+     },
+     {
+      "w": "و",
+      "t": 10.83,
+      "d": 0.204
+     },
+     {
+      "w": "از",
+      "t": 11.034,
+      "d": 0.187
+     },
+     {
+      "w": "ستاره",
+      "t": 11.221,
+      "d": 0.55
+     },
+     {
+      "w": "محافظت",
+      "t": 11.771,
+      "d": 0.757
+     },
+     {
+      "w": "کردند",
+      "t": 12.528,
+      "d": 0.564
+     },
+     {
+      "w": "تا",
+      "t": 13.092,
+      "d": 0.232
+     },
+     {
+      "w": "باد",
+      "t": 13.324,
+      "d": 0.34
+     },
+     {
+      "w": "خسته",
+      "t": 13.664,
+      "d": 0.479
+     },
+     {
+      "w": "شد",
+      "t": 14.143,
+      "d": 0.341
+     },
+     {
+      "w": "و",
+      "t": 14.484,
+      "d": 0.204
+     },
+     {
+      "w": "آرام",
+      "t": 14.688,
+      "d": 0.501
+     },
+     {
+      "w": "گرفت.",
+      "t": 15.189,
+      "d": 0.531
+     }
+    ],
+    "timing_source": "engine_word_events",
+    "timing_quality": {
+     "words": 36,
+     "text_words": 36,
+     "coverage": 1.0,
+     "monotonic": true,
+     "ends_at": 15.72,
+     "duration_s": 15.72,
+     "overshoot": 0.0,
+     "ok": true
+    }
+   },
+   "words": [
+    {
+     "w": "در",
+     "t": 0.0,
+     "d": 0.23
+    },
+    {
+     "w": "دشت",
+     "t": 0.23,
+     "d": 0.322
+    },
+    {
+     "w": "باز،",
+     "t": 0.552,
+     "d": 0.649
+    },
+    {
+     "w": "باد",
+     "t": 1.201,
+     "d": 0.289
+    },
+    {
+     "w": "تندی",
+     "t": 1.49,
+     "d": 0.43
+    },
+    {
+     "w": "وزید",
+     "t": 1.92,
+     "d": 0.495
+    },
+    {
+     "w": "و",
+     "t": 2.415,
+     "d": 0.207
+    },
+    {
+     "w": "سبد",
+     "t": 2.622,
+     "d": 0.453
+    },
+    {
+     "w": "را",
+     "t": 3.075,
+     "d": 0.165
+    },
+    {
+     "w": "کشید؛",
+     "t": 3.24,
+     "d": 0.854
+    },
+    {
+     "w": "نزدیک",
+     "t": 4.094,
+     "d": 0.538
+    },
+    {
+     "w": "بود",
+     "t": 4.632,
+     "d": 0.378
+    },
+    {
+     "w": "ستاره‌ی",
+     "t": 5.01,
+     "d": 0.74
+    },
+    {
+     "w": "کوچولو",
+     "t": 5.75,
+     "d": 0.687
+    },
+    {
+     "w": "را",
+     "t": 6.437,
+     "d": 0.19
+    },
+    {
+     "w": "با",
+     "t": 6.627,
+     "d": 0.178
+    },
+    {
+     "w": "خودش",
+     "t": 6.805,
+     "d": 0.456
+    },
+    {
+     "w": "ببرد!",
+     "t": 7.261,
+     "d": 0.76
+    },
+    {
+     "w": "سامان",
+     "t": 8.021,
+     "d": 0.761
+    },
+    {
+     "w": "و",
+     "t": 8.782,
+     "d": 0.213
+    },
+    {
+     "w": "فلفل",
+     "t": 8.995,
+     "d": 0.571
+    },
+    {
+     "w": "به",
+     "t": 9.566,
+     "d": 0.187
+    },
+    {
+     "w": "هم",
+     "t": 9.753,
+     "d": 0.301
+    },
+    {
+     "w": "چسبیدند",
+     "t": 10.054,
+     "d": 0.776
+    },
+    {
+     "w": "و",
+     "t": 10.83,
+     "d": 0.204
+    },
+    {
+     "w": "از",
+     "t": 11.034,
+     "d": 0.187
+    },
+    {
+     "w": "ستاره",
+     "t": 11.221,
+     "d": 0.55
+    },
+    {
+     "w": "محافظت",
+     "t": 11.771,
+     "d": 0.757
+    },
+    {
+     "w": "کردند",
+     "t": 12.528,
+     "d": 0.564
+    },
+    {
+     "w": "تا",
+     "t": 13.092,
+     "d": 0.232
+    },
+    {
+     "w": "باد",
+     "t": 13.324,
+     "d": 0.34
+    },
+    {
+     "w": "خسته",
+     "t": 13.664,
+     "d": 0.479
+    },
+    {
+     "w": "شد",
+     "t": 14.143,
+     "d": 0.341
+    },
+    {
+     "w": "و",
+     "t": 14.484,
+     "d": 0.204
+    },
+    {
+     "w": "آرام",
+     "t": 14.688,
+     "d": 0.501
+    },
+    {
+     "w": "گرفت.",
+     "t": 15.189,
+     "d": 0.531
+    }
+   ],
+   "timing_source": "engine_word_events",
+   "duration_s": 15.72,
+   "inpaints": 0
+  },
+  {
+   "id": "c1e8ee79ecbe4af991fcc9f694318823",
+   "number": 9,
+   "beat": "ep_thorns",
+   "text": "دیواری از بوته‌های پرخار راهشان را بست. آن‌قدر انبوه بود که نمی‌شد از رویش رد شد. فلفل تونل کوچکی نزدیک زمین پیدا کرد و سامان پشت سرش خزید و مراقب بود حتی یک خار هم به ستاره نخورد.",
+   "image_prompt": "Saman crawling through a small tunnel in thorny bramble bushes at night following Felfel, carefully holding a glowing basket",
+   "scene": {
+    "location": "forest",
+    "time": "night",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "brambles",
+     "basket_star"
+    ],
+    "mood": "careful",
+    "poses": {
+     "hero": "kneel",
+     "comp": "walk"
+    },
+    "expressions": {},
+    "shot": "medium",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/images/page-09-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: Saman crawling through a small tunnel in thorny bramble bushes at night following Felfel, carefully holding a glowing basket\nSetting: forest, time of day: night, mood: careful.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: kneel.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: walk.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: medium shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 930,
+      "file": "images/page-09-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "a9d3d39396676913"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 550575,
+      "aspect": 1.3333,
+      "luma_std": 26.44,
+      "luma_mean": 93.21,
+      "dhash": "a9d3d39396676913",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "audio_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/audio/page-09-504a4445bcba.mp3",
+   "audio_meta": {
+    "engine": "espeak-ng",
+    "voice": "fa",
+    "mime": "audio/mpeg",
+    "duration_s": 16.63,
+    "bytes": 133537,
+    "issues": [],
+    "words": [
+     {
+      "w": "دیواری",
+      "t": 0.0,
+      "d": 0.516
+     },
+     {
+      "w": "از",
+      "t": 0.516,
+      "d": 0.163
+     },
+     {
+      "w": "بوته‌های",
+      "t": 0.679,
+      "d": 0.741
+     },
+     {
+      "w": "پرخار",
+      "t": 1.42,
+      "d": 0.526
+     },
+     {
+      "w": "راهشان",
+      "t": 1.946,
+      "d": 0.642
+     },
+     {
+      "w": "را",
+      "t": 2.588,
+      "d": 0.179
+     },
+     {
+      "w": "بست.",
+      "t": 2.767,
+      "d": 0.632
+     },
+     {
+      "w": "آن‌قدر",
+      "t": 3.399,
+      "d": 0.632
+     },
+     {
+      "w": "انبوه",
+      "t": 4.031,
+      "d": 0.428
+     },
+     {
+      "w": "بود",
+      "t": 4.459,
+      "d": 0.363
+     },
+     {
+      "w": "که",
+      "t": 4.822,
+      "d": 0.286
+     },
+     {
+      "w": "نمی‌شد",
+      "t": 5.108,
+      "d": 0.562
+     },
+     {
+      "w": "از",
+      "t": 5.67,
+      "d": 0.174
+     },
+     {
+      "w": "رویش",
+      "t": 5.844,
+      "d": 0.426
+     },
+     {
+      "w": "رد",
+      "t": 6.27,
+      "d": 0.301
+     },
+     {
+      "w": "شد.",
+      "t": 6.571,
+      "d": 0.667
+     },
+     {
+      "w": "فلفل",
+      "t": 7.237,
+      "d": 0.667
+     },
+     {
+      "w": "تونل",
+      "t": 7.904,
+      "d": 0.438
+     },
+     {
+      "w": "کوچکی",
+      "t": 8.342,
+      "d": 0.629
+     },
+     {
+      "w": "نزدیک",
+      "t": 8.971,
+      "d": 0.538
+     },
+     {
+      "w": "زمین",
+      "t": 9.509,
+      "d": 0.415
+     },
+     {
+      "w": "پیدا",
+      "t": 9.924,
+      "d": 0.421
+     },
+     {
+      "w": "کرد",
+      "t": 10.345,
+      "d": 0.405
+     },
+     {
+      "w": "و",
+      "t": 10.75,
+      "d": 0.209
+     },
+     {
+      "w": "سامان",
+      "t": 10.959,
+      "d": 0.447
+     },
+     {
+      "w": "پشت",
+      "t": 11.406,
+      "d": 0.355
+     },
+     {
+      "w": "سرش",
+      "t": 11.761,
+      "d": 0.473
+     },
+     {
+      "w": "خزید",
+      "t": 12.234,
+      "d": 0.51
+     },
+     {
+      "w": "و",
+      "t": 12.744,
+      "d": 0.22
+     },
+     {
+      "w": "مراقب",
+      "t": 12.964,
+      "d": 0.573
+     },
+     {
+      "w": "بود",
+      "t": 13.537,
+      "d": 0.382
+     },
+     {
+      "w": "حتی",
+      "t": 13.919,
+      "d": 0.487
+     },
+     {
+      "w": "یک",
+      "t": 14.406,
+      "d": 0.267
+     },
+     {
+      "w": "خار",
+      "t": 14.673,
+      "d": 0.324
+     },
+     {
+      "w": "هم",
+      "t": 14.997,
+      "d": 0.329
+     },
+     {
+      "w": "به",
+      "t": 15.326,
+      "d": 0.187
+     },
+     {
+      "w": "ستاره",
+      "t": 15.513,
+      "d": 0.542
+     },
+     {
+      "w": "نخورد.",
+      "t": 16.055,
+      "d": 0.575
+     }
+    ],
+    "timing_source": "engine_word_events",
+    "timing_quality": {
+     "words": 38,
+     "text_words": 38,
+     "coverage": 1.0,
+     "monotonic": true,
+     "ends_at": 16.63,
+     "duration_s": 16.63,
+     "overshoot": 0.0,
+     "ok": true
+    }
+   },
+   "words": [
+    {
+     "w": "دیواری",
+     "t": 0.0,
+     "d": 0.516
+    },
+    {
+     "w": "از",
+     "t": 0.516,
+     "d": 0.163
+    },
+    {
+     "w": "بوته‌های",
+     "t": 0.679,
+     "d": 0.741
+    },
+    {
+     "w": "پرخار",
+     "t": 1.42,
+     "d": 0.526
+    },
+    {
+     "w": "راهشان",
+     "t": 1.946,
+     "d": 0.642
+    },
+    {
+     "w": "را",
+     "t": 2.588,
+     "d": 0.179
+    },
+    {
+     "w": "بست.",
+     "t": 2.767,
+     "d": 0.632
+    },
+    {
+     "w": "آن‌قدر",
+     "t": 3.399,
+     "d": 0.632
+    },
+    {
+     "w": "انبوه",
+     "t": 4.031,
+     "d": 0.428
+    },
+    {
+     "w": "بود",
+     "t": 4.459,
+     "d": 0.363
+    },
+    {
+     "w": "که",
+     "t": 4.822,
+     "d": 0.286
+    },
+    {
+     "w": "نمی‌شد",
+     "t": 5.108,
+     "d": 0.562
+    },
+    {
+     "w": "از",
+     "t": 5.67,
+     "d": 0.174
+    },
+    {
+     "w": "رویش",
+     "t": 5.844,
+     "d": 0.426
+    },
+    {
+     "w": "رد",
+     "t": 6.27,
+     "d": 0.301
+    },
+    {
+     "w": "شد.",
+     "t": 6.571,
+     "d": 0.667
+    },
+    {
+     "w": "فلفل",
+     "t": 7.237,
+     "d": 0.667
+    },
+    {
+     "w": "تونل",
+     "t": 7.904,
+     "d": 0.438
+    },
+    {
+     "w": "کوچکی",
+     "t": 8.342,
+     "d": 0.629
+    },
+    {
+     "w": "نزدیک",
+     "t": 8.971,
+     "d": 0.538
+    },
+    {
+     "w": "زمین",
+     "t": 9.509,
+     "d": 0.415
+    },
+    {
+     "w": "پیدا",
+     "t": 9.924,
+     "d": 0.421
+    },
+    {
+     "w": "کرد",
+     "t": 10.345,
+     "d": 0.405
+    },
+    {
+     "w": "و",
+     "t": 10.75,
+     "d": 0.209
+    },
+    {
+     "w": "سامان",
+     "t": 10.959,
+     "d": 0.447
+    },
+    {
+     "w": "پشت",
+     "t": 11.406,
+     "d": 0.355
+    },
+    {
+     "w": "سرش",
+     "t": 11.761,
+     "d": 0.473
+    },
+    {
+     "w": "خزید",
+     "t": 12.234,
+     "d": 0.51
+    },
+    {
+     "w": "و",
+     "t": 12.744,
+     "d": 0.22
+    },
+    {
+     "w": "مراقب",
+     "t": 12.964,
+     "d": 0.573
+    },
+    {
+     "w": "بود",
+     "t": 13.537,
+     "d": 0.382
+    },
+    {
+     "w": "حتی",
+     "t": 13.919,
+     "d": 0.487
+    },
+    {
+     "w": "یک",
+     "t": 14.406,
+     "d": 0.267
+    },
+    {
+     "w": "خار",
+     "t": 14.673,
+     "d": 0.324
+    },
+    {
+     "w": "هم",
+     "t": 14.997,
+     "d": 0.329
+    },
+    {
+     "w": "به",
+     "t": 15.326,
+     "d": 0.187
+    },
+    {
+     "w": "ستاره",
+     "t": 15.513,
+     "d": 0.542
+    },
+    {
+     "w": "نخورد.",
+     "t": 16.055,
+     "d": 0.575
+    }
+   ],
+   "timing_source": "engine_word_events",
+   "duration_s": 16.63,
+   "inpaints": 0
+  },
+  {
+   "id": "2662bcfd7eed4d909a9c360181e8fd3e",
+   "number": 10,
+   "beat": "doubt",
+   "text": "حالا نور ستاره خیلی کم شده بود و پاهای سامان خسته بودند. آهسته گفت: «اگر دیر برسیم چه؟» فلفل کنارش نشست و گفت: «تا این‌جا با هم آمده‌ایم. می‌توانیم کمی دیگر هم برویم.»",
+   "image_prompt": "Saman sitting tired on a rock at night holding a basket with a very faint star, Felfel comforting Saman",
+   "scene": {
+    "location": "hill",
+    "time": "night",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "basket_star_dim"
+    ],
+    "mood": "sad",
+    "poses": {
+     "hero": "sit",
+     "comp": "stand"
+    },
+    "expressions": {
+     "hero": "sad",
+     "comp": "kind"
+    },
+    "shot": "close",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/images/page-10-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: Saman sitting tired on a rock at night holding a basket with a very faint star, Felfel comforting Saman\nSetting: hill, time of day: night, mood: sad.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: sit. Expression: sad.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: stand. Expression: kind.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: close shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1031,
+      "file": "images/page-10-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "29691c9324a5e16b"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 521039,
+      "aspect": 1.3333,
+      "luma_std": 34.7,
+      "luma_mean": 88.52,
+      "dhash": "29691c9324a5e16b",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "audio_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/audio/page-10-0dfd0176b542.mp3",
+   "audio_meta": {
+    "engine": "espeak-ng",
+    "voice": "fa",
+    "mime": "audio/mpeg",
+    "duration_s": 16.78,
+    "bytes": 134791,
+    "issues": [],
+    "words": [
+     {
+      "w": "حالا",
+      "t": 0.0,
+      "d": 0.352
+     },
+     {
+      "w": "نور",
+      "t": 0.352,
+      "d": 0.272
+     },
+     {
+      "w": "ستاره",
+      "t": 0.624,
+      "d": 0.55
+     },
+     {
+      "w": "خیلی",
+      "t": 1.174,
+      "d": 0.419
+     },
+     {
+      "w": "کم",
+      "t": 1.593,
+      "d": 0.334
+     },
+     {
+      "w": "شده",
+      "t": 1.927,
+      "d": 0.416
+     },
+     {
+      "w": "بود",
+      "t": 2.343,
+      "d": 0.394
+     },
+     {
+      "w": "و",
+      "t": 2.737,
+      "d": 0.21
+     },
+     {
+      "w": "پاهای",
+      "t": 2.947,
+      "d": 0.535
+     },
+     {
+      "w": "سامان",
+      "t": 3.482,
+      "d": 0.445
+     },
+     {
+      "w": "خسته",
+      "t": 3.927,
+      "d": 0.479
+     },
+     {
+      "w": "بودند.",
+      "t": 4.406,
+      "d": 0.767
+     },
+     {
+      "w": "آهسته",
+      "t": 5.173,
+      "d": 0.767
+     },
+     {
+      "w": "گفت:",
+      "t": 5.94,
+      "d": 0.825
+     },
+     {
+      "w": "«اگر",
+      "t": 6.765,
+      "d": 0.371
+     },
+     {
+      "w": "دیر",
+      "t": 7.136,
+      "d": 0.283
+     },
+     {
+      "w": "برسیم",
+      "t": 7.419,
+      "d": 0.613
+     },
+     {
+      "w": "چه؟»",
+      "t": 8.032,
+      "d": 0.748
+     },
+     {
+      "w": "فلفل",
+      "t": 8.78,
+      "d": 0.748
+     },
+     {
+      "w": "کنارش",
+      "t": 9.529,
+      "d": 0.646
+     },
+     {
+      "w": "نشست",
+      "t": 10.175,
+      "d": 0.463
+     },
+     {
+      "w": "و",
+      "t": 10.638,
+      "d": 0.222
+     },
+     {
+      "w": "گفت:",
+      "t": 10.86,
+      "d": 0.822
+     },
+     {
+      "w": "«تا",
+      "t": 11.682,
+      "d": 0.218
+     },
+     {
+      "w": "این‌جا",
+      "t": 11.9,
+      "d": 0.326
+     },
+     {
+      "w": "با",
+      "t": 12.226,
+      "d": 0.185
+     },
+     {
+      "w": "هم",
+      "t": 12.411,
+      "d": 0.196
+     },
+     {
+      "w": "آمده‌ایم.",
+      "t": 12.607,
+      "d": 0.997
+     },
+     {
+      "w": "می‌توانیم",
+      "t": 13.604,
+      "d": 0.996
+     },
+     {
+      "w": "کمی",
+      "t": 14.6,
+      "d": 0.37
+     },
+     {
+      "w": "دیگر",
+      "t": 14.97,
+      "d": 0.413
+     },
+     {
+      "w": "هم",
+      "t": 15.383,
+      "d": 0.329
+     },
+     {
+      "w": "برویم.»",
+      "t": 15.712,
+      "d": 1.068
+     }
+    ],
+    "timing_source": "engine_word_events",
+    "timing_quality": {
+     "words": 33,
+     "text_words": 33,
+     "coverage": 1.0,
+     "monotonic": true,
+     "ends_at": 16.78,
+     "duration_s": 16.78,
+     "overshoot": 0.0,
+     "ok": true
+    }
+   },
+   "words": [
+    {
+     "w": "حالا",
+     "t": 0.0,
+     "d": 0.352
+    },
+    {
+     "w": "نور",
+     "t": 0.352,
+     "d": 0.272
+    },
+    {
+     "w": "ستاره",
+     "t": 0.624,
+     "d": 0.55
+    },
+    {
+     "w": "خیلی",
+     "t": 1.174,
+     "d": 0.419
+    },
+    {
+     "w": "کم",
+     "t": 1.593,
+     "d": 0.334
+    },
+    {
+     "w": "شده",
+     "t": 1.927,
+     "d": 0.416
+    },
+    {
+     "w": "بود",
+     "t": 2.343,
+     "d": 0.394
+    },
+    {
+     "w": "و",
+     "t": 2.737,
+     "d": 0.21
+    },
+    {
+     "w": "پاهای",
+     "t": 2.947,
+     "d": 0.535
+    },
+    {
+     "w": "سامان",
+     "t": 3.482,
+     "d": 0.445
+    },
+    {
+     "w": "خسته",
+     "t": 3.927,
+     "d": 0.479
+    },
+    {
+     "w": "بودند.",
+     "t": 4.406,
+     "d": 0.767
+    },
+    {
+     "w": "آهسته",
+     "t": 5.173,
+     "d": 0.767
+    },
+    {
+     "w": "گفت:",
+     "t": 5.94,
+     "d": 0.825
+    },
+    {
+     "w": "«اگر",
+     "t": 6.765,
+     "d": 0.371
+    },
+    {
+     "w": "دیر",
+     "t": 7.136,
+     "d": 0.283
+    },
+    {
+     "w": "برسیم",
+     "t": 7.419,
+     "d": 0.613
+    },
+    {
+     "w": "چه؟»",
+     "t": 8.032,
+     "d": 0.748
+    },
+    {
+     "w": "فلفل",
+     "t": 8.78,
+     "d": 0.748
+    },
+    {
+     "w": "کنارش",
+     "t": 9.529,
+     "d": 0.646
+    },
+    {
+     "w": "نشست",
+     "t": 10.175,
+     "d": 0.463
+    },
+    {
+     "w": "و",
+     "t": 10.638,
+     "d": 0.222
+    },
+    {
+     "w": "گفت:",
+     "t": 10.86,
+     "d": 0.822
+    },
+    {
+     "w": "«تا",
+     "t": 11.682,
+     "d": 0.218
+    },
+    {
+     "w": "این‌جا",
+     "t": 11.9,
+     "d": 0.326
+    },
+    {
+     "w": "با",
+     "t": 12.226,
+     "d": 0.185
+    },
+    {
+     "w": "هم",
+     "t": 12.411,
+     "d": 0.196
+    },
+    {
+     "w": "آمده‌ایم.",
+     "t": 12.607,
+     "d": 0.997
+    },
+    {
+     "w": "می‌توانیم",
+     "t": 13.604,
+     "d": 0.996
+    },
+    {
+     "w": "کمی",
+     "t": 14.6,
+     "d": 0.37
+    },
+    {
+     "w": "دیگر",
+     "t": 14.97,
+     "d": 0.413
+    },
+    {
+     "w": "هم",
+     "t": 15.383,
+     "d": 0.329
+    },
+    {
+     "w": "برویم.»",
+     "t": 15.712,
+     "d": 1.068
+    }
+   ],
+   "timing_source": "engine_word_events",
+   "duration_s": 16.78,
+   "inpaints": 0
+  },
+  {
+   "id": "7cd0815160ee4ac0b2a08bfc4dccf280",
+   "number": 11,
+   "beat": "climax",
+   "text": "سرانجام به بالای بلندترین تپه رسیدند. آسمان کم‌کم داشت روشن می‌شد. وقتی برای از دست دادن نبود! سامان سبد را تا جایی که می‌توانست بالا برد و فریاد زد: «پرواز کن و به خانه برو، ستاره‌ی کوچولو!»",
+   "image_prompt": "Saman on top of a grassy hill at dawn lifting a basket high with a glowing star toward the pale sky, Felfel cheering",
+   "scene": {
+    "location": "hill",
+    "time": "sunset",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "basket_star"
+    ],
+    "mood": "hopeful",
+    "poses": {
+     "hero": "lift",
+     "comp": "jump"
+    },
+    "expressions": {
+     "hero": "determined"
+    },
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/images/page-11-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: Saman on top of a grassy hill at dawn lifting a basket high with a glowing star toward the pale sky, Felfel cheering\nSetting: hill, time of day: sunset, mood: hopeful.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: lift. Expression: determined.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: jump.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: wide shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1132,
+      "file": "images/page-11-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "6b6ccc4b4b4a4b25"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 584136,
+      "aspect": 1.3333,
+      "luma_std": 21.43,
+      "luma_mean": 148.67,
+      "dhash": "6b6ccc4b4b4a4b25",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "audio_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/audio/page-11-2e0b0e169b46.mp3",
+   "audio_meta": {
+    "engine": "espeak-ng",
+    "voice": "fa",
+    "mime": "audio/mpeg",
+    "duration_s": 18.7,
+    "bytes": 150047,
+    "issues": [],
+    "words": [
+     {
+      "w": "سرانجام",
+      "t": 0.0,
+      "d": 0.702
+     },
+     {
+      "w": "به",
+      "t": 0.702,
+      "d": 0.199
+     },
+     {
+      "w": "بالای",
+      "t": 0.901,
+      "d": 0.459
+     },
+     {
+      "w": "بلندترین",
+      "t": 1.36,
+      "d": 0.805
+     },
+     {
+      "w": "تپه",
+      "t": 2.165,
+      "d": 0.533
+     },
+     {
+      "w": "رسیدند.",
+      "t": 2.698,
+      "d": 0.807
+     },
+     {
+      "w": "آسمان",
+      "t": 3.505,
+      "d": 0.808
+     },
+     {
+      "w": "کم‌کم",
+      "t": 4.313,
+      "d": 0.629
+     },
+     {
+      "w": "داشت",
+      "t": 4.942,
+      "d": 0.349
+     },
+     {
+      "w": "روشن",
+      "t": 5.291,
+      "d": 0.449
+     },
+     {
+      "w": "می‌شد.",
+      "t": 5.74,
+      "d": 0.665
+     },
+     {
+      "w": "وقتی",
+      "t": 6.405,
+      "d": 0.665
+     },
+     {
+      "w": "برای",
+      "t": 7.07,
+      "d": 0.444
+     },
+     {
+      "w": "از",
+      "t": 7.514,
+      "d": 0.159
+     },
+     {
+      "w": "دست",
+      "t": 7.673,
+      "d": 0.311
+     },
+     {
+      "w": "دادن",
+      "t": 7.984,
+      "d": 0.408
+     },
+     {
+      "w": "نبود!",
+      "t": 8.392,
+      "d": 0.715
+     },
+     {
+      "w": "سامان",
+      "t": 9.107,
+      "d": 0.715
+     },
+     {
+      "w": "سبد",
+      "t": 9.822,
+      "d": 0.453
+     },
+     {
+      "w": "را",
+      "t": 10.275,
+      "d": 0.163
+     },
+     {
+      "w": "تا",
+      "t": 10.438,
+      "d": 0.232
+     },
+     {
+      "w": "جایی",
+      "t": 10.67,
+      "d": 0.32
+     },
+     {
+      "w": "که",
+      "t": 10.99,
+      "d": 0.288
+     },
+     {
+      "w": "می‌توانست",
+      "t": 11.278,
+      "d": 0.751
+     },
+     {
+      "w": "بالا",
+      "t": 12.029,
+      "d": 0.346
+     },
+     {
+      "w": "برد",
+      "t": 12.375,
+      "d": 0.399
+     },
+     {
+      "w": "و",
+      "t": 12.774,
+      "d": 0.212
+     },
+     {
+      "w": "فریاد",
+      "t": 12.986,
+      "d": 0.59
+     },
+     {
+      "w": "زد:",
+      "t": 13.576,
+      "d": 0.815
+     },
+     {
+      "w": "«پرواز",
+      "t": 14.391,
+      "d": 0.544
+     },
+     {
+      "w": "کن",
+      "t": 14.935,
+      "d": 0.334
+     },
+     {
+      "w": "و",
+      "t": 15.269,
+      "d": 0.222
+     },
+     {
+      "w": "به",
+      "t": 15.491,
+      "d": 0.194
+     },
+     {
+      "w": "خانه",
+      "t": 15.685,
+      "d": 0.402
+     },
+     {
+      "w": "برو،",
+      "t": 16.087,
+      "d": 0.644
+     },
+     {
+      "w": "ستاره‌ی",
+      "t": 16.731,
+      "d": 0.742
+     },
+     {
+      "w": "کوچولو!»",
+      "t": 17.473,
+      "d": 1.227
+     }
+    ],
+    "timing_source": "engine_word_events",
+    "timing_quality": {
+     "words": 37,
+     "text_words": 37,
+     "coverage": 1.0,
+     "monotonic": true,
+     "ends_at": 18.7,
+     "duration_s": 18.7,
+     "overshoot": 0.0,
+     "ok": true
+    }
+   },
+   "words": [
+    {
+     "w": "سرانجام",
+     "t": 0.0,
+     "d": 0.702
+    },
+    {
+     "w": "به",
+     "t": 0.702,
+     "d": 0.199
+    },
+    {
+     "w": "بالای",
+     "t": 0.901,
+     "d": 0.459
+    },
+    {
+     "w": "بلندترین",
+     "t": 1.36,
+     "d": 0.805
+    },
+    {
+     "w": "تپه",
+     "t": 2.165,
+     "d": 0.533
+    },
+    {
+     "w": "رسیدند.",
+     "t": 2.698,
+     "d": 0.807
+    },
+    {
+     "w": "آسمان",
+     "t": 3.505,
+     "d": 0.808
+    },
+    {
+     "w": "کم‌کم",
+     "t": 4.313,
+     "d": 0.629
+    },
+    {
+     "w": "داشت",
+     "t": 4.942,
+     "d": 0.349
+    },
+    {
+     "w": "روشن",
+     "t": 5.291,
+     "d": 0.449
+    },
+    {
+     "w": "می‌شد.",
+     "t": 5.74,
+     "d": 0.665
+    },
+    {
+     "w": "وقتی",
+     "t": 6.405,
+     "d": 0.665
+    },
+    {
+     "w": "برای",
+     "t": 7.07,
+     "d": 0.444
+    },
+    {
+     "w": "از",
+     "t": 7.514,
+     "d": 0.159
+    },
+    {
+     "w": "دست",
+     "t": 7.673,
+     "d": 0.311
+    },
+    {
+     "w": "دادن",
+     "t": 7.984,
+     "d": 0.408
+    },
+    {
+     "w": "نبود!",
+     "t": 8.392,
+     "d": 0.715
+    },
+    {
+     "w": "سامان",
+     "t": 9.107,
+     "d": 0.715
+    },
+    {
+     "w": "سبد",
+     "t": 9.822,
+     "d": 0.453
+    },
+    {
+     "w": "را",
+     "t": 10.275,
+     "d": 0.163
+    },
+    {
+     "w": "تا",
+     "t": 10.438,
+     "d": 0.232
+    },
+    {
+     "w": "جایی",
+     "t": 10.67,
+     "d": 0.32
+    },
+    {
+     "w": "که",
+     "t": 10.99,
+     "d": 0.288
+    },
+    {
+     "w": "می‌توانست",
+     "t": 11.278,
+     "d": 0.751
+    },
+    {
+     "w": "بالا",
+     "t": 12.029,
+     "d": 0.346
+    },
+    {
+     "w": "برد",
+     "t": 12.375,
+     "d": 0.399
+    },
+    {
+     "w": "و",
+     "t": 12.774,
+     "d": 0.212
+    },
+    {
+     "w": "فریاد",
+     "t": 12.986,
+     "d": 0.59
+    },
+    {
+     "w": "زد:",
+     "t": 13.576,
+     "d": 0.815
+    },
+    {
+     "w": "«پرواز",
+     "t": 14.391,
+     "d": 0.544
+    },
+    {
+     "w": "کن",
+     "t": 14.935,
+     "d": 0.334
+    },
+    {
+     "w": "و",
+     "t": 15.269,
+     "d": 0.222
+    },
+    {
+     "w": "به",
+     "t": 15.491,
+     "d": 0.194
+    },
+    {
+     "w": "خانه",
+     "t": 15.685,
+     "d": 0.402
+    },
+    {
+     "w": "برو،",
+     "t": 16.087,
+     "d": 0.644
+    },
+    {
+     "w": "ستاره‌ی",
+     "t": 16.731,
+     "d": 0.742
+    },
+    {
+     "w": "کوچولو!»",
+     "t": 17.473,
+     "d": 1.227
+    }
+   ],
+   "timing_source": "engine_word_events",
+   "duration_s": 18.7,
+   "inpaints": 0
+  },
+  {
+   "id": "e7a8658d94c54c3cb706e1b44a2214b4",
+   "number": 12,
+   "beat": "resolution",
+   "text": "ستاره لرزید، درخشید و آرام‌آرام بالا رفت؛ آن‌قدر بالا که دوباره به خانه‌اش رسید. نورش دوباره پرفروغ شده بود و برای آخرین بار، با قدردانی برای سامان چشمک زد.",
+   "image_prompt": "A bright star rising into the dawn sky with a sparkling trail, Saman and Felfel on the hilltop waving goodbye",
+   "scene": {
+    "location": "hill",
+    "time": "sunset",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "rising_star"
+    ],
+    "mood": "joyful",
+    "poses": {
+     "hero": "wave",
+     "comp": "wave"
+    },
+    "expressions": {
+     "hero": "happy",
+     "comp": "happy"
+    },
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/images/page-12-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: A bright star rising into the dawn sky with a sparkling trail, Saman and Felfel on the hilltop waving goodbye\nSetting: hill, time of day: sunset, mood: joyful.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: wave. Expression: happy.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: wave. Expression: happy.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: wide shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1233,
+      "file": "images/page-12-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "496a7e6d6e696913"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 601316,
+      "aspect": 1.3333,
+      "luma_std": 21.34,
+      "luma_mean": 149.12,
+      "dhash": "496a7e6d6e696913",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "audio_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/audio/page-12-cdbbfdba2c75.mp3",
+   "audio_meta": {
+    "engine": "espeak-ng",
+    "voice": "fa",
+    "mime": "audio/mpeg",
+    "duration_s": 14.44,
+    "bytes": 115983,
+    "issues": [],
+    "words": [
+     {
+      "w": "ستاره",
+      "t": 0.0,
+      "d": 0.565
+     },
+     {
+      "w": "لرزید،",
+      "t": 0.565,
+      "d": 0.765
+     },
+     {
+      "w": "درخشید",
+      "t": 1.33,
+      "d": 0.704
+     },
+     {
+      "w": "و",
+      "t": 2.034,
+      "d": 0.204
+     },
+     {
+      "w": "آرام‌آرام",
+      "t": 2.238,
+      "d": 0.878
+     },
+     {
+      "w": "بالا",
+      "t": 3.116,
+      "d": 0.345
+     },
+     {
+      "w": "رفت؛",
+      "t": 3.461,
+      "d": 0.706
+     },
+     {
+      "w": "آن‌قدر",
+      "t": 4.167,
+      "d": 0.501
+     },
+     {
+      "w": "بالا",
+      "t": 4.668,
+      "d": 0.327
+     },
+     {
+      "w": "که",
+      "t": 4.995,
+      "d": 0.286
+     },
+     {
+      "w": "دوباره",
+      "t": 5.281,
+      "d": 0.563
+     },
+     {
+      "w": "به",
+      "t": 5.844,
+      "d": 0.189
+     },
+     {
+      "w": "خانه‌اش",
+      "t": 6.033,
+      "d": 0.563
+     },
+     {
+      "w": "رسید.",
+      "t": 6.596,
+      "d": 0.682
+     },
+     {
+      "w": "نورش",
+      "t": 7.278,
+      "d": 0.682
+     },
+     {
+      "w": "دوباره",
+      "t": 7.96,
+      "d": 0.524
+     },
+     {
+      "w": "پرفروغ",
+      "t": 8.484,
+      "d": 0.686
+     },
+     {
+      "w": "شده",
+      "t": 9.17,
+      "d": 0.417
+     },
+     {
+      "w": "بود",
+      "t": 9.587,
+      "d": 0.396
+     },
+     {
+      "w": "و",
+      "t": 9.983,
+      "d": 0.222
+     },
+     {
+      "w": "برای",
+      "t": 10.205,
+      "d": 0.467
+     },
+     {
+      "w": "آخرین",
+      "t": 10.672,
+      "d": 0.566
+     },
+     {
+      "w": "بار،",
+      "t": 11.238,
+      "d": 0.586
+     },
+     {
+      "w": "با",
+      "t": 11.824,
+      "d": 0.146
+     },
+     {
+      "w": "قدردانی",
+      "t": 11.97,
+      "d": 0.602
+     },
+     {
+      "w": "برای",
+      "t": 12.572,
+      "d": 0.453
+     },
+     {
+      "w": "سامان",
+      "t": 13.025,
+      "d": 0.448
+     },
+     {
+      "w": "چشمک",
+      "t": 13.473,
+      "d": 0.55
+     },
+     {
+      "w": "زد.",
+      "t": 14.023,
+      "d": 0.417
+     }
+    ],
+    "timing_source": "engine_word_events",
+    "timing_quality": {
+     "words": 29,
+     "text_words": 29,
+     "coverage": 1.0,
+     "monotonic": true,
+     "ends_at": 14.44,
+     "duration_s": 14.44,
+     "overshoot": 0.0,
+     "ok": true
+    }
+   },
+   "words": [
+    {
+     "w": "ستاره",
+     "t": 0.0,
+     "d": 0.565
+    },
+    {
+     "w": "لرزید،",
+     "t": 0.565,
+     "d": 0.765
+    },
+    {
+     "w": "درخشید",
+     "t": 1.33,
+     "d": 0.704
+    },
+    {
+     "w": "و",
+     "t": 2.034,
+     "d": 0.204
+    },
+    {
+     "w": "آرام‌آرام",
+     "t": 2.238,
+     "d": 0.878
+    },
+    {
+     "w": "بالا",
+     "t": 3.116,
+     "d": 0.345
+    },
+    {
+     "w": "رفت؛",
+     "t": 3.461,
+     "d": 0.706
+    },
+    {
+     "w": "آن‌قدر",
+     "t": 4.167,
+     "d": 0.501
+    },
+    {
+     "w": "بالا",
+     "t": 4.668,
+     "d": 0.327
+    },
+    {
+     "w": "که",
+     "t": 4.995,
+     "d": 0.286
+    },
+    {
+     "w": "دوباره",
+     "t": 5.281,
+     "d": 0.563
+    },
+    {
+     "w": "به",
+     "t": 5.844,
+     "d": 0.189
+    },
+    {
+     "w": "خانه‌اش",
+     "t": 6.033,
+     "d": 0.563
+    },
+    {
+     "w": "رسید.",
+     "t": 6.596,
+     "d": 0.682
+    },
+    {
+     "w": "نورش",
+     "t": 7.278,
+     "d": 0.682
+    },
+    {
+     "w": "دوباره",
+     "t": 7.96,
+     "d": 0.524
+    },
+    {
+     "w": "پرفروغ",
+     "t": 8.484,
+     "d": 0.686
+    },
+    {
+     "w": "شده",
+     "t": 9.17,
+     "d": 0.417
+    },
+    {
+     "w": "بود",
+     "t": 9.587,
+     "d": 0.396
+    },
+    {
+     "w": "و",
+     "t": 9.983,
+     "d": 0.222
+    },
+    {
+     "w": "برای",
+     "t": 10.205,
+     "d": 0.467
+    },
+    {
+     "w": "آخرین",
+     "t": 10.672,
+     "d": 0.566
+    },
+    {
+     "w": "بار،",
+     "t": 11.238,
+     "d": 0.586
+    },
+    {
+     "w": "با",
+     "t": 11.824,
+     "d": 0.146
+    },
+    {
+     "w": "قدردانی",
+     "t": 11.97,
+     "d": 0.602
+    },
+    {
+     "w": "برای",
+     "t": 12.572,
+     "d": 0.453
+    },
+    {
+     "w": "سامان",
+     "t": 13.025,
+     "d": 0.448
+    },
+    {
+     "w": "چشمک",
+     "t": 13.473,
+     "d": 0.55
+    },
+    {
+     "w": "زد.",
+     "t": 14.023,
+     "d": 0.417
+    }
+   ],
+   "timing_source": "engine_word_events",
+   "duration_s": 14.44,
+   "inpaints": 0
+  },
+  {
+   "id": "5571c9dfb78444568887b6e91a36165e",
+   "number": 13,
+   "beat": "celebration",
+   "text": "پایین در مرغزار، پرنده‌ها شروع به آواز خواندن کردند و انگار همه‌ی دنیا کمی روشن‌تر شده بود. سامان و فلفل خندیدند و از تپه‌ی نرم و سبز تا خانه قل خوردند. فلفل از همه سریع‌تر قل خورد و وسط بوته‌ی گل‌های بابونه فرود آمد!",
+   "image_prompt": "Saman and Felfel rolling and laughing down a grassy hill in the golden morning light, birds flying, daisies",
+   "scene": {
+    "location": "meadow",
+    "time": "day",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "birds",
+     "flowers"
+    ],
+    "mood": "joyful",
+    "poses": {
+     "hero": "jump",
+     "comp": "jump"
+    },
+    "expressions": {
+     "hero": "laugh",
+     "comp": "laugh"
+    },
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/images/page-13-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: Saman and Felfel rolling and laughing down a grassy hill in the golden morning light, birds flying, daisies\nSetting: meadow, time of day: day, mood: joyful.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: jump. Expression: laugh.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: jump. Expression: laugh.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: wide shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1334,
+      "file": "images/page-13-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "65c44b6b6b6a4b07"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 657114,
+      "aspect": 1.3333,
+      "luma_std": 27.89,
+      "luma_mean": 172.31,
+      "dhash": "65c44b6b6b6a4b07",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 0.5
+      }
+     }
+    }
+   },
+   "audio_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/audio/page-13-fc01fd736c26.mp3",
+   "audio_meta": {
+    "engine": "espeak-ng",
+    "voice": "fa",
+    "mime": "audio/mpeg",
+    "duration_s": 20.09,
+    "bytes": 161332,
+    "issues": [],
+    "words": [
+     {
+      "w": "پایین",
+      "t": 0.0,
+      "d": 0.441
+     },
+     {
+      "w": "در",
+      "t": 0.441,
+      "d": 0.239
+     },
+     {
+      "w": "مرغزار،",
+      "t": 0.68,
+      "d": 0.827
+     },
+     {
+      "w": "پرنده‌ها",
+      "t": 1.507,
+      "d": 0.737
+     },
+     {
+      "w": "شروع",
+      "t": 2.244,
+      "d": 0.509
+     },
+     {
+      "w": "به",
+      "t": 2.753,
+      "d": 0.181
+     },
+     {
+      "w": "آواز",
+      "t": 2.934,
+      "d": 0.487
+     },
+     {
+      "w": "خواندن",
+      "t": 3.421,
+      "d": 0.528
+     },
+     {
+      "w": "کردند",
+      "t": 3.949,
+      "d": 0.574
+     },
+     {
+      "w": "و",
+      "t": 4.523,
+      "d": 0.205
+     },
+     {
+      "w": "انگار",
+      "t": 4.728,
+      "d": 0.405
+     },
+     {
+      "w": "همه‌ی",
+      "t": 5.133,
+      "d": 0.533
+     },
+     {
+      "w": "دنیا",
+      "t": 5.666,
+      "d": 0.385
+     },
+     {
+      "w": "کمی",
+      "t": 6.051,
+      "d": 0.366
+     },
+     {
+      "w": "روشن‌تر",
+      "t": 6.417,
+      "d": 0.643
+     },
+     {
+      "w": "شده",
+      "t": 7.06,
+      "d": 0.417
+     },
+     {
+      "w": "بود.",
+      "t": 7.477,
+      "d": 0.677
+     },
+     {
+      "w": "سامان",
+      "t": 8.154,
+      "d": 0.677
+     },
+     {
+      "w": "و",
+      "t": 8.831,
+      "d": 0.213
+     },
+     {
+      "w": "فلفل",
+      "t": 9.044,
+      "d": 0.562
+     },
+     {
+      "w": "خندیدند",
+      "t": 9.606,
+      "d": 0.701
+     },
+     {
+      "w": "و",
+      "t": 10.307,
+      "d": 0.205
+     },
+     {
+      "w": "از",
+      "t": 10.512,
+      "d": 0.181
+     },
+     {
+      "w": "تپه‌ی",
+      "t": 10.693,
+      "d": 0.719
+     },
+     {
+      "w": "نرم",
+      "t": 11.412,
+      "d": 0.353
+     },
+     {
+      "w": "و",
+      "t": 11.765,
+      "d": 0.213
+     },
+     {
+      "w": "سبز",
+      "t": 11.978,
+      "d": 0.407
+     },
+     {
+      "w": "تا",
+      "t": 12.385,
+      "d": 0.229
+     },
+     {
+      "w": "خانه",
+      "t": 12.614,
+      "d": 0.396
+     },
+     {
+      "w": "قل",
+      "t": 13.01,
+      "d": 0.309
+     },
+     {
+      "w": "خوردند.",
+      "t": 13.319,
+      "d": 0.737
+     },
+     {
+      "w": "فلفل",
+      "t": 14.056,
+      "d": 0.737
+     },
+     {
+      "w": "از",
+      "t": 14.793,
+      "d": 0.15
+     },
+     {
+      "w": "همه",
+      "t": 14.943,
+      "d": 0.33
+     },
+     {
+      "w": "سریع‌تر",
+      "t": 15.273,
+      "d": 0.675
+     },
+     {
+      "w": "قل",
+      "t": 15.948,
+      "d": 0.306
+     },
+     {
+      "w": "خورد",
+      "t": 16.254,
+      "d": 0.419
+     },
+     {
+      "w": "و",
+      "t": 16.673,
+      "d": 0.228
+     },
+     {
+      "w": "وسط",
+      "t": 16.901,
+      "d": 0.471
+     },
+     {
+      "w": "بوته‌ی",
+      "t": 17.372,
+      "d": 0.647
+     },
+     {
+      "w": "گل‌های",
+      "t": 18.019,
+      "d": 0.574
+     },
+     {
+      "w": "بابونه",
+      "t": 18.593,
+      "d": 0.567
+     },
+     {
+      "w": "فرود",
+      "t": 19.16,
+      "d": 0.505
+     },
+     {
+      "w": "آمد!",
+      "t": 19.665,
+      "d": 0.425
+     }
+    ],
+    "timing_source": "engine_word_events",
+    "timing_quality": {
+     "words": 44,
+     "text_words": 44,
+     "coverage": 1.0,
+     "monotonic": true,
+     "ends_at": 20.09,
+     "duration_s": 20.09,
+     "overshoot": 0.0,
+     "ok": true
+    }
+   },
+   "words": [
+    {
+     "w": "پایین",
+     "t": 0.0,
+     "d": 0.441
+    },
+    {
+     "w": "در",
+     "t": 0.441,
+     "d": 0.239
+    },
+    {
+     "w": "مرغزار،",
+     "t": 0.68,
+     "d": 0.827
+    },
+    {
+     "w": "پرنده‌ها",
+     "t": 1.507,
+     "d": 0.737
+    },
+    {
+     "w": "شروع",
+     "t": 2.244,
+     "d": 0.509
+    },
+    {
+     "w": "به",
+     "t": 2.753,
+     "d": 0.181
+    },
+    {
+     "w": "آواز",
+     "t": 2.934,
+     "d": 0.487
+    },
+    {
+     "w": "خواندن",
+     "t": 3.421,
+     "d": 0.528
+    },
+    {
+     "w": "کردند",
+     "t": 3.949,
+     "d": 0.574
+    },
+    {
+     "w": "و",
+     "t": 4.523,
+     "d": 0.205
+    },
+    {
+     "w": "انگار",
+     "t": 4.728,
+     "d": 0.405
+    },
+    {
+     "w": "همه‌ی",
+     "t": 5.133,
+     "d": 0.533
+    },
+    {
+     "w": "دنیا",
+     "t": 5.666,
+     "d": 0.385
+    },
+    {
+     "w": "کمی",
+     "t": 6.051,
+     "d": 0.366
+    },
+    {
+     "w": "روشن‌تر",
+     "t": 6.417,
+     "d": 0.643
+    },
+    {
+     "w": "شده",
+     "t": 7.06,
+     "d": 0.417
+    },
+    {
+     "w": "بود.",
+     "t": 7.477,
+     "d": 0.677
+    },
+    {
+     "w": "سامان",
+     "t": 8.154,
+     "d": 0.677
+    },
+    {
+     "w": "و",
+     "t": 8.831,
+     "d": 0.213
+    },
+    {
+     "w": "فلفل",
+     "t": 9.044,
+     "d": 0.562
+    },
+    {
+     "w": "خندیدند",
+     "t": 9.606,
+     "d": 0.701
+    },
+    {
+     "w": "و",
+     "t": 10.307,
+     "d": 0.205
+    },
+    {
+     "w": "از",
+     "t": 10.512,
+     "d": 0.181
+    },
+    {
+     "w": "تپه‌ی",
+     "t": 10.693,
+     "d": 0.719
+    },
+    {
+     "w": "نرم",
+     "t": 11.412,
+     "d": 0.353
+    },
+    {
+     "w": "و",
+     "t": 11.765,
+     "d": 0.213
+    },
+    {
+     "w": "سبز",
+     "t": 11.978,
+     "d": 0.407
+    },
+    {
+     "w": "تا",
+     "t": 12.385,
+     "d": 0.229
+    },
+    {
+     "w": "خانه",
+     "t": 12.614,
+     "d": 0.396
+    },
+    {
+     "w": "قل",
+     "t": 13.01,
+     "d": 0.309
+    },
+    {
+     "w": "خوردند.",
+     "t": 13.319,
+     "d": 0.737
+    },
+    {
+     "w": "فلفل",
+     "t": 14.056,
+     "d": 0.737
+    },
+    {
+     "w": "از",
+     "t": 14.793,
+     "d": 0.15
+    },
+    {
+     "w": "همه",
+     "t": 14.943,
+     "d": 0.33
+    },
+    {
+     "w": "سریع‌تر",
+     "t": 15.273,
+     "d": 0.675
+    },
+    {
+     "w": "قل",
+     "t": 15.948,
+     "d": 0.306
+    },
+    {
+     "w": "خورد",
+     "t": 16.254,
+     "d": 0.419
+    },
+    {
+     "w": "و",
+     "t": 16.673,
+     "d": 0.228
+    },
+    {
+     "w": "وسط",
+     "t": 16.901,
+     "d": 0.471
+    },
+    {
+     "w": "بوته‌ی",
+     "t": 17.372,
+     "d": 0.647
+    },
+    {
+     "w": "گل‌های",
+     "t": 18.019,
+     "d": 0.574
+    },
+    {
+     "w": "بابونه",
+     "t": 18.593,
+     "d": 0.567
+    },
+    {
+     "w": "فرود",
+     "t": 19.16,
+     "d": 0.505
+    },
+    {
+     "w": "آمد!",
+     "t": 19.665,
+     "d": 0.425
+    }
+   ],
+   "timing_source": "engine_word_events",
+   "duration_s": 20.09,
+   "inpaints": 0
+  },
+  {
+   "id": "0747ec6e3cbd4a14b25296c2ab5393fe",
+   "number": 14,
+   "beat": "ending",
+   "text": "آن شب، سامان دوباره روی ایوان نشست و ستاره‌ها را شمرد. وقتی به کوچک‌ترین ستاره رسید، ستاره چشمک زد و سامان هم برایش چشمک زد. فلفل هم همان نزدیکی جمع شده بود و آرام خروپف می‌کرد.",
+   "image_prompt": "Saman on the cottage porch at night smiling up at a starry sky where one small star twinkles brightly, Felfel curled up asleep nearby",
+   "scene": {
+    "location": "meadow",
+    "time": "night",
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "props": [
+     "house",
+     "star_sky"
+    ],
+    "mood": "content",
+    "poses": {
+     "hero": "look_up",
+     "comp": "sleep"
+    },
+    "expressions": {
+     "hero": "happy",
+     "comp": "sleep"
+    },
+    "shot": "wide",
+    "weather": ""
+   },
+   "characters_present": [
+    "hero",
+    "comp"
+   ],
+   "image_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/images/page-14-v0.png",
+   "image_status": "generated",
+   "image_locked": false,
+   "image_meta": {
+    "provider": "Built-in procedural illustrator (offline, CPU)",
+    "model": "procedural-v1",
+    "prompt": "Children's picture-book illustration, soft watercolor picture-book illustration, gentle washes, visible paper texture, warm light.\nScene: Saman on the cottage porch at night smiling up at a starry sky where one small star twinkles brightly, Felfel curled up asleep nearby\nSetting: meadow, time of day: night, mood: content.\nExactly 2 main characters visible:\n- Saman: a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes. Always the same look: teal scarf, auburn short hair, green hoodie. Pose: look_up. Expression: happy.\n- Felfel: a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf. Always the same look: pink scarf, fox shape. Pose: sleep. Expression: sleep.\nRelative sizes (keep consistent): Saman is the tallest; Felfel is about 68% of Saman's height.\nRelationships: Felfel - best friend of Saman; Saman - best friend of Felfel.\nComposition: wide shot, aspect ratio 4:3, clear readable staging, all characters fully inside the frame.\nAbsolutely no text, letters or writing anywhere in the image.",
+    "negative_prompt": "text, letters, words, captions, watermark, signature, logo, speech bubble, extra people, extra characters, duplicate character, deformed hands, extra fingers, missing limbs, distorted face, blurry, low quality, photorealistic, scary, violent",
+    "attempts": [
+     {
+      "attempt": 1,
+      "variant": 0,
+      "seed": 1435,
+      "file": "images/page-14-v0.png",
+      "ok": true,
+      "issues": []
+     }
+    ],
+    "next_variant": 3,
+    "characters": [
+     "hero",
+     "comp"
+    ],
+    "dhash": "9353d9d939684903"
+   },
+   "qa": {
+    "image": {
+     "ok": true,
+     "issues": [],
+     "metrics": {
+      "width": 1280,
+      "height": 960,
+      "format": "PNG",
+      "bytes": 524888,
+      "aspect": 1.3333,
+      "luma_std": 37.81,
+      "luma_mean": 100.16,
+      "dhash": "9353d9d939684903",
+      "ocr_text": [],
+      "palette_coverage": {
+       "hero": 1.0,
+       "comp": 1.0
+      }
+     }
+    }
+   },
+   "audio_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/audio/page-14-051e1cd1fc80.mp3",
+   "audio_meta": {
+    "engine": "espeak-ng",
+    "voice": "fa",
+    "mime": "audio/mpeg",
+    "duration_s": 17.29,
+    "bytes": 138762,
+    "issues": [],
+    "words": [
+     {
+      "w": "آن",
+      "t": 0.0,
+      "d": 0.186
+     },
+     {
+      "w": "شب،",
+      "t": 0.186,
+      "d": 0.579
+     },
+     {
+      "w": "سامان",
+      "t": 0.765,
+      "d": 0.462
+     },
+     {
+      "w": "دوباره",
+      "t": 1.227,
+      "d": 0.539
+     },
+     {
+      "w": "روی",
+      "t": 1.766,
+      "d": 0.326
+     },
+     {
+      "w": "ایوان",
+      "t": 2.092,
+      "d": 0.441
+     },
+     {
+      "w": "نشست",
+      "t": 2.533,
+      "d": 0.487
+     },
+     {
+      "w": "و",
+      "t": 3.02,
+      "d": 0.206
+     },
+     {
+      "w": "ستاره‌ها",
+      "t": 3.226,
+      "d": 0.713
+     },
+     {
+      "w": "را",
+      "t": 3.939,
+      "d": 0.191
+     },
+     {
+      "w": "شمرد.",
+      "t": 4.13,
+      "d": 0.69
+     },
+     {
+      "w": "وقتی",
+      "t": 4.82,
+      "d": 0.69
+     },
+     {
+      "w": "به",
+      "t": 5.51,
+      "d": 0.194
+     },
+     {
+      "w": "کوچک‌ترین",
+      "t": 5.704,
+      "d": 1.007
+     },
+     {
+      "w": "ستاره",
+      "t": 6.711,
+      "d": 0.546
+     },
+     {
+      "w": "رسید،",
+      "t": 7.257,
+      "d": 0.727
+     },
+     {
+      "w": "ستاره",
+      "t": 7.984,
+      "d": 0.549
+     },
+     {
+      "w": "چشمک",
+      "t": 8.533,
+      "d": 0.556
+     },
+     {
+      "w": "زد",
+      "t": 9.089,
+      "d": 0.313
+     },
+     {
+      "w": "و",
+      "t": 9.402,
+      "d": 0.212
+     },
+     {
+      "w": "سامان",
+      "t": 9.614,
+      "d": 0.447
+     },
+     {
+      "w": "هم",
+      "t": 10.061,
+      "d": 0.326
+     },
+     {
+      "w": "برایش",
+      "t": 10.387,
+      "d": 0.571
+     },
+     {
+      "w": "چشمک",
+      "t": 10.958,
+      "d": 0.523
+     },
+     {
+      "w": "زد.",
+      "t": 11.481,
+      "d": 0.664
+     },
+     {
+      "w": "فلفل",
+      "t": 12.145,
+      "d": 0.663
+     },
+     {
+      "w": "هم",
+      "t": 12.808,
+      "d": 0.298
+     },
+     {
+      "w": "همان",
+      "t": 13.106,
+      "d": 0.434
+     },
+     {
+      "w": "نزدیکی",
+      "t": 13.54,
+      "d": 0.646
+     },
+     {
+      "w": "جمع",
+      "t": 14.186,
+      "d": 0.363
+     },
+     {
+      "w": "شده",
+      "t": 14.549,
+      "d": 0.417
+     },
+     {
+      "w": "بود",
+      "t": 14.966,
+      "d": 0.394
+     },
+     {
+      "w": "و",
+      "t": 15.36,
+      "d": 0.205
+     },
+     {
+      "w": "آرام",
+      "t": 15.565,
+      "d": 0.471
+     },
+     {
+      "w": "خروپف",
+      "t": 16.036,
+      "d": 0.7
+     },
+     {
+      "w": "می‌کرد.",
+      "t": 16.736,
+      "d": 0.554
+     }
+    ],
+    "timing_source": "engine_word_events",
+    "timing_quality": {
+     "words": 36,
+     "text_words": 36,
+     "coverage": 1.0,
+     "monotonic": true,
+     "ends_at": 17.29,
+     "duration_s": 17.29,
+     "overshoot": 0.0,
+     "ok": true
+    }
+   },
+   "words": [
+    {
+     "w": "آن",
+     "t": 0.0,
+     "d": 0.186
+    },
+    {
+     "w": "شب،",
+     "t": 0.186,
+     "d": 0.579
+    },
+    {
+     "w": "سامان",
+     "t": 0.765,
+     "d": 0.462
+    },
+    {
+     "w": "دوباره",
+     "t": 1.227,
+     "d": 0.539
+    },
+    {
+     "w": "روی",
+     "t": 1.766,
+     "d": 0.326
+    },
+    {
+     "w": "ایوان",
+     "t": 2.092,
+     "d": 0.441
+    },
+    {
+     "w": "نشست",
+     "t": 2.533,
+     "d": 0.487
+    },
+    {
+     "w": "و",
+     "t": 3.02,
+     "d": 0.206
+    },
+    {
+     "w": "ستاره‌ها",
+     "t": 3.226,
+     "d": 0.713
+    },
+    {
+     "w": "را",
+     "t": 3.939,
+     "d": 0.191
+    },
+    {
+     "w": "شمرد.",
+     "t": 4.13,
+     "d": 0.69
+    },
+    {
+     "w": "وقتی",
+     "t": 4.82,
+     "d": 0.69
+    },
+    {
+     "w": "به",
+     "t": 5.51,
+     "d": 0.194
+    },
+    {
+     "w": "کوچک‌ترین",
+     "t": 5.704,
+     "d": 1.007
+    },
+    {
+     "w": "ستاره",
+     "t": 6.711,
+     "d": 0.546
+    },
+    {
+     "w": "رسید،",
+     "t": 7.257,
+     "d": 0.727
+    },
+    {
+     "w": "ستاره",
+     "t": 7.984,
+     "d": 0.549
+    },
+    {
+     "w": "چشمک",
+     "t": 8.533,
+     "d": 0.556
+    },
+    {
+     "w": "زد",
+     "t": 9.089,
+     "d": 0.313
+    },
+    {
+     "w": "و",
+     "t": 9.402,
+     "d": 0.212
+    },
+    {
+     "w": "سامان",
+     "t": 9.614,
+     "d": 0.447
+    },
+    {
+     "w": "هم",
+     "t": 10.061,
+     "d": 0.326
+    },
+    {
+     "w": "برایش",
+     "t": 10.387,
+     "d": 0.571
+    },
+    {
+     "w": "چشمک",
+     "t": 10.958,
+     "d": 0.523
+    },
+    {
+     "w": "زد.",
+     "t": 11.481,
+     "d": 0.664
+    },
+    {
+     "w": "فلفل",
+     "t": 12.145,
+     "d": 0.663
+    },
+    {
+     "w": "هم",
+     "t": 12.808,
+     "d": 0.298
+    },
+    {
+     "w": "همان",
+     "t": 13.106,
+     "d": 0.434
+    },
+    {
+     "w": "نزدیکی",
+     "t": 13.54,
+     "d": 0.646
+    },
+    {
+     "w": "جمع",
+     "t": 14.186,
+     "d": 0.363
+    },
+    {
+     "w": "شده",
+     "t": 14.549,
+     "d": 0.417
+    },
+    {
+     "w": "بود",
+     "t": 14.966,
+     "d": 0.394
+    },
+    {
+     "w": "و",
+     "t": 15.36,
+     "d": 0.205
+    },
+    {
+     "w": "آرام",
+     "t": 15.565,
+     "d": 0.471
+    },
+    {
+     "w": "خروپف",
+     "t": 16.036,
+     "d": 0.7
+    },
+    {
+     "w": "می‌کرد.",
+     "t": 16.736,
+     "d": 0.554
+    }
+   ],
+   "timing_source": "engine_word_events",
+   "duration_s": 17.29,
+   "inpaints": 0
+  }
+ ],
+ "characters": [
+  {
+   "id": "1bd553b05b3b4809a4d969ab7e8a3139",
+   "char_id": "hero",
+   "name": "سامان",
+   "role": "protagonist",
+   "spec": {
+    "id": "hero",
+    "name": "سامان",
+    "role": "protagonist",
+    "pronoun": "he",
+    "age": "7",
+    "description": "a 7-year-old boy with light brown skin, auburn short hair, round friendly face, big dark eyes, wearing a green hoodie and pink shorts, a teal scarf and red shoes",
+    "personality": "",
+    "appearance": {
+     "species": "human",
+     "skin": "#a86b45",
+     "hair_color": "#b5651d",
+     "hair_style": "short",
+     "eye_color": "#3b2a20",
+     "face": "round, rosy cheeks",
+     "body": "small child",
+     "height": 1.0,
+     "scale": 1.0
+    },
+    "outfit": {
+     "top": "hoodie",
+     "top_color": "#4caf7a",
+     "bottom": "shorts",
+     "bottom_color": "#ef7fb0",
+     "accessory": "scarf",
+     "accessory_color": "#2bb3b1",
+     "shoes_color": "#e94f4f"
+    },
+    "distinctive": [
+     "teal scarf",
+     "auburn short hair",
+     "green hoodie"
+    ],
+    "expressions": [
+     "happy",
+     "curious",
+     "worried",
+     "determined",
+     "surprised"
+    ],
+    "movement": "quick, bouncy steps",
+    "palette": [
+     "#a86b45",
+     "#b5651d",
+     "#4caf7a",
+     "#2bb3b1",
+     "#ef7fb0"
+    ],
+    "relationships": {
+     "comp": "best friend",
+     "helper": "trusted grown-up",
+     "_latin_name": "Saman"
+    },
+    "lora_name": "",
+    "lora_weight": 0.8,
+    "lora_trigger": ""
+   },
+   "ref_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/refs/hero.png",
+   "ref_approved": true
+  },
+  {
+   "id": "a87f28e75e744a34b5ab3f3c8e3070f5",
+   "char_id": "comp",
+   "name": "فلفل",
+   "role": "companion",
+   "spec": {
+    "id": "comp",
+    "name": "فلفل",
+    "role": "companion",
+    "pronoun": "he",
+    "age": "young",
+    "description": "a little red fox with orange-red fur, big shiny dark eyes, wearing a small pink scarf",
+    "personality": "",
+    "appearance": {
+     "species": "fox",
+     "skin": "#e07b39",
+     "hair_color": "",
+     "hair_style": "",
+     "eye_color": "#2a1c12",
+     "face": "",
+     "body": "small fox",
+     "height": 0.7,
+     "scale": 1.0
+    },
+    "outfit": {
+     "top": "",
+     "top_color": "",
+     "bottom": "",
+     "bottom_color": "",
+     "accessory": "scarf",
+     "accessory_color": "#ef7fb0",
+     "shoes_color": ""
+    },
+    "distinctive": [
+     "pink scarf",
+     "fox shape"
+    ],
+    "expressions": [
+     "happy",
+     "curious",
+     "surprised",
+     "kind"
+    ],
+    "movement": "trots lightly",
+    "palette": [
+     "#e07b39",
+     "#ef7fb0"
+    ],
+    "relationships": {
+     "hero": "best friend",
+     "_latin_name": "Felfel"
+    },
+    "lora_name": "",
+    "lora_weight": 0.8,
+    "lora_trigger": ""
+   },
+   "ref_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/refs/comp.png",
+   "ref_approved": true
+  },
+  {
+   "id": "697f950bc24e428a98ceaf4ff74c40a3",
+   "char_id": "helper",
+   "name": "مادربزرگ جغد",
+   "role": "supporting",
+   "spec": {
+    "id": "helper",
+    "name": "مادربزرگ جغد",
+    "role": "supporting",
+    "pronoun": "she",
+    "age": "old",
+    "description": "a wise old owl with speckled brown feathers, big shiny dark eyes, wearing small dark round glasses",
+    "personality": "",
+    "appearance": {
+     "species": "owl",
+     "skin": "#8b6b4a",
+     "hair_color": "",
+     "hair_style": "",
+     "eye_color": "#2a1c12",
+     "face": "",
+     "body": "small owl",
+     "height": 0.6,
+     "scale": 1.0
+    },
+    "outfit": {
+     "top": "",
+     "top_color": "",
+     "bottom": "",
+     "bottom_color": "",
+     "accessory": "glasses",
+     "accessory_color": "#444444",
+     "shoes_color": ""
+    },
+    "distinctive": [
+     "dark round glasses",
+     "owl shape"
+    ],
+    "expressions": [
+     "happy",
+     "curious",
+     "surprised",
+     "kind"
+    ],
+    "movement": "glides",
+    "palette": [
+     "#8b6b4a",
+     "#444444"
+    ],
+    "relationships": {
+     "hero": "mentor",
+     "_latin_name": "Grandma Owl"
+    },
+    "lora_name": "",
+    "lora_weight": 0.8,
+    "lora_trigger": ""
+   },
+   "ref_url": "/api/projects/8897ed90905242298c13d7b9bef903f0/files/refs/helper.png",
+   "ref_approved": true
+  }
+ ]
+}
