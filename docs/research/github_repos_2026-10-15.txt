@@ -1,0 +1,62 @@
+ollama/ollama|MIT|2026-10-15|183256|False
+ggml-org/llama.cpp|MIT|2026-10-15|131267|False
+vllm-project/vllm|Apache-2.0|2026-10-15|93860|False
+comfyanonymous/ComfyUI|NOT FOUND|
+AUTOMATIC1111/stable-diffusion-webui|AGPL-3.0|2026-03-02|165060|False
+lllyasviel/stable-diffusion-webui-forge|AGPL-3.0|2025-07-31|13070|False
+huggingface/diffusers|Apache-2.0|2026-10-15|34724|False
+tencent-ailab/IP-Adapter|Apache-2.0|2024-06-28|6699|False
+cubiq/ComfyUI_IPAdapter_plus|GPL-3.0|2025-04-14|6145|False
+instantX-research/InstantID|Apache-2.0|2024-07-18|11993|False
+ToTheBeginning/PuLID|Apache-2.0|2025-07-31|3551|False
+HVision-NKU/StoryDiffusion|Apache-2.0|2024-09-26|6475|False
+lllyasviel/ControlNet|Apache-2.0|2024-02-25|34126|False
+Mikubill/sd-webui-controlnet|GPL-3.0|2024-08-12|17825|False
+black-forest-labs/flux|Apache-2.0|2025-07-31|26014|False
+Stability-AI/generative-models|MIT|2025-12-16|27306|False
+OmniGen2/OmniGen2|NOT FOUND|
+VectorSpaceLab/OmniGen|MIT|2025-12-04|4342|False
+mozilla/bleach|NOASSERTION|2026-06-05|2764|True
+MrReclusive/ai-storybook|NOT FOUND|
+langchain-ai/langgraph|MIT|2026-10-15|43311|False
+celery/celery|NOASSERTION|2026-10-15|28981|False
+rq/rq|NOASSERTION|2026-10-14|10694|False
+fastapi/fastapi|MIT|2026-10-15|103110|False
+MrPowers/quinn|NOT FOUND|
+Kozea/WeasyPrint|BSD-3-Clause|2026-10-15|9684|False
+reportlab/reportlab-mirror|NOT FOUND|
+py-pdf/pypdf|NOASSERTION|2026-10-14|10259|False
+pypdfium2-team/pypdfium2|None|2026-10-12|835|False
+mpcabd/python-arabic-reshaper|MIT|2026-04-28|449|False
+MeirKriheli/python-bidi|LGPL-3.0|2026-06-30|126|False
+rastikerdar/vazirmatn|OFL-1.1|2023-06-14|3270|False
+python-pillow/Pillow|NOASSERTION|2026-10-15|13899|False
+fonttools/fonttools|MIT|2026-10-15|5292|False
+openai/openai-python|Apache-2.0|2026-10-15|31849|False
+BerriAI/litellm|NOASSERTION|2026-10-15|61319|False
+vitejs/vite|MIT|2026-10-15|83318|False
+facebook/react|NOT FOUND|
+JohannesBuchner/imagehash|BSD-2-Clause|2026-10-12|3879|False
+tesseract-ocr/tesseract|Apache-2.0|2026-10-10|77008|False
+openai/CLIP|MIT|2026-03-25|34470|False
+mlfoundations/open_clip|NOASSERTION|2026-09-30|14198|False
+Comfy-Org/ComfyUI|GPL-3.0|2026-10-15|137672|False
+facebook/react|NOT FOUND
+reportlab/reportlab|NOT FOUND
+OmniGen2/OmniGen2|NOT FOUND
+VectorSpaceLab/OmniGen2|Apache-2.0|2026-03-20|4118|False
+mlfoundations/open_clip|NOASSERTION|2026-09-30|14198|False
+py-pdf/pypdf|NOASSERTION|2026-10-14|10259|False
+celery/celery|NOASSERTION|2026-10-15|28981|False
+rq/rq|NOASSERTION|2026-10-14|10694|False
+python-pillow/Pillow|NOASSERTION|2026-10-15|13899|False
+BerriAI/litellm|NOASSERTION|2026-10-15|61319|False
+pypdfium2-team/pypdfium2|None|2026-10-12|835|False
+Comfy-Org/ComfyUI-Manager|GPL-3.0|2026-10-15|16466|False
+lodestone-rock/flow|Apache-2.0|2026-04-16|170|False
+kijai/ComfyUI-KJNodes|GPL-3.0|2026-10-15|3382|False
+Tencent-Hunyuan/HunyuanImage-2.1|NOASSERTION|2025-10-14|674|False
+QwenLM/Qwen-Image|Apache-2.0|2026-02-10|8407|False
+mit-han-lab/nunchaku|NOT FOUND
+leejet/stable-diffusion.cpp|MIT|2026-10-15|7690|False
+rupeshs/fastsdcpu|MIT|2026-07-24|2175|False

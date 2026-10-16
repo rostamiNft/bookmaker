@@ -1,0 +1,14 @@
+19:24:16 PASS first-run setup screen 
+19:24:17 PASS admin logged in 
+19:24:20 PASS outline gate stops before illustrations status=awaiting_review pages=8
+19:24:53 PASS book completed after approval status=completed errors=0 warnings=0
+19:24:53 PASS narration audio on every page 22.71,16.42,15,16.06,14.42,11.86,10.27,12.77
+19:24:56 PASS browser plays the narration MP3 ok 1.16s of 22.8
+19:25:04 PASS mask repair applied only inside the mask {"page":1,"engine":"opencv-telea","mask_coverage":0.01,"changed_outside_mask":0,"mean_change_inside_mask":2.3,"size":[1280,960],"prompt":""}
+19:25:04 PASS old illustration kept as a revision revisions=1
+19:25:15 PASS EPUB built and passes EPUBCheck in the UI 
+19:25:17 PASS HTML reader: RTL, all pages, embedded audio {"dir":"rtl","sheets":11,"audio":8}
+19:25:17 PASS cast line-up visible 
+19:25:20 PASS preview read-along plays page after page page-01-663999f6fd1d.mp3 -> page-02-71c2ded3d011.mp3
+19:25:20 PASS second account is isolated create=201 get=404 books=0
+19:25:20 PASS no browser console errors Failed to load resource: the server responded with a status of 401 (Unauthorized) | Failed to load resource: the server responded with a status of 401 (Unauthorized) | Failed to load resource: the server responded with a status of 404 (Not Found)

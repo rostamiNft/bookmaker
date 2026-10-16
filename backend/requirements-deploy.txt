@@ -1,0 +1,5 @@
+# Optional: multi-container deployment (docker-compose.yml).
+# Pure-Python drivers: no compiler, no system libraries.
+pg8000==1.31.5          # PostgreSQL driver, BSD-3 (no libpq needed)
+redis==8.1.0            # optional shared worker locks, MIT
+PyJWT==2.15.1           # OIDC / single sign-on ID-token verification, MIT

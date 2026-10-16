@@ -1,0 +1,85 @@
+# Multi-container deployment: PostgreSQL + Redis + the app (and optional workers).
+#
+#   cp .env.example .env      # then set BOOKMAKER_* values
+#   docker compose up -d --build
+#   docker compose up -d --scale worker=2      # two workers sharing one queue
+#
+# The containers are untested in the development sandbox (no Docker there); the
+# PostgreSQL and Redis code paths ARE tested against real local servers
+# (backend/tests/test_postgres_redis.py).
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: bookmaker
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-bookmaker}
+      POSTGRES_DB: bookmaker
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bookmaker -d bookmaker"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--save", "60", "1"]
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  app:
+    build: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      BOOKMAKER_ENV: production
+      BOOKMAKER_DATA_DIR: /data
+      BOOKMAKER_DATABASE_URL: postgresql://bookmaker:${POSTGRES_PASSWORD:-bookmaker}@postgres:5432/bookmaker
+      BOOKMAKER_REDIS_URL: redis://redis:6379/0
+      BOOKMAKER_AUTH_MODE: ${BOOKMAKER_AUTH_MODE:-accounts}
+      BOOKMAKER_SECRET_KEY: ${BOOKMAKER_SECRET_KEY:-}
+      BOOKMAKER_PUBLIC_URL: ${BOOKMAKER_PUBLIC_URL:-}
+    volumes:
+      - appdata:/data
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  # Extra workers: they share the same database queue (jobs are claimed with
+  # SELECT ... FOR UPDATE SKIP LOCKED) and the same Redis locks.
+  worker:
+    build: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      BOOKMAKER_ENV: production
+      BOOKMAKER_DATA_DIR: /data
+      BOOKMAKER_DATABASE_URL: postgresql://bookmaker:${POSTGRES_PASSWORD:-bookmaker}@postgres:5432/bookmaker
+      BOOKMAKER_REDIS_URL: redis://redis:6379/0
+      BOOKMAKER_SECRET_KEY: ${BOOKMAKER_SECRET_KEY:-}
+      BOOKMAKER_START_WORKER: "true"
+    volumes:
+      - appdata:/data
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    restart: unless-stopped
+    deploy:
+      replicas: 0
+
+volumes:
+  pgdata:
+  redisdata:
+  appdata:

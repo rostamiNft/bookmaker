@@ -1,0 +1,15 @@
+# runtime data (projects, database, secrets key) - never commit
+/data/
+.env
+*.key
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+# node
+frontend/node_modules/
+frontend/dist/
+# misc
+*.tmp.pdf
+.DS_Store

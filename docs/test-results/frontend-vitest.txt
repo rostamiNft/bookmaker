@@ -1,0 +1,17 @@
+
+ RUN  v5.0.5 /home/user/bookmaker/frontend
+
+ ✓ src/test/ui.test.jsx (10 tests) 1145ms
+   ✓ Bookmaker UI (10)
+     ✓ creates a book from the form and navigates to it 442ms
+     ✓ blocks generation when the estimate reports a problem 383ms
+ ✓ src/test/features.test.jsx (8 tests) 372ms
+
+ Test Files  2 passed (2)
+      Tests  18 passed (18)
+   Start at  19:28:51
+   Duration  2.97s (tests 55%, environment 36%, setup 6%, import 1%, transform 1%, worker 1%)
+
+    Isolate  2 workers spawned · ~582ms startup each (spawn + environment, per file)
+             at least ~582ms faster with isolate: false — reuses workers across files instead of one per file
+
