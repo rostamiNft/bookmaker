@@ -152,9 +152,10 @@ without it the worker locks are per-process, which is correct for a single insta
 | [docs/RESEARCH.md](docs/RESEARCH.md) | survey of open-source projects/models, maintenance, licences, why this architecture |
 | [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | common problems and fixes |
 | [docs/TEST_REPORT.md](docs/TEST_REPORT.md) | test results, feature status (tested / partial / missing), known limitations |
+| [docs/REPORT-fa.md](docs/REPORT-fa.md) | the same status report **in Persian** (گزارش نهایی) |
 | [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) | libraries, fonts and their licences |
 
-Run the tests: `cd backend && ../.venv/bin/python -m pytest -q` (235 tests) and `cd frontend && npm test` (18 tests).
+Run the tests: `cd backend && ../.venv/bin/python -m pytest -q` (256 tests) and `cd frontend && npm test` (18 tests).
 Browser end-to-end test (real Chromium): see the header of `frontend/e2e/browser-e2e.mjs`.
 
 ---
@@ -168,4 +169,5 @@ Browser end-to-end test (real Chromium): see the header of `frontend/e2e/browser
 * بدون اینترنت، GPU یا کلید API هم کار می‌کند (موتور داستان داخلی + تصویرساز رویه‌ای). برای تولید با هوش مصنوعی، در بخش «مدل‌ها و سرویس‌ها» Ollama، یک API سازگار با OpenAI، ComfyUI یا Automatic1111 را اضافه کنید.
 * متن فارسی با قلم Vazirmatn، اتصال صحیح حروف، نیم‌فاصله و ترتیب درست خطوط و متن ترکیبی فارسی/انگلیسی در PDF قرار می‌گیرد.
 * موتور داستان داخلی مبتنی بر قالب‌های دست‌نویس است (هوش مصنوعی نیست)، ۶ تا ۱۸ صفحه و زبان‌های فارسی و انگلیسی را پشتیبانی می‌کند. برای موضوع آزاد و صفحات بیشتر (تا ۴۰) یک مدل زبانی متصل کنید.
-* جزئیات وضعیت قابلیت‌ها و محدودیت‌ها در [docs/TEST_REPORT.md](docs/TEST_REPORT.md) آمده است.
+* جزئیات وضعیت قابلیت‌ها و محدودیت‌ها در [گزارش نهایی فارسی](docs/REPORT-fa.md) و
+  [docs/TEST_REPORT.md](docs/TEST_REPORT.md) آمده است.

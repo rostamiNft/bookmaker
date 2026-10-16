@@ -1,5 +1,8 @@
 # Test report and feature status
 
+> **Persian summary**: [`docs/REPORT-fa.md`](REPORT-fa.md) - the same status split into
+> implemented+tested / partial / not implemented, in Persian.
+
 Date: 2026-10-16 · Environment: 2 vCPU, 3.8 GB RAM, no GPU, Python 3.11.2, Node 22, outbound network limited to
 GitHub/PyPI/npm (no model downloads, no model APIs, no API keys).
 
