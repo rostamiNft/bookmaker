@@ -146,7 +146,7 @@ LICENSE file, so copying would not be allowed anyway).
 | ebooklib | – | **AGPL-3.0** | – | **avoided** | EPUB is written directly with `zipfile` instead |
 | StPageFlip | 888 | MIT | unmaintained since 2024-01 | not used | the HTML reader uses a small CSS page-turn instead |
 | uharfbuzz | 113 | Apache-2.0 | active | **used**: HarfBuzz shaping (opt-in `shaping=harfbuzz`, auto when installed) | full OpenType contextual forms; falls back to arabic-reshaper |
-| pyphen | 400 | GPL/LGPL/MPL tri-licence (installed dist carries MPL 1.1) | active | **used**: hyphenation for Latin scripts | opt-in per book (`hyphenation`) |
+| pyphen | 400 | **GPL-2.0+ OR LGPL-2.1+ OR MPL-1.1** (tri-licence; the wheel ships all three licence texts) | active | **used**: hyphenation for Latin scripts | off by default, opt-in per book (`hyphenation`); pick the licence that fits your distribution |
 | pg8000 | 900 | BSD-3 (moved to Codeberg) | active | **used**: PostgreSQL driver for `BOOKMAKER_DATABASE_URL` | pure Python, no libpq; psycopg was rejected (LGPL-3) |
 | redis-py | 19k | MIT | active | **used**: optional shared worker locks | optional; falls back to in-process locks |
 | PyJWT | 8k | MIT | active | **used**: OIDC ID-token verification | kid-matched JWKS, cached + refetched |
