@@ -1,13 +1,13 @@
 # Test report and feature status
 
-Date: 2026-10-15 · Environment: 2 vCPU, 3.8 GB RAM, no GPU, Python 3.11.2, Node 22, outbound network limited to
+Date: 2026-10-16 · Environment: 2 vCPU, 3.8 GB RAM, no GPU, Python 3.11.2, Node 22, outbound network limited to
 GitHub/PyPI/npm (no model downloads, no model APIs, no API keys).
 
 ## Automated test results (real runs)
 
 | Suite | Command | Result |
 |---|---|---|
-| Backend unit + integration + end-to-end | `cd backend && ../.venv/bin/python -m pytest -q` | **235 passed**, 0 failed (297 s): [log](test-results/backend-pytest.txt) |
+| Backend unit + integration + end-to-end | `cd backend && ../.venv/bin/python -m pytest -q` | **256 passed**, 0 failed (486 s): [log](test-results/backend-pytest.txt) |
 | Frontend UI (Vitest + Testing Library, jsdom) | `cd frontend && npm test` | **18 passed**, 0 failed: [log](test-results/frontend-vitest.txt) |
 | **Browser end-to-end** (real Chromium 153 headless + real backend in `accounts` mode, no mocks) | `frontend/e2e/browser-e2e.mjs` | **14/14 checks passed**: [results + screenshots](test-results/browser-e2e/) |
 
@@ -123,6 +123,31 @@ All samples were regenerated on 2026-10-15 with the current code through the liv
 * **Character scale & cast line-up** (relative sizes enforced; used as an extra reference for AI images when `cast_reference` is on).
 * **CPU diffusion adapters**: FastSD CPU (`fastsdcpu`), stable-diffusion.cpp via the A1111-compatible API.
 * Persian `/ActualText` for correct copy/paste and screen readers.
+* **Typography**: HarfBuzz shaping (uharfbuzz, Apache-2.0) with automatic fallback to arabic-reshaper; Pyphen
+  hyphenation for Latin scripts; justified lines with **kashida stretching** first for Persian/Arabic (Benatia rules)
+  and word spaces afterwards (`test_new_pipeline_features.py`: engine selection, kashida capacity, justification
+  measured at the margin, hyphenation split points).
+* **PDF/X-4 + ICC**: forced CMYK through a real ICC profile (bundled ISOcoated v2 300 %, CC0, or a user profile),
+  `/OutputIntent` with `GTS_PDFX` + `DestOutputProfile`, XMP packet, `/ID`, `Trapped`, TrimBox/BleedBox on every page,
+  plus a mechanical self-check that is proven to *reject* a plain screen PDF.
+* **Speech bubbles inside the art**: balloons are placed over the picture from a saliency/face analysis, each with a
+  visible tail (>= 10 pt) pointing at its speaker; verified by rasterising the composed PDF and checking the exact
+  balloon rectangles (opaque light fill, differs from the same page composed without bubbles, no layout issues).
+* **Word-level narration timings** (eSpeak word events, de-duplicated, off-by-one corrected, first word anchored at 0)
+  -> karaoke highlighting in the HTML reader, EPUB 3 media overlays (SMIL + `media:duration`), and video captions.
+* **Video export** (PyAV/FFmpeg): WebM VP9 + Opus by default (royalty-free); MP4/H.264 only after an explicit
+  `confirm_gpl` (the bundled FFmpeg links x264, GPL-2+) - without it the API answers 402.
+* **Per-character LoRA dataset export**: ZIP with `img/<repeats>_<trigger> <class>/` images, caption files, ready-to-run
+  `kohya_config.toml` and `ai_toolkit.yaml`; the trained LoRA's `<lora:name:weight> trigger` is prepended to every
+  page/reference/cast/cover prompt once it is configured.
+* **Single sign-on (OIDC + PKCE)** and **password reset by e-mail**: tested against a real local OIDC provider
+  (RSA-signed ID tokens, nonce/audience/issuer verified, state replay refused) and a real SMTP server (aiosmtpd).
+  With no mail server configured the reset link is handed to an administrator instead of failing silently.
+* **PostgreSQL / Redis deployment**: `BOOKMAKER_DATABASE_URL` switches the whole schema to PostgreSQL (pg8000,
+  pure Python, BSD-3) with a real connection pool; the worker claims jobs with `SELECT ... FOR UPDATE SKIP LOCKED` so
+  several processes share one queue; `BOOKMAKER_REDIS_URL` upgrades the worker locks to Redis (falls back to
+  in-process, never deadlocks). Verified against a real PostgreSQL 16 started locally by `pgserver`; `docker-compose.yml`
+  ships postgres + redis + app + scalable workers.
 
 ### ⚠️ Implemented, partially verified
 * **Real AI models were not exercised** (no network access to model hosts/APIs here). Adapters are tested against mock servers implementing the same HTTP protocols; behaviour with real services (latency, odd outputs) still needs validation by the user.
@@ -136,12 +161,14 @@ All samples were regenerated on 2026-10-15 with the current code through the liv
 * LLM path: Persian quality depends strongly on the model; small local models may need more revision attempts.
 
 ### ❌ Not implemented (future work)
-* PDF/X-1a/X-4 conformance (ICC output intent, profile-based CMYK conversion). Current CMYK is a naive conversion.
-* PostgreSQL/Redis/Celery deployment profile; SSO/OAuth login; password reset by e-mail.
-* Hyphenation and justified text; HarfBuzz shaping (uharfbuzz) instead of arabic-reshaper.
-* Text-highlight synchronised with audio (word timings); video export.
-* LoRA training per character (CharForge-style) — documented as an external GPU workflow only.
-* Speech bubbles / typeset text placed *inside* the illustration composition (the full-bleed panel is a separate overlay).
+* **Certified preflight** (veraPDF / Adobe Acrobat preflight). The PDF/X-4 output passes the app's own mechanical
+  check; it was not run through an external, certified checker (none is installable here).
+* **Celery**: the job queue is PostgreSQL-backed with `SKIP LOCKED` claiming and runs in worker threads/processes;
+  there is no Celery integration and none is planned unless a need appears.
+* **LoRA training itself** (GPU, kohya/ai-toolkit) is out of scope: the app exports a ready-to-train dataset and then
+  uses the trained weights, it does not train.
+* A **certified PDF/A** export (PDF/A-1b/-2b) - veraPDF would be GPL-3.0, so only PDF/X-4 was implemented.
+* Real AI models: still unexercised (see below).
 
 ## Known limitations
 
@@ -151,5 +178,8 @@ All samples were regenerated on 2026-10-15 with the current code through the liv
 * PDF text extraction: Persian text now carries `/ActualText` (logical order), which Acrobat-style readers and pypdf honour; PDFium/pdftotext-style extractors ignore ActualText and still return visual-order presentation forms.
 * Full-bleed layout: with 4:3 pictures on portrait pages the crop would be too large, so pages fall back to the classic layout (noted in the layout report); use aspect 3:4. The text panel can cover the characters' feet/legs on some scenes (the illustrator does not reserve the panel area yet).
 * A failed job (e.g. a crash in a repair) marks the whole book `failed` until the next successful job; finished work is kept.
-* SQLite + in-process worker = single server instance. No hard CPU/RAM caps inside the app: use container limits.
-* The Dockerfile was not built or tested in this environment.
+* SQLite + in-process worker = single server instance. For several workers/containers set `BOOKMAKER_DATABASE_URL`
+  (PostgreSQL) and optionally `BOOKMAKER_REDIS_URL`; see `docs/ARCHITECTURE.md` and `docker-compose.yml`.
+  No hard CPU/RAM caps inside the app: use container limits.
+* The Dockerfile and `docker-compose.yml` were not built or tested in this environment (no Docker here); the
+  PostgreSQL and Redis code paths they rely on are tested against real local servers.

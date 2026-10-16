@@ -128,10 +128,35 @@ def measure(text: str, chain: list[str], size: float) -> float:
 
 
 @dataclass
+class TypeOpts:
+    """Typesetting options. shaping: auto|harfbuzz|basic; justify: stretch all but the last
+    line of each paragraph to the box width (kashida first for Persian/Arabic, then word
+    spaces); hyphenate: break long words at pyphen patterns (LTR languages only)."""
+    shaping: str = "auto"
+    justify: bool = False
+    hyphenate: bool = False
+    lang: str = "en"
+    kashida: bool = True
+
+    @property
+    def engine(self) -> str:
+        from .shaping import resolve_engine
+        return resolve_engine(self.shaping)
+
+
+DEFAULT_OPTS = TypeOpts()
+
+
+@dataclass
 class Line:
     logical: str
     visual: str
     width: float
+    pieces: list | None = None
+    justified: bool = False
+    natural_width: float = 0.0
+    kashidas: int = 0
+    hyphenated: bool = False
 
 
 @dataclass
@@ -140,39 +165,179 @@ class Paragraph:
     size: float = 12
     leading: float = 16
     overflow_word: str = ""
+    engine: str = "basic"
 
     @property
     def height(self) -> float:
         return len(self.lines) * self.leading
 
 
-def wrap(text: str, chain: list[str], size: float, max_width: float, rtl: bool, leading_factor: float) -> Paragraph:
-    para = Paragraph(size=size, leading=size * leading_factor)
+@lru_cache(maxsize=20000)
+def _word_width(word: str, chain: tuple, size: float, engine: str, rtl: bool, lang: str) -> float:
+    from . import shaping as sh
+    if engine == "harfbuzz" and sh.ARABIC.search(word):
+        return sh.pieces_width(sh.typeset_harfbuzz(word, list(chain), _cmaps, size, rtl, lang, embed_ltr_runs))
+    return measure(logical_shaped(word), list(chain), size)
+
+
+def typeset(logical: str, chain: list[str], size: float, rtl: bool, opts: TypeOpts) -> tuple[str, list, float]:
+    """(visual string, pieces, width) for one line."""
+    from . import shaping as sh
+    visual = shape(logical, rtl)
+    if opts.engine == "harfbuzz":
+        pieces = sh.typeset_harfbuzz(logical, chain, _cmaps, size, rtl, opts.lang, embed_ltr_runs)
+    else:
+        pieces = sh.typeset_basic(visual, chain, _cmaps, size)
+    return visual, pieces, sh.pieces_width(pieces)
+
+
+@lru_cache(maxsize=8)
+def _hyphenator(lang: str):
+    try:
+        import pyphen
+    except ImportError:
+        return None
+    code = {"en": "en_US", "de": "de_DE", "fr": "fr_FR", "es": "es_ES", "it": "it_IT", "nl": "nl_NL", "pt": "pt_PT"}.get(lang, lang)
+    if code not in pyphen.LANGUAGES:
+        return None
+    return pyphen.Pyphen(lang=code, left=2, right=3)
+
+
+def hyphenation_available(lang: str) -> bool:
+    return not is_rtl(lang) and _hyphenator((lang or "en").split("-")[0]) is not None
+
+
+_WORD_CORE = re.compile(r"^([\"'(\[«]*)([A-Za-zÀ-ÿ]+)(.*)$")
+
+
+def hyphen_splits(word: str, lang: str) -> list[tuple[str, str]]:
+    """Possible (head-, tail) splits of a word, longest head first."""
+    h = _hyphenator(lang)
+    m = _WORD_CORE.match(word)
+    if not h or not m or len(m.group(2)) < 6:
+        return []
+    pre, core, post = m.groups()
+    out = []
+    for head, tail in h.iterate(core):
+        out.append((pre + head + "-", tail + post))
+    return out
+
+
+def _finish_line(logical: str, chain, size, rtl, opts: TypeOpts, hyphenated=False) -> Line:
+    visual, pieces, width = typeset(logical, chain, size, rtl, opts)
+    return Line(logical, visual, width, pieces, natural_width=width, hyphenated=hyphenated)
+
+
+def justify_line(line: Line, chain, size, max_width, rtl, opts: TypeOpts) -> Line:
+    """Stretch a line to max_width. Persian/Arabic: up to ~60% of the slack with kashida
+    (tatweel, max 2 per word, priority rules in shaping.kashida_points); the rest by
+    widening word spaces. Lines whose spaces would grow beyond 4x are left unjustified."""
+    from . import shaping as sh
+    slack = max_width - line.width
+    if slack <= 0.05:
+        line.justified = True
+        return line
+    if opts.kashida and rtl and sh.ARABIC.search(line.logical):
+        tw = _word_width(sh.TATWEEL, tuple(chain), size, opts.engine, rtl, opts.lang)
+        cap = sh.kashida_capacity(line.logical)
+        n = min(cap, int(slack * 0.6 / tw)) if tw > 0 else 0
+        while n > 0:
+            stretched = sh.kashida_plan(line.logical, n)
+            visual, pieces, width = typeset(stretched, chain, size, rtl, opts)
+            if width <= max_width + 0.01:
+                line = Line(line.logical, visual, width, pieces, natural_width=line.natural_width, kashidas=n,
+                            hyphenated=line.hyphenated)
+                break
+            n -= 1
+    spaces = [p for p in line.pieces if p["k"] == "space"]
+    slack = max_width - line.width
+    if not spaces:
+        line.justified = slack < 0.5
+        return line
+    extra = slack / len(spaces)
+    if extra > 4 * spaces[0]["w"]:
+        return line
+    for p in spaces:
+        p["w"] += extra
+    line.width = sh.pieces_width(line.pieces)
+    line.justified = True
+    return line
+
+
+def wrap(text: str, chain: list[str], size: float, max_width, rtl: bool, leading_factor: float,
+         opts: TypeOpts | None = None) -> Paragraph:
+    """max_width: a number, or a callable (line_index) -> width, used to typeset text
+    inside non-rectangular shapes such as speech balloons."""
+    opts = opts or TypeOpts(lang="fa" if rtl else "en")
+    engine = opts.engine
+    mw = max_width if callable(max_width) else (lambda _i: max_width)
+    para = Paragraph(size=size, leading=size * leading_factor, engine=engine)
+    ch = tuple(chain)
+    ww = lambda w: _word_width(w, ch, size, engine, rtl, opts.lang)
+    sp = measure(" ", chain, size)
+    hyph = opts.hyphenate and not rtl and hyphenation_available(opts.lang)
     for block in text.split("\n"):
         words_ = block.split()
+        block_lines: list[Line] = []
         cur: list[str] = []
-        for w in words_:
-            trial = " ".join(cur + [w])
-            if measure(logical_shaped(trial), chain, size) <= max_width or not cur:
-                if not cur and measure(logical_shaped(w), chain, size) > max_width:
-                    para.overflow_word = w  # single word wider than the box
+        cur_w = 0.0
+        last_hyph = 0
+        i = 0
+        while i < len(words_):
+            w = words_[i]
+            wv = ww(w)
+            need = wv if not cur else cur_w + sp + wv
+            if need <= mw(len(block_lines)):
                 cur.append(w)
-            else:
-                line = " ".join(cur)
-                para.lines.append(Line(line, shape(line, rtl), measure(logical_shaped(line), chain, size)))
-                cur = [w]
+                cur_w = need
+                i += 1
+                continue
+            # does not fit: try a hyphenated head on this line
+            room = mw(len(block_lines)) - (cur_w + sp if cur else 0)
+            if hyph and last_hyph < 2 and (not cur or room > mw(len(block_lines)) * 0.12):
+                split = next(((hd, tl) for hd, tl in hyphen_splits(w, opts.lang) if ww(hd) <= room), None)
+                if split:
+                    cur.append(split[0])
+                    block_lines.append(_finish_line(" ".join(cur), chain, size, rtl, opts, hyphenated=True))
+                    words_[i] = split[1]
+                    cur, cur_w, last_hyph = [], 0.0, last_hyph + 1
+                    continue
+            if not cur:  # a single word wider than the box
+                para.overflow_word = w
+                cur, cur_w = [w], wv
+                i += 1
+                continue
+            block_lines.append(_finish_line(" ".join(cur), chain, size, rtl, opts))
+            cur, cur_w, last_hyph = [], 0.0, 0
         if cur:
-            line = " ".join(cur)
-            para.lines.append(Line(line, shape(line, rtl), measure(logical_shaped(line), chain, size)))
+            block_lines.append(_finish_line(" ".join(cur), chain, size, rtl, opts))
+        # shaping across a whole line can differ slightly from the sum of words: re-flow
+        k = 0
+        while k < len(block_lines):
+            ln = block_lines[k]
+            ws = ln.logical.split(" ")
+            if ln.width > mw(k) + 0.01 and len(ws) > 1:
+                block_lines[k] = _finish_line(" ".join(ws[:-1]), chain, size, rtl, opts)
+                if k + 1 < len(block_lines) and not ln.hyphenated:
+                    nxt = block_lines[k + 1]
+                    block_lines[k + 1] = _finish_line(ws[-1] + " " + nxt.logical, chain, size, rtl, opts, nxt.hyphenated)
+                else:
+                    block_lines.insert(k + 1, _finish_line(ws[-1], chain, size, rtl, opts, ln.hyphenated))
+                continue
+            k += 1
+        if opts.justify:
+            for k in range(len(block_lines) - 1):
+                block_lines[k] = justify_line(block_lines[k], chain, size, mw(k), rtl, opts)
+        para.lines.extend(block_lines)
     return para
 
 
 def fit(text: str, chain: list[str], box_w: float, box_h: float, max_size: float, min_size: float, rtl: bool,
-        leading_factor: float, step: float = 0.5) -> Paragraph | None:
+        leading_factor: float, step: float = 0.5, opts: TypeOpts | None = None) -> Paragraph | None:
     """Largest font size at which the text fits the box, or None."""
     size = max_size
     while size >= min_size - 1e-6:
-        p = wrap(text, chain, size, box_w, rtl, leading_factor)
+        p = wrap(text, chain, size, box_w, rtl, leading_factor, opts)
         if p.height <= box_h and not p.overflow_word:
             return p
         size -= step

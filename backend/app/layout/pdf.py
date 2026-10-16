@@ -7,9 +7,11 @@ from pathlib import Path
 
 from PIL import Image
 from reportlab.lib.utils import ImageReader
+from reportlab.graphics.shapes import FILL_EVEN_ODD
 from reportlab.pdfgen import canvas
 
 from .engine import Element, PageLayout
+from .shaping import shaped_string
 from .text import runs
 
 DPI = {"screen": 150, "print": 300}
@@ -36,10 +38,12 @@ def image_to_cmyk(im: Image.Image) -> Image.Image:
     return Image.fromarray(np.clip(out * 255 + 0.5, 0, 255).astype("uint8"), "CMYK")
 
 
-def prepare_image(path: str | Path, w_pt: float, h_pt: float, profile: str, cache: dict, color_mode: str = "rgb") -> ImageReader:
+def prepare_image(path: str | Path, w_pt: float, h_pt: float, profile: str, cache: dict, color_mode: str = "rgb",
+                  icc_path: str = "") -> ImageReader:
     """Resample to exactly the pixels needed for the box at the profile DPI (never stretched:
-    the box already has the image's aspect ratio). JPEG for compact files."""
-    key = (str(path), round(w_pt), round(h_pt), profile, color_mode)
+    the box already has the image's aspect ratio). JPEG for compact files.
+    icc_path: convert through this CMYK profile (PDF/X) instead of the naive formula."""
+    key = (str(path), round(w_pt), round(h_pt), profile, color_mode, icc_path)
     if key in cache:
         return cache[key]
     dpi = DPI[profile]
@@ -59,7 +63,11 @@ def prepare_image(path: str | Path, w_pt: float, h_pt: float, profile: str, cach
         if im.width > tw or im.height > th:
             im = im.resize((tw, th), Image.LANCZOS)
         if color_mode == "cmyk":
-            im = image_to_cmyk(im)
+            if icc_path:
+                from .pdfx import convert_image_icc
+                im = convert_image_icc(im, icc_path)
+            else:
+                im = image_to_cmyk(im)
         buf = io.BytesIO()
         im.save(buf, format="JPEG", quality=90 if profile == "screen" else 94, optimize=True)
     buf.seek(0)
@@ -68,16 +76,16 @@ def prepare_image(path: str | Path, w_pt: float, h_pt: float, profile: str, cach
     return reader
 
 
-def set_fill(c: canvas.Canvas, rgb, color_mode: str):
+def set_fill(c: canvas.Canvas, rgb, color_mode: str, cmyk_fn=None):
     if color_mode == "cmyk":
-        c.setFillColorCMYK(*rgb_to_cmyk(*rgb))
+        c.setFillColorCMYK(*(cmyk_fn or rgb_to_cmyk)(*rgb))
     else:
         c.setFillColorRGB(*rgb)
 
 
-def set_stroke(c: canvas.Canvas, rgb, color_mode: str):
+def set_stroke(c: canvas.Canvas, rgb, color_mode: str, cmyk_fn=None):
     if color_mode == "cmyk":
-        c.setStrokeColorCMYK(*rgb_to_cmyk(*rgb))
+        c.setStrokeColorCMYK(*(cmyk_fn or rgb_to_cmyk)(*rgb))
     else:
         c.setStrokeColorRGB(*rgb)
 
@@ -86,27 +94,94 @@ def _utf16_hex(s: str) -> str:
     return "FEFF" + s.encode("utf-16-be").hex().upper()
 
 
-def draw_text(c: canvas.Canvas, el: Element, color_mode: str = "rgb"):
-    set_fill(c, el.data.get("color", (0.17, 0.13, 0.11)), color_mode)
+def draw_text(c: canvas.Canvas, el: Element, color_mode: str = "rgb", cmyk_fn=None):
+    set_fill(c, el.data.get("color", (0.17, 0.13, 0.11)), color_mode, cmyk_fn)
     size = el.data["size"]
     chain = el.data["chain"]
     rtl = el.data.get("rtl")
     for ln in el.data["lines"]:
-        x = ln["x"]
-        # Persian/Arabic is drawn as reshaped presentation forms in visual order; the
-        # ActualText span gives copy/paste, search and screen readers the logical text.
-        actual = rtl and ln.get("logical") and ln["logical"] != ln["text"]
+        # Persian/Arabic glyphs are drawn in visual order (HarfBuzz glyph ids or reshaped
+        # presentation forms); the ActualText span gives copy/paste, search and screen
+        # readers the logical text.
+        actual = rtl and ln.get("logical") and (ln["logical"] != ln["text"] or ln.get("kashidas"))
         if actual:
             c._code.append(f"/Span <</ActualText <{_utf16_hex(ln['logical'])}>>> BDC")
-        for font, s in runs(ln["text"], chain):
-            c.setFont(font, size)
-            c.drawString(x, ln["baseline"], s)
-            x += c.stringWidth(s, font, size)
+        parts = ln.get("parts")
+        if parts is None:  # layouts produced before the piece-based typesetter
+            x = ln["x"]
+            for font, s in runs(ln["text"], chain):
+                c.setFont(font, size)
+                c.drawString(x, ln["baseline"], s)
+                x += c.stringWidth(s, font, size)
+        else:
+            for part in parts:
+                x = part["x"]
+                if part["k"] == "glyphs":
+                    t = c.beginText(x, ln["baseline"])
+                    t.setFont(part["font"], size)
+                    t.textOut(shaped_string(part["font"], part["g"]))
+                    c.drawText(t)
+                    continue
+                for font, s in part["runs"]:
+                    c.setFont(font, size)
+                    c.drawString(x, ln["baseline"], s)
+                    x += c.stringWidth(s, font, size)
         if actual:
             c._code.append("EMC")
 
 
-def draw_crop_marks(c: canvas.Canvas, o: float, W: float, H: float, bleed: float, color_mode: str):
+def _tail_path(c: canvas.Canvas, tail):
+    p = c.beginPath()
+    p.moveTo(tail[0][0], tail[0][1])
+    for pt in tail[1:]:
+        p.lineTo(pt[0], pt[1])
+    p.close()
+    return p
+
+
+def draw_bubble(c: canvas.Canvas, el: Element, color_mode: str, page_w: float, page_h: float, cmyk_fn=None):
+    """Rounded balloon + tail, drawn as one shape: fill first (tail, then body, so the
+    joint disappears), then stroke each part clipped to the *outside* of the other,
+    which leaves a clean comic outline with an opening where the tail leaves the body."""
+    x, y, w, h = el.x, el.y, el.w, el.h
+    r = el.data.get("radius", min(w, h) * 0.42)
+    tail = el.data.get("tail") or []
+    c.saveState()
+    set_fill(c, el.data.get("fill", (1, 1, 1)), color_mode, cmyk_fn)
+    c.setFillAlpha(el.data.get("alpha", 1.0))
+    set_stroke(c, el.data.get("stroke", (0.2, 0.16, 0.14)), color_mode, cmyk_fn)
+    c.setLineWidth(el.data.get("line_width", 1.3))
+    if tail:
+        c.drawPath(_tail_path(c, tail), stroke=0, fill=1)
+    body = c.beginPath()
+    body.roundRect(x, y, w, h, r)
+    c.drawPath(body, stroke=0, fill=1)
+    if tail:
+        c.saveState()                       # tail edges, clipped to outside the body
+        clip = c.beginPath()
+        clip.rect(0, 0, page_w, page_h)
+        clip.roundRect(x, y, w, h, r)
+        c.clipPath(clip, stroke=0, fill=0, fillMode=FILL_EVEN_ODD)
+        c.drawPath(_tail_path(c, tail), stroke=1, fill=0)
+        c.restoreState()
+        c.saveState()                       # body outline, clipped to outside the tail
+        clip = c.beginPath()
+        clip.rect(0, 0, page_w, page_h)
+        tp = _tail_path(c, tail)
+        clip.moveTo(tail[0][0], tail[0][1])
+        for pt in tail[1:]:
+            clip.lineTo(pt[0], pt[1])
+        clip.close()
+        del tp
+        c.clipPath(clip, stroke=0, fill=0, fillMode=FILL_EVEN_ODD)
+        c.drawPath(body, stroke=1, fill=0)
+        c.restoreState()
+    else:
+        c.drawPath(body, stroke=1, fill=0)
+    c.restoreState()
+
+
+def draw_crop_marks(c: canvas.Canvas, o: float, W: float, H: float, bleed: float, color_mode: str, cmyk_fn=None):
     """Trim marks in the slug area, offset beyond the bleed so they never print on the page."""
     if color_mode == "cmyk":
         c.setStrokeColorCMYK(1, 1, 1, 1)  # registration
@@ -124,13 +199,24 @@ def draw_crop_marks(c: canvas.Canvas, o: float, W: float, H: float, bleed: float
 
 def render_pdf(layouts: list[PageLayout], images: dict[str, str], out_path: str | Path, *, title: str, author: str,
                subject: str, language: str, keywords: list[str], profile: str = "screen", bleed_mm: float = 0.0,
-               crop_marks: bool = False, color_mode: str = "rgb") -> dict:
+               crop_marks: bool = False, color_mode: str = "rgb", pdfx: bool = False,
+               icc_profile: str = "") -> dict:
     """bleed_mm > 0 enlarges the media box by the bleed on every side, extends full-bleed
     pictures and page backgrounds into it, and writes TrimBox/BleedBox. crop_marks adds a
     slug area with trim marks. color_mode="cmyk" writes DeviceCMYK images and colours
-    (naive conversion, no ICC output intent: not PDF/X)."""
+    (naive conversion). pdfx=True forces CMYK, converts through an ICC profile, and adds
+    the PDF/X-4 structures (OutputIntent, XMP, TrimBox, /ID, Trapped) + a self-check."""
     out_path = Path(out_path)
     tmp = out_path.with_suffix(".tmp.pdf")
+    icc_path, condition, icc_name = "", "", ""
+    cmyk_fn = None
+    if pdfx:
+        from .pdfx import PdfxError, icc_supported, resolve_icc, rgb_to_cmyk_icc
+        if not icc_supported():
+            raise PdfxError("Pillow was built without ImageCms; ICC-based PDF/X output is unavailable")
+        p, condition, icc_name = resolve_icc(icc_profile)
+        icc_path, color_mode = str(p), "cmyk"
+        cmyk_fn = lambda r, g, b: rgb_to_cmyk_icc(r, g, b, icc_path)
     W, H = layouts[0].width, layouts[0].height
     b = max(0.0, float(bleed_mm)) * MM
     o = b + (18.0 if crop_marks else 0.0)  # offset of the trim box inside the media box
@@ -169,7 +255,7 @@ def render_pdf(layouts: list[PageLayout], images: dict[str, str], out_path: str 
                     x1 = x + w + b if x + w >= pl.width - 0.5 else x + w
                     y1 = y + h + b if y + h >= pl.height - 0.5 else y + h
                     x, y, w, h = x0, y0, x1 - x0, y1 - y0
-                reader = prepare_image(path, w, h, profile, cache, color_mode)
+                reader = prepare_image(path, w, h, profile, cache, color_mode, icc_path)
                 c.drawImage(reader, x, y, w, h, preserveAspectRatio=True, anchor="c", mask=None)
                 if el.data.get("frame"):
                     set_stroke(c, (0.35, 0.27, 0.22), color_mode)
@@ -182,13 +268,22 @@ def render_pdf(layouts: list[PageLayout], images: dict[str, str], out_path: str 
                 c.setFillAlpha(el.data.get("alpha", 1))
                 c.roundRect(el.x, el.y, el.w, el.h, el.data.get("radius", 0), stroke=0, fill=1)
                 c.restoreState()
+            elif el.kind == "bubble":
+                draw_bubble(c, el, color_mode, pl.width, pl.height, cmyk_fn)
             elif el.kind in ("text", "pagenum"):
-                draw_text(c, el, color_mode)
+                draw_text(c, el, color_mode, cmyk_fn)
         c.restoreState()
         if crop_marks:
-            draw_crop_marks(c, o, W, H, b, color_mode)
+            draw_crop_marks(c, o, W, H, b, color_mode, cmyk_fn)
         c.showPage()
     c.save()
     tmp.replace(out_path)  # atomic: a half-written PDF never replaces a good one
-    return {"pages": len(layouts), "images_placed": placed, "bytes": out_path.stat().st_size, "media_size": (MW, MH),
-            "trim_size": (W, H), "trim_offset": o, "bleed_pt": b, "color_mode": color_mode}
+    out = {"pages": len(layouts), "images_placed": placed, "bytes": out_path.stat().st_size, "media_size": (MW, MH),
+           "trim_size": (W, H), "trim_offset": o, "bleed_pt": b, "color_mode": color_mode}
+    if pdfx:
+        from .pdfx import apply_pdfx, check_pdfx4
+        out["pdfx"] = apply_pdfx(out_path, title=title, author=author, subject=subject, keywords=keywords,
+                                 language=language, icc_path=icc_path, condition=condition, profile_name=icc_name)
+        out["pdfx"]["check"] = check_pdfx4(out_path)
+        out["bytes"] = out_path.stat().st_size
+    return out

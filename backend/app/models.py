@@ -195,9 +195,33 @@ class User(Base):
     display_name: Mapped[str] = mapped_column(String(120), default="")
     password_hash: Mapped[str] = mapped_column(String(300))
     role: Mapped[str] = mapped_column(String(20), default="user")  # admin | user
+    email: Mapped[str] = mapped_column(String(200), default="", index=True)
+    sso_subject: Mapped[str] = mapped_column(String(300), default="", index=True)  # OIDC "sub"
+    sso_provider: Mapped[str] = mapped_column(String(60), default="")
     active: Mapped[bool] = mapped_column(Boolean, default=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=now)
     last_login: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+
+class PasswordReset(Base):
+    """One-time password reset tokens. Only a SHA-256 of the token is stored."""
+    __tablename__ = "password_resets"
+    token_hash: Mapped[str] = mapped_column(String(64), primary_key=True)
+    user_id: Mapped[str] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=now)
+    expires_at: Mapped[datetime] = mapped_column(DateTime)
+    used_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+
+class OidcState(Base):
+    """Short-lived OIDC login state (PKCE verifier + nonce), single use."""
+    __tablename__ = "oidc_states"
+    state: Mapped[str] = mapped_column(String(64), primary_key=True)
+    code_verifier: Mapped[str] = mapped_column(String(200))
+    nonce: Mapped[str] = mapped_column(String(200))
+    redirect_to: Mapped[str] = mapped_column(String(300), default="")
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=now)
+    expires_at: Mapped[datetime] = mapped_column(DateTime)
 
 
 class AuthSession(Base):

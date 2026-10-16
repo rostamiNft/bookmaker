@@ -166,3 +166,46 @@ request-size limit, Pydantic validation of all input, `safe_join` against path t
 image/JSON types inside the project dir, uploads validated with Pillow (type, size, pixel count) and re-encoded,
 encrypted API keys, masked keys in the UI, log redaction, no stack traces in production, security headers, delete
 confirmation and trash instead of hard delete, atomic PDF writes.
+
+## Login: accounts, password reset and single sign-on
+
+* **Local accounts** (`accounts` mode): scrypt hashes, random session tokens stored only as SHA-256, per-user isolation.
+* **Password reset by e-mail** (`app/mailer.py`, `app/api/auth.py`): `POST /api/auth/reset/request` answers `200` with the
+  same body whether or not the address exists (no account enumeration), stores a single-use token (`password_resets`,
+  60 minutes) and mails a link built from `BOOKMAKER_PUBLIC_URL`. When **no SMTP server is configured** the link is
+  returned to an administrator (`POST /api/auth/reset/confirm` still works) instead of failing silently.
+  `POST /api/auth/reset/confirm` invalidates every session of the account (`sessions_invalidated_at`).
+* **Single sign-on** (`app/sso.py`): OpenID Connect authorization code flow with **PKCE (S256)** against any conforming
+  provider (Keycloak, Authentik, Zitadel, Okta, Entra ID, Google …). Discovery document and JWKS are cached; the ID token
+  is verified with PyJWT against the provider's signing key (kid-matched, refetched on a miss) for `aud`, `iss`, `exp`
+  and `nonce`. Accounts are matched on `sso_subject`, or on a verified e-mail; first login can create the account
+  (`BOOKMAKER_OIDC_AUTO_CREATE`) and an optional role claim maps admin/user. The `state` is stored in `oidc_states` and
+  consumed once, so a replayed callback is refused.
+
+## Deployment: SQLite, PostgreSQL and Redis
+
+| | Default | Multi-container |
+|---|---|---|
+| Database | SQLite file in the data dir (WAL, foreign keys on) | `BOOKMAKER_DATABASE_URL=postgresql://…` → SQLAlchemy + **pg8000** (pure Python, BSD-3, no libpq), `QueuePool` sized by `BOOKMAKER_DB_POOL_SIZE`, `pool_pre_ping`, 30 min recycle |
+| Locks | in-process `threading.Lock` per name | `BOOKMAKER_REDIS_URL=redis://…` → Redis lock (redis-py, MIT); if Redis is unreachable the code falls back to the in-process lock and records why - a lost lock must never stop a book |
+| Job queue | single writer, plain `UPDATE … WHERE status='queued'` | `SELECT … FOR UPDATE SKIP LOCKED` inside a named lock, so N worker processes poll the same queue without handing the same job to two of them |
+
+The schema is created by SQLAlchemy from the models on both backends, and `migrate_add_columns()` adds columns that a
+model gained after the database was created (it uses `ALTER TABLE … ADD COLUMN`, which works on both).
+`docker-compose.yml` starts PostgreSQL 16 + Redis 7 + the app and an optional `--scale worker=N`; the containers wait for
+the database healthcheck before starting.
+
+## Media pipeline (narration → read-along → video)
+
+```
+TTS word events  ->  app/export/timing.py  ->  page.audio_meta["words"]
+                                          ->  HTML reader: one <span data-t data-d> per word, karaoke highlight
+                                          ->  EPUB 3 media overlays (SMIL + media:duration, EPUBCheck-clean)
+                                          ->  app/export/video.py: one shot per page, caption with the spoken word
+                                              highlighted, WebM (VP9 + Opus) by default, MP4/H.264 behind confirm_gpl
+```
+
+eSpeak NG reports word events with `text_position` off by one and no event for the first word; `timing.py` de-duplicates
+on `(text_position, length, audio_ms)`, anchors the first word at 0 and interpolates inside tokens, so coverage goes from
+~0.77 to 1.0. When a TTS engine gives no word events at all the timings are estimated proportionally and the export
+reports `timing_source = estimated_proportional` instead of pretending they were measured.

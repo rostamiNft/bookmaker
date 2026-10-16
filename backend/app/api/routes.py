@@ -47,6 +47,9 @@ def page_out(pid: str, p: Page) -> dict:
             "image_locked": p.image_locked, "image_meta": {k: v for k, v in (p.image_meta or {}).items() if k not in ("renderer_meta",)},
             "qa": p.qa or {}, "audio_url": file_url(pid, p.audio_file),
             "audio_meta": {k: v for k, v in (p.audio_meta or {}).items() if k != "key"},
+            "words": list((p.audio_meta or {}).get("words") or []),
+            "timing_source": (p.audio_meta or {}).get("timing_source", ""),
+            "duration_s": float((p.audio_meta or {}).get("duration_s") or 0),
             "inpaints": len((p.image_meta or {}).get("inpaints", []))}
 
 
@@ -66,7 +69,9 @@ def provider_out(c: ProviderConfig) -> dict:
             "last_check": c.last_check}
 
 
-EXPORT_FORMATS = {"epub": ("application/epub+zip", "epub"), "html": ("text/html; charset=utf-8", "html"), "images": ("application/zip", "zip")}
+EXPORT_FORMATS = {"epub": ("application/epub+zip", "epub"), "html": ("text/html; charset=utf-8", "html"),
+                  "images": ("application/zip", "zip"), "video": ("video/webm", "webm"),
+                  "video_mp4": ("video/mp4", "mp4")}
 
 
 def export_info(p: Project) -> dict:
@@ -82,7 +87,10 @@ def book_data(db: Session, p: Project):
                     publisher=(p.settings or {}).get("publisher", ""), summary=plan.summary, blurb=plan.back_cover_blurb or plan.summary,
                     cover=cover if cover and cover.is_file() else None, version=p.version,
                     pages=[BookPage(number=x.number, text=x.text, image=absf(p.id, x.image_file), audio=absf(p.id, x.audio_file),
-                                    alt=(x.image_prompt or "").split(".")[0]) for x in pages])
+                                    alt=(x.image_prompt or "").split(".")[0],
+                                    words=list((x.audio_meta or {}).get("words") or []),
+                                    timing_source=(x.audio_meta or {}).get("timing_source", ""),
+                                    duration_s=float((x.audio_meta or {}).get("duration_s") or 0)) for x in pages])
 
 
 def job_conflict(e: JobConflict):
@@ -90,6 +98,22 @@ def job_conflict(e: JobConflict):
 
 
 # ------------------------------------------------------------------ system
+def _system_extras() -> dict:
+    from ..db import db_info
+    from ..export.books import epubcheck_available
+    from ..export.video import video_available
+    from ..locks import lock_info
+    return {"database": db_info(), "locks": lock_info(), "sso": sso_status_public(),
+            "smtp": {"configured": settings.smtp_configured},
+            "media": {"epubcheck": epubcheck_available()[0], "video": video_available()}}
+
+
+def sso_status_public() -> dict:
+    if not settings.oidc_configured:
+        return {"enabled": False}
+    return {"enabled": True, "label": settings.oidc_label or settings.oidc_issuer}
+
+
 @router.get("/system")
 def system(db: Session = Depends(get_db)):
     import shutil as sh
@@ -115,7 +139,8 @@ def system(db: Session = Depends(get_db)):
             "usage": {"cost_usd": round(float(usage[0]), 4), "input_tokens": int(usage[1]), "output_tokens": int(usage[2]),
                       "images": int(usage[3]), "calls": int(usage[4])},
             "offline_engine": {"min_pages": MIN_PAGES, "max_pages": MAX_PAGES}, "env": settings.env,
-            "auth_enabled": settings.auth_mode != "none", "auth_mode": settings.auth_mode}
+            "auth_enabled": settings.auth_mode != "none", "auth_mode": settings.auth_mode,
+            **_system_extras()}
 
 
 @router.get("/presets")
@@ -307,7 +332,7 @@ def create_project(body: CreateIn, db: Session = Depends(get_db), user: str = De
     if est["warnings"]:
         raise HTTPException(422, " ".join(est["warnings"]))
     if est["paid"] and est["cost_max_usd"] > 0 and not body.confirm_cost:
-        raise HTTPException(402, json.dumps({"message": "This run uses paid APIs. Confirm the cost estimate to continue.", "estimate": est}))
+        raise HTTPException(402, {"message": "This run uses paid APIs. Confirm the cost estimate to continue.", "estimate": est})
     used = sum(f.stat().st_size for f in settings.projects_dir.rglob("*") if f.is_file())
     if used > settings.max_disk_gb * 1e9:
         raise HTTPException(507, "Disk quota for book projects is exhausted; delete or archive books first.")
@@ -893,14 +918,15 @@ def export_project(pid: str, db: Session = Depends(get_db), user: str = Depends(
 
 
 class ExportIn(BaseModel):
-    format: str = Field(..., pattern="^(epub|html|images)$")
+    format: str = Field(..., pattern="^(epub|html|images|video|video_mp4)$")
     validate_epub: bool = True
+    confirm_gpl: bool = Field(False, description="MP4/H.264 links the GPL-2+ x264 encoder: confirm you accept that")
 
 
 @router.post("/projects/{pid}/exports")
 def build_export(pid: str, body: ExportIn, db: Session = Depends(get_db), user: str = Depends(require_auth)):
     """Build an EPUB 3 / single-file HTML reader / images ZIP from the current pages (+ narration if present)."""
-    from ..export.books import build_epub, build_html, build_images_zip, validate_epub
+    from ..export.books import build_epub, build_html, build_images_zip, build_video, validate_epub
     p = get_project(db, pid, user)
     if db.scalar(select(Job.id).where(Job.project_id == pid, Job.status.in_(["queued", "running"]))):
         raise HTTPException(409, "Wait until the running task has finished")
@@ -916,6 +942,18 @@ def build_export(pid: str, body: ExportIn, db: Session = Depends(get_db), user: 
         info["validation"] = validate_epub(out) if body.validate_epub else {"checked": False, "ok": None, "note": "skipped"}
     elif body.format == "html":
         info = build_html(book, out)
+    elif body.format in ("video", "video_mp4"):
+        try:
+            import av  # noqa: F401
+        except ImportError:
+            raise HTTPException(409, "Video export needs the optional package: pip install av")
+        if body.format == "video_mp4" and not body.confirm_gpl:
+            raise HTTPException(402, {"message": "MP4/H.264 is encoded with x264, which is licensed GPL-2+. "
+                                                 "Use WebM/VP9 (royalty-free, default) or confirm the GPL terms.",
+                                      "estimate": {"container": "mp4", "video": "libx264 (GPL-2+)", "audio": "aac"}})
+        info = build_video(book, out, fmt="webm" if body.format == "video" else "mp4")
+        missing_audio = [x.number for x in book.pages if not (x.audio and x.audio.is_file())]
+        info["pages_without_audio"] = missing_audio
     else:
         info = build_images_zip(book, out)
     info.update({"file": f"exports/{out.name}", "version": p.version, "built_at": datetime.utcnow().isoformat() + "Z",
@@ -929,6 +967,49 @@ def build_export(pid: str, body: ExportIn, db: Session = Depends(get_db), user: 
                                           "valid": (info.get("validation") or {}).get("ok")}, actor="user")
     db.commit()
     return info
+
+
+@router.get("/projects/{pid}/lora-dataset")
+def lora_dataset(pid: str, db: Session = Depends(get_db), user: str = Depends(require_auth)):
+    """ZIP with a ready-to-train LoRA dataset (kohya / ai-toolkit) for every character.
+
+    Bookmaker does not train models: it prepares the images, the captions (trigger word
+    first) and the trainer configs. Training needs a GPU and kohya ss or ai-toolkit."""
+    from ..export.lora import build_dataset
+    p = get_project(db, pid, user)
+    plan = current_plan(db, p)
+    chars = db.scalars(select(Character).where(Character.project_id == pid)).all()
+    pages = db.scalars(select(Page).where(Page.project_id == pid).order_by(Page.number)).all()
+    by_id = {c.char_id: c for c in chars}
+    samples: dict[str, list] = {}
+    for ch in chars:
+        paths = []
+        if ch.ref_image_file:
+            f = absf(pid, ch.ref_image_file)
+            if f and f.is_file():
+                paths.append(f)
+        samples[ch.char_id] = paths
+    for pg in pages:                       # every illustration the character appears in
+        f = absf(pid, pg.image_file)
+        if not (f and f.is_file()):
+            continue
+        for cid in (pg.characters_present or []):
+            if cid in samples:
+                samples[cid].append(f)
+    specs = [dict(c.spec or {}) | {"id": c.char_id, "name": c.name} for c in chars]
+    out = project_dir(pid) / "exports" / f"lora-dataset-v{p.version}.zip"
+    info = build_dataset(specs, samples, (p.settings or {}).get("illustration_style", "watercolor"), out)
+    if not info["characters"]:
+        raise HTTPException(409, "No character images yet: generate the illustrations first")
+    st = dict(p.stage_state or {})
+    ex = dict(st.get("exports") or {})
+    ex["lora"] = info
+    st["exports"] = ex
+    p.stage_state = st
+    add_history(db, pid, "lora_dataset_built", {"images": info["images"], "characters": len(info["characters"])}, actor="user")
+    db.commit()
+    safe_title = "".join(ch for ch in (p.title or "book") if ch.isalnum() or ch in " -_").strip()[:60] or "book"
+    return FileResponse(out, media_type="application/zip", filename=f"{safe_title}-lora-dataset.zip")
 
 
 @router.get("/projects/{pid}/exports/{fmt}")

@@ -117,15 +117,34 @@ class Worker:
         self.thread: threading.Thread | None = None
 
     def claim(self) -> str | None:
-        with session_scope() as s:
-            busy_projects = set(s.scalars(select(Job.project_id).where(Job.status == "running")).all())
-            for job in s.scalars(select(Job).where(Job.status == "queued").order_by(Job.created_at)).all():
-                if job.project_id in busy_projects:
-                    continue
-                res = s.execute(update(Job).where(Job.id == job.id, Job.status == "queued")
-                                .values(status="running", attempts=Job.attempts + 1, started_at=now()))
-                if res.rowcount == 1:
-                    return job.id
+        """Take the next runnable job.
+
+        On PostgreSQL the candidate row is selected with ``FOR UPDATE SKIP LOCKED``
+        inside the transaction, so several worker processes can poll the same queue
+        without ever handing the same job to two of them (and without blocking each
+        other). On SQLite the single-writer model makes the plain update sufficient."""
+        from ..db import IS_POSTGRES
+        from ..locks import named_lock
+        with named_lock("worker-claim", ttl=15, timeout=5) as (got, _mode):
+            if not got:
+                return None
+            with session_scope() as s:
+                busy_projects = set(s.scalars(select(Job.project_id).where(Job.status == "running")).all())
+                if IS_POSTGRES:
+                    job = s.scalars(select(Job).where(Job.status == "queued").order_by(Job.created_at)
+                                    .with_for_update(skip_locked=True).limit(1)).first()
+                    if job is None or job.project_id in busy_projects:
+                        return None
+                    res = s.execute(update(Job).where(Job.id == job.id, Job.status == "queued")
+                                    .values(status="running", attempts=Job.attempts + 1, started_at=now()))
+                    return job.id if res.rowcount == 1 else None
+                for job in s.scalars(select(Job).where(Job.status == "queued").order_by(Job.created_at)).all():
+                    if job.project_id in busy_projects:
+                        continue
+                    res = s.execute(update(Job).where(Job.id == job.id, Job.status == "queued")
+                                    .values(status="running", attempts=Job.attempts + 1, started_at=now()))
+                    if res.rowcount == 1:
+                        return job.id
         return None
 
     def tick(self) -> bool:

@@ -118,15 +118,35 @@ class EspeakTTS(TTSProvider):
         return cls._lib, cls._rate
 
     def synthesize(self, text, language, voice="", speed=1.0):
+        return self.synthesize_with_words(text, language, voice, speed)[0]
+
+    def synthesize_with_words(self, text, language, voice="", speed=1.0):
+        """Synthesize and return (AudioResult, word timings).
+
+        eSpeak NG reports one WORD event per spoken word with its character range and
+        its offset in the generated audio (ms) - that is what read-along highlighting
+        and the video export use. Engines without word events fall back to
+        :func:`app.export.timing.proportional_timings`."""
         voice = voice or ESPEAK_VOICES.get(language, language)
         with self._lock:
             lib, rate = self._load()
             buf = array.array("h")
+            events: list = []
             CB = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_short), ctypes.c_int, ctypes.c_void_p)
+            INTS = ctypes.c_int * 6  # type, uid, text_position, length, audio_position, sample
 
-            def _cb(wav, n, _events):
+            def _cb(wav, n, ev):
                 if wav and n > 0:
                     buf.frombytes(ctypes.string_at(wav, n * 2))
+                if ev:
+                    arr = ctypes.cast(ev, ctypes.POINTER(INTS))
+                    i = 0
+                    while i < 4096:  # the list ends with espeakEVENT_LIST_TERMINATED
+                        e = arr[i]
+                        if e[0] == 0:
+                            break
+                        events.append((e[0], e[2], e[3], e[4]))
+                        i += 1
                 return 0
             cb = CB(_cb)
             lib.espeak_SetSynthCallback(cb)
@@ -144,7 +164,11 @@ class EspeakTTS(TTSProvider):
             raise ProviderError("eSpeak NG produced no audio")
         mp3 = encode_mp3(pcm, rate)
         data, mime = (mp3, "audio/mpeg") if mp3 else (encode_wav(pcm, rate), "audio/wav")
-        return AudioResult(data=data, mime=mime, model="espeak-ng", duration_s=round(len(buf) / rate, 2), voice=voice, input_chars=len(text))
+        duration = round(len(buf) / rate, 2)
+        res = AudioResult(data=data, mime=mime, model="espeak-ng", duration_s=duration, voice=voice, input_chars=len(text))
+        from ..export.timing import timings_from_events
+        words = timings_from_events(text, events, duration)
+        return res, (words if len(words) > 1 else [])
 
     def check(self):
         ok, hint = self.available()

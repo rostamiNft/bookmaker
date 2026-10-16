@@ -4,6 +4,7 @@ from contextlib import contextmanager
 
 from sqlalchemy import create_engine, event
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
+from sqlalchemy.pool import QueuePool
 
 from .config import settings
 
@@ -12,20 +13,18 @@ class Base(DeclarativeBase):
     pass
 
 
-engine = create_engine(
-    f"sqlite:///{settings.db_path}",
-    connect_args={"check_same_thread": False, "timeout": 30},
-    pool_pre_ping=True,
-)
+def _engine_kwargs(url: str) -> dict:
+    if url.startswith("postgres"):
+        # pg8000 is a pure-python driver (BSD-3): no libpq, no build step.
+        return {"poolclass": QueuePool, "pool_size": settings.db_pool_size, "max_overflow": 10,
+                "pool_pre_ping": True, "pool_recycle": 1800, "connect_args": {"timeout": 30}}
+    return {"connect_args": {"check_same_thread": False, "timeout": 30}, "pool_pre_ping": True}
 
 
-@event.listens_for(engine, "connect")
-def _sqlite_pragmas(dbapi_conn, _):
-    cur = dbapi_conn.cursor()
-    cur.execute("PRAGMA journal_mode=WAL")
-    cur.execute("PRAGMA foreign_keys=ON")
-    cur.execute("PRAGMA busy_timeout=30000")
-    cur.close()
+DATABASE_URL = settings.database_url or f"sqlite:///{settings.db_path}"
+IS_POSTGRES = DATABASE_URL.startswith("postgres")
+
+engine = create_engine(DATABASE_URL, **_engine_kwargs(DATABASE_URL))
 
 
 SessionLocal = sessionmaker(bind=engine, expire_on_commit=False)
@@ -59,9 +58,25 @@ def init_db() -> None:
     migrate_add_columns()
 
 
+def db_info() -> dict:
+    """Which database this process uses and why (shown by /api/system)."""
+    out = {"backend": "postgres" if IS_POSTGRES else "sqlite",
+           "url": (DATABASE_URL.split("@")[-1] if IS_POSTGRES else str(settings.db_path)),
+           "pool_size": settings.db_pool_size if IS_POSTGRES else None,
+           "dialect": engine.dialect.name}
+    if IS_POSTGRES:
+        try:
+            with engine.connect() as c:
+                out["server_version"] = str(c.exec_driver_sql("select version()").scalar()).split(",")[0]
+        except Exception as e:  # noqa: BLE001 - reported, never fatal
+            out["error"] = f"{type(e).__name__}: {e}"[:200]
+    return out
+
+
 def migrate_add_columns() -> list[str]:
-    """Minimal forward migration for SQLite: add columns that exist in the model but
-    not yet in an older database file (new features add nullable/defaulted columns only)."""
+    """Forward migration: add columns that exist in the model but not yet in the
+    database (works on SQLite and Postgres; new features only add nullable/defaulted
+    columns, so this is enough and no migration tool is needed)."""
     from sqlalchemy import inspect, text
     added = []
     insp = inspect(engine)

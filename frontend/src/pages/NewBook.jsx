@@ -12,6 +12,8 @@ export const DEFAULTS = {
   vision_provider_id: '', max_image_attempts: 3, max_story_attempts: 3, budget_usd: 0,
   review_outline: false, layout_style: 'classic', bleed_mm: 0, crop_marks: false, color_mode: 'rgb', narration_audio: false, tts_provider_id: '',
   cast_reference: true,
+  text_align: 'start', hyphenation: false, shaping: 'auto', kashida: true, speech_bubbles: false,
+  print_standard: 'none', icc_profile: '', lora_training: false,
 }
 
 export default function NewBook() {
@@ -105,6 +107,23 @@ export default function NewBook() {
             <Field label={t('publisher')}><input dir="auto" value={s.publisher} maxLength={120} onChange={(e) => set('publisher')(e.target.value)} /></Field>
           </div>
 
+          <h3>✍️ {t('typography')}</h3>
+          <div className="row">
+            <Field label={t('textAlign')} hint={s.text_align === 'justify' && s.language === 'fa' ? t('kashidaNote') : ''}>
+              <Select value={s.text_align} onChange={set('text_align')} options={[['start', t('alignStart')], ['justify', t('alignJustify')]]} data-testid="opt-align" />
+            </Field>
+            <Field label={t('shaping')} hint={s.shaping === 'basic' ? t('shapingBasicNote') : ''}>
+              <Select value={s.shaping} onChange={set('shaping')} options={[['auto', 'auto (HarfBuzz)'], ['harfbuzz', 'harfbuzz'], ['basic', 'basic']]} data-testid="opt-shaping" />
+            </Field>
+            <Field label={t('hyphenation')}>
+              <Select value={s.hyphenation ? '1' : '0'} onChange={(v) => set('hyphenation')(v === '1')} options={[['0', t('no')], ['1', t('yes')]]} />
+            </Field>
+          </div>
+          <div className="row checks">
+            <label><input type="checkbox" checked={s.speech_bubbles} onChange={(e) => set('speech_bubbles')(e.target.checked)} data-testid="opt-bubbles" /> {t('speechBubbles')}</label>
+            <label><input type="checkbox" checked={s.kashida} onChange={(e) => set('kashida')(e.target.checked)} /> {t('kashida')}</label>
+          </div>
+
           <h3>🖨 {t('printOptions')} · 🔊 {t('narrationAudio')}</h3>
           <div className="row">
             <Field label={t('layoutStyle')}><Select value={s.layout_style} onChange={set('layout_style')} options={[['classic', 'classic'], ['full_bleed', 'full-bleed + text panel']]} /></Field>
@@ -115,6 +134,14 @@ export default function NewBook() {
             <label><input type="checkbox" checked={s.crop_marks} onChange={(e) => set('crop_marks')(e.target.checked)} /> {t('cropMarks')}</label>
             <label><input type="checkbox" checked={s.narration_audio} onChange={(e) => set('narration_audio')(e.target.checked)} data-testid="opt-narration" /> {t('narrationAudio')}</label>
             <label><input type="checkbox" checked={s.review_outline} onChange={(e) => set('review_outline')(e.target.checked)} data-testid="opt-review" /> {t('reviewOutline')}</label>
+          </div>
+          <div className="row">
+            <Field label={t('printStandard')} hint={s.print_standard === 'pdfx4' ? t('pdfxNote') : ''}>
+              <Select value={s.print_standard} onChange={set('print_standard')} options={[['none', t('none')], ['pdfx4', 'PDF/X-4']]} data-testid="opt-standard" />
+            </Field>
+            <Field label={t('iccProfile')} hint={t('iccHint')}>
+              <input dir="ltr" value={s.icc_profile} maxLength={300} placeholder={t('iccPlaceholder')} onChange={(e) => set('icc_profile')(e.target.value)} />
+            </Field>
           </div>
           {s.narration_audio && <Field label={t('ttsModel')}><Select value={s.tts_provider_id} onChange={set('tts_provider_id')} options={opts('tts')} /></Field>}
 

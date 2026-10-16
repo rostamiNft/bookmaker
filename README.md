@@ -38,6 +38,7 @@ python3 -m venv .venv
 .venv/bin/pip install -r backend/requirements.txt
 .venv/bin/pip install -r backend/requirements-optional.txt   # optional OCR check (~100 MB, CPU)
 .venv/bin/pip install -r backend/requirements-media.txt      # optional: EPUBCheck + Java runtime, offline narration (eSpeak NG = GPL-3.0)
+.venv/bin/pip install -r backend/requirements-deploy.txt     # optional: PostgreSQL (pg8000) + Redis + OIDC (PyJWT)
 # rapidocr installs the GUI OpenCV build, which needs libGL; keep the headless one (run.sh does this):
 .venv/bin/pip uninstall -y opencv-python; .venv/bin/pip install --force-reinstall --no-deps opencv-python-headless==5.0.0.93
 (cd frontend && npm ci && npm run build)
@@ -76,6 +77,12 @@ Copy `.env.example` to `.env`. Everything is optional:
 | `BOOKMAKER_MAX_UPLOAD_MB` | 10 | max reference-image upload |
 | `BOOKMAKER_RATE_LIMIT_PER_MINUTE` | 240 | per-IP API rate limit (0 = off) |
 | `BOOKMAKER_ENABLE_OCR` | true | stray-text detection in illustrations (needs optional deps) |
+| `BOOKMAKER_DATABASE_URL` | – | empty = SQLite file in the data dir. Set to `postgresql://user:pw@host:5432/db` to run several workers/containers (driver: pg8000, pure Python) |
+| `BOOKMAKER_DB_POOL_SIZE` | 5 | PostgreSQL connection pool size |
+| `BOOKMAKER_REDIS_URL` | – | optional: shared worker locks across machines (without it the locks are in-process) |
+| `BOOKMAKER_SMTP_*` / `BOOKMAKER_PUBLIC_URL` | – | password-reset e-mail; with no SMTP server the reset link is handed to an admin instead |
+| `BOOKMAKER_OIDC_*` | – | single sign-on (any OIDC provider: Keycloak, Authentik, Zitadel, Okta, Entra ID, Google …) |
+| `BOOKMAKER_START_WORKER` | auto | set `0` to run the app with no job worker (e.g. a second replica behind a queue) |
 
 Provider API keys are entered in the UI, stored **encrypted**, shown masked (`sk-…abcd`) and redacted from logs.
 Instead of a key you can type `env:OPENAI_API_KEY` to read it from the server environment.
@@ -115,6 +122,21 @@ Instead of a key you can type `env:OPENAI_API_KEY` to read it from the server en
   login throttling (5 failures → 15 min lock).
 * **Models & providers**: add providers, test connection, set defaults (story / image / vision reviewer / narration / inpainting), fallbacks,
   rate limits, pricing, see recent usage and costs.
+
+## Deployment with PostgreSQL and Redis
+
+The default single-container setup needs nothing but a data directory. To scale out (several workers, or several app
+replicas sharing one queue):
+
+```bash
+cp .env.example .env                 # set POSTGRES_PASSWORD, BOOKMAKER_SECRET_KEY, BOOKMAKER_PUBLIC_URL …
+docker compose up -d --build         # postgres + redis + app
+docker compose up -d --scale worker=2   # two workers on the same queue
+```
+
+Workers claim jobs with `SELECT … FOR UPDATE SKIP LOCKED`, so a job is never handed to two processes. Redis is optional:
+without it the worker locks are per-process, which is correct for a single instance. Both code paths are covered by
+`backend/tests/test_postgres_redis.py` against a real PostgreSQL 16 server started locally by `pgserver`.
 
 ## Documentation
 

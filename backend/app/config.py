@@ -57,6 +57,31 @@ class Settings:
     enable_ocr: bool = field(default_factory=lambda: _bool("BOOKMAKER_ENABLE_OCR", True))
     cors_origins: str = field(default_factory=lambda: os.environ.get("BOOKMAKER_CORS_ORIGINS", ""))
     start_worker: bool = field(default_factory=lambda: _bool("BOOKMAKER_START_WORKER", True))
+    # ---------------------------------------------------------------- database
+    # Postgres (recommended for several workers): postgresql://user:pass@host:5432/dbname
+    # Empty = the bundled SQLite file (single process / small installs).
+    database_url: str = field(default_factory=lambda: os.environ.get("BOOKMAKER_DATABASE_URL", "").strip())
+    db_pool_size: int = field(default_factory=lambda: _int("BOOKMAKER_DB_POOL_SIZE", 5))
+    # Redis (optional): shared worker locks and cache. Empty = in-process, single node.
+    redis_url: str = field(default_factory=lambda: os.environ.get("BOOKMAKER_REDIS_URL", "").strip())
+    # ---------------------------------------------------------------- mail (password reset)
+    smtp_host: str = field(default_factory=lambda: os.environ.get("BOOKMAKER_SMTP_HOST", ""))
+    smtp_port: int = field(default_factory=lambda: _int("BOOKMAKER_SMTP_PORT", 587))
+    smtp_user: str = field(default_factory=lambda: os.environ.get("BOOKMAKER_SMTP_USER", ""))
+    smtp_password: str = field(default_factory=lambda: os.environ.get("BOOKMAKER_SMTP_PASSWORD", ""))
+    smtp_from: str = field(default_factory=lambda: os.environ.get("BOOKMAKER_SMTP_FROM", ""))
+    smtp_starttls: bool = field(default_factory=lambda: _bool("BOOKMAKER_SMTP_STARTTLS", True))
+    # Public base URL used to build links in e-mails (no trailing slash).
+    public_url: str = field(default_factory=lambda: os.environ.get("BOOKMAKER_PUBLIC_URL", "").rstrip("/"))
+    # ---------------------------------------------------------------- single sign-on (OIDC)
+    oidc_issuer: str = field(default_factory=lambda: os.environ.get("BOOKMAKER_OIDC_ISSUER", "").rstrip("/"))
+    oidc_client_id: str = field(default_factory=lambda: os.environ.get("BOOKMAKER_OIDC_CLIENT_ID", ""))
+    oidc_client_secret: str = field(default_factory=lambda: os.environ.get("BOOKMAKER_OIDC_CLIENT_SECRET", ""))
+    oidc_redirect_uri: str = field(default_factory=lambda: os.environ.get("BOOKMAKER_OIDC_REDIRECT_URI", ""))
+    oidc_scope: str = field(default_factory=lambda: os.environ.get("BOOKMAKER_OIDC_SCOPE", "openid email profile"))
+    oidc_label: str = field(default_factory=lambda: os.environ.get("BOOKMAKER_OIDC_LABEL", "Single sign-on"))
+    oidc_auto_create: bool = field(default_factory=lambda: _bool("BOOKMAKER_OIDC_AUTO_CREATE", True))
+    oidc_role_claim: str = field(default_factory=lambda: os.environ.get("BOOKMAKER_OIDC_ROLE_CLAIM", ""))
 
     @property
     def auth_mode(self) -> str:
@@ -68,6 +93,14 @@ class Settings:
     @auth_mode.setter
     def auth_mode(self, value: str):
         self.auth_mode_env = value
+
+    @property
+    def smtp_configured(self) -> bool:
+        return bool(self.smtp_host and self.smtp_from)
+
+    @property
+    def oidc_configured(self) -> bool:
+        return bool(self.oidc_issuer and self.oidc_client_id)
 
     @property
     def is_production(self) -> bool:

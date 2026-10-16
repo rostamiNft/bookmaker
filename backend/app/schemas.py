@@ -66,6 +66,20 @@ class BookSettings(BaseModel):
     tts_provider_id: str = ""
     narration_voice: str = Field("", max_length=80)
     narration_speed: float = Field(1.0, ge=0.5, le=2.0)
+    # typography
+    text_align: Literal["start", "justify"] = Field(
+        "start", description="justify: stretch story lines to the text box (kashida for Persian/Arabic, word spaces otherwise)")
+    hyphenation: bool = Field(False, description="Break long words at syllable boundaries (Latin scripts, needs pyphen)")
+    shaping: Literal["auto", "harfbuzz", "basic"] = Field(
+        "auto", description="auto: HarfBuzz when installed; harfbuzz: real OpenType shaping; basic: built-in presentation forms")
+    kashida: bool = Field(True, description="Allow tatweel (kashida) stretching when justifying Arabic-script text")
+    speech_bubbles: bool = Field(False, description="Draw the page text in vector speech bubbles over the illustration")
+    # print standards
+    print_standard: Literal["none", "pdfx4"] = Field(
+        "none", description="pdfx4: add PDF/X-4 output intent, XMP and TrimBox (forces CMYK colour)")
+    icc_profile: str = Field("", max_length=300, description="Path to a CMYK ICC profile; empty = bundled ISOcoated_v2_300 (CC0)")
+    # per-character LoRA
+    lora_training: bool = Field(False, description="Also export a LoRA training dataset (kohya/ai-toolkit format) per character")
 
     @field_validator("title", "topic", "moral", "hero_name", "author", "publisher")
     @classmethod
@@ -111,6 +125,10 @@ class CharacterSpec(BaseModel):
     movement: str = ""
     palette: list[str] = []
     relationships: dict[str, str] = {}
+    # per-character LoRA (weights are trained elsewhere; these fields drive prompts + dataset export)
+    lora_name: str = Field("", max_length=120, description="File name (without extension) of a trained LoRA for this character")
+    lora_weight: float = Field(0.8, ge=0.0, le=1.5, description="Default LoRA strength used in prompts")
+    lora_trigger: str = Field("", max_length=200, description="Trigger word that activates the LoRA")
 
 
 class LocationSpec(BaseModel):

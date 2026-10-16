@@ -1,4 +1,6 @@
 # NOTE: provided for convenience; not built/tested in the development sandbox (no Docker there).
+# PostgreSQL (pg8000) and Redis support lives in requirements-deploy.txt: only needed when
+# BOOKMAKER_DATABASE_URL / BOOKMAKER_REDIS_URL are set.
 FROM node:22-slim AS ui
 WORKDIR /ui
 COPY frontend/package*.json ./
@@ -10,7 +12,7 @@ FROM python:3.11-slim
 RUN apt-get update && apt-get install -y --no-install-recommends fonts-dejavu-core && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY backend/requirements*.txt backend/
-RUN pip install --no-cache-dir -r backend/requirements.txt -r backend/requirements-optional.txt -r backend/requirements-media.txt \
+RUN pip install --no-cache-dir -r backend/requirements.txt -r backend/requirements-optional.txt -r backend/requirements-media.txt -r backend/requirements-deploy.txt \
  && (pip uninstall -y opencv-python || true) \
  && pip install --no-cache-dir --force-reinstall --no-deps opencv-python-headless==5.0.0.93
 COPY backend/ backend/

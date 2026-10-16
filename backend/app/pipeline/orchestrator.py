@@ -490,7 +490,7 @@ class Pipeline:
                     images["cover"] = str(cover)
                 if pages and f"story:{pages[-1].number}" in images:
                     images["back"] = images[f"story:{pages[-1].number}"]
-                page_dicts = [{"number": p.number, "text": p.text} for p in pages]
+                page_dicts = [{"number": p.number, "text": p.text, "image_meta": dict(p.image_meta or {})} for p in pages]
                 title, version = proj.title or plan.title, proj.version + 1
             layouts, issues = build_layouts(self.s, title, page_dicts, images, plan.model_dump(), [self.llm_model_name, self.image_model_name])
             overflow = sorted({i["page"] for i in issues if i["code"] == "text_overflow" and i.get("page")})
@@ -500,9 +500,18 @@ class Pipeline:
             if not any([self._shorten_page(n) for n in overflow]):
                 break
         out = self.dir / "pdf" / f"book-v{version}.pdf"
+        pdfx = getattr(self.s, "print_standard", "none") == "pdfx4"
+        if pdfx:
+            try:
+                from ..layout.pdfx import PdfxError, resolve_icc
+                resolve_icc(getattr(self.s, "icc_profile", "") or "")
+            except PdfxError as e:
+                self._log("pdf", "warning", f"PDF/X-4 disabled: {e}")
+                pdfx = False
         info = render_pdf(layouts, images, out, title=title, author=self.s.author, subject=plan.summary, language=self.s.language,
                           keywords=["children's book", plan.theme, self.s.age_group], profile=self.s.output_profile,
-                          bleed_mm=self.s.bleed_mm, crop_marks=self.s.crop_marks, color_mode=self.s.color_mode)
+                          bleed_mm=self.s.bleed_mm, crop_marks=self.s.crop_marks, color_mode="cmyk" if pdfx else self.s.color_mode,
+                          pdfx=pdfx, icc_profile=getattr(self.s, "icc_profile", "") or "")
         W, H = page_size(self.s)
         MW, MH = info["media_size"]
         expected_story = len(page_dicts)
@@ -517,9 +526,19 @@ class Pipeline:
         v = validate_pdf(out, expected_pages=len(layouts), expected_size=(MW, MH), page_kinds=[l.kind for l in layouts], image_pages=image_pages,
                          title=title, language=self.s.language, ltr_samples=ltr, render_dir=self.dir / "render" / f"v{version}",
                          trim=(W, H, info["trim_offset"]) if info["trim_offset"] > 0 else None, bleed_pt=info["bleed_pt"],
-                         color_mode=self.s.color_mode, rtl_samples=rtl)
+                         color_mode="cmyk" if pdfx else self.s.color_mode, rtl_samples=rtl)
         v["info"]["print"] = {"trim_mm": [round(W / 72 * 25.4, 1), round(H / 72 * 25.4, 1)], "bleed_mm": self.s.bleed_mm,
-                              "crop_marks": self.s.crop_marks, "color_mode": self.s.color_mode, "layout_style": self.s.layout_style}
+                              "crop_marks": self.s.crop_marks, "color_mode": "cmyk" if pdfx else self.s.color_mode,
+                              "layout_style": self.s.layout_style, "standard": self.s.print_standard,
+                              "icc": (info.get("pdfx") or {}).get("icc", "")}
+        if pdfx:  # surface the PDF/X self-check as real QA issues (self-check, not certification)
+            chk = (info.get("pdfx") or {}).get("check") or {}
+            v["info"]["pdfx"] = {k: val for k, val in (info.get("pdfx") or {}).items() if k != "check"}
+            v["info"]["pdfx"]["check"] = chk
+            for i in chk.get("issues", []):
+                v["issues"].append({"code": i["code"], "severity": "error", "message": i["message"], "page": i.get("page"),
+                                    "stage": "pdf"})
+            v["ok"] = not any(i["severity"] == "error" for i in v["issues"])
         story_missing = [p["number"] for p in page_dicts if f"story:{p['number']}" not in images]
         for n in story_missing:
             issues.append({"code": "image_missing", "severity": "error", "message": "Story page has no illustration", "page": n, "stage": "image"})
@@ -675,9 +694,20 @@ class Pipeline:
         if not self.tts_id:
             return [{"code": "tts_not_configured", "severity": "warning", "message": "No narration provider configured", "page": number, "stage": "audio"}]
         spoken = text
+        words, timing_source = [], ""
         try:
-            res = self.router.run(self.tts_id, "tts", f"narration_{number}",
-                                  lambda prov, cfg: prov.synthesize(spoken, self.s.language, self.s.narration_voice, self.s.narration_speed))
+            def _synth(prov, cfg):
+                nonlocal words, timing_source
+                if hasattr(prov, "synthesize_with_words"):
+                    res, words = prov.synthesize_with_words(spoken, self.s.language, self.s.narration_voice, self.s.narration_speed)
+                    timing_source = "engine_word_events" if words else ""
+                    return res
+                res = prov.synthesize(spoken, self.s.language, self.s.narration_voice, self.s.narration_speed)
+                from ..export.timing import proportional_timings
+                words = proportional_timings(spoken, res.duration_s)
+                timing_source = "estimated_proportional" if words else ""
+                return res
+            res = self.router.run(self.tts_id, "tts", f"narration_{number}", _synth)
         except (ProviderError, NotImplementedError) as e:
             issue = {"code": "tts_failed", "severity": "warning", "message": f"Narration failed: {str(e)[:200]}", "page": number, "stage": "audio"}
             with session_scope() as s:
@@ -695,11 +725,18 @@ class Pipeline:
         elif not (2.0 <= cps <= 45.0):
             issues.append({"code": "audio_suspect_length", "severity": "warning",
                            "message": f"Narration length looks wrong ({res.duration_s:.1f}s for {len(text)} characters)", "page": number, "stage": "audio"})
+        if words:  # word-level timing for read-along (highlight, video, EPUB media overlay)
+            from ..export.timing import timings_quality
+            quality = timings_quality(words, spoken, res.duration_s)
+            if not quality["ok"]:
+                issues.append({"code": "timings_suspect", "severity": "warning",
+                               "message": f"Word timing looks unreliable ({quality})", "page": number, "stage": "audio"})
         with session_scope() as s:
             p = s.get(Page, page_id)
             p.audio_file = rel(self.pid, path)
             p.audio_meta = {"key": key, "engine": res.model, "voice": res.voice, "mime": res.mime, "duration_s": res.duration_s,
-                            "bytes": len(res.data), "issues": issues}
+                            "bytes": len(res.data), "issues": issues, "words": words, "timing_source": timing_source,
+                            "timing_quality": (timings_quality(words, spoken, res.duration_s) if words else {})}
         return issues
 
     def narrate(self, page_id: str = "", force: bool = False):

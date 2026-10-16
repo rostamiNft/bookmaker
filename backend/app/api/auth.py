@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import re
 import secrets
+import urllib.parse
 from datetime import datetime, timedelta
 
 from fastapi import APIRouter, Depends, HTTPException, Request
@@ -12,7 +13,8 @@ from sqlalchemy.orm import Session
 
 from ..config import settings
 from ..db import get_db
-from ..models import AuthSession, Project, User
+from ..mailer import reset_mail, send_mail
+from ..models import AuthSession, OidcState, PasswordReset, Project, User
 from ..security import (current_user, hash_password, login_throttle, require_admin, token_hash, verify_password)
 
 router = APIRouter(prefix="/api/auth")
@@ -146,6 +148,186 @@ class UserPatch(BaseModel):
     role: str | None = Field(None, pattern="^(admin|user)$")
     active: bool | None = None
     password: str | None = Field(None, max_length=200)
+
+
+# ------------------------------------------------------------------ password reset
+class ResetRequest(BaseModel):
+    username: str = Field("", max_length=200)
+    email: str = Field("", max_length=200)
+
+
+class ResetConfirm(BaseModel):
+    token: str = Field(..., min_length=20, max_length=200)
+    password: str = Field(..., max_length=200)
+
+
+RESET_MINUTES = 60
+
+
+def _reset_link(token: str, base: str = "") -> str:
+    base = (base or settings.public_url or "").rstrip("/")
+    return f"{base}/#/reset?token={urllib.parse.quote(token)}"
+
+
+def _find_user(db: Session, username: str, email: str) -> User | None:
+    username, email = (username or "").strip().lower(), (email or "").strip().lower()
+    if email:
+        u = db.scalar(select(User).where(func.lower(User.email) == email))
+        if u is not None:
+            return u
+    if username:
+        return db.scalar(select(User).where(func.lower(User.username) == username))
+    return None
+
+
+def _make_reset(db: Session, u: User) -> str:
+    from datetime import timedelta
+    token = secrets.token_urlsafe(32)
+    db.execute(delete(PasswordReset).where(PasswordReset.expires_at < datetime.utcnow()))
+    db.add(PasswordReset(token_hash=token_hash(token), user_id=u.id,
+                         expires_at=datetime.utcnow() + timedelta(minutes=RESET_MINUTES)))
+    db.commit()
+    return token
+
+
+@router.post("/reset/request")
+def reset_request(body: ResetRequest, request: Request, db: Session = Depends(get_db)):
+    """E-mail a one-time reset link. Always answers 200 so the endpoint cannot be used to
+    find out which accounts exist. With SMTP disabled (or for an admin) the link is
+    returned instead, so the flow stays usable and testable without a mail server."""
+    if settings.auth_mode != "accounts":
+        raise HTTPException(400, "Accounts are not enabled")
+    is_admin = False
+    try:
+        is_admin = current_user(request)["role"] == "admin"
+    except HTTPException:
+        pass
+    u = _find_user(db, body.username, body.email)
+    out = {"ok": True, "mailed": False, "method": "none"}
+    if u is None or not u.active:
+        return out                                   # same answer either way
+    token = _make_reset(db, u)
+    link = _reset_link(token, str(request.base_url).rstrip("/") if not settings.public_url else settings.public_url)
+    subj, plain, html = reset_mail(link, RESET_MINUTES, u.username)
+    res = send_mail(u.email or "", subj, plain, html)
+    out.update({"mailed": res.sent, "method": res.method, "error": res.error})
+    if not res.sent:  # no mail server: let an administrator pass the link on by hand
+        if is_admin or settings.env != "production":
+            out["link"] = link
+            out["note"] = "SMTP is not configured: pass this link to the user yourself"
+        else:
+            out["note"] = "SMTP is not configured; ask an administrator for a reset link"
+    return out
+
+
+@router.post("/reset/confirm")
+def reset_confirm(body: ResetConfirm, db: Session = Depends(get_db)):
+    if settings.auth_mode != "accounts":
+        raise HTTPException(400, "Accounts are not enabled")
+    h = token_hash(body.token)
+    row = db.get(PasswordReset, h)
+    if row is None or row.used_at is not None or row.expires_at < datetime.utcnow():
+        raise HTTPException(400, "Reset link is invalid or has expired")
+    u = db.get(User, row.user_id)
+    if u is None or not u.active:
+        raise HTTPException(400, "Account is not active")
+    _check_password(body.password)
+    u.password_hash = hash_password(body.password)
+    row.used_at = datetime.utcnow()
+    db.execute(delete(AuthSession).where(AuthSession.user_id == u.id))     # log out everywhere
+    db.execute(delete(PasswordReset).where(PasswordReset.user_id == u.id))
+    db.commit()
+    return {"ok": True, "username": u.username}
+
+
+@router.post("/users/{uid}/reset-link", dependencies=[Depends(require_admin)])
+def admin_reset_link(uid: str, request: Request, db: Session = Depends(get_db)):
+    """Administrator path: a reset link without e-mail (when no SMTP server is set up)."""
+    u = db.get(User, uid)
+    if not u:
+        raise HTTPException(404, "User not found")
+    token = _make_reset(db, u)
+    link = _reset_link(token, settings.public_url or str(request.base_url).rstrip("/"))
+    return {"ok": True, "link": link, "expires_minutes": RESET_MINUTES,
+            "email": u.email, "mailed": False if not u.email else send_mail(
+                u.email, *reset_mail(link, RESET_MINUTES, u.username)).sent}
+
+
+# ------------------------------------------------------------------ single sign-on (OIDC)
+@router.get("/sso")
+def sso_status():
+    from ..sso import provider_label
+    if not settings.oidc_configured:
+        return {"enabled": False, "note": "Set BOOKMAKER_OIDC_ISSUER and BOOKMAKER_OIDC_CLIENT_ID to enable single sign-on"}
+    return {"enabled": True, "label": provider_label(), "issuer": settings.oidc_issuer,
+            "auto_create": settings.oidc_auto_create}
+
+
+@router.get("/sso/authorize")
+def sso_authorize(request: Request, redirect_uri: str = "", db: Session = Depends(get_db)):
+    """Start an OIDC login: stores the PKCE verifier and returns the provider URL."""
+    from datetime import timedelta
+    from ..sso import SsoError, authorize_url, new_state
+    if settings.auth_mode != "accounts":
+        raise HTTPException(400, "Accounts are not enabled")
+    if not settings.oidc_configured:
+        raise HTTPException(400, "Single sign-on is not configured")
+    state, verifier, nonce = new_state()
+    uri = redirect_uri or settings.oidc_redirect_uri or f"{str(request.base_url).rstrip('/')}/api/auth/sso/callback"
+    try:
+        url = authorize_url(state, verifier, nonce, uri)
+    except SsoError as e:
+        raise HTTPException(502, f"Identity provider unavailable: {e}")
+    db.execute(delete(OidcState).where(OidcState.expires_at < datetime.utcnow()))
+    db.add(OidcState(state=state, code_verifier=verifier, nonce=nonce, redirect_to=uri,
+                     expires_at=datetime.utcnow() + timedelta(minutes=10)))
+    db.commit()
+    return {"url": url, "state": state}
+
+
+@router.get("/sso/callback")
+def sso_callback(code: str = "", state: str = "", error: str = "", db: Session = Depends(get_db)):
+    """Provider redirects here. Exchanges the code, verifies the ID token, logs the user in."""
+    from fastapi.responses import RedirectResponse
+    from ..sso import SsoError, exchange_code, verify_id_token
+    if error or not code or not state:
+        raise HTTPException(400, f"Single sign-on failed: {error or 'missing code'}")
+    row = db.get(OidcState, state)
+    if row is None or row.expires_at < datetime.utcnow():
+        raise HTTPException(400, "Login request expired or unknown: please start again")
+    verifier, nonce, redirect_to = row.code_verifier, row.nonce, row.redirect_to
+    db.delete(row)
+    db.commit()
+    if not settings.oidc_configured:
+        raise HTTPException(400, "Single sign-on is not configured")
+    try:
+        tokens = exchange_code(code, verifier, settings.oidc_redirect_uri or redirect_to or
+                               f"{settings.public_url}/api/auth/sso/callback")
+        ident = verify_id_token(tokens.get("id_token", ""), nonce)
+    except SsoError as e:
+        raise HTTPException(401, str(e))
+    u = db.scalar(select(User).where(User.sso_subject == ident.subject))
+    if u is None and ident.email_verified and ident.email:
+        u = db.scalar(select(User).where(func.lower(User.email) == ident.email))
+        if u is not None:
+            u.sso_subject, u.sso_provider = ident.subject, ident.issuer
+    if u is None:
+        if not settings.oidc_auto_create:
+            raise HTTPException(403, "No account for this identity and automatic creation is disabled")
+        base = re.sub(r"[^a-z0-9._-]", "", (ident.name or ident.email.split("@")[0]).lower())[:40] or "sso"
+        name, i = base, 1
+        while db.scalar(select(User).where(func.lower(User.username) == name)):
+            i += 1
+            name = f"{base}{i}"
+        u = User(username=name, display_name=ident.name or name, password_hash=hash_password(secrets.token_urlsafe(24)),
+                 role=ident.role or "user", email=ident.email, sso_subject=ident.subject, sso_provider=ident.issuer)
+        db.add(u)
+        db.flush()
+    elif not u.active:
+        raise HTTPException(403, "Account is disabled")
+    token = _issue(db, u)
+    # the token travels in the fragment: browsers never send it to the server in a URL
+    return RedirectResponse(f"{settings.public_url or ''}/#/sso?token={urllib.parse.quote(token)}", status_code=302)
 
 
 @router.get("/users", dependencies=[Depends(require_admin)])

@@ -11,6 +11,10 @@ if [ "${BOOKMAKER_NO_MEDIA:-0}" != "1" ]; then
   # EPUBCheck + Java runtime, offline narration (eSpeak NG is GPL-3.0; set BOOKMAKER_NO_MEDIA=1 to skip)
   .venv/bin/pip install -q -r backend/requirements-media.txt || echo "Media extras not installed (optional)"
 fi
+if [ "${BOOKMAKER_NO_DEPLOY:-0}" != "1" ]; then
+  # PostgreSQL driver (pg8000), Redis client, PyJWT for SSO - only needed for multi-container/SSO setups
+  .venv/bin/pip install -q -r backend/requirements-deploy.txt || echo "Deployment extras not installed (optional)"
+fi
 # rapidocr pulls the GUI build of OpenCV, which shadows the headless one and needs libGL: keep only headless
 if .venv/bin/pip show -q opencv-python >/dev/null 2>&1; then
   .venv/bin/pip uninstall -q -y opencv-python

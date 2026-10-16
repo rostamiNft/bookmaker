@@ -145,7 +145,17 @@ LICENSE file, so copying would not be allowed anyway).
 | w3c/epubcheck (PyPI `epubcheck` + `jdk4py`) | 2.0k | BSD-3 / GPLv2+CPE | active | EPUB validation | ~70 MB optional; without it EPUBs are reported "not checked" |
 | ebooklib | – | **AGPL-3.0** | – | **avoided** | EPUB is written directly with `zipfile` instead |
 | StPageFlip | 888 | MIT | unmaintained since 2024-01 | not used | the HTML reader uses a small CSS page-turn instead |
-| uharfbuzz | 113 | Apache-2.0 | active | not used yet | candidate for full OpenType shaping (current: arabic-reshaper + bidi) |
+| uharfbuzz | 113 | Apache-2.0 | active | **used**: HarfBuzz shaping (opt-in `shaping=harfbuzz`, auto when installed) | full OpenType contextual forms; falls back to arabic-reshaper |
+| pyphen | 400 | GPL/LGPL/MPL tri-licence (installed dist carries MPL 1.1) | active | **used**: hyphenation for Latin scripts | opt-in per book (`hyphenation`) |
+| pg8000 | 900 | BSD-3 (moved to Codeberg) | active | **used**: PostgreSQL driver for `BOOKMAKER_DATABASE_URL` | pure Python, no libpq; psycopg was rejected (LGPL-3) |
+| redis-py | 19k | MIT | active | **used**: optional shared worker locks | optional; falls back to in-process locks |
+| PyJWT | 8k | MIT | active | **used**: OIDC ID-token verification | kid-matched JWKS, cached + refetched |
+| aiosmtpd | 1k | BSD-3 | active | **used in tests only**: real SMTP server for the password-reset test | – |
+| pgserver | 200 | Apache-2.0 | active | **used in tests only**: real PostgreSQL 16 for the deployment test | bundles the postgres binaries, no Docker needed |
+| PyAV 18.1 | 2k | BSD-3 (bundles FFmpeg 8.1.2 "LGPLv3+" **and GPL libx264/libx265**) | active | **used**: video export | default WebM VP9+Opus (royalty-free); MP4/H.264 only after `confirm_gpl` → 402 otherwise |
+| kohya sd-scripts / ai-toolkit | 25k / 8k | Apache-2.0 / MIT | active | **used**: LoRA dataset export writes ready-to-run configs for both | training itself is out of scope (needs a GPU) |
+| aliftype/raqim-kashida | – | MIT | active | **used**: kashida (tatweel) rules for justified Persian | Benatia et al. 2006 priorities re-implemented |
+| pmjdebruijn/amethyst-cmyk-icc-profiles | – | CC0 | – | bundled alternative CMYK profile | experimental: a hard proof is recommended |
 | hazm | 1.4k | MIT | active | not used | Persian NLP (normalisation) candidate |
 
 ### Datasets mentioned by the user (not verified, Hugging Face unreachable from the build environment)

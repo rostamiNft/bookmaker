@@ -1,0 +1,28 @@
+# Third research round (2026-10-16): libraries for the remaining features, permissive / commercial-use licences preferred
+# repo | stars | licence (GitHub API) | last push | archived | description
+pmjdebruijn/amethyst-cmyk-icc-profiles | 0 | CC0-1.0 | 2024-01-07 | False | Amethyst CMYK ICC Profiles
+saucecontrol/Compact-ICC-Profiles | 340 | CC0-1.0 | 2023-06-07 | False | Minimal ICC Profiles intended for embedding in image files
+mm2/Little-CMS | 756 | MIT | 2026-10-14 | False | A free, open source, CMM engine. It provides fast transforms between ICC profiles.
+harfbuzz/uharfbuzz | 113 | Apache-2.0 | 2026-10-06 | False | A HarfBuzz Python binding
+harfbuzz/harfbuzz | 6158 | NOASSERTION | 2026-10-15 | False | HarfBuzz text shaping engine
+Kozea/Pyphen | 230 | NOASSERTION | 2026-09-02 | False | Hy-phen-ation made easy
+aliftype/raqim-kashida | 20 | MIT | 2026-10-15 | False | A library for finding kashida (tatweel) insertion points and priorities.
+theodore-s-beers/bekesh | 0 | MIT | 2026-09-01 | False | Browser-first Persian and Arabic kashida justification
+PyAV-Org/pyav | 3309 | BSD-3-Clause | 2026-10-14 | False | ﻿﻿Pythonic bindings for FFmpeg's libraries.
+orm011/pgserver | 104 | Apache-2.0 | 2024-06-10 | False | Pip-installable, embedded-like postgres server for your python app
+psycopg/psycopg | 2510 | LGPL-3.0 | 2026-10-12 | False | New generation PostgreSQL database adapter for the Python programming language 
+jpadilla/pyjwt | 5718 | MIT | 2026-10-14 | False | JSON Web Token implementation in Python
+authlib/authlib | 5433 | BSD-3-Clause | 2026-10-15 | False | The ultimate Python library in building OAuth, OpenID Connect clients and servers. JWS, JW
+aio-libs/aiosmtpd | 372 | Apache-2.0 | 2026-10-12 | False | A reimplementation of the Python stdlib smtpd.py based on asyncio.
+redis/redis-py | 13649 | MIT | 2026-10-15 | False | Redis Python client
+valkey-io/valkey | 27437 | BSD-3-Clause | 2026-10-15 | False | A flexible distributed key-value database that is optimized for caching and other realtime
+celery/celery | 28987 | NOASSERTION | 2026-10-15 | False | Distributed Task Queue (development branch)
+ostris/ai-toolkit | 12312 | MIT | 2026-10-15 | False | The ultimate training toolkit for finetuning diffusion models
+kohya-ss/sd-scripts | 7244 | Apache-2.0 | 2026-09-24 | False | 
+ozefe/spantrack | 4 | MIT | 2026-07-07 | False | Turn text EPUBs into offline read-alongs: EPUB 3 Media Overlays narrated by local Kokoro T
+readbeyond/aeneas | 2872 | AGPL-3.0 | 2026-07-25 | False | aeneas is a Python/C library and a set of tools to automagically synchronize audio and tex
+MontrealCorpusTools/Montreal-Forced-Aligner | 1903 | MIT | 2026-10-08 | False | Command line utility for forced alignment using Kaldi
+veraPDF/veraPDF-library | 346 | GPL-3.0 | 2026-10-15 | False | Industry supported, open source PDF/A validation library
+cn-vhql/StoryCraft | 18 | MIT | 2026-03-07 | False | AI-powered children's picture book generator for ages 3-5、
+py-pdf/fpdf2 | 1548 | LGPL-3.0 | 2026-10-15 | False | Simple PDF generation for Python
+espeak-ng/espeak-ng | 6950 | GPL-3.0 | 2026-09-22 | False | eSpeak NG is an open source speech synthesizer that supports more than hundred languages a

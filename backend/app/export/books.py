@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import base64
 import html
+import re
 import io
 import json
 import subprocess
@@ -43,6 +44,9 @@ class BookPage:
     image: Path | None = None
     audio: Path | None = None
     alt: str = ""
+    words: list = field(default_factory=list)      # word timings [{w,t,d}] when narration exists
+    timing_source: str = ""                        # engine_word_events | estimated_proportional
+    duration_s: float = 0.0
 
 
 @dataclass
@@ -80,6 +84,95 @@ def _jpeg(path: Path, max_side: int = 1400, quality: int = 86) -> bytes:
 def _digits(n: int, lang: str) -> str:
     s = str(n)
     return s.translate(str.maketrans("0123456789", "۰۱۲۳۴۵۶۷۸۹")) if lang == "fa" else s
+
+
+def _word_spans(text: str, words: list[dict]) -> str:
+    """Text with one span per word carrying the narration timing (data-t/data-d).
+
+    Timings are matched in document order (the k-th word of the page takes the k-th
+    timing); a word the engine merged or skipped simply gets no timing. Everything is
+    HTML-escaped, so the result can be interpolated into the template."""
+    paras = []
+    k = 0
+    for para in (text or "").split("\n"):
+        i, out, idx = 0, [], 0
+        for m in re.finditer(r"\S+", para):
+            out.append(html.escape(para[i:m.start()]))
+            w = m.group()
+            t = words[k] if k < len(words) and str(words[k].get("w", "")).strip() == w.strip(" .,!?؛،:") else None
+            if t is not None:
+                k += 1
+            if t:
+                out.append(f'<span class="w" data-t="{float(t.get("t", 0)):.3f}" data-d="{float(t.get("d", 0)):.3f}">{html.escape(w)}</span>')
+            else:
+                out.append(f'<span class="w">{html.escape(w)}</span>')
+            i = m.end()
+            idx += 1
+        out.append(html.escape(para[i:]))
+        body = "".join(out)
+        if body.strip():
+            paras.append(body)
+    return "".join(f"<p>{x}</p>" for x in paras)
+
+
+def _smil_clock(seconds: float) -> str:
+    """EPUB/SMIL clock value, always the full H:MM:SS.mmm form."""
+    seconds = max(0.0, float(seconds))
+    h, rem = divmod(seconds, 3600)
+    m, sec = divmod(rem, 60)
+    return f"{int(h)}:{int(m):02d}:{sec:06.3f}"
+
+
+def _word_spans_ids(text: str, words: list[dict], prefix: str) -> str:
+    """Like :func:`_word_spans` but every span gets an id, so a media overlay can
+    point at it (EPUB 3 ``<text src="page-01.xhtml#p01w3"/>``)."""
+    out, i, k, idx = [], 0, 0, 0
+    for m in re.finditer(r"\S+", text):
+        out.append(html.escape(text[i:m.start()]))
+        w = m.group()
+        t = words[k] if k < len(words) and str(words[k].get("w", "")).strip() == w.strip(" .,!?؛،:") else None
+        if t is not None:
+            k += 1
+        wid = f"{prefix}{idx}"
+        if t:
+            out.append(f'<span id="{wid}" data-t="{float(t.get("t", 0)):.3f}" data-d="{float(t.get("d", 0)):.3f}">{html.escape(w)}</span>')
+        else:
+            out.append(f'<span id="{wid}">{html.escape(w)}</span>')
+        i = m.end()
+        idx += 1
+    out.append(html.escape(text[i:]))
+    return f"<p>{''.join(out)}</p>"
+
+
+def _smil_end(words: list[dict], duration_s: float) -> float:
+    """Where the last <par> of an overlay ends (the overlay's own duration)."""
+    end = 0.0
+    for w in words or []:
+        t, d = float(w.get("t", 0) or 0), float(w.get("d", 0) or 0)
+        if d > 0:
+            end = max(end, min(t + d, duration_s) if duration_s else t + d)
+    return end
+
+
+def _smil(n: str, words: list[dict], duration_s: float, prefix: str) -> str:
+    """EPUB 3 media overlay: one <par> per word, clipped to the word's time in the audio."""
+    total = _smil_clock(_smil_end(words, duration_s) or duration_s)
+    pars, k = [], 0
+    for i, w in enumerate(words or []):
+        t, d = float(w.get("t", 0) or 0), float(w.get("d", 0) or 0)
+        if d <= 0:
+            continue
+        end = min(t + d, duration_s) if duration_s else t + d
+        if end <= t:
+            continue
+        pars.append(f'<par id="par-{n}-{i}"><text src="page-{n}.xhtml#{prefix}{k}"/>'
+                    f'<audio src="audio/page-{n}.mp3" clipBegin="{_smil_clock(t)}" clipEnd="{_smil_clock(end)}"/></par>')
+        k += 1
+    return ('<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<smil xmlns="http://www.w3.org/ns/SMIL" xmlns:epub="http://www.idpf.org/2007/ops" version="3.0">\n'
+            f'<head><metadata><meta property="media:duration">{total}</meta></metadata></head>\n'
+            f'<body><seq id="seq-{n}" epub:textref="page-{n}.xhtml" epub:type="bodymatter chapter">\n'
+            + "\n".join(pars) + "\n</seq>\n</body>\n</smil>\n")
 
 
 def _paras(text: str) -> str:
@@ -155,6 +248,8 @@ def build_epub(book: BookData, out: Path) -> dict:
     nav.append(("title.xhtml", book.title))
 
     audio_count = 0
+    media_meta: list[str] = []
+    overlays, total_audio, overlay_total = 0, 0.0, 0.0
     for p in book.pages:
         n = f"{p.number:02d}"
         body = f'<section epub:type="chapter" id="p{n}">'
@@ -162,15 +257,30 @@ def build_epub(book: BookData, out: Path) -> dict:
             files[f"OEBPS/images/page-{n}.jpg"] = _jpeg(p.image)
             manifest.append(f'<item id="img-{n}" href="images/page-{n}.jpg" media-type="image/jpeg"/>')
             body += f'<figure><img src="images/page-{n}.jpg" alt="{html.escape(_alt(book, p))}"/></figure>'
-        body += f'<div class="text">{_paras(p.text)}</div>'
+        overlay = bool(p.audio and p.audio.is_file() and p.audio.suffix == ".mp3" and p.words and p.duration_s > 0)
+        ids = f"p{n}w" if overlay else ""
+        if overlay:
+            audio_count += 1
+        body += f'<div class="text">{_word_spans_ids(p.text, p.words, ids) if overlay else _paras(p.text)}</div>'
         if p.audio and p.audio.is_file() and p.audio.suffix == ".mp3":
             files[f"OEBPS/audio/page-{n}.mp3"] = p.audio.read_bytes()
             manifest.append(f'<item id="aud-{n}" href="audio/page-{n}.mp3" media-type="audio/mpeg"/>')
             body += f'<audio controls="controls" src="audio/page-{n}.mp3">{html.escape(ui["listen"])}</audio>'
-            audio_count += 1
+            # NOTE: no media:duration refines="#aud-NN" - EPUBCheck sums every refined
+            # duration as an overlay document and then reports the total as wrong.
+            if overlay:
+                smil = _smil(n, p.words, p.duration_s, ids)
+                files[f"OEBPS/overlay-{n}.smil"] = smil.encode("utf-8")
+                manifest.append(f'<item id="ov-{n}" href="overlay-{n}.smil" media-type="application/smil+xml"/>')
+                ov_end = _smil_end(p.words, p.duration_s)
+                media_meta.append(f'<meta property="media:duration" refines="#ov-{n}">{_smil_clock(ov_end)}</meta>')
+                overlays += 1
+                total_audio += p.duration_s
+                overlay_total += ov_end
         body += f'<p class="num">{_digits(p.number, lang)}</p></section>'
         files[f"OEBPS/page-{n}.xhtml"] = xhtml(f"{book.title} – {p.number}", body)
-        manifest.append(f'<item id="page-{n}" href="page-{n}.xhtml" media-type="application/xhtml+xml"/>')
+        mo = f' media-overlay="ov-{n}"' if overlay else ""
+        manifest.append(f'<item id="page-{n}" href="page-{n}.xhtml" media-type="application/xhtml+xml"{mo}/>')
         spine.append(f'<itemref idref="page-{n}"/>')
         nav.append((f"page-{n}.xhtml", f"{ui['page']} {_digits(p.number, lang)}"))
 
@@ -183,6 +293,9 @@ def build_epub(book: BookData, out: Path) -> dict:
     files["OEBPS/nav.xhtml"] = xhtml(ui["contents"], f'<nav epub:type="toc" id="toc"><h1>{html.escape(ui["contents"])}</h1><ol>{nav_items}</ol></nav>')
     manifest.append('<item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>')
 
+    media_total = f'<meta property="media:duration">{_smil_clock(overlay_total)}</meta>' if overlays else ""
+    media_active = '<meta property="media:active-class">-epub-media-overlay-active</meta>' if overlays else ""
+    media_narrator = f'<meta property="media:narrator">{html.escape(book.author or "Bookmaker TTS")}</meta>' if overlays else ""
     creator = f"<dc:creator>{html.escape(book.author)}</dc:creator>" if book.author else ""
     publisher = f"<dc:publisher>{html.escape(book.publisher)}</dc:publisher>" if book.publisher else ""
     desc = f"<dc:description>{html.escape(book.summary[:900])}</dc:description>" if book.summary else ""
@@ -203,6 +316,8 @@ def build_epub(book: BookData, out: Path) -> dict:
 <meta property="schema:accessibilityHazard">none</meta>
 <meta property="schema:accessibilitySummary">Picture book: every illustration has a text alternative; the story text is real text.</meta>
 <meta name="generator" content="Bookmaker"/>
+{chr(10).join(media_meta)}
+{media_total}{media_active}{media_narrator}
 </metadata>
 <manifest>
 {chr(10).join(manifest)}
@@ -222,7 +337,8 @@ def build_epub(book: BookData, out: Path) -> dict:
         for name, data in files.items():
             z.writestr(name, data, compress_type=zipfile.ZIP_STORED if name.endswith((".jpg", ".mp3")) else zipfile.ZIP_DEFLATED)
     tmp.replace(out)
-    return {"format": "epub", "bytes": out.stat().st_size, "pages": len(book.pages), "audio_pages": audio_count}
+    return {"format": "epub", "bytes": out.stat().st_size, "pages": len(book.pages), "audio_pages": audio_count,
+            "media_overlays": overlays, "media_duration_s": round(total_audio, 2)}
 
 
 def epubcheck_available() -> tuple[bool, str]:
@@ -282,7 +398,9 @@ def build_html(book: BookData, out: Path, embed_audio: bool = True) -> dict:
             mime = "audio/mpeg" if p.audio.suffix == ".mp3" else "audio/wav"
             aud = f'<audio preload="none" src="data:{mime};base64,{base64.b64encode(p.audio.read_bytes()).decode()}"></audio>'
             audio_count += 1
-        sheets.append(f'<section class="sheet page" data-n="{p.number}">{img}<div class="text">{_paras(p.text)}</div>{aud}'
+        body = _word_spans(p.text, p.words) if p.words else _paras(p.text)
+        sync = " data-sync=\"1\"" if p.words else ""
+        sheets.append(f'<section class="sheet page" data-n="{p.number}"{sync}>{img}<div class="text">{body}</div>{aud}'
                       f'<div class="num">{_digits(p.number, lang)}</div></section>')
     sheets.append(f'<section class="sheet end"><p class="the-end">{html.escape(ui["end"])}</p><div class="text">{_paras(book.blurb)}</div></section>')
     doc = f"""<!DOCTYPE html>
@@ -306,12 +424,18 @@ nav{{display:flex;gap:8px;justify-content:center;padding:10px}}button{{font:inhe
 <script>
 const S=[...document.querySelectorAll('.sheet')];let i=0,reading=false;const rtl={str(book.rtl).lower()};const LANG='{lang}';
 function show(k){{i=Math.max(0,Math.min(S.length-1,k));S.forEach((s,j)=>s.classList.toggle('on',j===i));}}
-function stop(){{reading=false;speechSynthesis&&speechSynthesis.cancel();document.querySelectorAll('audio').forEach(a=>{{a.pause();a.currentTime=0}});
+function stop(){{reading=false;speechSynthesis&&speechSynthesis.cancel();document.querySelectorAll('audio').forEach(a=>{{a.pause();a.currentTime=0}});clearHl();
  document.getElementById('read').textContent='🔊 {html.escape(ui['read'])}';}}
-function readPage(){{if(!reading)return;const s=S[i];const a=s.querySelector('audio');const done=()=>{{if(!reading)return;if(i<S.length-1){{show(i+1);setTimeout(readPage,600)}}else stop()}};
- if(a){{a.onended=done;a.play().catch(done);return}}
+function clearHl(){{document.querySelectorAll('.w.hl').forEach(w=>w.classList.remove('hl'))}}
+function hlAt(t){{const s=S[i];let best=null;s.querySelectorAll('.w[data-t]').forEach(w=>{{const a=+w.dataset.t,b=a+ +w.dataset.d;
+ if(t>=a&&t<b)best=w}});if(best&&!best.classList.contains('hl')){{clearHl();best.classList.add('hl')}}}}
+function readPage(){{if(!reading)return;const s=S[i];const a=s.querySelector('audio');const done=()=>{{clearHl();if(!reading)return;if(i<S.length-1){{show(i+1);setTimeout(readPage,600)}}else stop()}};
+ if(a){{a.onended=done;if(s.dataset.sync){{a.ontimeupdate=()=>hlAt(a.currentTime)}}a.play().catch(done);return}}
  const t=s.querySelector('.text');if(!t||!t.innerText.trim()||!window.speechSynthesis){{setTimeout(done,1500);return}}
- const u=new SpeechSynthesisUtterance(t.innerText);u.lang=LANG==='fa'?'fa-IR':'en-US';u.onend=done;u.onerror=done;speechSynthesis.speak(u);}}
+ const u=new SpeechSynthesisUtterance(t.innerText);u.lang=LANG==='fa'?'fa-IR':'en-US';u.onend=done;u.onerror=done;
+ const ws=[...t.querySelectorAll('.w')];let cum=0;const offs=ws.map(w=>{{const o=cum;cum+=w.textContent.length+1;return o}});
+ u.onboundary=e=>{{if(e.name!=='word')return;const k=offs.findIndex((o,j)=>e.charIndex>=o&&(j+1>=offs.length||e.charIndex<offs[j+1]));
+  if(k>=0){{clearHl();ws[k].classList.add('hl')}}}};speechSynthesis.speak(u);}}
 document.getElementById('read').onclick=()=>{{if(reading){{stop();return}}reading=true;document.getElementById('read').textContent='⏹ {html.escape(ui['stop'])}';readPage()}};
 document.getElementById('next').onclick=()=>{{stop();show(i+1)}};document.getElementById('prev').onclick=()=>{{stop();show(i-1)}};
 addEventListener('keydown',e=>{{if(e.key==='ArrowRight'){{stop();show(i+(rtl?-1:1))}}if(e.key==='ArrowLeft'){{stop();show(i+(rtl?1:-1))}}}});
@@ -340,3 +464,27 @@ def build_images_zip(book: BookData, out: Path) -> dict:
         z.writestr("text.json", json.dumps({"title": book.title, "language": book.language,
                                             "pages": [{"number": p.number, "text": p.text} for p in book.pages]}, ensure_ascii=False, indent=1))
     return {"format": "images", "bytes": out.stat().st_size, "images": n}
+
+
+# ---------------------------------------------------------------------- video
+def build_video(book: BookData, out: Path, fmt: str = "webm", size=(1280, 720)) -> dict:
+    """Read-along video: one shot per page, narration as the soundtrack, the spoken word
+    highlighted in the caption. Timings come from the narration engine when it reports
+    word events, otherwise from a proportional estimate (reported in the result)."""
+    from .video import probe, render_video
+
+    pages = []
+    for p in book.pages:
+        if not (p.image and p.image.is_file()):
+            continue
+        pages.append({"number": p.number, "image": str(p.image), "audio": str(p.audio) if p.audio and p.audio.is_file() else None,
+                      "text": p.text, "words": p.words, "duration_s": p.duration_s, "rtl": book.rtl})
+    if not pages:
+        raise ValueError("No page images to put in the video")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    rep = render_video(pages, out, fmt=fmt, size=size)
+    rep["format"] = f"video_{fmt}"
+    rep["pages"] = len(pages)
+    rep["timing_source"] = next((p.timing_source for p in book.pages if p.timing_source), "")
+    rep["probe"] = probe(out)
+    return rep

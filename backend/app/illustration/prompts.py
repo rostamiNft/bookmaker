@@ -10,6 +10,13 @@ NEGATIVE = ("text, letters, words, captions, watermark, signature, logo, speech 
             "photorealistic, scary, violent")
 
 
+def lora_prefixes(characters: list[dict]) -> str:
+    """Trained per-character LoRAs ("<lora:name:weight> trigger"), once per prompt."""
+    from ..export.lora import lora_token
+    toks = [t for t in (lora_token(c) for c in characters or []) if t]
+    return " ".join(dict.fromkeys(toks)) + " " if toks else ""
+
+
 def latin_name(c: dict) -> str:
     return (c.get("relationships") or {}).get("_latin_name") or c.get("name", "")
 
@@ -62,7 +69,7 @@ def build_page_prompt(page: dict, characters: list[dict], style: str, text_in_im
     lines.append(f"Composition: {scene.get('shot', 'medium')} shot, aspect ratio {aspect}, clear readable staging, all characters fully inside the frame.")
     if not text_in_image:
         lines.append("Absolutely no text, letters or writing anywhere in the image.")
-    return "\n".join(lines), NEGATIVE + ("" if not text_in_image else "").replace("text, letters, words, captions, ", "" if text_in_image else "text, letters, words, captions, ")
+    return lora_prefixes(present) + "\n".join(lines), NEGATIVE + ("" if not text_in_image else "").replace("text, letters, words, captions, ", "" if text_in_image else "text, letters, words, captions, ")
 
 
 def build_reference_prompt(c: dict, style: str, mode: str = "multi_view") -> tuple[str, str]:
@@ -74,7 +81,7 @@ def build_reference_prompt(c: dict, style: str, mode: str = "multi_view") -> tup
     p = (f"Character reference sheet for a children's picture book, {ILLUSTRATION_STYLES.get(style, style)}. "
          f"{latin_name(c)}: {c.get('description', '')}. {views}, "
          f"plain light background, consistent proportions and colours. Distinctive: {', '.join(c.get('distinctive', []))}. No text, no labels.")
-    return p, NEGATIVE
+    return lora_prefixes([c]) + p, NEGATIVE
 
 
 def build_cast_prompt(characters: list[dict], style: str) -> tuple[str, str]:
@@ -82,7 +89,7 @@ def build_cast_prompt(characters: list[dict], style: str) -> tuple[str, str]:
     who = "; ".join(f"{latin_name(c)} ({c.get('description', '')}, {round(rel[c['id']] * 100)}% height)" for c in characters)
     p = (f"Cast line-up for a children's picture book, {ILLUSTRATION_STYLES.get(style, style)}. All characters standing side by side on one "
          f"ground line, front view, full body, true relative sizes: {who}. Plain light background. No text, no labels.")
-    return p, NEGATIVE
+    return lora_prefixes(characters) + p, NEGATIVE
 
 
 def build_cover_prompt(plan: dict, characters: list[dict], style: str) -> tuple[str, str]:
@@ -92,4 +99,4 @@ def build_cover_prompt(plan: dict, characters: list[dict], style: str) -> tuple[
     p = (f"Front cover illustration for a children's picture book, {ILLUSTRATION_STYLES.get(style, style)}. "
          f"{who} in an inviting key scene that captures the story: {plan.get('summary', '')}. "
          "Leave calm empty sky in the upper third for the title. No text or letters.")
-    return p, NEGATIVE
+    return lora_prefixes(characters) + p, NEGATIVE

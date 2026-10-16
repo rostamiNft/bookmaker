@@ -12,7 +12,7 @@ from dataclasses import dataclass, field
 from reportlab.lib.pagesizes import A4, A5, LETTER, landscape, portrait
 
 from ..schemas import BookSettings
-from .text import Paragraph, fit, font_chain, is_rtl, missing_glyphs, wrap
+from .text import Paragraph, TypeOpts, fit, font_chain, is_rtl, missing_glyphs, wrap
 
 PAGE_SIZES = {"A4": A4, "A5": A5, "Letter": LETTER, "Square8": (576.0, 576.0)}
 FONT_RANGE = {"3-5": (17, 30), "6-8": (14, 23), "9-12": (12, 18)}
@@ -61,21 +61,44 @@ def margins(W: float, H: float) -> float:
     return max(28.0, round(min(W, H) * 0.065, 1))
 
 
+def _place_pieces(pieces: list, x0: float) -> list[dict]:
+    """Absolute x for every drawable part of a line (words keep their parts back to back,
+    stretched spaces carry the justification)."""
+    out, x = [], x0
+    for p in pieces or []:
+        if p["k"] == "space":
+            x += p["w"]
+            continue
+        parts = p["parts"] if p["k"] == "word" else [p]
+        for part in parts:
+            d = {"x": round(x, 3), "w": round(part["w"], 3), "k": part["k"]}
+            if part["k"] == "glyphs":
+                d.update(font=part["font"], g=part["g"])
+            else:
+                d["runs"] = part["runs"]
+            out.append(d)
+            x += part["w"]
+    return out
+
+
 def text_element(para: Paragraph, x, y, w, h, rtl: bool, align: str, chain: list[str], valign: str = "middle", color=(0.17, 0.13, 0.11)) -> Element:
     used = para.height
     top = y + h - (h - used) / 2 if valign == "middle" else y + h
     lines = []
     for i, ln in enumerate(para.lines):
         baseline = top - (i + 1) * para.leading + para.leading * 0.28
-        if align == "center":
+        if align == "center" and not ln.justified:
             lx = x + (w - ln.width) / 2
         elif rtl:
             lx = x + w - ln.width
         else:
             lx = x
         lines.append({"text": ln.visual, "logical": ln.logical, "x": round(lx, 2), "baseline": round(baseline, 2),
-                      "width": round(ln.width, 2), "top": round(baseline + para.size * 0.95, 2), "bottom": round(baseline - para.size * 0.3, 2)})
-    return Element("text", x, y, w, h, {"size": para.size, "leading": para.leading, "chain": chain, "lines": lines, "color": color, "rtl": rtl})
+                      "width": round(ln.width, 2), "top": round(baseline + para.size * 0.95, 2), "bottom": round(baseline - para.size * 0.3, 2),
+                      "parts": _place_pieces(ln.pieces, lx), "justified": ln.justified, "kashidas": ln.kashidas,
+                      "hyphenated": ln.hyphenated})
+    return Element("text", x, y, w, h, {"size": para.size, "leading": para.leading, "chain": chain, "lines": lines, "color": color,
+                                        "rtl": rtl, "engine": para.engine})
 
 
 class LayoutEngine:
@@ -89,9 +112,22 @@ class LayoutEngine:
         self.leading = 1.75 if self.rtl else 1.42
         self.aspect = ASPECTS[s.aspect_ratio]
         self.footer = 22.0 if s.page_numbers else 0.0
+        lang = (s.language or "en").split("-")[0]
+        self.body_opts = TypeOpts(shaping=getattr(s, "shaping", "auto"), justify=getattr(s, "text_align", "start") == "justify",
+                                  hyphenate=bool(getattr(s, "hyphenation", False)), lang=lang,
+                                  kashida=bool(getattr(s, "kashida", True)))
+        self.plain_opts = TypeOpts(shaping=self.body_opts.shaping, lang=lang)
+
+    def _opts(self, align: str) -> TypeOpts:
+        return self.body_opts if align == "start" else self.plain_opts
 
     # ------------------------------------------------------------------ story
-    def story_page(self, number: int, text: str, has_image: bool = True, image_path: str | None = None) -> PageLayout:
+    def story_page(self, number: int, text: str, has_image: bool = True, image_path: str | None = None,
+                   image_meta: dict | None = None) -> PageLayout:
+        if getattr(self.s, "speech_bubbles", False) and has_image and image_path:
+            pl = self.speech_bubble_page(number, text, image_path, image_meta)
+            if pl is not None:
+                return pl
         if self.s.layout_style == "full_bleed" and has_image and image_path:
             pl = self.full_bleed_page(number, text, image_path)
             if pl.kind == "story":
@@ -142,7 +178,7 @@ class LayoutEngine:
         align = "center" if self.s.age_group == "3-5" else "start"
         for frac in (0.2, 0.25, 0.3, 0.35, 0.4):
             ph = H * frac
-            para = fit(text, self.chain, tw, ph - 2 * pad, hi, lo, self.rtl, self.leading)
+            para = fit(text, self.chain, tw, ph - 2 * pad, hi, lo, self.rtl, self.leading, opts=self._opts(align))
             if not para:
                 continue
             ph = min(ph, para.height + 2 * pad + 6)  # shrink the panel to the text actually set
@@ -159,6 +195,42 @@ class LayoutEngine:
             pl.notes.append(f"layout=full_bleed panel={'top' if at_top else 'bottom'} panel_frac={ph / H:.2f} font={para.size} crop={loss:.0%}")
             return pl
         return PageLayout("fallback", number, W, H, notes=["full_bleed→classic: text needs more than 40% of the page"])
+
+    def speech_bubble_page(self, number: int, text: str, image_path: str, image_meta: dict | None) -> PageLayout | None:
+        """Picture fills the page, text sits in vector balloons with tails. None when the
+        text cannot be ballooned (too long / too small): the caller falls back."""
+        from .bubbles import analyse_image, plan_balloons, split_speech
+        W, H, m = self.W, self.H, self.m
+        boxes = ((image_meta or {}).get("renderer_meta") or {}).get("character_boxes") or (image_meta or {}).get("character_boxes")
+        info = analyse_image(image_path, boxes)
+        lo, hi = FONT_RANGE[self.s.age_group]
+        if self.rtl:
+            lo, hi = lo + 1, hi + 1
+        chunks = split_speech(text)
+        plan = plan_balloons(W=W, H=H, margin=m, footer=self.footer, chunks=chunks, info=info, rtl=self.rtl,
+                             chain=self.chain, opts=self.plain_opts, size_hi=min(hi - 2, 20), size_lo=max(MIN_READABLE, lo - 2),
+                             leading_factor=1.45 if self.rtl else 1.25)
+        if not plan:
+            return None
+        pl = PageLayout("story", number, W, H)
+        pl.elements.append(Element("image", 0, 0, W, H, {"slot": f"story:{number}", "frame": False, "full_bleed": True}))
+        for b in plan:
+            pl.elements.append(Element("bubble", b.box[0], b.box[1], b.box[2], b.box[3],
+                                       {"radius": b.radius, "tail": b.tail, "fill": (1, 1, 1), "alpha": 1.0,
+                                        "face_cover": round(b.face_cover, 3), "busy": round(b.busy, 3),
+                                        "speaker": b.speaker, "tail_len": round(b.tail_len, 1)}))
+            # the text box is symmetric inside the balloon, a little larger than the
+            # text block so ascenders/descenders are inside it too
+            slack = b.pad * 0.45
+            inner_x, inner_w = b.box[0] + b.pad - slack, b.box[2] - 2 * b.pad + 2 * slack
+            inner_y, inner_h = b.box[1] + b.pad - slack, b.box[3] - 2 * b.pad + 2 * slack
+            para = b.para  # type: ignore[attr-defined]
+            pl.elements.append(text_element(para, inner_x, inner_y, inner_w, inner_h, self.rtl, "center", self.chain))
+        if self.s.page_numbers:
+            self._pagenum(pl, number, panel=True)
+        pl.notes.append(f"layout=speech_bubbles balloons={len(plan)} font={plan[0].para.size:.1f} "
+                        f"face_cover={max(b.face_cover for b in plan):.0%} speakers={len(info['speakers'])}")
+        return pl
 
     def _classic_story_page(self, number: int, text: str, has_image: bool = True) -> PageLayout:
         W, H, m = self.W, self.H, self.m
@@ -198,7 +270,7 @@ class LayoutEngine:
                 ty, th = cy0, ch
             if th <= 0 or tw <= 0:
                 continue
-            para = fit(text, self.chain, tw, th, hi, lo, self.rtl, self.leading)
+            para = fit(text, self.chain, tw, th, hi, lo, self.rtl, self.leading, opts=self._opts(align))
             attempts.append((mode, frac, para.size if para else None))
             if para:
                 pl = PageLayout("story", number, W, H)
@@ -215,7 +287,7 @@ class LayoutEngine:
             label = str(number)
             if self.rtl:
                 label = label.translate(str.maketrans("0123456789", "۰۱۲۳۴۵۶۷۸۹"))
-            para = wrap(label, self.chain, 10, 60, self.rtl, 1.2)
+            para = wrap(label, self.chain, 10, 60, self.rtl, 1.2, self.plain_opts)
             if panel:  # readable on top of a full-bleed picture
                 pl.elements.append(Element("rect", self.W / 2 - 16, self.m * 0.55 - 3, 32, 20, {"fill": (1, 0.99, 0.96), "alpha": 0.85, "radius": 9}))
             pl.elements.append(text_element(para, self.W / 2 - 30, self.m * 0.55, 60, 16, self.rtl, "center", self.chain,
@@ -225,7 +297,7 @@ class LayoutEngine:
     # ------------------------------------------------------------------ front/back matter
     def _fit_block(self, text, x, y, w, h, hi, lo, bold=False, align="center", color=(0.17, 0.13, 0.11), page=None):
         chain = self.bold if bold else self.chain
-        para = fit(text, chain, w, h, hi, lo, self.rtl, 1.3 if not self.rtl else 1.55)
+        para = fit(text, chain, w, h, hi, lo, self.rtl, 1.3 if not self.rtl else 1.55, opts=self.plain_opts)
         if para is None:
             raise LayoutError("text_overflow", f"Text block does not fit: {text[:40]!r}", page)
         return text_element(para, x, y, w, h, self.rtl, align, chain, color=color)
@@ -269,7 +341,7 @@ class LayoutEngine:
         W, H, m = self.W, self.H, self.m
         pl = PageLayout("copyright", None, W, H)
         text = "\n".join(lines)
-        para = fit(text, self.chain, W - 2 * m, H * 0.45, 10, 7, self.rtl, 1.5)
+        para = fit(text, self.chain, W - 2 * m, H * 0.45, 10, 7, self.rtl, 1.5, opts=self.plain_opts)
         if para is None:
             raise LayoutError("text_overflow", "Copyright page text does not fit")
         el = text_element(para, m, m, W - 2 * m, H * 0.45, self.rtl, "start", self.chain, valign="bottom", color=(0.35, 0.32, 0.3))
@@ -337,7 +409,7 @@ def verify_layout(pl: PageLayout, margin: float) -> list[dict]:
             if _overlap(t.box(), im.box()):
                 add("overlap", "Text box overlaps an image")
     if any(i.data.get("full_bleed") for i in images):
-        panels = [e.box() for e in pl.elements if e.kind == "rect" and e.data.get("alpha", 1) >= 0.75]
+        panels = [e.box() for e in (pl.elements) if (e.kind == "rect" or e.kind == "bubble") and e.data.get("alpha", 1) >= 0.75]
         for t in texts:
             ls = t.data["lines"]
             if not ls:
@@ -350,6 +422,17 @@ def verify_layout(pl: PageLayout, margin: float) -> list[dict]:
         for j in range(i + 1, len(images)):
             if _overlap(images[i].box(), images[j].box()):
                 add("overlap", "Two images overlap")
+    bubbles = [e for e in pl.elements if e.kind == "bubble"]
+    if bubbles:
+        for b in bubbles:
+            if b.data.get("face_cover", 0) > 0.18:
+                add("bubble_covers_face", f"Speech balloon covers {b.data['face_cover']:.0%} of a character")
+            if b.data.get("tail_len", 99) < 10:
+                add("bubble_tail_missing", "Speech balloon has no visible tail")
+        for i in range(len(bubbles)):
+            for j in range(i + 1, len(bubbles)):
+                if _overlap(bubbles[i].box(), bubbles[j].box()):
+                    add("bubble_overlap", "Two speech balloons overlap")
     if pl.kind == "story":
         if not any(t.kind == "text" and t.data["lines"] for t in texts):
             add("empty_text", "Story page has no text")
